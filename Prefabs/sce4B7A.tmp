@@ -1,0 +1,84 @@
+[gd_scene load_steps=11 format=3 uid="uid://c1vubbps0wbru"]
+
+[ext_resource type="Script" path="res://Scripts/TileContainer.gd" id="1_cav1r"]
+[ext_resource type="Texture2D" uid="uid://lybc5abc6vb7" path="res://Textures/gradient.tres" id="1_s76xi"]
+[ext_resource type="PackedScene" uid="uid://bkpdehcudch4y" path="res://Prefabs/tile.tscn" id="1_xldoj"]
+[ext_resource type="Texture2D" uid="uid://xqdy4im07hvs" path="res://Textures/box.png" id="3_fr5j5"]
+[ext_resource type="Script" path="res://Scripts/PlayArea.gd" id="5_618o0"]
+[ext_resource type="PackedScene" uid="uid://df1cixr56udqb" path="res://Prefabs/UI.tscn" id="5_lmoip"]
+[ext_resource type="Texture2D" uid="uid://l17s848qglji" path="res://Textures/tile_preview.png" id="5_stkny"]
+[ext_resource type="PackedScene" uid="uid://bsolopte6gbrd" path="res://Prefabs/audio_manager.tscn" id="6_3ltku"]
+[ext_resource type="PackedScene" uid="uid://bfyjye2s7d3f7" path="res://Prefabs/play_area.tscn" id="9_hffdp"]
+
+[sub_resource type="Curve" id="Curve_amq86"]
+min_value = -1.0
+_data = [Vector2(0, -1), 0.0, 2.0, 0, 1, Vector2(1, 1), 2.0, 0.0, 1, 0]
+point_count = 2
+
+[node name="Node3D" type="Node3D"]
+
+[node name="Backdrop" type="Sprite3D" parent="."]
+transform = Transform3D(1.70217, 0, 0, 0, 1.63319, 0, 0, 0, 1, 0, 0, -2)
+texture = ExtResource("1_s76xi")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.005, 0, 29.6931)
+fov = 25.0
+size = 100.0
+near = 0.01
+far = 2000.0
+
+[node name="Hand" type="Node3D" parent="." node_paths=PackedStringArray("tiles")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5.05552, 0)
+script = ExtResource("1_cav1r")
+tiles = [NodePath("TileContainer/domino1"), NodePath("TileContainer/domino2"), NodePath("TileContainer/domino3"), NodePath("TileContainer/domino4"), NodePath("TileContainer/domino5"), NodePath("TileContainer/domino6"), NodePath("TileContainer/domino7")]
+rotationCurve = SubResource("Curve_amq86")
+maxTileCount = null
+allowedTileTypes = null
+
+[node name="Sprite3D" type="Sprite3D" parent="Hand"]
+transform = Transform3D(1.69861, 0, 0, 0, 0.389826, 0, 0, 0, 0.847979, -0.0231667, -0.471844, -0.183589)
+modulate = Color(0, 0, 0, 0.603922)
+texture = ExtResource("3_fr5j5")
+
+[node name="TileContainer" type="Node3D" parent="Hand"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.05552, 0)
+
+[node name="domino1" parent="Hand/TileContainer" instance=ExtResource("1_xldoj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.18801, -5.21423, 0)
+
+[node name="domino2" parent="Hand/TileContainer" instance=ExtResource("1_xldoj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.12503, -5.21423, 0)
+
+[node name="domino3" parent="Hand/TileContainer" instance=ExtResource("1_xldoj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.05003, -5.21423, 0)
+
+[node name="domino4" parent="Hand/TileContainer" instance=ExtResource("1_xldoj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0102673, -5.21423, 0)
+
+[node name="domino5" parent="Hand/TileContainer" instance=ExtResource("1_xldoj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.06841, -5.21423, 0)
+
+[node name="domino6" parent="Hand/TileContainer" instance=ExtResource("1_xldoj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.12817, -5.21423, 0)
+
+[node name="domino7" parent="Hand/TileContainer" instance=ExtResource("1_xldoj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.1836, -5.21423, 0)
+
+[node name="PlayArea" type="Node3D" parent="."]
+script = ExtResource("5_618o0")
+
+[node name="Sprite3D" type="Sprite3D" parent="PlayArea"]
+transform = Transform3D(0.133546, 0, 0, 0, 0.135142, 0, 0, 0, 1, 0.0116519, -0.0119369, 0.282802)
+modulate = Color(1, 1, 1, 0.494118)
+pixel_size = 0.02
+texture = ExtResource("5_stkny")
+
+[node name="CanvasLayer" parent="." instance=ExtResource("5_lmoip")]
+
+[node name="AudioManager" parent="." instance=ExtResource("6_3ltku")]
+
+[node name="Node3D" parent="." instance=ExtResource("9_hffdp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
+
+[editable path="CanvasLayer"]

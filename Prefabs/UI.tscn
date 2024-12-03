@@ -1,0 +1,38 @@
+[gd_scene load_steps=2 format=3 uid="uid://df1cixr56udqb"]
+
+[ext_resource type="Texture2D" uid="uid://lybc5abc6vb7" path="res://Textures/gradient.tres" id="1_qsv56"]
+
+[node name="CanvasLayer" type="CanvasLayer"]
+
+[node name="TextureRect" type="TextureRect" parent="."]
+visible = false
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("1_qsv56")
+
+[node name="Score text" type="RichTextLabel" parent="."]
+visible = false
+offset_right = 1.0
+offset_bottom = 30.0
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/bold_italics_font_size = 0
+theme_override_font_sizes/normal_font_size = 22
+text = " score: "
+metadata/_edit_use_anchors_ = true
+
+[node name="Control" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchor_right = 0.044
+anchor_bottom = 0.037
+offset_right = -0.480003
+offset_bottom = 0.0400009
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control"]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.152
+anchor_bottom = 0.126
+offset_right = 43.232
+offset_bottom = 24.96

@@ -1,0 +1,59 @@
+[gd_scene load_steps=2 format=3 uid="uid://utjd2g0awai0"]
+
+[ext_resource type="Texture2D" uid="uid://hgyed1frwc5v" path="res://Textures/rounded_rect.png" id="1_io8cb"]
+
+[node name="RoundedRect" type="Node3D"]
+
+[node name="Top Right" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 5, 0)
+texture = ExtResource("1_io8cb")
+region_enabled = true
+region_rect = Rect2(0, 0, 300, 300)
+
+[node name="Top Left" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 5, 0)
+texture = ExtResource("1_io8cb")
+region_enabled = true
+region_rect = Rect2(600, 0, 300, 300)
+
+[node name="Top Left2" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
+texture = ExtResource("1_io8cb")
+region_enabled = true
+region_rect = Rect2(300, 0, 300, 300)
+
+[node name="Top Right2" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 2, 0)
+texture = ExtResource("1_io8cb")
+region_enabled = true
+region_rect = Rect2(0, 300, 300, 300)
+
+[node name="Top Left3" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 2, 0)
+texture = ExtResource("1_io8cb")
+region_enabled = true
+region_rect = Rect2(600, 300, 300, 300)
+
+[node name="Top Left4" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+texture = ExtResource("1_io8cb")
+region_enabled = true
+region_rect = Rect2(300, 300, 300, 300)
+
+[node name="Top Right3" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, -1, 0)
+texture = ExtResource("1_io8cb")
+region_enabled = true
+region_rect = Rect2(0, 600, 300, 300)
+
+[node name="Top Left5" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, -1, 0)
+texture = ExtResource("1_io8cb")
+region_enabled = true
+region_rect = Rect2(600, 600, 300, 300)
+
+[node name="Top Left6" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+texture = ExtResource("1_io8cb")
+region_enabled = true
+region_rect = Rect2(300, 600, 300, 300)

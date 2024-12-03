@@ -1,0 +1,18 @@
+[gd_resource type="Environment" load_steps=4 format=3 uid="uid://s33mj7bdkm73"]
+
+[ext_resource type="Texture2D" uid="uid://b5gl8shp801fn" path="res://Textures/belfast_sunset_puresky_2k.hdr" id="1_1wpxe"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_e04qi"]
+panorama = ExtResource("1_1wpxe")
+
+[sub_resource type="Sky" id="Sky_8oek7"]
+sky_material = SubResource("PanoramaSkyMaterial_e04qi")
+radiance_size = 2
+
+[resource]
+background_mode = 2
+background_color = Color(0.984375, 0.944973, 0.937596, 1)
+sky = SubResource("Sky_8oek7")
+sky_rotation = Vector3(0, 1.64759, 0)
+reflected_light_source = 2
+tonemap_exposure = 0.8
