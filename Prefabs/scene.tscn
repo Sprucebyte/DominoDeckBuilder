@@ -43,16 +43,16 @@ texture = ExtResource("3_fr5j5")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.321737, 0)
 
 [node name="Tile" parent="Hand/TileContainer" instance=ExtResource("1_xldoj")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.321737, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.0128, -0.321737, 0)
 
 [node name="Tile2" parent="Hand/TileContainer" instance=ExtResource("1_xldoj")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.643474, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.31646, -0.643474, 0)
 
 [node name="Tile3" parent="Hand/TileContainer" instance=ExtResource("1_xldoj")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.96521, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.42375, -0.96521, 0)
 
 [node name="Tile4" parent="Hand/TileContainer" instance=ExtResource("1_xldoj")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.28695, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.316504, -1.28695, 0)
 
 [node name="CanvasLayer" parent="." instance=ExtResource("5_lmoip")]
 
