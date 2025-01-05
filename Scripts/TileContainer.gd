@@ -8,8 +8,6 @@ extends Node3D
 @export_flags ("Normal","Tarot","Cursed","Joker") var allowedTileTypes: int = 0
 
  
-
-
 func _addTile(_tile) -> void:
 	# if there is space in hand
 	# if tile is valid
@@ -55,9 +53,7 @@ func _process(delta: float) -> void:
 		var ratio = i / (tiles.size())
 		var sample = rotationCurve.sample(ratio)
 		var angle = sample * -5
-
+		
 		tiles[i].targetRotation = Vector3(0,0,angle)
 		tiles[i].homePosition = position + Vector3(sample * 4 + .5, 0 , 0)
-	
-	
 	

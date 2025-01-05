@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Scripts/TileContainer.gd" id="1_cav1r"]
 [ext_resource type="Texture2D" uid="uid://lybc5abc6vb7" path="res://Textures/gradient.tres" id="1_s76xi"]
-[ext_resource type="PackedScene" uid="uid://bkpdehcudch4y" path="res://Prefabs/tile.tscn" id="1_xldoj"]
+[ext_resource type="PackedScene" uid="uid://dli3f2y42248e" path="res://Prefabs/tile.tscn" id="1_xldoj"]
 [ext_resource type="Texture2D" uid="uid://xqdy4im07hvs" path="res://Textures/box.png" id="3_fr5j5"]
 [ext_resource type="PackedScene" uid="uid://df1cixr56udqb" path="res://Prefabs/UI.tscn" id="5_lmoip"]
 [ext_resource type="Texture2D" uid="uid://l17s848qglji" path="res://Textures/tile_preview.png" id="5_stkny"]
@@ -31,7 +31,7 @@ far = 2000.0
 [node name="Hand" type="Node3D" parent="." node_paths=PackedStringArray("tiles")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5.05552, 0)
 script = ExtResource("1_cav1r")
-tiles = [NodePath("TileContainer/domino1"), NodePath("TileContainer/domino2"), NodePath("TileContainer/domino3"), NodePath("TileContainer/domino4"), NodePath("TileContainer/domino5"), NodePath("TileContainer/domino6"), NodePath("TileContainer/domino7")]
+tiles = [NodePath("TileContainer/Tile"), NodePath("TileContainer/Tile2"), NodePath("TileContainer/Tile3"), NodePath("TileContainer/Tile4")]
 rotationCurve = SubResource("Curve_amq86")
 
 [node name="Sprite3D" type="Sprite3D" parent="Hand"]
@@ -42,19 +42,17 @@ texture = ExtResource("3_fr5j5")
 [node name="TileContainer" type="Node3D" parent="Hand"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.321737, 0)
 
-[node name="domino1" parent="Hand/TileContainer" instance=ExtResource("1_xldoj")]
+[node name="Tile" parent="Hand/TileContainer" instance=ExtResource("1_xldoj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.321737, 0)
 
-[node name="domino2" parent="Hand/TileContainer" instance=ExtResource("1_xldoj")]
+[node name="Tile2" parent="Hand/TileContainer" instance=ExtResource("1_xldoj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.643474, 0)
 
-[node name="domino3" parent="Hand/TileContainer" instance=ExtResource("1_xldoj")]
+[node name="Tile3" parent="Hand/TileContainer" instance=ExtResource("1_xldoj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.96521, 0)
 
-[node name="domino4" parent="Hand/TileContainer" instance=ExtResource("1_xldoj")]
-
-[node name="domino5" parent="Hand/TileContainer" instance=ExtResource("1_xldoj")]
-
-[node name="domino6" parent="Hand/TileContainer" instance=ExtResource("1_xldoj")]
-
-[node name="domino7" parent="Hand/TileContainer" instance=ExtResource("1_xldoj")]
+[node name="Tile4" parent="Hand/TileContainer" instance=ExtResource("1_xldoj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.28695, 0)
 
 [node name="CanvasLayer" parent="." instance=ExtResource("5_lmoip")]
 

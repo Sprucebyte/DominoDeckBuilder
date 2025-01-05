@@ -1,5 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://c7bd10uvtpe4n"]
-
-[ext_resource type="PackedScene" uid="uid://d0gpb6wij800r" path="res://Blender/domino.blend" id="1_03dki"]
-
-[node name="domino" instance=ExtResource("1_03dki")]

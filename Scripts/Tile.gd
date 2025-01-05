@@ -3,7 +3,7 @@ class_name Tile
 
 @export var selectedOffset = .5;
 
-@onready var mesh: MeshInstance3D = $Tile
+@onready var mesh: MeshInstance3D = $MeshInstance3D
 @onready var shakerSelect: ShakerComponent3D = $"Shaker Select"
 @onready var shakerIdle: ShakerComponent3D = $"Shaker Idle"
 
@@ -101,7 +101,7 @@ func deselect():
 	if not (selectable): return
 	selected = false
 	SignalBus.emit_signal("OnTileDeselected", self)
-	shakerSelect.play_shake()
+	shakerSelect.play_shake()	
 	pass
 
 func hover():
