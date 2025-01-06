@@ -58,10 +58,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.316504, -1.28695, 0)
 
 [node name="AudioManager" parent="." instance=ExtResource("6_3ltku")]
 
-[node name="Node3D" parent="." instance=ExtResource("9_hffdp")]
+[node name="PlayArea" parent="." instance=ExtResource("9_hffdp")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
 
-[node name="Sprite3D" type="Sprite3D" parent="Node3D"]
+[node name="Sprite3D" type="Sprite3D" parent="PlayArea"]
 transform = Transform3D(0.133546, 0, 0, 0, 0.135142, 0, 0, 0, 1, 0, 0, 1)
 modulate = Color(1, 1, 1, 0.494118)
 pixel_size = 0.02

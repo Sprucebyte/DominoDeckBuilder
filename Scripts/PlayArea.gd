@@ -3,25 +3,23 @@ extends Node3D
 var tileNodeTree: TileNodeTree
 var gridSize = 1.05
 
-func placeTile(tile: Tile):
-	if (tileNodeTree.rootNode == null):
-		tile.play()
-		tile.homePosition = Vector3(0,0,0)
-		tileNodeTree.rootNode = tile
-	else:
-		tile.play()
-		
-
-		
-		tile.homePosition = edgeTiles[0].position + Vector3(gridSize,0,0)
-		print("1: ")
-		print(edgeTiles[0].get_children())
-		print("2:  ")
-		print(edgeTiles[0].find_children("tile"))
-		#tile.homePosition = getEdgeTiles
-		#rootTile.addTile
-		pass
+func _ready() -> void:
 	
+	
+#	tileNodeTree.addNode(null,)
+	pass
+
+
+
+func getPlacementRequirements():
+	pass
+
+func getAllPlacements():
+	
+	pass
+	
+func getValidPlacements():
+	pass
 
 #@export var mainBranch = Branch.new()
 
