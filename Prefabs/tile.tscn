@@ -32,7 +32,7 @@ bake_internal = 64
 __follow_timeline = false
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_jyux7"]
-size = Vector3(1.03784, 2.04153, 0.250366)
+size = Vector3(1.03784, 2.04153, 0.39798)
 
 [sub_resource type="BoxMesh" id="BoxMesh_j5ih2"]
 
@@ -83,8 +83,17 @@ shakerPreset = SubResource("Resource_l6pl4")
 [node name="Area3D" type="Area3D" parent="."]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0020752, 0.00227356, -0.00164795)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0020752, 0.00227356, 0.00724794)
 shape = SubResource("BoxShape3D_jyux7")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+[node name="ModelContainer" type="Node3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="ModelContainer"]
+transform = Transform3D(1, 0, 0, 0, 2.00737, 0, 0, 0, 0.257412, 0, 0, 0)
 mesh = SubResource("BoxMesh_j5ih2")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="ModelContainer"]
+transform = Transform3D(0.282843, -0.282843, 0, 0.282843, 0.282843, 0, 0, 0, 0.14, 0, 0.922667, 0.00198197)
+mesh = SubResource("BoxMesh_j5ih2")
+skeleton = NodePath("../..")

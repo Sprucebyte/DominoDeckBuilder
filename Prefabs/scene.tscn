@@ -55,6 +55,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.42375, -0.96521, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.316504, -1.28695, 0)
 
 [node name="CanvasLayer" parent="." instance=ExtResource("5_lmoip")]
+visible = false
 
 [node name="AudioManager" parent="." instance=ExtResource("6_3ltku")]
 

@@ -3,14 +3,14 @@ class_name Tile
 
 @export var selectedOffset = .5;
 
-@onready var mesh: MeshInstance3D = $MeshInstance3D
+@onready var mesh: Node3D = $ModelContainer
 @onready var shakerSelect: ShakerComponent3D = $"Shaker Select"
 @onready var shakerIdle: ShakerComponent3D = $"Shaker Idle"
 
 var homePosition = Vector3.ONE
 var targetScale = Vector3.ONE
 var targetPosition = Vector3.ZERO
-var targetRotation
+var targetRotation = Vector3.ZERO
 
 var targetRot: Quaternion
 var selected = false

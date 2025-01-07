@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://ddvh8ae22qm33"]
+
+[ext_resource type="Script" path="res://Scripts/PlayArea.gd" id="1_048vs"]
+
+[node name="Node3D" type="Node3D"]
+script = ExtResource("1_048vs")

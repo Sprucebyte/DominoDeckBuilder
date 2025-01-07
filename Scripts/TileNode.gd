@@ -4,6 +4,7 @@ class_name TileNode
 var tile: Tile
 var direction: Util.Direction
 var parent = null
+var str = ""
 # direction is relative to the tile, meaning left and right is only and always reserved for spinners.   
 #        Top
 #      ,-----,
@@ -25,10 +26,11 @@ var child = {
 
 
 
+
 ## Returns all connected children, ignores the node specified as the parent node
 func getChildren() -> Array[TileNode]:
 	var childNodes: Array[TileNode]
-	for childNode in child.keys():
+	for childNode in child.values():
 		if (childNode != null) and (childNode != parent):
 			childNodes.push_back(childNode)  
 	return childNodes
