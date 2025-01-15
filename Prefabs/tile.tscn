@@ -1,13 +1,25 @@
-[gd_scene load_steps=13 format=3 uid="uid://dli3f2y42248e"]
+[gd_scene load_steps=25 format=3 uid="uid://dli3f2y42248e"]
 
 [ext_resource type="Script" path="res://Scripts/Tile.gd" id="1_qw2k2"]
+[ext_resource type="Texture2D" uid="uid://cvgq3ra2j5c0d" path="res://Textures/Pips/0.png" id="2_u5gsw"]
 [ext_resource type="Script" path="res://addons/shaker/src/Vector3/shaker_component3D.gd" id="3_gatgg"]
 [ext_resource type="Script" path="res://addons/shaker/data/Vector3/BaseShakerType3D.gd" id="4_0wswn"]
+[ext_resource type="Texture2D" uid="uid://vwnuj4gkv65m" path="res://Textures/Pips/2.png" id="4_itqk5"]
 [ext_resource type="Resource" uid="uid://2iignwymlhcw" path="res://Shaker/Presets/activate.tres" id="4_resp8"]
 [ext_resource type="Resource" uid="uid://cpdsnrua1i6fr" path="res://Shaker/Presets/select.tres" id="5_0exb5"]
+[ext_resource type="Texture2D" uid="uid://bmcveqykmx1qs" path="res://Textures/Pips/3.png" id="5_edwkp"]
 [ext_resource type="Script" path="res://addons/shaker/data/Vector3/ShakerTypeSineWave3D.gd" id="5_h4qqa"]
 [ext_resource type="Script" path="res://addons/shaker/data/Vector3/ShakerPreset3D.gd" id="6_ev5fe"]
 [ext_resource type="Resource" uid="uid://dnfeg2b578roa" path="res://Shaker/Presets/place.tres" id="6_h557c"]
+[ext_resource type="Texture2D" uid="uid://87viidx63vjq" path="res://Textures/Pips/4.png" id="6_hfv6i"]
+[ext_resource type="Texture2D" uid="uid://0fs0x1vbgqvl" path="res://Textures/Pips/5.png" id="7_qfiaq"]
+[ext_resource type="Texture2D" uid="uid://bdvqpmosru35" path="res://Textures/Pips/6.png" id="8_jv7qa"]
+[ext_resource type="Texture2D" uid="uid://bs5yopu8qmkbv" path="res://Textures/Pips/7.png" id="9_8jyje"]
+[ext_resource type="PackedScene" uid="uid://d1j41otwjwlq2" path="res://Prefabs/domino_model 2.tscn" id="9_cbwtk"]
+[ext_resource type="Texture2D" uid="uid://d4n4auuin8b51" path="res://Textures/Pips/1.png" id="9_ofvkv"]
+[ext_resource type="Texture2D" uid="uid://bjnohxr7k6hxy" path="res://Textures/Pips/8.png" id="10_fmo2a"]
+[ext_resource type="Texture2D" uid="uid://c3iv6yckr4cm8" path="res://Textures/Pips/9.png" id="11_cpofk"]
+[ext_resource type="Texture2D" uid="uid://81gjx4ejknel" path="res://Textures/divider test.png" id="19_7rsrd"]
 
 [sub_resource type="Resource" id="Resource_por6t"]
 script = ExtResource("5_h4qqa")
@@ -37,12 +49,14 @@ size = Vector3(1.03784, 2.04153, 0.39798)
 [sub_resource type="BoxMesh" id="BoxMesh_j5ih2"]
 
 [node name="Tile" type="Node3D"]
+transform = Transform3D(0.999997, -3.00126e-05, -0.00229441, 0, 0.999914, -0.0130796, 0.00229461, 0.0130796, 0.999912, 0, 0, 0)
 script = ExtResource("1_qw2k2")
+sprites = Array[Texture2D]([ExtResource("2_u5gsw"), ExtResource("9_ofvkv"), ExtResource("4_itqk5"), ExtResource("5_edwkp"), ExtResource("6_hfv6i"), ExtResource("7_qfiaq"), ExtResource("8_jv7qa"), ExtResource("9_8jyje"), ExtResource("10_fmo2a"), ExtResource("11_cpofk")])
 
 [node name="Shaker Activate" type="Node3D" parent="." node_paths=PackedStringArray("Targets")]
 script = ExtResource("3_gatgg")
 custom_target = true
-Targets = [null]
+Targets = [NodePath("../ModelContainer")]
 duration = 0.01
 shake_speed = 0.05
 shakerPreset = ExtResource("4_resp8")
@@ -50,7 +64,7 @@ shakerPreset = ExtResource("4_resp8")
 [node name="Shaker Select" type="Node3D" parent="." node_paths=PackedStringArray("Targets")]
 script = ExtResource("3_gatgg")
 custom_target = true
-Targets = [null]
+Targets = [NodePath("../ModelContainer")]
 intensity = 0.787
 duration = 0.5
 shake_speed = 5.0
@@ -61,7 +75,7 @@ shakerPreset = ExtResource("5_0exb5")
 [node name="Shaker Place" type="Node3D" parent="." node_paths=PackedStringArray("Targets")]
 script = ExtResource("3_gatgg")
 custom_target = true
-Targets = [null]
+Targets = [NodePath("../ModelContainer")]
 intensity = 0.787
 duration = 0.5
 shake_speed = 6.0
@@ -72,7 +86,7 @@ shakerPreset = ExtResource("6_h557c")
 [node name="Shaker Idle" type="Node3D" parent="." node_paths=PackedStringArray("Targets")]
 script = ExtResource("3_gatgg")
 custom_target = true
-Targets = [null]
+Targets = [NodePath("../ModelContainer")]
 AutoPlay = true
 duration = 50.0
 shake_speed = 0.2
@@ -87,13 +101,26 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0020752, 0.00227356, 0.0072
 shape = SubResource("BoxShape3D_jyux7")
 
 [node name="ModelContainer" type="Node3D" parent="."]
+transform = Transform3D(0.999997, -3.00124e-05, 0.00229441, 0, 0.999914, 0.0130795, -0.0022946, -0.0130795, 0.999912, 0, 0, 0)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="ModelContainer"]
-transform = Transform3D(1, 0, 0, 0, 2.00737, 0, 0, 0, 0.257412, 0, 0, 0)
-mesh = SubResource("BoxMesh_j5ih2")
-skeleton = NodePath("../..")
+[node name="Divider" type="Sprite3D" parent="ModelContainer"]
+transform = Transform3D(0.202699, 1.8207e-12, -1.42109e-13, -3.63488e-12, 0.149998, -4.26326e-14, 2.84217e-14, 6.21725e-15, 1, 1.70867e-05, -0.000225961, 0.20601)
+texture = ExtResource("19_7rsrd")
+
+[node name="SpriteTop" type="Sprite3D" parent="ModelContainer"]
+transform = Transform3D(0.2, 1.14343e-12, -2.23923e-14, -1.14343e-12, 0.2, -5.59683e-15, 4.47846e-15, 1.11937e-15, 1, 1.42389e-05, 0.474432, 0.103005)
+texture = ExtResource("9_ofvkv")
+
+[node name="SpriteBottom" type="Sprite3D" parent="ModelContainer"]
+transform = Transform3D(0.2, 1.14343e-12, -4.47847e-14, -1.14343e-12, 0.2, -5.59683e-15, 8.95693e-15, 1.11937e-15, 1, -1.42389e-05, -0.474432, 0.103005)
+texture = ExtResource("9_ofvkv")
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="ModelContainer"]
 transform = Transform3D(0.282843, -0.282843, 0, 0.282843, 0.282843, 0, 0, 0, 0.14, 0, 0.922667, 0.00198197)
 mesh = SubResource("BoxMesh_j5ih2")
 skeleton = NodePath("../..")
+
+[node name="domino_model2" parent="ModelContainer" instance=ExtResource("9_cbwtk")]
+
+[connection signal="mouse_entered" from="Area3D" to="." method="_on_area_3d_mouse_entered"]
+[connection signal="mouse_exited" from="Area3D" to="." method="_on_area_3d_mouse_exited"]

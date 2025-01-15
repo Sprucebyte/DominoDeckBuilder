@@ -1,34 +1,44 @@
 extends Node
 class_name Util
 
+enum Direction {Up, Right, Down, Left}
+enum Side {Top, Bottom, Left, Right}
 
+static func repeat(value, length) -> float:
+	return ((value % length) + length) % length
 
-enum Direction {UP, DOWN, LEFT, RIGHT, UNDEFINED}
+static func sideToKey(side: Util.Side) -> String:
+	match side:
+		Util.Side.Top: 	return "top"
+		Util.Side.Bottom: return "bottom"
+		Util.Side.Left: return "left"
+		Util.Side.Right: return "right"
+	return ""	 
 
-#enum TileTypes {Normal, Tarot, Cursed, Joker}
-static func sideToDirection(key) -> Util.Direction:
+static func keyToSide(key: String) -> Util.Side:
 	match key:
-		"up": return Util.Direction.UP
-		"down": return Util.Direction.DOWN
-		"left": return Util.Direction.LEFT
-		"right": return Util.Direction.RIGHT
-	return Util.Direction.UNDEFINED 	
+		"top": return Side.Top
+		"bottom": return Side.Bottom
+		"left": return Side.Left
+		"right": return Side.Right
+	return Side.Top
 
-static func directionToSide(direction) -> String:
-	match direction:
-		Util.Direction.UP: return "up"
-		Util.Direction.DOWN: return "down"
-		Util.Direction.LEFT: return "left"
-		Util.Direction.RIGHT: return "right"
-		Util.Direction.UNDEFINED: return "undefined"
-	return "undefined" 	
 
-static func directionToTile(direction) -> String:
-	match direction:
-		Util.Direction.UP: return "🂆"
-		Util.Direction.DOWN: return "🁨"
-		Util.Direction.LEFT: return "🁔"
-		Util.Direction.RIGHT: return "🀶"
-		Util.Direction.UNDEFINED: return "🀰"
+static func sideToVector3(side: Util.Side) -> Vector3:
+	match side:
+		Util.Side.Top: return Vector3.UP
+		Util.Side.Bottom: return Vector3.DOWN
+		Util.Side.Left: return Vector3.LEFT
+		Util.Side.Right: return Vector3.RIGHT
+	return Vector3.ZERO	 
+
+
+
+static func sideToTileCharacter(side) -> String:
+	match side:
+		Side.Top: return "🂆"
+		Side.Bottom: return "🁨"
+		Side.Left: return "🁔"
+		Side.Right: return "🀶"
 	return "🀰" 	
 	

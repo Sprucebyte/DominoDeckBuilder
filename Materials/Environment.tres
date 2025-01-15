@@ -14,5 +14,6 @@ background_mode = 2
 background_color = Color(0.984375, 0.944973, 0.937596, 1)
 sky = SubResource("Sky_8oek7")
 sky_rotation = Vector3(0, 1.64759, 0)
+ambient_light_sky_contribution = 0.5
 reflected_light_source = 2
 tonemap_exposure = 0.8

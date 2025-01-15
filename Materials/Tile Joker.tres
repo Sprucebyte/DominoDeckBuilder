@@ -1,7 +1,0 @@
-[gd_resource type="StandardMaterial3D" format=3 uid="uid://caxwjtd32ceis"]
-
-[resource]
-resource_name = "Domino.003"
-cull_mode = 2
-shading_mode = 0
-texture_filter = 0

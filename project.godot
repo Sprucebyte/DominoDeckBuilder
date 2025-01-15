@@ -36,6 +36,16 @@ project/assembly_name="Dominoes 3D"
 
 enabled=PackedStringArray("res://addons/anthonyec.camera_preview/plugin.cfg", "res://addons/shaker/plugin.cfg")
 
+[file_customization]
+
+folder_colors={
+"res://Audio/": "red",
+"res://Materials/": "orange",
+"res://Prefabs/": "yellow",
+"res://Scripts/": "green",
+"res://Textures/": "blue"
+}
+
 [input]
 
 click={
@@ -55,3 +65,4 @@ textures/canvas_textures/default_texture_filter=0
 environment/defaults/default_clear_color=Color(0.183594, 0.183594, 0.183594, 1)
 anti_aliasing/quality/msaa_3d=2
 anti_aliasing/quality/screen_space_aa=1
+environment/defaults/default_environment="res://Materials/Environment.tres"

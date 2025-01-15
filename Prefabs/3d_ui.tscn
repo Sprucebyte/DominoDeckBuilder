@@ -1,0 +1,67 @@
+[gd_scene load_steps=5 format=3 uid="uid://8l8oyfxis17a"]
+
+[sub_resource type="Gradient" id="Gradient_6nxay"]
+offsets = PackedFloat32Array(0.0653465, 0.273267, 0.714851, 1)
+colors = PackedColorArray(1, 0.342126, 0.272379, 1, 0.839754, 0.193483, 0.151689, 1, 0.502604, 0.0943559, 0.0710235, 1, 0.242188, 0.00833052, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_1vvcn"]
+gradient = SubResource("Gradient_6nxay")
+width = 1920
+height = 1080
+fill = 1
+fill_from = Vector2(0.5, 0.7)
+metadata/_snap_enabled = true
+
+[sub_resource type="Theme" id="Theme_peo2o"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_swsg5"]
+bg_color = Color(0, 0, 0, 0.478431)
+border_color = Color(0.12, 0.12, 0.12, 0.427451)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+corner_detail = 5
+anti_aliasing_size = 0.811
+
+[node name="3D UI" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 0.233201, 0.163483, 1)
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_1vvcn")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 600
+theme_override_constants/margin_top = 910
+theme_override_constants/margin_right = 600
+theme_override_constants/margin_bottom = 30
+
+[node name="Panel" type="Panel" parent="MarginContainer"]
+layout_mode = 2
+theme = SubResource("Theme_peo2o")
+theme_override_styles/panel = SubResource("StyleBoxFlat_swsg5")
+metadata/_edit_use_anchors_ = true

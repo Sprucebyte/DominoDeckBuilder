@@ -82,3 +82,21 @@ transform = Transform3D(0.967117, 0, 0.254332, 0, 1, 0, -0.254332, 0, 0.967117, 
 
 [node name="Tile4" parent="TileContainer" instance=ExtResource("1_xldoj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.472126, -1.03132, 0)
+
+[node name="Tile5" parent="TileContainer" instance=ExtResource("1_xldoj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.9738, -1.03132, 0.158201)
+selectable = false
+hoverable = false
+
+[node name="Tile6" parent="TileContainer" instance=ExtResource("1_xldoj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.4246, -1.03132, 0.607251)
+selectable = false
+hoverable = false
+
+[node name="Tile7" parent="TileContainer" instance=ExtResource("1_xldoj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.4219, -1.03132, -0.305882)
+selectable = false
+
+[node name="Tile8" parent="TileContainer" instance=ExtResource("1_xldoj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.0077, -1.03132, -0.710846)
+selectable = false

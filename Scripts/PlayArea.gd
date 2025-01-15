@@ -3,63 +3,249 @@ extends Node3D
 var tileNodeTree: TileNodeTree = TileNodeTree.new()
 var gridSize = 1.05
 
+
+
 func _process(delta: float) -> void:
 	
+	tileNodeTree.getOpenSlots(tileNodeTree.rootNode)
+	
+	if (Input.is_action_just_pressed("play")):
+		if (GameManager.selectedTiles.size() == 1):
+			var tile = GameManager.selectedTiles[0]
+			if (tileNodeTree.nodeCount > 0):
+				var openSlots = tileNodeTree.getOpenSlots(tileNodeTree.rootNode)
+				var validSlots: Array
+				var chosenSlot
+				var tileSide: Util.Side
+				
+				
+				for slot in openSlots:
+					
+					if (slot.side == Util.Side.Left) or (slot.side == Util.Side.Right):
+						if (slot.pips != slot.oppositePips): continue	
+					
+					if (slot.pips == tile.topValue) or (slot.pips == tile.bottomValue):
+						validSlots.append(slot)
+
+
+					#else:
+						#print("no valid slots")
+						#return
+				
+				
+				#chosenSlot = openSlots[0]
+				if (validSlots.size() > 0):
+					chosenSlot = validSlots[0]
+					if (chosenSlot.pips == tile.topValue) and (chosenSlot.pips == tile.bottomValue):
+						tileSide = Util.Side.Right
+					else: if (chosenSlot.pips == tile.topValue):
+						tileSide = Util.Side.Top
+					else: if (chosenSlot.pips == tile.bottomValue):
+						tileSide = Util.Side.Bottom
+				else:
+					print("no valid slots")
+					return
+				addTile(tile, chosenSlot.node, tileSide, chosenSlot.side)
+			else: 
+				addTile(tile, null)
+			
+		else: if (GameManager.selectedTiles.size() > 1):
+			print("too many tiles selected")
+		else:  
+			print("no tiles selected")
 	pass
 
-func _ready() -> void:
-	
-	var a = TileNode.new()
-	a.str = "A"
-	
-	var b = TileNode.new()
-	b.str = "B"
-	
-	var c = TileNode.new()
-	c.str = "C"
-	
-	var d = TileNode.new()
-	d.str = "D"
-	
-	var e = TileNode.new()
-	e.str = "E"
-	
-	var f = TileNode.new()
-	f.str = "F"
-	
-	var g = TileNode.new()
-	g.str = "G"
-	
-	tileNodeTree.addNode(null,a,Util.Direction.UP, Util.Direction.DOWN)
-	tileNodeTree.addNode(a,b,Util.Direction.UP, Util.Direction.DOWN)
-	tileNodeTree.addNode(a,c,Util.Direction.DOWN, Util.Direction.UP)
-	tileNodeTree.addNode(b,d,Util.Direction.UP, Util.Direction.DOWN)
-	tileNodeTree.addNode(d,e,Util.Direction.UP, Util.Direction.DOWN)
-	tileNodeTree.addNode(d,f,Util.Direction.DOWN, Util.Direction.UP)
-	tileNodeTree.addNode(d,g,Util.Direction.RIGHT, Util.Direction.LEFT)
 
-	# E
-	# ^
-	# D -> G
-	# ^
-	# B   
-	# ^
-	# A   root node
-	# v
-	# C
+
+
+
+
+
+func addTile(tile: Tile, parentTileNode: TileNode, sideOfTile: Util.Side = Util.Side.Top, sideOfParent: Util.Side = Util.Side.Top):
+	print("----------")
+	print("trying to add tile")
 	
-	# F cant be placed
+	if (tile == null): return;
+	print("tile was not null")
 	
-	print("-------")
-	print("trying to find edge nodes:")
-	tileNodeTree.getEdgeNodes(tileNodeTree.rootNode)
-	print("-------")
-	print("trying to find all placement positions:")
+	var placed = false
+	var tileNode = TileNode.new()
+ 
+	tileNode.str = str(tileNodeTree.nodeCount)
+	tileNode.tile = tile;
+	tile.tileNode = tileNode;
+	
+	if (parentTileNode == null):
+		print("parent tile is null")
+		placed = tileNodeTree.addNode(tileNode,null,Util.Side.Top, Util.Side.Bottom)
+	else:
+		print("parent tile is not null")
+		placed = tileNodeTree.addNode(tileNode, parentTileNode, sideOfTile, sideOfParent)
+
+	if not (placed): return
+	
+	print("tile was added to node tree")
+	
+	if (parentTileNode == null):
+		tile.targetPosition = global_position;
+		tile.setDirection(Util.Direction.Up)
+	else:
+		var offset: Vector3 = Vector3.ZERO
+		var dir: Util.Direction
+		var parentTile: Tile = parentTileNode.tile
+		var parentTileDirection = parentTile.direction
+		#offset = Util.sideToVector3(sideOfParent) * 2
+		
+		# If new tile is connected to the parent left to left, right to right, top to top or bottom to bottom	
+		if (sideOfTile == sideOfParent):
+			if (parentTileDirection == Util.Direction.Up):
+				dir = Util.Direction.Down
+				offset = Vector3.UP * 2 
+			else: if (parentTileDirection == Util.Direction.Down): 
+				dir = Util.Direction.Up
+				offset = Vector3.DOWN * 2
+			else: if (parentTileDirection == Util.Direction.Left): 
+				dir = Util.Direction.Left
+				offset = Vector3.LEFT * 2
+			else: if (parentTileDirection == Util.Direction.Right): 
+				dir = Util.Direction.Right
+				offset = Vector3.RIGHT * 2
+			if (sideOfParent == Util.Side.Bottom):
+				offset = offset *-1
+
+		# If new tile is connected with its left side to the right side of the parent	
+		else: if (sideOfTile == Util.Side.Left) and (sideOfParent == Util.Side.Right):
+			dir = parentTileDirection
+			if (parentTileDirection == Util.Direction.Up):
+				offset = Vector3.RIGHT * 2
+			else: if (parentTileDirection == Util.Direction.Down):
+				offset = Vector3.LEFT * 2
+			else: if (parentTileDirection == Util.Direction.Right):
+				offset = Vector3.DOWN * 2
+			else: if (parentTileDirection == Util.Direction.Left):
+				offset = Vector3.UP * 2
+		
+		# If new tile is connected with its right side to the left side of the parent
+		else: if (sideOfTile == Util.Side.Right) and (sideOfParent == Util.Side.Left):
+			dir = parentTileDirection
+			if (parentTileDirection == Util.Direction.Up):
+				offset = Vector3.LEFT * 2
+			else: if (parentTileDirection == Util.Direction.Down):
+				offset = Vector3.RIGHT * 2
+			else: if (parentTileDirection == Util.Direction.Right):
+				offset = Vector3.UP * 2
+			else: if (parentTileDirection == Util.Direction.Left):
+				offset = Vector3.DOWN * 2
+		
+		# If new tile is connected with its top side to the bottom side of the parent	
+		else: if (sideOfTile == Util.Side.Top) and (sideOfParent == Util.Side.Bottom):
+			dir = parentTileDirection
+			if (parentTileDirection == Util.Direction.Up):
+				offset = Vector3.DOWN * 2
+			else: if (parentTileDirection == Util.Direction.Down):
+				offset = Vector3.UP * 2
+			else: if (parentTileDirection == Util.Direction.Right):
+				offset = Vector3.LEFT * 2
+			else: if (parentTileDirection == Util.Direction.Left):
+				offset = Vector3.RIGHT * 2
+		
+		# If new tile is connected with its bottom side to the top side of the parent
+		else: if (sideOfTile == Util.Side.Bottom) and (sideOfParent == Util.Side.Top):
+			dir = parentTileDirection
+			if (parentTileDirection == Util.Direction.Up):
+				offset = Vector3.UP * 2
+			else: if (parentTileDirection == Util.Direction.Down):
+				offset = Vector3.DOWN * 2
+			else: if (parentTileDirection == Util.Direction.Right):
+				offset = Vector3.RIGHT * 2
+			else: if (parentTileDirection == Util.Direction.Left):
+				offset = Vector3.LEFT * 2
+				
+		# If new tile is connected with its right or left side to the top side of the parent		
+		else: if ((sideOfTile == Util.Side.Right) or (sideOfTile == Util.Side.Left)) and (sideOfParent == Util.Side.Top):
+			if (parentTileDirection == Util.Direction.Up): 
+				dir = Util.Direction.Left
+				offset = Vector3.UP * 1.5
+			else: if (parentTileDirection == Util.Direction.Down): 
+				dir = Util.Direction.Right
+				offset = Vector3.DOWN * 1.5
+			else: if (parentTileDirection == Util.Direction.Left):
+				dir = Util.Direction.Down
+				offset = Vector3.LEFT * 1.5
+			else: if (parentTileDirection == Util.Direction.Right): 
+				dir = Util.Direction.Up 
+				offset = Vector3.RIGHT * 1.5
+			pass
+			
+		# If new tile is connected with its right or left side to the bottom side of the parent	
+		else: if ((sideOfTile == Util.Side.Right) or (sideOfTile == Util.Side.Left)) and (sideOfParent == Util.Side.Top):
+			if (parentTileDirection == Util.Direction.Up): 
+				dir = Util.Direction.Left
+				offset = Vector3.DOWN * 1.5
+			else: if (parentTileDirection == Util.Direction.Down): 
+				dir = Util.Direction.Right
+				offset = Vector3.UP * 1.5
+			else: if (parentTileDirection == Util.Direction.Left):
+				dir = Util.Direction.Down
+				offset = Vector3.RIGHT * 1.5
+			else: if (parentTileDirection == Util.Direction.Right): 
+				dir = Util.Direction.Up 
+				offset = Vector3.LEFT * 1.5
+			pass
+		
+		# If new tile is connected with its bottom side to the right or left side of the parent	
+		else: if ((sideOfTile == Util.Side.Top) or (sideOfTile == Util.Side.Bottom)) and ((sideOfParent == Util.Side.Left) or (sideOfParent == Util.Side.Right)):
+			if (parentTileDirection == Util.Direction.Up): 
+				dir = Util.Direction.Right
+				offset = Vector3.RIGHT * 1.5
+			else: if (parentTileDirection == Util.Direction.Down): 
+				dir = Util.Direction.Left
+				offset = Vector3.LEFT * 1.5
+			else: if (parentTileDirection == Util.Direction.Left):
+				dir = Util.Direction.Up
+				offset = Vector3.UP * 1.5
+			else: if (parentTileDirection == Util.Direction.Right): 
+				dir = Util.Direction.Down 
+				offset = Vector3.DOWN * 1.5
+			
+			if (sideOfParent == Util.Side.Left):
+				offset = offset * -1
+		
+		# If new tile is connected with its top side to the right or left side of the parent	
+		else: if ((sideOfTile == Util.Side.Top) or (sideOfTile == Util.Side.Bottom)) and ((sideOfParent == Util.Side.Left) or (sideOfParent == Util.Side.Right)):
+			if (parentTileDirection == Util.Direction.Up): 
+				dir = Util.Direction.Left
+				offset = Vector3.RIGHT * 1.5
+			else: if (parentTileDirection == Util.Direction.Down): 
+				dir = Util.Direction.Right
+				offset = Vector3.LEFT * 1.5
+			else: if (parentTileDirection == Util.Direction.Left):
+				dir = Util.Direction.Down
+				offset = Vector3.UP * 1.5
+			else: if (parentTileDirection == Util.Direction.Right): 
+				dir = Util.Direction.Up 
+				offset = Vector3.DOWN * 1.5
+			
+			if (sideOfParent == Util.Side.Left):
+				offset = offset * -1
+		
+			#dir = Util.repeat(parentTileNode.tile.direction + 1, 3)
+		tile.targetPosition = parentTileNode.tile.global_position + offset;
+		
+		tile.setDirection(dir)
+	tile.play()
+	print("tile was placed")
+	
+	
+	
+	
+	
+	print("----------")
+	
+	print("open slots:")
 	print(tileNodeTree.getOpenSlots(tileNodeTree.rootNode))
-	print("-------")
-	pass
-
-
+	
+	
 
 func getPlacementRequirements():
 	pass
@@ -69,128 +255,3 @@ func getAllPlacements():
 	
 func getValidPlacements():
 	pass
-
-
-func placeTile(root: Tile, tile: Tile):
-	#if (rootTile == null):
-		#tile.play()
-		#tile.homePosition = Vector3(0,0,0)
-		#rootTile = tile
-		#print("added first tile")
-	#else:
-		#print("added second tile")
-		#tile.play()
-		#
-		#var edgeTiles: Array[Tile] = getEdgeTiles(rootTile)
-		#
-		##edgeTiles[0].add_child(tile)
-		#
-		#tile.homePosition = edgeTiles[0].position + Vector3(gridSize,0,0)
-		#print("1: ")
-		#print(edgeTiles[0].get_children())
-		#print("2:  ")
-		#print(edgeTiles[0].find_children("tile"))
-		##tile.homePosition = getEdgeTiles
-		##rootTile.addTile
-		#pass
-		#
-	pass
-
-
-#@export var mainBranch = Branch.new()
-
-#
-#var rootTile: Tile = null
-#
-#
-#
-#
-#func getEdgeTiles(tile: Tile):
-	#var edgeTiles: Array[Tile] = []
-	#if (rootTile == null): return
-	#var children: Array = tile.find_children("tile") 
-	##print(tile.get_children())
-	#if (children.size() == 0): 
-		#edgeTiles.push_back(tile)
-		#
-		#return edgeTiles
-	#else:
-		#var n = 0
-		#for childTile in children:
-			#++n
-			#if (childTile != null):
-				#pass
-				##getEdgeTiles()
-				##getEdgeTiles(childTile)
-				##print("child:")
-				##print(childTile)
-			#
-			##var childEdgeTiles: Array[Tile] = []
-			##edgeTiles.append_array(getEdgeTiles(childTile))
-			#if (n > 100): break	
-			##if (child)
-		#
-#
-#
-	#
-	#return edgeTiles
-#
-#
-#func placeTile(tile: Tile):
-	#if (rootTile == null):
-		#tile.play()
-		#tile.homePosition = Vector3(0,0,0)
-		#rootTile = tile
-		#print("added first tile")
-	#else:
-		#print("added second tile")
-		#tile.play()
-		#
-		#var edgeTiles: Array[Tile] = getEdgeTiles(rootTile)
-		#
-		##edgeTiles[0].add_child(tile)
-		#
-		#tile.homePosition = edgeTiles[0].position + Vector3(gridSize,0,0)
-		#print("1: ")
-		#print(edgeTiles[0].get_children())
-		#print("2:  ")
-		#print(edgeTiles[0].find_children("tile"))
-		##tile.homePosition = getEdgeTiles
-		##rootTile.addTile
-		#pass
-		#
-	#pass
-	##var edgeTiles = mainBranch._findLocalEdgeTiles()
-	##print(tile)
-	##if (edgeTiles.size() > 0):
-	##	tile.play()
-	##	tile.homePosition = edgeTiles[edgeTiles.size()-1].global_position + Vector3.UP * gridSize * 2
-	##		
-	##	mainBranch.addTile(tile)
-	##	pass
-	##else:
-	##	tile.play()
-	##	tile.homePosition = mainBranch.getOrigin()
-	##	mainBranch.addTile(tile)
-	##	pass
-#
-#func _ready() -> void:
-	##print_debug("test")
-	#pass # Replace with function body.
-#
-#
-#
-#func _process(delta: float) -> void:
-	##print("----")
-	##print(getEdgeTiles(rootTile))
-	#if (rootTile != null):
-		#var edgeTiles: Array[Tile] = getEdgeTiles(rootTile)
-		#if (edgeTiles.size() > 0):
-			#pass
-			##print(edgeTiles[0].find_children("tile"))
-	#if (Input.is_action_just_pressed("play")):
-	##	print_debug("play")
-		#if (GameManager.selectedTiles.size() > 0):
-			#placeTile(GameManager.selectedTiles[0])
-	##print("----")
-	#pass

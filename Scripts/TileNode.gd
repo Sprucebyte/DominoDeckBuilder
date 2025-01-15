@@ -2,7 +2,7 @@ extends Node
 class_name TileNode
 
 var tile: Tile
-var direction: Util.Direction
+#var side: Util.Side
 var parent = null
 var str = ""
 # direction is relative to the tile, meaning left and right is only and always reserved for spinners.   
@@ -16,14 +16,11 @@ var str = ""
 # If the tile is rotated to 90 degrees to the right, up will be facing right, and the right side will face down
 # The node tree does however not care at all about the rotation of the tile, it only handles the connections between them
 var child = {
-	up = null,
-	down = null,
+	top = null,
+	bottom = null,
 	left = null,
 	right = null
 }
-
-
-
 
 
 

@@ -55,5 +55,5 @@ func _process(delta: float) -> void:
 		var angle = sample * -5
 		
 		tiles[i].targetRotation = Vector3(0,0,angle)
-		tiles[i].homePosition = position + Vector3(sample * 4 + .5, 0 , 0)
+		tiles[i].targetPosition = position + Vector3(sample * 4 + .5, 0 , 0)
 	

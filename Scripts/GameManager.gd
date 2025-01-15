@@ -36,7 +36,7 @@ var leastTilesInDeck = 0
 #
 var biggestHand = 0
 
-
+#var gameSpeed = 1
 
 func selectTile(tile):
 	selectedTiles.push_back(tile)
@@ -53,4 +53,5 @@ func _ready() -> void:
 	pass
 
 func _process(delta: float) -> void:
+
 	pass
