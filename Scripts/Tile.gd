@@ -16,6 +16,15 @@ class_name Tile
 @onready var spriteTop = $ModelContainer/SpriteTop
 @onready var spriteBottom = $ModelContainer/SpriteBottom
 
+@onready var topTakenIndicator = $ModelContainer/TopIndicator
+@onready var bottomTakenIndicator = $ModelContainer/BottomIndicator
+@onready var leftTakenIndicator = $ModelContainer/LeftIndicator
+@onready var rightTakenIndicator = $ModelContainer/RightIndicator
+
+@onready var directionText = $"ModelContainer/Direction text"
+
+@onready var tilenameText = $"ModelContainer/Label tilename"
+
 
 
 var targetScale = Vector3.ONE
@@ -49,15 +58,45 @@ func setDirection(direction: Util.Direction):
 	var rot = Vector3.ZERO
 	match direction:
 		Util.Direction.Up: rot = Vector3(0,0,0)
-		Util.Direction.Right: rot = Vector3(0,0,90)
+		Util.Direction.Right: rot = Vector3(0,0,-90)
 		Util.Direction.Down: rot = Vector3(0,0,180)
-		Util.Direction.Left: rot = Vector3(0,0,-90)
+		Util.Direction.Left: rot = Vector3(0,0,90)
 	targetRotation = rot
 
 
 # Update
 func _process(delta: float) -> void:
 	
+	
+	var string = ""
+	
+	match direction:
+		0: string = "Up"
+		1: string = "Right"
+		2: string = "Down"
+		3: string = "Left"
+	
+	directionText.text = string
+
+	if (tileNode != null):
+		tilenameText.text = tileNode.str
+		if (tileNode.child.top == null): topTakenIndicator.modulate = Color.TRANSPARENT
+		else: topTakenIndicator.modulate = Color.GREEN
+	
+		if (tileNode.child.right == null): rightTakenIndicator.modulate = Color.TRANSPARENT
+		else: rightTakenIndicator.modulate = Color.BLUE
+	
+		if (tileNode.child.bottom == null): bottomTakenIndicator.modulate = Color.TRANSPARENT
+		else: bottomTakenIndicator.modulate = Color.PURPLE
+	
+		if (tileNode.child.left == null): leftTakenIndicator.modulate = Color.TRANSPARENT
+		else: leftTakenIndicator.modulate = Color.RED
+	else:
+		topTakenIndicator.modulate = Color.TRANSPARENT
+		rightTakenIndicator.modulate = Color.TRANSPARENT
+		bottomTakenIndicator.modulate = Color.TRANSPARENT
+		leftTakenIndicator.modulate = Color.TRANSPARENT
+		
 	spriteTop.texture = sprites[topValue]
 	spriteBottom.texture = sprites[bottomValue]
 	scale = scale.lerp(targetScale, delta*20)

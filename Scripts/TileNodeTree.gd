@@ -90,7 +90,7 @@ func getOpenSlots(root) -> Array:
 			if (value != null) and (value != node.parent):
 				stack.append(value)
 				
-				DebugDraw3D.draw_line(node.tile.global_position,value.tile.global_position,Color.BLUE)
+				#DebugDraw3D.draw_line(node.tile.global_position,value.tile.global_position,Color.BLUE)
 			if (value == null):
 				#print(node.str + "-" + key + " is free")
 				var pips = 0
@@ -104,7 +104,7 @@ func getOpenSlots(root) -> Array:
 					Util.Side.Left: col = Color.CYAN
 					Util.Side.Right: col = Color.BLUE
 					
-				DebugDraw3D.draw_arrow(node.tile.global_position,node.tile.global_position + Util.sideToVector3(side),col,.2)
+				#DebugDraw3D.draw_arrow(node.tile.global_position,node.tile.global_position + Util.sideToVector3(side),col,.2)
 				
 				if (side == Util.Side.Top):
 					pips = node.tile.topValue

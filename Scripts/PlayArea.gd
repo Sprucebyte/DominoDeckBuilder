@@ -1,7 +1,7 @@
 extends Node3D
 
 var tileNodeTree: TileNodeTree = TileNodeTree.new()
-var gridSize = 1.05
+var gridSize = 1.1
 
 
 
@@ -88,7 +88,7 @@ func addTile(tile: Tile, parentTileNode: TileNode, sideOfTile: Util.Side = Util.
 	
 	if (parentTileNode == null):
 		tile.targetPosition = global_position;
-		tile.setDirection(Util.Direction.Up)
+		tile.setDirection(Util.Direction.Right)
 	else:
 		var offset: Vector3 = Vector3.ZERO
 		var dir: Util.Direction
@@ -96,144 +96,158 @@ func addTile(tile: Tile, parentTileNode: TileNode, sideOfTile: Util.Side = Util.
 		var parentTileDirection = parentTile.direction
 		#offset = Util.sideToVector3(sideOfParent) * 2
 		
-		# If new tile is connected to the parent left to left, right to right, top to top or bottom to bottom	
-		if (sideOfTile == sideOfParent):
-			if (parentTileDirection == Util.Direction.Up):
-				dir = Util.Direction.Down
-				offset = Vector3.UP * 2 
-			else: if (parentTileDirection == Util.Direction.Down): 
-				dir = Util.Direction.Up
-				offset = Vector3.DOWN * 2
-			else: if (parentTileDirection == Util.Direction.Left): 
-				dir = Util.Direction.Left
-				offset = Vector3.LEFT * 2
-			else: if (parentTileDirection == Util.Direction.Right): 
-				dir = Util.Direction.Right
-				offset = Vector3.RIGHT * 2
-			if (sideOfParent == Util.Side.Bottom):
-				offset = offset *-1
-
-		# If new tile is connected with its left side to the right side of the parent	
-		else: if (sideOfTile == Util.Side.Left) and (sideOfParent == Util.Side.Right):
-			dir = parentTileDirection
-			if (parentTileDirection == Util.Direction.Up):
-				offset = Vector3.RIGHT * 2
-			else: if (parentTileDirection == Util.Direction.Down):
-				offset = Vector3.LEFT * 2
-			else: if (parentTileDirection == Util.Direction.Right):
-				offset = Vector3.DOWN * 2
-			else: if (parentTileDirection == Util.Direction.Left):
-				offset = Vector3.UP * 2
-		
-		# If new tile is connected with its right side to the left side of the parent
-		else: if (sideOfTile == Util.Side.Right) and (sideOfParent == Util.Side.Left):
-			dir = parentTileDirection
-			if (parentTileDirection == Util.Direction.Up):
-				offset = Vector3.LEFT * 2
-			else: if (parentTileDirection == Util.Direction.Down):
-				offset = Vector3.RIGHT * 2
-			else: if (parentTileDirection == Util.Direction.Right):
-				offset = Vector3.UP * 2
-			else: if (parentTileDirection == Util.Direction.Left):
-				offset = Vector3.DOWN * 2
-		
-		# If new tile is connected with its top side to the bottom side of the parent	
-		else: if (sideOfTile == Util.Side.Top) and (sideOfParent == Util.Side.Bottom):
-			dir = parentTileDirection
-			if (parentTileDirection == Util.Direction.Up):
-				offset = Vector3.DOWN * 2
-			else: if (parentTileDirection == Util.Direction.Down):
-				offset = Vector3.UP * 2
-			else: if (parentTileDirection == Util.Direction.Right):
-				offset = Vector3.LEFT * 2
-			else: if (parentTileDirection == Util.Direction.Left):
-				offset = Vector3.RIGHT * 2
-		
-		# If new tile is connected with its bottom side to the top side of the parent
-		else: if (sideOfTile == Util.Side.Bottom) and (sideOfParent == Util.Side.Top):
-			dir = parentTileDirection
-			if (parentTileDirection == Util.Direction.Up):
-				offset = Vector3.UP * 2
-			else: if (parentTileDirection == Util.Direction.Down):
-				offset = Vector3.DOWN * 2
-			else: if (parentTileDirection == Util.Direction.Right):
-				offset = Vector3.RIGHT * 2
-			else: if (parentTileDirection == Util.Direction.Left):
-				offset = Vector3.LEFT * 2
-				
-		# If new tile is connected with its right or left side to the top side of the parent		
-		else: if ((sideOfTile == Util.Side.Right) or (sideOfTile == Util.Side.Left)) and (sideOfParent == Util.Side.Top):
-			if (parentTileDirection == Util.Direction.Up): 
-				dir = Util.Direction.Left
-				offset = Vector3.UP * 1.5
-			else: if (parentTileDirection == Util.Direction.Down): 
-				dir = Util.Direction.Right
-				offset = Vector3.DOWN * 1.5
-			else: if (parentTileDirection == Util.Direction.Left):
-				dir = Util.Direction.Down
-				offset = Vector3.LEFT * 1.5
-			else: if (parentTileDirection == Util.Direction.Right): 
-				dir = Util.Direction.Up 
-				offset = Vector3.RIGHT * 1.5
-			pass
-			
-		# If new tile is connected with its right or left side to the bottom side of the parent	
-		else: if ((sideOfTile == Util.Side.Right) or (sideOfTile == Util.Side.Left)) and (sideOfParent == Util.Side.Top):
-			if (parentTileDirection == Util.Direction.Up): 
-				dir = Util.Direction.Left
-				offset = Vector3.DOWN * 1.5
-			else: if (parentTileDirection == Util.Direction.Down): 
-				dir = Util.Direction.Right
-				offset = Vector3.UP * 1.5
-			else: if (parentTileDirection == Util.Direction.Left):
-				dir = Util.Direction.Down
-				offset = Vector3.RIGHT * 1.5
-			else: if (parentTileDirection == Util.Direction.Right): 
-				dir = Util.Direction.Up 
-				offset = Vector3.LEFT * 1.5
-			pass
 		
 		# If new tile is connected with its bottom side to the right or left side of the parent	
-		else: if ((sideOfTile == Util.Side.Top) or (sideOfTile == Util.Side.Bottom)) and ((sideOfParent == Util.Side.Left) or (sideOfParent == Util.Side.Right)):
+		if ((sideOfTile == Util.Side.Top) or (sideOfTile == Util.Side.Bottom)) and ((sideOfParent == Util.Side.Left) or (sideOfParent == Util.Side.Right)):
+			print("--- at 1")
 			if (parentTileDirection == Util.Direction.Up): 
 				dir = Util.Direction.Right
-				offset = Vector3.RIGHT * 1.5
+				offset = Vector3.RIGHT * 1.5 * gridSize
 			else: if (parentTileDirection == Util.Direction.Down): 
 				dir = Util.Direction.Left
-				offset = Vector3.LEFT * 1.5
+				offset = Vector3.LEFT * 1.5 * gridSize
 			else: if (parentTileDirection == Util.Direction.Left):
 				dir = Util.Direction.Up
-				offset = Vector3.UP * 1.5
+				offset = Vector3.UP * 1.5 * gridSize
 			else: if (parentTileDirection == Util.Direction.Right): 
 				dir = Util.Direction.Down 
-				offset = Vector3.DOWN * 1.5
+				offset = Vector3.DOWN * 1.5 * gridSize
 			
 			if (sideOfParent == Util.Side.Left):
 				offset = offset * -1
 		
 		# If new tile is connected with its top side to the right or left side of the parent	
 		else: if ((sideOfTile == Util.Side.Top) or (sideOfTile == Util.Side.Bottom)) and ((sideOfParent == Util.Side.Left) or (sideOfParent == Util.Side.Right)):
+			print("--- at 2")
 			if (parentTileDirection == Util.Direction.Up): 
 				dir = Util.Direction.Left
-				offset = Vector3.RIGHT * 1.5
+				offset = Vector3.RIGHT * 1.5 * gridSize
 			else: if (parentTileDirection == Util.Direction.Down): 
 				dir = Util.Direction.Right
-				offset = Vector3.LEFT * 1.5
+				offset = Vector3.LEFT * 1.5 * gridSize
 			else: if (parentTileDirection == Util.Direction.Left):
 				dir = Util.Direction.Down
-				offset = Vector3.UP * 1.5
+				offset = Vector3.UP * 1.5 * gridSize
 			else: if (parentTileDirection == Util.Direction.Right): 
 				dir = Util.Direction.Up 
-				offset = Vector3.DOWN * 1.5
+				offset = Vector3.DOWN * 1.5 * gridSize
 			
 			if (sideOfParent == Util.Side.Left):
 				offset = offset * -1
+		
+		# If new tile is connected to the parent left to left, right to right, top to top or bottom to bottom	
+		else: if (sideOfTile == sideOfParent):
+			print("--- at 3")
+			if (parentTileDirection == Util.Direction.Up):
+				dir = Util.Direction.Down
+				offset = Vector3.UP * 2 * gridSize
+			else: if (parentTileDirection == Util.Direction.Down): 
+				dir = Util.Direction.Up
+				offset = Vector3.DOWN * 2 * gridSize
+			else: if (parentTileDirection == Util.Direction.Left): 
+				dir = Util.Direction.Right
+				offset = Vector3.LEFT * 2 * gridSize
+			else: if (parentTileDirection == Util.Direction.Right): 
+				dir = Util.Direction.Left
+				offset = Vector3.RIGHT * 2 * gridSize
+				
+			if (sideOfParent == Util.Side.Bottom):
+				offset = offset *-1
+
+		# If new tile is connected with its left side to the right side of the parent	
+		else: if (sideOfTile == Util.Side.Left) and (sideOfParent == Util.Side.Right):
+			print("--- at 4")
+			dir = parentTileDirection
+			if (parentTileDirection == Util.Direction.Up):
+				offset = Vector3.RIGHT * 2 * gridSize
+			else: if (parentTileDirection == Util.Direction.Down):
+				offset = Vector3.LEFT * 2 * gridSize
+			else: if (parentTileDirection == Util.Direction.Right):
+				offset = Vector3.DOWN * 2 * gridSize
+			else: if (parentTileDirection == Util.Direction.Left):
+				offset = Vector3.UP * 2 * gridSize
+		
+		# If new tile is connected with its right side to the left side of the parent
+		else: if (sideOfTile == Util.Side.Right) and (sideOfParent == Util.Side.Left):
+			print("--- at 5")
+			dir = parentTileDirection
+			if (parentTileDirection == Util.Direction.Up):
+				offset = Vector3.LEFT * 2 * gridSize
+			else: if (parentTileDirection == Util.Direction.Down):
+				offset = Vector3.RIGHT * 2 * gridSize
+			else: if (parentTileDirection == Util.Direction.Right):
+				offset = Vector3.UP * 2 * gridSize
+			else: if (parentTileDirection == Util.Direction.Left):
+				offset = Vector3.DOWN * 2 * gridSize
+		
+		# If new tile is connected with its top side to the bottom side of the parent	
+		else: if (sideOfTile == Util.Side.Top) and (sideOfParent == Util.Side.Bottom):
+			print("--- at 6")
+			dir = parentTileDirection
+			if (parentTileDirection == Util.Direction.Up):
+				offset = Vector3.DOWN * 2 * gridSize
+			else: if (parentTileDirection == Util.Direction.Down):
+				offset = Vector3.UP * 2 * gridSize
+			else: if (parentTileDirection == Util.Direction.Right):
+				offset = Vector3.LEFT * 2 * gridSize
+			else: if (parentTileDirection == Util.Direction.Left):
+				offset = Vector3.RIGHT * 2 * gridSize
+		
+		# If new tile is connected with its bottom side to the top side of the parent
+		else: if (sideOfTile == Util.Side.Bottom) and (sideOfParent == Util.Side.Top):
+			print("--- at 7")
+			dir = parentTileDirection
+			if (parentTileDirection == Util.Direction.Up):
+				offset = Vector3.UP * 2 * gridSize
+			else: if (parentTileDirection == Util.Direction.Down):
+				offset = Vector3.DOWN * 2 * gridSize
+			else: if (parentTileDirection == Util.Direction.Right):
+				offset = Vector3.RIGHT * 2 * gridSize
+			else: if (parentTileDirection == Util.Direction.Left):
+				offset = Vector3.LEFT * 2 * gridSize
+				
+		# If new tile is connected with its right or left side to the top side of the parent		
+		else: if ((sideOfTile == Util.Side.Right) or (sideOfTile == Util.Side.Left)) and (sideOfParent == Util.Side.Top):
+			print("--- at 8")
+			if (parentTileDirection == Util.Direction.Up): 
+				dir = Util.Direction.Right
+				offset = Vector3.UP * 1.5 * gridSize
+			else: if (parentTileDirection == Util.Direction.Down): 
+				dir = Util.Direction.Left
+				offset = Vector3.DOWN * 1.5 * gridSize
+			else: if (parentTileDirection == Util.Direction.Left):
+				dir = Util.Direction.Up
+				offset = Vector3.LEFT * 1.5 * gridSize
+			else: if (parentTileDirection == Util.Direction.Right): 
+				dir = Util.Direction.Down 
+				offset = Vector3.RIGHT * 1.5 * gridSize
+			pass
+			
+		# If new tile is connected with its right or left side to the bottom side of the parent	
+		else: if ((sideOfTile == Util.Side.Right) or (sideOfTile == Util.Side.Left)) and (sideOfParent == Util.Side.Bottom):
+			print("--- at 9")
+			if (parentTileDirection == Util.Direction.Up): 
+				dir = Util.Direction.Left
+				offset = Vector3.DOWN * 1.5 * gridSize
+			else: if (parentTileDirection == Util.Direction.Down): 
+				dir = Util.Direction.Right
+				offset = Vector3.UP * 1.5 * gridSize
+			else: if (parentTileDirection == Util.Direction.Left):
+				dir = Util.Direction.Down
+				offset = Vector3.RIGHT * 1.5 * gridSize
+			else: if (parentTileDirection == Util.Direction.Right): 
+				dir = Util.Direction.Up 
+				offset = Vector3.LEFT * 1.5 * gridSize
+			pass
+		
+		
 		
 			#dir = Util.repeat(parentTileNode.tile.direction + 1, 3)
 		tile.targetPosition = parentTileNode.tile.global_position + offset;
 		
 		tile.setDirection(dir)
 	tile.play()
+	tile.reparent(self)
 	print("tile was placed")
 	
 	

@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://dli3f2y42248e"]
+[gd_scene load_steps=26 format=3 uid="uid://dli3f2y42248e"]
 
 [ext_resource type="Script" path="res://Scripts/Tile.gd" id="1_qw2k2"]
 [ext_resource type="Texture2D" uid="uid://cvgq3ra2j5c0d" path="res://Textures/Pips/0.png" id="2_u5gsw"]
@@ -20,6 +20,7 @@
 [ext_resource type="Texture2D" uid="uid://bjnohxr7k6hxy" path="res://Textures/Pips/8.png" id="10_fmo2a"]
 [ext_resource type="Texture2D" uid="uid://c3iv6yckr4cm8" path="res://Textures/Pips/9.png" id="11_cpofk"]
 [ext_resource type="Texture2D" uid="uid://81gjx4ejknel" path="res://Textures/divider test.png" id="19_7rsrd"]
+[ext_resource type="Texture2D" uid="uid://f470s7enp0x1" path="res://Textures/debug_arrow.png" id="21_eldiw"]
 
 [sub_resource type="Resource" id="Resource_por6t"]
 script = ExtResource("5_h4qqa")
@@ -104,7 +105,7 @@ shape = SubResource("BoxShape3D_jyux7")
 transform = Transform3D(0.999997, -3.00124e-05, 0.00229441, 0, 0.999914, 0.0130795, -0.0022946, -0.0130795, 0.999912, 0, 0, 0)
 
 [node name="Divider" type="Sprite3D" parent="ModelContainer"]
-transform = Transform3D(0.202699, 1.8207e-12, -1.42109e-13, -3.63488e-12, 0.149998, -4.26326e-14, 2.84217e-14, 6.21725e-15, 1, 1.70867e-05, -0.000225961, 0.20601)
+transform = Transform3D(0.202699, 1.8207e-12, -1.42109e-13, -3.63488e-12, 0.149998, -4.9738e-14, 3.19744e-14, 7.10543e-15, 1, 1.70699e-05, -0.000225968, 0.12102)
 texture = ExtResource("19_7rsrd")
 
 [node name="SpriteTop" type="Sprite3D" parent="ModelContainer"]
@@ -117,10 +118,72 @@ texture = ExtResource("9_ofvkv")
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="ModelContainer"]
 transform = Transform3D(0.282843, -0.282843, 0, 0.282843, 0.282843, 0, 0, 0, 0.14, 0, 0.922667, 0.00198197)
+visible = false
 mesh = SubResource("BoxMesh_j5ih2")
 skeleton = NodePath("../..")
 
 [node name="domino_model2" parent="ModelContainer" instance=ExtResource("9_cbwtk")]
+
+[node name="TopIndicator" type="Sprite3D" parent="ModelContainer"]
+transform = Transform3D(0.0757105, 4.55611e-13, -2.84217e-14, -4.5359e-13, 0.075718, -7.10543e-15, 1.77636e-15, 2.66454e-15, 1, 2.68457e-05, 0.893781, 0.209051)
+modulate = Color(0.148045, 1, 0.0774338, 1)
+render_priority = 1
+texture = ExtResource("21_eldiw")
+
+[node name="BottomIndicator" type="Sprite3D" parent="ModelContainer"]
+transform = Transform3D(-0.0757105, -6.61998e-09, 4.10248e-07, 6.6193e-09, -0.075718, 1.15484e-07, 3.106e-08, 8.74421e-09, 1, -2.44269e-05, -0.814585, 0.209051)
+modulate = Color(1, 0, 0.915179, 1)
+render_priority = 1
+texture = ExtResource("21_eldiw")
+
+[node name="LeftIndicator" type="Sprite3D" parent="ModelContainer"]
+transform = Transform3D(9.92896e-09, -0.075718, 2.62866e-07, 0.0757105, 9.93145e-09, -1.47382e-07, 1.11583e-08, 1.99037e-08, 1, -0.479562, -0.00739572, 0.209051)
+modulate = Color(1, 0.231851, 0.152145, 1)
+render_priority = 1
+texture = ExtResource("21_eldiw")
+
+[node name="RightIndicator" type="Sprite3D" parent="ModelContainer"]
+transform = Transform3D(-3.3101e-09, 0.075718, 1.47382e-07, -0.0757105, -3.31011e-09, 2.62866e-07, 1.99017e-08, -1.11594e-08, 1, 0.449731, -0.0074237, 0.209051)
+modulate = Color(0, 0.388286, 1, 1)
+render_priority = 1
+texture = ExtResource("21_eldiw")
+
+[node name="Direction text" type="Label3D" parent="ModelContainer"]
+transform = Transform3D(1, 1.06581e-14, 0, 1.42109e-14, 1, 0, 0, 1.06581e-14, 1, 0.0223236, -0.00434655, 0.191704)
+visible = false
+text = "right"
+font_size = 47
+outline_size = 27
+uppercase = true
+
+[node name="Label3D" type="Label3D" parent="ModelContainer"]
+transform = Transform3D(1, 1.14007e-14, 0, 1.52817e-14, 1, 0, 0, 3.55271e-15, 1, 3.00126e-05, 1.19872, 0.290756)
+text = "TOP"
+font_size = 40
+outline_size = 0
+
+[node name="Label tilename" type="Label3D" parent="ModelContainer"]
+transform = Transform3D(1, 1.14007e-14, 0, 1.52817e-14, 1, 0, 0, 3.55271e-15, 1, -0.386619, -0.765381, 0.290756)
+font_size = 40
+outline_size = 25
+
+[node name="Label3D2" type="Label3D" parent="ModelContainer"]
+transform = Transform3D(1, 1.14007e-14, 0, 1.52817e-14, 1, 0, 0, 3.55271e-15, 1, 3.00127e-05, -1.04174, 0.290756)
+text = "BOTTOM"
+font_size = 40
+outline_size = 0
+
+[node name="Label3D3" type="Label3D" parent="ModelContainer"]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 3.55271e-15, 1, 0.658339, 0.0155256, 0.290756)
+text = "RIGHT"
+font_size = 40
+outline_size = 0
+
+[node name="Label3D4" type="Label3D" parent="ModelContainer"]
+transform = Transform3D(1.31134e-07, -1, 0, 1, 1.31134e-07, 0, 0, 3.55271e-15, 1, -0.585352, -0.0200125, 0.290756)
+text = "LEFT"
+font_size = 40
+outline_size = 0
 
 [connection signal="mouse_entered" from="Area3D" to="." method="_on_area_3d_mouse_entered"]
 [connection signal="mouse_exited" from="Area3D" to="." method="_on_area_3d_mouse_exited"]
