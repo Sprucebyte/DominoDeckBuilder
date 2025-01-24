@@ -8,3 +8,4 @@ signal OnTilePlayed(val)
 signal OnTileDestroyed(val)
 signal OnTileObtained(val)
 signal OnRoundStarted
+signal OnPlayedFrom(val)

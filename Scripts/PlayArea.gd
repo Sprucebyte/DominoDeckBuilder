@@ -2,264 +2,137 @@ extends Node3D
 
 var tileNodeTree: TileNodeTree = TileNodeTree.new()
 var gridSize = 1.1
+var validSlots
 
+func playFrom(oldTile):
+	var tile = GameManager.selectedTiles[0]
+	var chosenSlot = null
+	var tileSide = Util.Top
+	
+	for validSlot in validSlots:
+		if (validSlot.node == oldTile.tileNode):
+			chosenSlot = validSlot
+			print("real shit")
+			break
+	if (chosenSlot == null):
+		print("not a valid slot")
+		return
+	print(chosenSlot.pips)
+	
+	if (chosenSlot.pips == tile.topValue) and (chosenSlot.pips == tile.bottomValue):
+		tileSide = Util.Right
+	else: if (chosenSlot.pips == tile.topValue):
+		tileSide = Util.Top
+	else: if (chosenSlot.pips == tile.bottomValue):
+		tileSide = Util.Bottom
+	addTile(tile, chosenSlot.node, tileSide, chosenSlot.side)
+	pass
+	
 
+func _ready():
+	SignalBus.connect("OnPlayedFrom",playFrom)
+	
 
 func _process(delta: float) -> void:
-	
-	tileNodeTree.getOpenSlots(tileNodeTree.rootNode)
-	
-	if (Input.is_action_just_pressed("play")):
-		if (GameManager.selectedTiles.size() == 1):
-			var tile = GameManager.selectedTiles[0]
+	if (GameManager.selectedTiles.size() == 1):
+		var tile = GameManager.selectedTiles[0]
+		validSlots = tileNodeTree.getValidSlots(tileNodeTree.rootNode,tile)	
+		if (Input.is_action_just_pressed("play")):
 			if (tileNodeTree.nodeCount > 0):
-				var openSlots = tileNodeTree.getOpenSlots(tileNodeTree.rootNode)
-				var validSlots: Array
 				var chosenSlot
-				var tileSide: Util.Side
-				
-				
-				for slot in openSlots:
-					
-					if (slot.side == Util.Side.Left) or (slot.side == Util.Side.Right):
-						if (slot.pips != slot.oppositePips): continue	
-					
-					if (slot.pips == tile.topValue) or (slot.pips == tile.bottomValue):
-						validSlots.append(slot)
-
-
-					#else:
-						#print("no valid slots")
-						#return
-				
-				
-				#chosenSlot = openSlots[0]
+				var tileSide
 				if (validSlots.size() > 0):
 					chosenSlot = validSlots[0]
 					if (chosenSlot.pips == tile.topValue) and (chosenSlot.pips == tile.bottomValue):
-						tileSide = Util.Side.Right
+						tileSide = Util.Right
 					else: if (chosenSlot.pips == tile.topValue):
-						tileSide = Util.Side.Top
+						tileSide = Util.Top
 					else: if (chosenSlot.pips == tile.bottomValue):
-						tileSide = Util.Side.Bottom
+						tileSide = Util.Bottom
 				else:
-					print("no valid slots")
 					return
 				addTile(tile, chosenSlot.node, tileSide, chosenSlot.side)
 			else: 
+				# Add parent tile if node tree is empty
 				addTile(tile, null)
-			
-		else: if (GameManager.selectedTiles.size() > 1):
-			print("too many tiles selected")
-		else:  
-			print("no tiles selected")
 	pass
 
 
 
-
-
-
-
-func addTile(tile: Tile, parentTileNode: TileNode, sideOfTile: Util.Side = Util.Side.Top, sideOfParent: Util.Side = Util.Side.Top):
-	print("----------")
-	print("trying to add tile")
-	
+func addTile(tile: Tile, parentTileNode: TileNode, sideOfTile = Util.Top, sideOfParent = Util.Top):
 	if (tile == null): return;
-	print("tile was not null")
-	
 	var placed = false
 	var tileNode = TileNode.new()
- 
 	tileNode.str = str(tileNodeTree.nodeCount)
 	tileNode.tile = tile;
 	tile.tileNode = tileNode;
-	
-	if (parentTileNode == null):
-		print("parent tile is null")
-		placed = tileNodeTree.addNode(tileNode,null,Util.Side.Top, Util.Side.Bottom)
-	else:
-		print("parent tile is not null")
-		placed = tileNodeTree.addNode(tileNode, parentTileNode, sideOfTile, sideOfParent)
 
+	if (parentTileNode == null):
+		placed = tileNodeTree.addNode(tileNode,null,Util.Top, Util.Bottom)
+	else:
+		placed = tileNodeTree.addNode(tileNode, parentTileNode, sideOfTile, sideOfParent)
+		
 	if not (placed): return
-	
-	print("tile was added to node tree")
 	
 	if (parentTileNode == null):
 		tile.targetPosition = global_position;
-		tile.setDirection(Util.Direction.Right)
+		tile.setDirection(Util.Right)
 	else:
-		var offset: Vector3 = Vector3.ZERO
-		var dir: Util.Direction
-		var parentTile: Tile = parentTileNode.tile
-		var parentTileDirection = parentTile.direction
-		#offset = Util.sideToVector3(sideOfParent) * 2
+		var offsetAndDirection = getTileOffsetAndDirection(parentTileNode, tileNode,sideOfParent, sideOfTile)
+		tile.targetPosition = parentTileNode.tile.global_position + offsetAndDirection.offset;
+		tile.setDirection(offsetAndDirection.direction)
 		
-		
-		# If new tile is connected with its bottom side to the right or left side of the parent	
-		if ((sideOfTile == Util.Side.Top) or (sideOfTile == Util.Side.Bottom)) and ((sideOfParent == Util.Side.Left) or (sideOfParent == Util.Side.Right)):
-			print("--- at 1")
-			if (parentTileDirection == Util.Direction.Up): 
-				dir = Util.Direction.Right
-				offset = Vector3.RIGHT * 1.5 * gridSize
-			else: if (parentTileDirection == Util.Direction.Down): 
-				dir = Util.Direction.Left
-				offset = Vector3.LEFT * 1.5 * gridSize
-			else: if (parentTileDirection == Util.Direction.Left):
-				dir = Util.Direction.Up
-				offset = Vector3.UP * 1.5 * gridSize
-			else: if (parentTileDirection == Util.Direction.Right): 
-				dir = Util.Direction.Down 
-				offset = Vector3.DOWN * 1.5 * gridSize
-			
-			if (sideOfParent == Util.Side.Left):
-				offset = offset * -1
-		
-		# If new tile is connected with its top side to the right or left side of the parent	
-		else: if ((sideOfTile == Util.Side.Top) or (sideOfTile == Util.Side.Bottom)) and ((sideOfParent == Util.Side.Left) or (sideOfParent == Util.Side.Right)):
-			print("--- at 2")
-			if (parentTileDirection == Util.Direction.Up): 
-				dir = Util.Direction.Left
-				offset = Vector3.RIGHT * 1.5 * gridSize
-			else: if (parentTileDirection == Util.Direction.Down): 
-				dir = Util.Direction.Right
-				offset = Vector3.LEFT * 1.5 * gridSize
-			else: if (parentTileDirection == Util.Direction.Left):
-				dir = Util.Direction.Down
-				offset = Vector3.UP * 1.5 * gridSize
-			else: if (parentTileDirection == Util.Direction.Right): 
-				dir = Util.Direction.Up 
-				offset = Vector3.DOWN * 1.5 * gridSize
-			
-			if (sideOfParent == Util.Side.Left):
-				offset = offset * -1
-		
-		# If new tile is connected to the parent left to left, right to right, top to top or bottom to bottom	
-		else: if (sideOfTile == sideOfParent):
-			print("--- at 3")
-			if (parentTileDirection == Util.Direction.Up):
-				dir = Util.Direction.Down
-				offset = Vector3.UP * 2 * gridSize
-			else: if (parentTileDirection == Util.Direction.Down): 
-				dir = Util.Direction.Up
-				offset = Vector3.DOWN * 2 * gridSize
-			else: if (parentTileDirection == Util.Direction.Left): 
-				dir = Util.Direction.Right
-				offset = Vector3.LEFT * 2 * gridSize
-			else: if (parentTileDirection == Util.Direction.Right): 
-				dir = Util.Direction.Left
-				offset = Vector3.RIGHT * 2 * gridSize
-				
-			if (sideOfParent == Util.Side.Bottom):
-				offset = offset *-1
-
-		# If new tile is connected with its left side to the right side of the parent	
-		else: if (sideOfTile == Util.Side.Left) and (sideOfParent == Util.Side.Right):
-			print("--- at 4")
-			dir = parentTileDirection
-			if (parentTileDirection == Util.Direction.Up):
-				offset = Vector3.RIGHT * 2 * gridSize
-			else: if (parentTileDirection == Util.Direction.Down):
-				offset = Vector3.LEFT * 2 * gridSize
-			else: if (parentTileDirection == Util.Direction.Right):
-				offset = Vector3.DOWN * 2 * gridSize
-			else: if (parentTileDirection == Util.Direction.Left):
-				offset = Vector3.UP * 2 * gridSize
-		
-		# If new tile is connected with its right side to the left side of the parent
-		else: if (sideOfTile == Util.Side.Right) and (sideOfParent == Util.Side.Left):
-			print("--- at 5")
-			dir = parentTileDirection
-			if (parentTileDirection == Util.Direction.Up):
-				offset = Vector3.LEFT * 2 * gridSize
-			else: if (parentTileDirection == Util.Direction.Down):
-				offset = Vector3.RIGHT * 2 * gridSize
-			else: if (parentTileDirection == Util.Direction.Right):
-				offset = Vector3.UP * 2 * gridSize
-			else: if (parentTileDirection == Util.Direction.Left):
-				offset = Vector3.DOWN * 2 * gridSize
-		
-		# If new tile is connected with its top side to the bottom side of the parent	
-		else: if (sideOfTile == Util.Side.Top) and (sideOfParent == Util.Side.Bottom):
-			print("--- at 6")
-			dir = parentTileDirection
-			if (parentTileDirection == Util.Direction.Up):
-				offset = Vector3.DOWN * 2 * gridSize
-			else: if (parentTileDirection == Util.Direction.Down):
-				offset = Vector3.UP * 2 * gridSize
-			else: if (parentTileDirection == Util.Direction.Right):
-				offset = Vector3.LEFT * 2 * gridSize
-			else: if (parentTileDirection == Util.Direction.Left):
-				offset = Vector3.RIGHT * 2 * gridSize
-		
-		# If new tile is connected with its bottom side to the top side of the parent
-		else: if (sideOfTile == Util.Side.Bottom) and (sideOfParent == Util.Side.Top):
-			print("--- at 7")
-			dir = parentTileDirection
-			if (parentTileDirection == Util.Direction.Up):
-				offset = Vector3.UP * 2 * gridSize
-			else: if (parentTileDirection == Util.Direction.Down):
-				offset = Vector3.DOWN * 2 * gridSize
-			else: if (parentTileDirection == Util.Direction.Right):
-				offset = Vector3.RIGHT * 2 * gridSize
-			else: if (parentTileDirection == Util.Direction.Left):
-				offset = Vector3.LEFT * 2 * gridSize
-				
-		# If new tile is connected with its right or left side to the top side of the parent		
-		else: if ((sideOfTile == Util.Side.Right) or (sideOfTile == Util.Side.Left)) and (sideOfParent == Util.Side.Top):
-			print("--- at 8")
-			if (parentTileDirection == Util.Direction.Up): 
-				dir = Util.Direction.Right
-				offset = Vector3.UP * 1.5 * gridSize
-			else: if (parentTileDirection == Util.Direction.Down): 
-				dir = Util.Direction.Left
-				offset = Vector3.DOWN * 1.5 * gridSize
-			else: if (parentTileDirection == Util.Direction.Left):
-				dir = Util.Direction.Up
-				offset = Vector3.LEFT * 1.5 * gridSize
-			else: if (parentTileDirection == Util.Direction.Right): 
-				dir = Util.Direction.Down 
-				offset = Vector3.RIGHT * 1.5 * gridSize
-			pass
-			
-		# If new tile is connected with its right or left side to the bottom side of the parent	
-		else: if ((sideOfTile == Util.Side.Right) or (sideOfTile == Util.Side.Left)) and (sideOfParent == Util.Side.Bottom):
-			print("--- at 9")
-			if (parentTileDirection == Util.Direction.Up): 
-				dir = Util.Direction.Left
-				offset = Vector3.DOWN * 1.5 * gridSize
-			else: if (parentTileDirection == Util.Direction.Down): 
-				dir = Util.Direction.Right
-				offset = Vector3.UP * 1.5 * gridSize
-			else: if (parentTileDirection == Util.Direction.Left):
-				dir = Util.Direction.Down
-				offset = Vector3.RIGHT * 1.5 * gridSize
-			else: if (parentTileDirection == Util.Direction.Right): 
-				dir = Util.Direction.Up 
-				offset = Vector3.LEFT * 1.5 * gridSize
-			pass
-		
-		
-		
-			#dir = Util.repeat(parentTileNode.tile.direction + 1, 3)
-		tile.targetPosition = parentTileNode.tile.global_position + offset;
-		
-		tile.setDirection(dir)
 	tile.play()
 	tile.reparent(self)
-	print("tile was placed")
+	# -------------- #
+	
+
+func getTilePosition(tile: Tile):
+	var tileNode = tile.tileNode
+	var offset: Vector3 = Vector3.ZERO
+	var stack: Array[TileNode] = [tileNode]
+	
+	while stack:
+		# Get the last node from the list, and remove it
+		var node = stack.pop_back() 
+		if (node.parent != null):
+			stack.append(node.parent)
+			
+	pass
+
+func getTileOffsetAndDirection(parentTileNode, tileNode, sideOfParent, sideOfTile) -> Dictionary:
+	var offset = Vector3.ZERO
+	var direction = 0
+	var parentTile: Tile = parentTileNode.tile
+	var parentTileDirection = parentTile.direction
+	var data = [sideOfParent, sideOfTile]
+	var offsetAmount = 2
+	
+	var directionDelta = abs(abs(sideOfParent-sideOfTile)+2)
+	direction = Util.rotateDirection(parentTileDirection, directionDelta) 
 	
 	
+	if (sideOfParent == Util.Left) or (sideOfParent == Util.Right) or (sideOfTile == Util.Left) or (sideOfTile == Util.Right):
+		offsetAmount = 1.5
+		
+	if ((sideOfParent == Util.Left) or (sideOfParent == Util.Right)) and ((sideOfTile == Util.Left) or (sideOfTile == Util.Right)):
+		offsetAmount = 1
 	
+	match data:
+		[Util.Top, Util.Left]: 
+			direction = Util.rotateDirection(parentTileDirection, 3) 
+		[Util.Top, Util.Right]: 
+			direction = Util.rotateDirection(parentTileDirection, 1) 
+		[Util.Bottom, Util.Left]: 
+			direction = Util.rotateDirection(parentTileDirection, 1) 
+		[Util.Bottom, Util.Right]: 
+			direction = Util.rotateDirection(parentTileDirection, 3) 
 	
+	offset = Util.rotateVector(Util.directionToVector3(sideOfParent) * offsetAmount * gridSize, parentTileDirection)
 	
-	print("----------")
-	
-	print("open slots:")
-	print(tileNodeTree.getOpenSlots(tileNodeTree.rootNode))
-	
-	
+	return {"offset": offset, "direction": direction}
+
+
 
 func getPlacementRequirements():
 	pass

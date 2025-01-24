@@ -22,10 +22,7 @@ class_name Tile
 @onready var rightTakenIndicator = $ModelContainer/RightIndicator
 
 @onready var directionText = $"ModelContainer/Direction text"
-
 @onready var tilenameText = $"ModelContainer/Label tilename"
-
-
 
 var targetScale = Vector3.ONE
 var targetPosition = Vector3.ZERO
@@ -33,41 +30,37 @@ var targetRotation = Vector3.ZERO
 
 var selected = false
 var hovered = false
-var spinner = false
-var spinnerFilled = false
 var played = false
 
-var topFree = true
-var bottomFree = true
-
 var direction = Util.Direction.Up
-var vertical = false
+
 var topValue = 2
 var bottomValue = 4
 
 var tileNode: TileNode = null
 
 func _ready() -> void:
-	topValue = randi_range(0,4)
-	bottomValue = randi_range(0,4)
+	topValue = randi_range(2,4)
+	bottomValue = randi_range(2,4)
 	pass
 	
 
-func setDirection(direction: Util.Direction):
+func setDirection(direction):
 	self.direction = direction
 	var rot = Vector3.ZERO
+	print("014")
 	match direction:
-		Util.Direction.Up: rot = Vector3(0,0,0)
-		Util.Direction.Right: rot = Vector3(0,0,-90)
-		Util.Direction.Down: rot = Vector3(0,0,180)
-		Util.Direction.Left: rot = Vector3(0,0,90)
+		Util.Up: rot = Vector3(0,0,0)
+		Util.Right: rot = Vector3(0,0,-90)
+		Util.Down: rot = Vector3(0,0,180)
+		Util.Left: rot = Vector3(0,0,90)
 	targetRotation = rot
+	print("015")
 
 
 # Update
 func _process(delta: float) -> void:
-	
-	
+
 	var string = ""
 	
 	match direction:
@@ -80,16 +73,16 @@ func _process(delta: float) -> void:
 
 	if (tileNode != null):
 		tilenameText.text = tileNode.str
-		if (tileNode.child.top == null): topTakenIndicator.modulate = Color.TRANSPARENT
+		if (tileNode.children[0] == null): topTakenIndicator.modulate = Color.TRANSPARENT
 		else: topTakenIndicator.modulate = Color.GREEN
 	
-		if (tileNode.child.right == null): rightTakenIndicator.modulate = Color.TRANSPARENT
+		if (tileNode.children[1] == null): rightTakenIndicator.modulate = Color.TRANSPARENT
 		else: rightTakenIndicator.modulate = Color.BLUE
 	
-		if (tileNode.child.bottom == null): bottomTakenIndicator.modulate = Color.TRANSPARENT
+		if (tileNode.children[2] == null): bottomTakenIndicator.modulate = Color.TRANSPARENT
 		else: bottomTakenIndicator.modulate = Color.PURPLE
 	
-		if (tileNode.child.left == null): leftTakenIndicator.modulate = Color.TRANSPARENT
+		if (tileNode.children[3] == null): leftTakenIndicator.modulate = Color.TRANSPARENT
 		else: leftTakenIndicator.modulate = Color.RED
 	else:
 		topTakenIndicator.modulate = Color.TRANSPARENT
@@ -101,22 +94,20 @@ func _process(delta: float) -> void:
 	spriteBottom.texture = sprites[bottomValue]
 	scale = scale.lerp(targetScale, delta*20)
 	global_position = global_position.lerp(targetPosition + Vector3.UP * selectedOffset * ( 1 if (selected) else 0), delta*20) 
-	global_rotation_degrees = global_rotation_degrees.lerp(targetRotation,delta*20)
+	rotation_degrees = rotation_degrees.lerp(targetRotation,delta*20)
 	
+		
+	if (hovered):
+		if (Input.is_action_just_pressed("click")):	
+			playFrom()
+			if not (selected):
+				select()	
+			else:
+				deselect()
+
 	if not (shakerIdle.is_playing):
 		if (played): return
 		shakerIdle.play_shake()
-		
-	if (hovered):
-		if (Input.is_action_just_pressed("click")):
-			if not (selected):
-				select()
-				
-			else:
-				deselect()
-				
-
-
 
 func _on_area_3d_mouse_entered() -> void:
 	if not (hoverable): return
@@ -129,7 +120,7 @@ func _on_area_3d_mouse_exited() -> void:
 func play(): 
 	unhover()
 	deselect()
-	hoverable = false
+	#hoverable = false
 	selectable = false
 	played = true
 	shakerIdle.force_stop_shake()
@@ -142,6 +133,12 @@ func destroy():
 	queue_free()
 	pass
 
+
+func playFrom():
+	if not (played): return
+	
+	SignalBus.emit_signal("OnPlayedFrom", self)
+	#shakerSelect.play_shake()
 
 func select():
 	if not (selectable): return
@@ -158,7 +155,7 @@ func deselect():
 	pass
 
 func hover():
-	if not (hoverable): return
+	#if not (hoverable): return
 	SignalBus.emit_signal("OnTileHovered", self)
 	#targetPosition = Vector3(0,.2,.2)
 	targetScale = Vector3.ONE * 1.05
@@ -166,7 +163,7 @@ func hover():
 	pass
 
 func unhover():
-	if not (hoverable): return
+	#if not (hoverable): return
 	SignalBus.emit_signal("OnTileUnhovered", self)
 	#targetPosition = Vector3.ZERO
 	targetScale = Vector3.ONE
