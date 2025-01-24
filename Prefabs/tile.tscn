@@ -197,6 +197,7 @@ outline_size = 0
 
 [node name="Selection" type="Sprite3D" parent="ModelContainer"]
 transform = Transform3D(0.313329, 0, 0, 0, 0.291076, 0, 0, 0, 1, 1.70699e-05, -0.000225968, 0.12102)
+visible = false
 modulate = Color(0.973409, 1, 0.96706, 1)
 texture = ExtResource("22_pss3p")
 
