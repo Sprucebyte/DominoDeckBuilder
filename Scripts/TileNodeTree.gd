@@ -114,3 +114,21 @@ func getEdgeNodes(root) -> Array[TileNode]:
 		if empty:
 			leafNodes.append(node)	
 	return leafNodes
+
+
+func getEdgeValue(root = rootNode) -> int:
+	var edgeValue = 0
+	var edgeNodes: Array[TileNode] = getEdgeNodes(root)
+	
+	for edgeNode in edgeNodes:
+		var up = edgeNode.children[Util.Up]
+		var down = edgeNode.children[Util.Down]
+
+		if (up == null && down == null):
+			edgeValue += edgeNode.tile.topValue + edgeNode.tile.bottomValue
+		else: if (up == null):
+			edgeValue += edgeNode.tile.topValue
+		else: if (down == null):
+			edgeValue += edgeNode.tile.bottomValue
+	
+	return edgeValue

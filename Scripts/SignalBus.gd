@@ -9,3 +9,4 @@ signal OnTileDestroyed(val)
 signal OnTileObtained(val)
 signal OnRoundStarted
 signal OnPlayedFrom(val)
+signal UpdateEdgeValue(val)

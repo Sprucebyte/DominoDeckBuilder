@@ -25,9 +25,9 @@
 
 [sub_resource type="Resource" id="Resource_por6t"]
 script = ExtResource("5_h4qqa")
-frequency = Vector3(1, 1, 1)
+frequency = Vector3(2, 1, 0.5)
 phase = Vector3(1, 1, 1)
-amplitude = Vector3(0.1, 0.1, 0)
+amplitude = Vector3(0.06, 0.155, 0.05)
 offset = Vector3(0, 0, 0)
 BlendingMode = 0
 fade_in = 0.0
@@ -86,10 +86,10 @@ fade_out = 1e-05
 shakerPreset = ExtResource("6_h557c")
 
 [node name="Shaker Idle" type="Node3D" parent="." node_paths=PackedStringArray("Targets")]
+transform = Transform3D(1, -1.81899e-12, 0, -1.81899e-12, 1, 0, 0, 0, 1, -0.00879639, 0.00873366, -0.00163199)
 script = ExtResource("3_gatgg")
 custom_target = true
 Targets = [NodePath("../ModelContainer")]
-AutoPlay = true
 duration = 50.0
 shake_speed = 0.2
 fade_in = 0.0268594
@@ -103,7 +103,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0020752, 0.00227356, 0.0072
 shape = SubResource("BoxShape3D_jyux7")
 
 [node name="ModelContainer" type="Node3D" parent="."]
-transform = Transform3D(0.999997, -3.00124e-05, 0.00229441, 0, 0.999914, 0.0130795, -0.0022946, -0.0130795, 0.999912, 0, 0, 0)
+transform = Transform3D(0.999997, -3.00102e-05, 0.00229434, -1.86249e-09, 0.999914, 0.0130798, -0.00229454, -0.0130797, 0.999912, 0, 0, 0)
 
 [node name="Divider" type="Sprite3D" parent="ModelContainer"]
 transform = Transform3D(0.202699, 1.8207e-12, -1.42109e-13, -3.63488e-12, 0.149998, -4.9738e-14, 3.19744e-14, 7.10543e-15, 1, 1.70699e-05, -0.000225968, 0.12102)

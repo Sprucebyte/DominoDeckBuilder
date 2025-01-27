@@ -32,7 +32,7 @@ var selected = false
 var hovered = false
 var played = false
 
-var direction = Util.Direction.Up
+var direction = Util.Up
 
 var topValue = 2
 var bottomValue = 4
@@ -48,29 +48,21 @@ func _ready() -> void:
 func setDirection(direction):
 	self.direction = direction
 	var rot = Vector3.ZERO
-	print("014")
 	match direction:
 		Util.Up: rot = Vector3(0,0,0)
 		Util.Right: rot = Vector3(0,0,-90)
 		Util.Down: rot = Vector3(0,0,180)
 		Util.Left: rot = Vector3(0,0,90)
-	targetRotation = rot
-	print("015")
+	targetRotation = rot + Vector3(0,0,randf_range(-0.5,0.5))
 
 
 # Update
 func _process(delta: float) -> void:
 
 	var string = ""
-	
-	match direction:
-		0: string = "Up"
-		1: string = "Right"
-		2: string = "Down"
-		3: string = "Left"
-	
-	directionText.text = string
 
+	#region Debug
+	directionText.text = string
 	if (tileNode != null):
 		tilenameText.text = tileNode.str
 		if (tileNode.children[0] == null): topTakenIndicator.modulate = Color.TRANSPARENT
@@ -89,14 +81,16 @@ func _process(delta: float) -> void:
 		rightTakenIndicator.modulate = Color.TRANSPARENT
 		bottomTakenIndicator.modulate = Color.TRANSPARENT
 		leftTakenIndicator.modulate = Color.TRANSPARENT
-		
+	#endregion	
+	
 	spriteTop.texture = sprites[topValue]
 	spriteBottom.texture = sprites[bottomValue]
 	scale = scale.lerp(targetScale, delta*20)
 	global_position = global_position.lerp(targetPosition + Vector3.UP * selectedOffset * ( 1 if (selected) else 0), delta*20) 
+	
+	#if not (Util.angleDifferenceLessThan(rotation_degrees,targetRotation,2)):
 	rotation_degrees = rotation_degrees.lerp(targetRotation,delta*20)
 	
-		
 	if (hovered):
 		if (Input.is_action_just_pressed("click")):	
 			playFrom()
@@ -107,7 +101,7 @@ func _process(delta: float) -> void:
 
 	if not (shakerIdle.is_playing):
 		if (played): return
-		shakerIdle.play_shake()
+		#shakerIdle.play_shake()
 
 func _on_area_3d_mouse_entered() -> void:
 	if not (hoverable): return
@@ -120,7 +114,7 @@ func _on_area_3d_mouse_exited() -> void:
 func play(): 
 	unhover()
 	deselect()
-	#hoverable = false
+
 	selectable = false
 	played = true
 	shakerIdle.force_stop_shake()
@@ -136,9 +130,7 @@ func destroy():
 
 func playFrom():
 	if not (played): return
-	
 	SignalBus.emit_signal("OnPlayedFrom", self)
-	#shakerSelect.play_shake()
 
 func select():
 	if not (selectable): return
@@ -155,17 +147,20 @@ func deselect():
 	pass
 
 func hover():
-	#if not (hoverable): return
+	if not (hoverable): return
 	SignalBus.emit_signal("OnTileHovered", self)
-	#targetPosition = Vector3(0,.2,.2)
 	targetScale = Vector3.ONE * 1.05
 	hovered = true
 	pass
 
 func unhover():
-	#if not (hoverable): return
+	if not (hoverable): return
 	SignalBus.emit_signal("OnTileUnhovered", self)
-	#targetPosition = Vector3.ZERO
 	targetScale = Vector3.ONE
 	hovered = false
 	pass
+
+func activate():
+	print("activated!")
+	pass
+	

@@ -10,12 +10,12 @@ func _ready() -> void:
 	SignalBus.connect("OnTileDeselected",audioSelected)
 	pass
 
-func audioSelected(val):
+func audioSelected(_val):
 	domino1.play()
 	pass
 
 
-func audioHovered(val):
+func audioHovered(_val):
 	domino2.play()
 	pass
 	

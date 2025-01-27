@@ -1,10 +1,6 @@
 extends Node
 class_name Util
 
-enum Direction {Up, Right, Down, Left}
-#enum Side {Top, Bottom, Left, Right}
-enum Side {Top, Right, Bottom, Left}
-
 
 #region # ---------------- New Shit! ---------------- #
 
@@ -17,6 +13,9 @@ const Left = 3
 const Top = 0
 const Bottom = 2
 #
+
+static func angleDifferenceLessThan(vec1, vec2, angle) -> bool:
+	return abs(vec1.x - vec2.x) <= angle and abs(vec1.y - vec2.y) <= angle and abs(vec1.z - vec2.z) <= angle
 
 static func angleToDirection(angle) -> int:
 	var direction = round(angle / 90)
@@ -44,13 +43,6 @@ static func directionToString(side) -> String:
 		Util.Right: return "right"
 	return ""	
 
-#endregion # ------------------------------------------- #
-
-#region # ---------------- Old Shit! ---------------- #
-
-
-
-
 static func directionToVector3(side) -> Vector3:
 	match side:
 		Util.Top: return Vector3.UP
@@ -58,22 +50,32 @@ static func directionToVector3(side) -> Vector3:
 		Util.Left: return Vector3.LEFT
 		Util.Right: return Vector3.RIGHT
 	return Vector3.ZERO	 
+	
+	
+	
+#endregion # ------------------------------------------- #
+
+#region # ---------------- Old Shit! ---------------- #
 
 
 
-static func sideToTileCharacter(side) -> String:
-	match side:
-		Side.Top: return "🂆"
-		Side.Bottom: return "🁨"
-		Side.Left: return "🁔"
-		Side.Right: return "🀶"
-	return "🀰" 	
+
+
+
+
+#static func sideToTileCharacter(side) -> String:
+	#match side:
+		#Side.Top: return "🂆"
+		#Side.Bottom: return "🁨"
+		#Side.Left: return "🁔"
+		#Side.Right: return "🀶"
+	#return "🀰" 	
 	
 
 
-static func sideToAngle(side: Util.Side) -> int:
+static func sideToAngle(side) -> int:
 	return side * 90
-	
+	#
 ## Rotate vector around the Z axis in 90 degree steps
 static func rotateVector(vector: Vector3, steps) -> Vector3:
 	var axis = Vector3(0,0,1) 
@@ -82,7 +84,7 @@ static func rotateVector(vector: Vector3, steps) -> Vector3:
 
 
 ## Rotate direction in 90 degree steps
-static func rotateDirection(direction: Util.Direction, steps: int) -> Util.Direction:
+static func rotateDirection(direction, steps: int) -> int:
 	var directionCount = 4
 	var rotatedDirection = (direction + steps) % directionCount
 	return rotatedDirection

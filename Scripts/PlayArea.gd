@@ -5,6 +5,7 @@ var gridSize = 1.1
 var validSlots
 
 func playFrom(oldTile):
+	if (GameManager.selectedTiles.size() != 1): return;
 	var tile = GameManager.selectedTiles[0]
 	var chosenSlot = null
 	var tileSide = Util.Top
@@ -33,7 +34,7 @@ func _ready():
 	SignalBus.connect("OnPlayedFrom",playFrom)
 	
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if (GameManager.selectedTiles.size() == 1):
 		var tile = GameManager.selectedTiles[0]
 		validSlots = tileNodeTree.getValidSlots(tileNodeTree.rootNode,tile)	
@@ -56,7 +57,6 @@ func _process(delta: float) -> void:
 				# Add parent tile if node tree is empty
 				addTile(tile, null)
 	pass
-
 
 
 func addTile(tile: Tile, parentTileNode: TileNode, sideOfTile = Util.Top, sideOfParent = Util.Top):
@@ -84,8 +84,12 @@ func addTile(tile: Tile, parentTileNode: TileNode, sideOfTile = Util.Top, sideOf
 		
 	tile.play()
 	tile.reparent(self)
-	# -------------- #
 	
+	var edgeValue = tileNodeTree.getEdgeValue()
+	SignalBus.emit_signal("UpdateEdgeValue",edgeValue)
+
+
+	# -------------- #
 
 func getTilePosition(tile: Tile):
 	var tileNode = tile.tileNode
@@ -131,14 +135,3 @@ func getTileOffsetAndDirection(parentTileNode, tileNode, sideOfParent, sideOfTil
 	offset = Util.rotateVector(Util.directionToVector3(sideOfParent) * offsetAmount * gridSize, parentTileDirection)
 	
 	return {"offset": offset, "direction": direction}
-
-
-
-func getPlacementRequirements():
-	pass
-
-func getAllPlacements():
-	pass
-	
-func getValidPlacements():
-	pass

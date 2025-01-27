@@ -1,11 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://c1vubbps0wbru"]
+[gd_scene load_steps=10 format=3 uid="uid://c1vubbps0wbru"]
 
 [ext_resource type="Script" path="res://Scripts/TileContainer.gd" id="1_cav1r"]
 [ext_resource type="Texture2D" uid="uid://lybc5abc6vb7" path="res://Textures/gradient.tres" id="1_s76xi"]
 [ext_resource type="PackedScene" uid="uid://dli3f2y42248e" path="res://Prefabs/tile.tscn" id="1_xldoj"]
 [ext_resource type="PackedScene" uid="uid://bsolopte6gbrd" path="res://Prefabs/audio_manager.tscn" id="6_3ltku"]
 [ext_resource type="Script" path="res://Prefabs/Deck.gd" id="7_2v4lr"]
-[ext_resource type="Script" path="res://Scripts/UI.gd" id="8_apk3h"]
 [ext_resource type="PackedScene" uid="uid://8l8oyfxis17a" path="res://Prefabs/3d_ui.tscn" id="8_j2tmk"]
 [ext_resource type="PackedScene" uid="uid://bfyjye2s7d3f7" path="res://Prefabs/play_area.tscn" id="9_hffdp"]
 
@@ -41,7 +40,7 @@ rotationCurve = SubResource("Curve_amq86")
 [node name="AudioManager" parent="." instance=ExtResource("6_3ltku")]
 
 [node name="PlayArea" parent="." instance=ExtResource("9_hffdp")]
-transform = Transform3D(0.999992, 0, 0, 0, 0.999994, 0, 0, 0, 0.999998, 0, 0, -1)
+transform = Transform3D(0.990459, -0.0102778, 0.137368, 0, 0.997207, 0.0746108, -0.137751, -0.0738993, 0.987704, 0, 0, -1)
 
 [node name="SubViewport" type="SubViewport" parent="PlayArea"]
 transparent_bg = true
@@ -101,45 +100,3 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.472126, -1.03132, 0)
 
 [node name="Node3D" type="Node3D" parent="."]
 script = ExtResource("7_2v4lr")
-
-[node name="User Interface" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-script = ExtResource("8_apk3h")
-metadata/_edit_use_anchors_ = true
-
-[node name="EdgeValueDisplay" type="Panel" parent="User Interface"]
-unique_name_in_owner = true
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.0208333
-anchor_top = 0.0324074
-anchor_right = 0.127604
-anchor_bottom = 0.0703704
-offset_right = -1.52588e-05
-metadata/_edit_use_anchors_ = true
-
-[node name="Label" type="Label" parent="User Interface/EdgeValueDisplay"]
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 0.064
-offset_left = 5.0
-offset_top = 7.0
-offset_right = 87.88
-offset_bottom = 49.0
-text = "Edge value:"
-
-[node name="Value" type="Label" parent="User Interface/EdgeValueDisplay"]
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 0.064
-offset_left = 100.0
-offset_top = 7.0
-offset_right = 182.88
-offset_bottom = 49.0
-text = "0"
