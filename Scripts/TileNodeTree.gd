@@ -101,17 +101,13 @@ func getEdgeNodes(root) -> Array[TileNode]:
 	var leafNodes: Array[TileNode]
 	while stack:
 		var node = stack.pop_back() # Get and remove the last node from the stack
-		var empty = true
-		# Go trough each child connection point
-		# Check if they are connected and that they are not connected to the parent
-		# If they have any valid children, add them to the stack
-		# If the node has any children, set "empty" to false
+		var childCount = 0
 		for child in node.children:
-			if (child != null) and (child != node.parent):
-				stack.append(child)
-				empty = false
-		# If the node has no children, add it as a leaf ndoe
-		if empty:
+			if (child != null):
+				if (child != node.parent):
+					stack.append(child)
+				childCount += 1
+		if (childCount <= 1):
 			leafNodes.append(node)	
 	return leafNodes
 

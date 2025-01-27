@@ -48,12 +48,13 @@ func _ready() -> void:
 func setDirection(direction):
 	self.direction = direction
 	var rot = Vector3.ZERO
+	
 	match direction:
 		Util.Up: rot = Vector3(0,0,0)
 		Util.Right: rot = Vector3(0,0,-90)
 		Util.Down: rot = Vector3(0,0,180)
 		Util.Left: rot = Vector3(0,0,90)
-	targetRotation = rot + Vector3(0,0,randf_range(-0.5,0.5))
+	targetRotation = rot# + Vector3(0,0,randf_range(-0.5,0.5))
 
 
 # Update
@@ -89,9 +90,23 @@ func _process(delta: float) -> void:
 	global_position = global_position.lerp(targetPosition + Vector3.UP * selectedOffset * ( 1 if (selected) else 0), delta*20) 
 	
 	#if not (Util.angleDifferenceLessThan(rotation_degrees,targetRotation,2)):
-	rotation_degrees = rotation_degrees.lerp(targetRotation,delta*20)
 	
+	#var a = Quaternion.from_euler(rotation_degrees)
+	#var b = Quaternion.from_euler(targetRotation)
+	#var c = a.slerp(b,delta*20)
+	#rot.x = lerp(rotation_degrees.x,targetRotation.x,delta*20)
+	#rot.y = lerp(rotation_degrees.y,targetRotation.y,delta*20)
+	#if abs(rotation_degrees.z - targetRotation.z):
+	#rot.z = lerp(rotation_degrees.z,targetRotation.z,delta*20)
+	#var a = rotation_degrees.z
+	#var b = targetRotation.z
+
+
+	#rotation_degrees.z = lerp_angle(a, b, delta*20)
+	rotation_degrees = rotation_degrees.lerp(targetRotation,delta*20)
+	#print("teeeeeeeee")
 	if (hovered):
+		print(rotation_degrees)
 		if (Input.is_action_just_pressed("click")):	
 			playFrom()
 			if not (selected):

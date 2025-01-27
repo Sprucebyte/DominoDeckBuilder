@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://lybc5abc6vb7" path="res://Textures/gradient.tres" id="1_s76xi"]
 [ext_resource type="PackedScene" uid="uid://dli3f2y42248e" path="res://Prefabs/tile.tscn" id="1_xldoj"]
 [ext_resource type="PackedScene" uid="uid://bsolopte6gbrd" path="res://Prefabs/audio_manager.tscn" id="6_3ltku"]
-[ext_resource type="Script" path="res://Prefabs/Deck.gd" id="7_2v4lr"]
+[ext_resource type="Script" path="res://Scripts/Deck.gd" id="7_2v4lr"]
 [ext_resource type="Script" path="res://Scripts/UI.gd" id="8_apk3h"]
 [ext_resource type="PackedScene" uid="uid://8l8oyfxis17a" path="res://Prefabs/3d_ui.tscn" id="8_j2tmk"]
 [ext_resource type="PackedScene" uid="uid://bfyjye2s7d3f7" path="res://Prefabs/play_area.tscn" id="9_hffdp"]
@@ -35,8 +35,50 @@ far = 2000.0
 [node name="Hand" type="Node3D" parent="." node_paths=PackedStringArray("tiles")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -12.9196, 0)
 script = ExtResource("1_cav1r")
-tiles = [NodePath("../TileContainer/Tile"), NodePath("../TileContainer/Tile2"), NodePath("../TileContainer/Tile3"), NodePath("../TileContainer/Tile4"), NodePath("../TileContainer/Tile9"), NodePath("../TileContainer/Tile10"), NodePath("../TileContainer/Tile11"), NodePath("../TileContainer/Tile5"), NodePath("../TileContainer/Tile6"), NodePath("../TileContainer/Tile12"), NodePath("../TileContainer/Tile13"), NodePath("../TileContainer/Tile14"), NodePath("../TileContainer/Tile7"), NodePath("../TileContainer/Tile8")]
+tiles = [NodePath("Tile"), NodePath("Tile2"), NodePath("Tile3"), NodePath("Tile4"), NodePath("Tile9"), NodePath("Tile10"), NodePath("Tile11"), NodePath("Tile5"), NodePath("Tile6"), NodePath("Tile12"), NodePath("Tile13"), NodePath("Tile14"), NodePath("Tile7"), NodePath("Tile8")]
 rotationCurve = SubResource("Curve_amq86")
+
+[node name="Tile5" parent="Hand" instance=ExtResource("1_xldoj")]
+transform = Transform3D(0.954274, 4.93601e-08, -0.298905, 1.56462e-07, 0.999993, 3.27826e-07, 0.298908, 3.50177e-07, 0.954279, -11.2014, 7.16217, -1.41263e-05)
+
+[node name="Tile6" parent="Hand" instance=ExtResource("1_xldoj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.21283, 7.10238, 0)
+
+[node name="Tile12" parent="Hand" instance=ExtResource("1_xldoj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.33278, 7.10238, 0)
+
+[node name="Tile13" parent="Hand" instance=ExtResource("1_xldoj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.3137, 7.10238, 0)
+
+[node name="Tile14" parent="Hand" instance=ExtResource("1_xldoj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.0721, 7.10238, 0)
+
+[node name="Tile7" parent="Hand" instance=ExtResource("1_xldoj")]
+transform = Transform3D(0.967117, 0, 0.254332, 0, 1, 0, -0.254332, 0, 0.967117, -4.66642, 7.18225, 0)
+
+[node name="Tile8" parent="Hand" instance=ExtResource("1_xldoj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.30046, 7.11614, 0)
+
+[node name="Tile" parent="Hand" instance=ExtResource("1_xldoj")]
+transform = Transform3D(0.954282, 0, -0.298908, 0, 1, 0, 0.298908, 0, 0.954282, -3.42892, 7.20048, 0)
+
+[node name="Tile2" parent="Hand" instance=ExtResource("1_xldoj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.44024, 7.14074, 0)
+
+[node name="Tile9" parent="Hand" instance=ExtResource("1_xldoj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.560193, 7.14074, 0)
+
+[node name="Tile10" parent="Hand" instance=ExtResource("1_xldoj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.45889, 7.14074, 0)
+
+[node name="Tile11" parent="Hand" instance=ExtResource("1_xldoj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.29948, 7.14074, 0)
+
+[node name="Tile3" parent="Hand" instance=ExtResource("1_xldoj")]
+transform = Transform3D(0.967117, 0, 0.254332, 0, 1, 0, -0.254332, 0, 0.967117, 3.10617, 7.22061, 0)
+
+[node name="Tile4" parent="Hand" instance=ExtResource("1_xldoj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.472126, 7.1545, 0)
 
 [node name="AudioManager" parent="." instance=ExtResource("6_3ltku")]
 
@@ -53,51 +95,6 @@ size = Vector2i(1920, 1080)
 transform = Transform3D(2.85178, 0, 0, 0, 2.85178, 0, 0, 0, 2, 0, 0, -9.55676)
 visible = false
 texture = SubResource("ViewportTexture_d0xon")
-
-[node name="TileContainer" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4.73378, 0)
-
-[node name="Tile5" parent="TileContainer" instance=ExtResource("1_xldoj")]
-transform = Transform3D(0.954274, 4.93601e-08, -0.298905, 1.56462e-07, 0.999993, 3.27826e-07, 0.298908, 3.50177e-07, 0.954279, -11.2014, -1.02365, -1.41263e-05)
-
-[node name="Tile6" parent="TileContainer" instance=ExtResource("1_xldoj")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.21283, -1.08344, 0)
-
-[node name="Tile12" parent="TileContainer" instance=ExtResource("1_xldoj")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.33278, -1.08344, 0)
-
-[node name="Tile13" parent="TileContainer" instance=ExtResource("1_xldoj")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.3137, -1.08344, 0)
-
-[node name="Tile14" parent="TileContainer" instance=ExtResource("1_xldoj")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.0721, -1.08344, 0)
-
-[node name="Tile7" parent="TileContainer" instance=ExtResource("1_xldoj")]
-transform = Transform3D(0.967117, 0, 0.254332, 0, 1, 0, -0.254332, 0, 0.967117, -4.66642, -1.00357, 0)
-
-[node name="Tile8" parent="TileContainer" instance=ExtResource("1_xldoj")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.30046, -1.06968, 0)
-
-[node name="Tile" parent="TileContainer" instance=ExtResource("1_xldoj")]
-transform = Transform3D(0.954282, 0, -0.298908, 0, 1, 0, 0.298908, 0, 0.954282, -3.42892, -0.985335, 0)
-
-[node name="Tile2" parent="TileContainer" instance=ExtResource("1_xldoj")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.44024, -1.04508, 0)
-
-[node name="Tile9" parent="TileContainer" instance=ExtResource("1_xldoj")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.560193, -1.04508, 0)
-
-[node name="Tile10" parent="TileContainer" instance=ExtResource("1_xldoj")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.45889, -1.04508, 0)
-
-[node name="Tile11" parent="TileContainer" instance=ExtResource("1_xldoj")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.29948, -1.04508, 0)
-
-[node name="Tile3" parent="TileContainer" instance=ExtResource("1_xldoj")]
-transform = Transform3D(0.967117, 0, 0.254332, 0, 1, 0, -0.254332, 0, 0.967117, 3.10617, -0.96521, 0)
-
-[node name="Tile4" parent="TileContainer" instance=ExtResource("1_xldoj")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.472126, -1.03132, 0)
 
 [node name="Node3D" type="Node3D" parent="."]
 script = ExtResource("7_2v4lr")
@@ -143,3 +140,6 @@ offset_top = 7.0
 offset_right = 182.88
 offset_bottom = 49.0
 text = "0"
+
+[node name="Deck" type="Node3D" parent="."]
+script = ExtResource("7_2v4lr")

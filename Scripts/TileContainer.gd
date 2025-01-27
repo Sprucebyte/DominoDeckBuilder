@@ -5,7 +5,7 @@ extends Node3D
 @export var rotationCurve: Curve
 @export var maxTileCount = 0
 @onready var container = $TileContainer
-@export_flags ("Normal","Tarot","Cursed","Joker") var allowedTileTypes: int = 0
+@export_flags (TileTypes.Normal,TileTypes.Tarot,TileTypes.Cursed,TileTypes.Joker) var allowedTileTypes: int = 0
 
  
 func _addTile(_tile) -> void:
