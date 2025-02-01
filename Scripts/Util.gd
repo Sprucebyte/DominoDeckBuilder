@@ -58,11 +58,6 @@ static func directionToVector3(side) -> Vector3:
 #region # ---------------- Old Shit! ---------------- #
 
 
-
-
-
-
-
 #static func sideToTileCharacter(side) -> String:
 	#match side:
 		#Side.Top: return "🂆"

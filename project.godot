@@ -17,9 +17,9 @@ config/icon="res://Textures/icon.svg"
 
 [autoload]
 
+GameManager="*res://Scripts/GameManager.gd"
 SignalBus="*res://Scripts/SignalBus.gd"
 Shaker="*res://addons/shaker/src/Shaker.gd"
-GameManager="*res://Scripts/GameManager.gd"
 
 [display]
 
@@ -45,6 +45,13 @@ folder_colors={
 "res://Scripts/": "green",
 "res://Textures/": "blue"
 }
+
+[global_group]
+
+Deck=""
+Hand=""
+DiscardPile=""
+PlayArea=""
 
 [input]
 

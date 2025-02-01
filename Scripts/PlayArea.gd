@@ -1,12 +1,15 @@
 extends Node3D
+class_name PlayArea
 
 var tileNodeTree: TileNodeTree = TileNodeTree.new()
 var gridSize = 1.1
 var validSlots
 
 func playFrom(oldTile):
-	if (GameManager.selectedTiles.size() != 1): return;
+	if (GameManager.selectedTiles.size() != 1): return
 	var tile = GameManager.selectedTiles[0]
+	#if not tile in GameManager.hand.tiles: return
+	if not tile.state == Tile.States.inHand: return
 	var chosenSlot = null
 	var tileSide = Util.Top
 	
@@ -131,7 +134,8 @@ func getTileOffsetAndDirection(parentTileNode, tileNode, sideOfParent, sideOfTil
 			direction = Util.rotateDirection(parentTileDirection, 1) 
 		[Util.Bottom, Util.Right]: 
 			direction = Util.rotateDirection(parentTileDirection, 3) 
-	
+		[Util.Right, Util.Bottom]: 
+			direction = Util.rotateDirection(parentTileDirection, 1) 
 	offset = Util.rotateVector(Util.directionToVector3(sideOfParent) * offsetAmount * gridSize, parentTileDirection)
 	
 	return {"offset": offset, "direction": direction}

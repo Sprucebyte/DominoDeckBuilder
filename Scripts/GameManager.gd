@@ -1,10 +1,15 @@
 extends Node
 
 
+var tilePrefab = preload("res://Prefabs/tile.tscn")
 var selectedTiles: Array[Tile] = []
 
+var discardPile: DiscardPile = null
+var hand: Hand = null
+var playArea: PlayArea = null
+var deck: Deck = null
 
-# Run stats
+#region Run stats
 var seed = 0
 #
 var totalScore = 0
@@ -35,12 +40,13 @@ var mostTilesInDeck = 0
 var leastTilesInDeck = 0
 #
 var biggestHand = 0
+#endregion
 
-#var gameSpeed = 1
+var gameSpeedMultiplier = 1
 
 func selectTile(tile):
 	selectedTiles.push_back(tile)
-
+	
 	pass
 
 func deselectTile(tile):
@@ -48,10 +54,18 @@ func deselectTile(tile):
 	pass
 
 func _ready() -> void:
+	discardPile = get_tree().get_first_node_in_group("DiscardPile")
+	deck = get_tree().get_first_node_in_group("Deck")
+	hand = get_tree().get_first_node_in_group("Hand")
+	playArea = get_tree().get_first_node_in_group("PlayArea")
+
+	
 	SignalBus.connect("OnTileSelected",selectTile)
 	SignalBus.connect("OnTileDeselected",deselectTile)
 	pass
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
+	
 
+	
 	pass

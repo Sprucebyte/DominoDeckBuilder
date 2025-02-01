@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://dli3f2y42248e"]
+[gd_scene load_steps=26 format=3 uid="uid://dli3f2y42248e"]
 
 [ext_resource type="Script" path="res://Scripts/Tile.gd" id="1_qw2k2"]
 [ext_resource type="Texture2D" uid="uid://cvgq3ra2j5c0d" path="res://Textures/Pips/0.png" id="2_u5gsw"]
@@ -15,7 +15,7 @@
 [ext_resource type="Texture2D" uid="uid://0fs0x1vbgqvl" path="res://Textures/Pips/5.png" id="7_qfiaq"]
 [ext_resource type="Texture2D" uid="uid://bdvqpmosru35" path="res://Textures/Pips/6.png" id="8_jv7qa"]
 [ext_resource type="Texture2D" uid="uid://bs5yopu8qmkbv" path="res://Textures/Pips/7.png" id="9_8jyje"]
-[ext_resource type="PackedScene" uid="uid://d1j41otwjwlq2" path="res://Prefabs/domino_model 2.tscn" id="9_cbwtk"]
+[ext_resource type="PackedScene" uid="uid://d1j41otwjwlq2" path="res://Prefabs/domino_model.tscn" id="9_cbwtk"]
 [ext_resource type="Texture2D" uid="uid://d4n4auuin8b51" path="res://Textures/Pips/1.png" id="9_ofvkv"]
 [ext_resource type="Texture2D" uid="uid://bjnohxr7k6hxy" path="res://Textures/Pips/8.png" id="10_fmo2a"]
 [ext_resource type="Texture2D" uid="uid://c3iv6yckr4cm8" path="res://Textures/Pips/9.png" id="11_cpofk"]
@@ -48,17 +48,14 @@ __follow_timeline = false
 [sub_resource type="BoxShape3D" id="BoxShape3D_jyux7"]
 size = Vector3(1.03784, 2.04153, 0.39798)
 
-[sub_resource type="BoxMesh" id="BoxMesh_j5ih2"]
-
 [node name="Tile" type="Node3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 script = ExtResource("1_qw2k2")
 sprites = Array[Texture2D]([ExtResource("2_u5gsw"), ExtResource("9_ofvkv"), ExtResource("4_itqk5"), ExtResource("5_edwkp"), ExtResource("6_hfv6i"), ExtResource("7_qfiaq"), ExtResource("8_jv7qa"), ExtResource("9_8jyje"), ExtResource("10_fmo2a"), ExtResource("11_cpofk")])
 
 [node name="Shaker Activate" type="Node3D" parent="." node_paths=PackedStringArray("Targets")]
 script = ExtResource("3_gatgg")
 custom_target = true
-Targets = [NodePath("../ModelContainer")]
+Targets = [NodePath("../FlipAxis/ModelContainer")]
 duration = 0.01
 shake_speed = 0.05
 shakerPreset = ExtResource("4_resp8")
@@ -66,7 +63,7 @@ shakerPreset = ExtResource("4_resp8")
 [node name="Shaker Select" type="Node3D" parent="." node_paths=PackedStringArray("Targets")]
 script = ExtResource("3_gatgg")
 custom_target = true
-Targets = [NodePath("../ModelContainer")]
+Targets = [NodePath("../FlipAxis/ModelContainer")]
 intensity = 0.787
 duration = 0.5
 shake_speed = 5.0
@@ -77,7 +74,7 @@ shakerPreset = ExtResource("5_0exb5")
 [node name="Shaker Place" type="Node3D" parent="." node_paths=PackedStringArray("Targets")]
 script = ExtResource("3_gatgg")
 custom_target = true
-Targets = [NodePath("../ModelContainer")]
+Targets = [NodePath("../FlipAxis/ModelContainer")]
 intensity = 0.787
 duration = 0.5
 shake_speed = 6.0
@@ -89,7 +86,7 @@ shakerPreset = ExtResource("6_h557c")
 transform = Transform3D(1, -1.81899e-12, 0, -1.81899e-12, 1, 0, 0, 0, 1, -0.00879639, 0.00873366, -0.00163199)
 script = ExtResource("3_gatgg")
 custom_target = true
-Targets = [NodePath("../ModelContainer")]
+Targets = [NodePath("../FlipAxis/ModelContainer")]
 duration = 50.0
 shake_speed = 0.2
 fade_in = 0.0268594
@@ -102,94 +99,102 @@ shakerPreset = SubResource("Resource_l6pl4")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0020752, 0.00227356, 0.00724794)
 shape = SubResource("BoxShape3D_jyux7")
 
-[node name="ModelContainer" type="Node3D" parent="."]
-transform = Transform3D(0.999997, -3.00102e-05, 0.00229434, -1.86249e-09, 0.999914, 0.0130798, -0.00229454, -0.0130797, 0.999912, 0, 0, 0)
+[node name="FlipAxis" type="Node3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 0.999997, 0, 0, 0, 1, 0, -6.48015e-16, 5.96046e-08)
 
-[node name="Divider" type="Sprite3D" parent="ModelContainer"]
+[node name="ModelContainer" type="Node3D" parent="FlipAxis"]
+
+[node name="SpriteDivider" type="Sprite3D" parent="FlipAxis/ModelContainer"]
 transform = Transform3D(0.202699, 1.8207e-12, -1.42109e-13, -3.63488e-12, 0.149998, -4.9738e-14, 3.19744e-14, 7.10543e-15, 1, 1.70699e-05, -0.000225968, 0.12102)
 texture = ExtResource("19_7rsrd")
 
-[node name="SpriteTop" type="Sprite3D" parent="ModelContainer"]
+[node name="SpriteTop" type="Sprite3D" parent="FlipAxis/ModelContainer"]
+unique_name_in_owner = true
 transform = Transform3D(0.2, 1.14343e-12, -2.23923e-14, -1.14343e-12, 0.2, -5.59683e-15, 4.47846e-15, 1.11937e-15, 1, 1.42389e-05, 0.474432, 0.103005)
 texture = ExtResource("9_ofvkv")
 
-[node name="SpriteBottom" type="Sprite3D" parent="ModelContainer"]
+[node name="SpriteBottom" type="Sprite3D" parent="FlipAxis/ModelContainer"]
+unique_name_in_owner = true
 transform = Transform3D(0.2, 1.14343e-12, -4.47847e-14, -1.14343e-12, 0.2, -5.59683e-15, 8.95693e-15, 1.11937e-15, 1, -1.42389e-05, -0.474432, 0.103005)
 texture = ExtResource("9_ofvkv")
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="ModelContainer"]
-transform = Transform3D(0.282843, -0.282843, 0, 0.282843, 0.282843, 0, 0, 0, 0.14, 0, 0.922667, 0.00198197)
-visible = false
-mesh = SubResource("BoxMesh_j5ih2")
-skeleton = NodePath("../..")
+[node name="domino_model2" parent="FlipAxis/ModelContainer" instance=ExtResource("9_cbwtk")]
 
-[node name="domino_model2" parent="ModelContainer" instance=ExtResource("9_cbwtk")]
-
-[node name="TopIndicator" type="Sprite3D" parent="ModelContainer"]
-transform = Transform3D(0.0757105, 4.55611e-13, -2.84217e-14, -4.5359e-13, 0.075718, -7.10543e-15, 1.77636e-15, 2.66454e-15, 1, 2.68457e-05, 0.893781, 0.209051)
-modulate = Color(0.148045, 1, 0.0774338, 1)
-render_priority = 1
-texture = ExtResource("21_eldiw")
-
-[node name="BottomIndicator" type="Sprite3D" parent="ModelContainer"]
-transform = Transform3D(-0.0757105, -6.61998e-09, 4.10248e-07, 6.6193e-09, -0.075718, 1.15484e-07, 3.106e-08, 8.74421e-09, 1, -2.44269e-05, -0.814585, 0.209051)
-modulate = Color(1, 0, 0.915179, 1)
-render_priority = 1
-texture = ExtResource("21_eldiw")
-
-[node name="LeftIndicator" type="Sprite3D" parent="ModelContainer"]
-transform = Transform3D(9.92896e-09, -0.075718, 2.62866e-07, 0.0757105, 9.93145e-09, -1.47382e-07, 1.11583e-08, 1.99037e-08, 1, -0.479562, -0.00739572, 0.209051)
-modulate = Color(1, 0.231851, 0.152145, 1)
-render_priority = 1
-texture = ExtResource("21_eldiw")
-
-[node name="RightIndicator" type="Sprite3D" parent="ModelContainer"]
-transform = Transform3D(-3.3101e-09, 0.075718, 1.47382e-07, -0.0757105, -3.31011e-09, 2.62866e-07, 1.99017e-08, -1.11594e-08, 1, 0.449731, -0.0074237, 0.209051)
-modulate = Color(0, 0.388286, 1, 1)
-render_priority = 1
-texture = ExtResource("21_eldiw")
-
-[node name="Direction text" type="Label3D" parent="ModelContainer"]
-transform = Transform3D(1, 1.06581e-14, 0, 1.42109e-14, 1, 0, 0, 1.06581e-14, 1, 0.0223236, -0.00434655, 0.191704)
-text = "right"
-font_size = 47
-outline_size = 27
-uppercase = true
-
-[node name="Label3D" type="Label3D" parent="ModelContainer"]
-transform = Transform3D(1, 1.14007e-14, 0, 1.52817e-14, 1, 0, 0, 3.55271e-15, 1, 3.00126e-05, 1.19872, 0.290756)
-text = "TOP"
-font_size = 40
-outline_size = 0
-
-[node name="Label tilename" type="Label3D" parent="ModelContainer"]
-transform = Transform3D(1, 1.14007e-14, 0, 1.52817e-14, 1, 0, 0, 3.55271e-15, 1, -0.386619, -0.765381, 0.290756)
-font_size = 40
-outline_size = 25
-
-[node name="Label3D2" type="Label3D" parent="ModelContainer"]
-transform = Transform3D(1, 1.14007e-14, 0, 1.52817e-14, 1, 0, 0, 3.55271e-15, 1, 3.00127e-05, -1.04174, 0.290756)
-text = "BOTTOM"
-font_size = 40
-outline_size = 0
-
-[node name="Label3D3" type="Label3D" parent="ModelContainer"]
-transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 3.55271e-15, 1, 0.658339, 0.0155256, 0.290756)
-text = "RIGHT"
-font_size = 40
-outline_size = 0
-
-[node name="Label3D4" type="Label3D" parent="ModelContainer"]
-transform = Transform3D(1.31134e-07, -1, 0, 1, 1.31134e-07, 0, 0, 3.55271e-15, 1, -0.585352, -0.0200125, 0.290756)
-text = "LEFT"
-font_size = 40
-outline_size = 0
-
-[node name="Selection" type="Sprite3D" parent="ModelContainer"]
+[node name="Selection" type="Sprite3D" parent="FlipAxis/ModelContainer"]
 transform = Transform3D(0.313329, 0, 0, 0, 0.291076, 0, 0, 0, 1, 1.70699e-05, -0.000225968, 0.12102)
 visible = false
 modulate = Color(0.973409, 1, 0.96706, 1)
 texture = ExtResource("22_pss3p")
 
-[connection signal="mouse_entered" from="Area3D" to="." method="_on_area_3d_mouse_entered"]
-[connection signal="mouse_exited" from="Area3D" to="." method="_on_area_3d_mouse_exited"]
+[node name="Debug" type="Node3D" parent="FlipAxis/ModelContainer"]
+visible = false
+
+[node name="TopIndicator" type="Sprite3D" parent="FlipAxis/ModelContainer/Debug"]
+unique_name_in_owner = true
+transform = Transform3D(0.0757105, 2.27374e-13, 0, -6.82121e-13, 0.075718, 0, 0, -1.16415e-10, 1, 2.68457e-05, 0.893781, 0.209051)
+modulate = Color(0.148045, 1, 0.0774338, 1)
+render_priority = 1
+texture = ExtResource("21_eldiw")
+
+[node name="BottomIndicator" type="Sprite3D" parent="FlipAxis/ModelContainer/Debug"]
+unique_name_in_owner = true
+transform = Transform3D(-0.0757105, -6.61998e-09, 4.10248e-07, 6.61953e-09, -0.075718, 1.15484e-07, 3.10538e-08, 8.84756e-09, 1, -2.4427e-05, -0.814585, 0.209051)
+modulate = Color(1, 0, 0.915179, 1)
+render_priority = 1
+texture = ExtResource("21_eldiw")
+
+[node name="LeftIndicator" type="Sprite3D" parent="FlipAxis/ModelContainer/Debug"]
+unique_name_in_owner = true
+transform = Transform3D(9.92895e-09, -0.075718, 2.62866e-07, 0.0757105, 9.93145e-09, -1.47149e-07, 1.11759e-08, 1.9907e-08, 1, -0.479562, -0.00739572, 0.209051)
+modulate = Color(1, 0.231851, 0.152145, 1)
+render_priority = 1
+texture = ExtResource("21_eldiw")
+
+[node name="RightIndicator" type="Sprite3D" parent="FlipAxis/ModelContainer/Debug"]
+unique_name_in_owner = true
+transform = Transform3D(-3.31011e-09, 0.075718, 1.47382e-07, -0.0757105, -3.31011e-09, 2.62633e-07, 1.9907e-08, -1.11613e-08, 1, 0.449731, -0.0074237, 0.209051)
+modulate = Color(0, 0.388286, 1, 1)
+render_priority = 1
+texture = ExtResource("21_eldiw")
+
+[node name="DirectionText" type="Label3D" parent="FlipAxis/ModelContainer/Debug"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 1.81899e-12, 1, 0, 0, 0, 1, 0.0223236, -0.00434655, 0.191704)
+text = "right"
+font_size = 47
+outline_size = 27
+uppercase = true
+
+[node name="LabelTilename" type="Label3D" parent="FlipAxis/ModelContainer/Debug"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 1.81899e-12, 1, 0, 0, 0, 1, -0.386619, -0.765381, 0.290756)
+font_size = 40
+outline_size = 25
+
+[node name="Label3D" type="Label3D" parent="FlipAxis/ModelContainer/Debug"]
+transform = Transform3D(1, 0, 0, 3.63798e-12, 1, 0, 0, 0, 1, 3.00126e-05, 1.19872, 0.290756)
+text = "TOP"
+font_size = 40
+outline_size = 0
+
+[node name="Label3D2" type="Label3D" parent="FlipAxis/ModelContainer/Debug"]
+transform = Transform3D(1, 0, 0, 1.81899e-12, 1, 0, 0, 0, 1, 3.00127e-05, -1.04174, 0.290756)
+text = "BOTTOM"
+font_size = 40
+outline_size = 0
+
+[node name="Label3D3" type="Label3D" parent="FlipAxis/ModelContainer/Debug"]
+transform = Transform3D(-4.37121e-08, 1, 0, -1, -4.37103e-08, 0, 0, -2.32831e-10, 1, 0.658339, 0.0155256, 0.290756)
+text = "RIGHT"
+font_size = 40
+outline_size = 0
+
+[node name="Label3D4" type="Label3D" parent="FlipAxis/ModelContainer/Debug"]
+transform = Transform3D(1.31135e-07, -1, 0, 1, 1.31133e-07, 0, 0, 2.32831e-10, 1, -0.585352, -0.0200125, 0.290756)
+text = "LEFT"
+font_size = 40
+outline_size = 0
+
+[connection signal="mouse_entered" from="Area3D" to="." method="hover"]
+[connection signal="mouse_exited" from="Area3D" to="." method="unhover"]

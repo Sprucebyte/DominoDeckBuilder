@@ -119,7 +119,12 @@ func getEdgeValue(root = rootNode) -> int:
 	for edgeNode in edgeNodes:
 		var up = edgeNode.children[Util.Up]
 		var down = edgeNode.children[Util.Down]
+		#
+		edgeNode.tile.activate()
+		
 
+
+		#edgeNode.tile.activate()
 		if (up == null && down == null):
 			edgeValue += edgeNode.tile.topValue + edgeNode.tile.bottomValue
 		else: if (up == null):

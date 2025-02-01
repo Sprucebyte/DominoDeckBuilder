@@ -1,7 +1,7 @@
 extends Node
 @onready var domino1 = $"Domino 1"
 @onready var domino2 = $"Domino 2"
-
+@export var sound: AudioStream
 
 
 func _ready() -> void:
@@ -11,7 +11,12 @@ func _ready() -> void:
 	pass
 
 func audioSelected(_val):
+	var count = GameManager.selectedTiles.size()
+	#var originalPitch = sound.
+	#sound.pitch_scale = count
+
 	domino1.play()
+	#sound.pitch_scale = originalPitch
 	pass
 
 

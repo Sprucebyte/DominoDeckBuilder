@@ -1,7 +1,12 @@
 extends Node3D
 class_name Tile
 
-#enum states {hovered, selected, played}
+enum States {onBoard, inDeck, inHand, inShop, inPack, discarded, disabled}
+var state = States.inDeck
+
+
+
+
 
 @export var sprites: Array[Texture2D] = []
 
@@ -10,19 +15,23 @@ class_name Tile
 @export var hoverable = true
 
 @onready var mesh: Node3D = $ModelContainer
+@onready var shakerActivate: ShakerComponent3D = $"Shaker Activate"
 @onready var shakerSelect: ShakerComponent3D = $"Shaker Select"
 @onready var shakerIdle: ShakerComponent3D = $"Shaker Idle"
 
-@onready var spriteTop = $ModelContainer/SpriteTop
-@onready var spriteBottom = $ModelContainer/SpriteBottom
+@onready var spriteTop = %SpriteTop
+@onready var spriteBottom = %SpriteBottom
 
-@onready var topTakenIndicator = $ModelContainer/TopIndicator
-@onready var bottomTakenIndicator = $ModelContainer/BottomIndicator
-@onready var leftTakenIndicator = $ModelContainer/LeftIndicator
-@onready var rightTakenIndicator = $ModelContainer/RightIndicator
+@onready var topTakenIndicator = %TopIndicator
+@onready var bottomTakenIndicator = %BottomIndicator
+@onready var leftTakenIndicator = %LeftIndicator
+@onready var rightTakenIndicator = %RightIndicator
 
-@onready var directionText = $"ModelContainer/Direction text"
-@onready var tilenameText = $"ModelContainer/Label tilename"
+@onready var directionText = %DirectionText
+@onready var tilenameText = %LabelTilename
+@onready var flipAxis: Node3D = %FlipAxis
+
+var faceDown = false
 
 var targetScale = Vector3.ONE
 var targetPosition = Vector3.ZERO
@@ -40,10 +49,50 @@ var bottomValue = 4
 var tileNode: TileNode = null
 
 func _ready() -> void:
-	topValue = randi_range(2,4)
-	bottomValue = randi_range(2,4)
 	pass
 	
+
+func _process(delta: float) -> void:
+
+
+	if (selected):
+		if (Input.is_physical_key_pressed(KEY_ENTER)):
+			faceDown = !faceDown
+		
+
+	match state:
+		States.inDeck: faceDown = true
+		States.inHand: faceDown = false
+		States.onBoard: faceDown = false
+		States.discarded: faceDown = true
+
+	debug()
+
+	if (faceDown):
+		flipAxis.rotation.y = lerp_angle(flipAxis.rotation.y, deg_to_rad(180), delta*20)
+	else:
+		flipAxis.rotation.y = lerp_angle(flipAxis.rotation.y, 0, delta*20)
+
+	spriteTop.texture = sprites[min(topValue,sprites.size()-1)]
+	spriteBottom.texture = sprites[min(bottomValue,sprites.size()-1)]
+	scale = scale.lerp(targetScale, delta*10)
+	global_position = global_position.lerp(targetPosition + Vector3.UP * selectedOffset * ( 1 if (selected) else 0), delta*10) 
+	
+	rotation.x = lerp_angle(rotation.x, deg_to_rad(targetRotation.x),delta*10)
+	rotation.y = lerp_angle(rotation.y, deg_to_rad(targetRotation.y),delta*10)
+	rotation.z = lerp_angle(rotation.z, deg_to_rad(targetRotation.z),delta*10)
+
+	if (hovered):
+		if (Input.is_action_just_pressed("click")):	
+			playFrom()
+			if not (selected):
+				select()	
+			else:
+				deselect()
+
+	if not (shakerIdle.is_playing):
+		if (played): return
+
 
 func setDirection(direction):
 	self.direction = direction
@@ -54,15 +103,13 @@ func setDirection(direction):
 		Util.Right: rot = Vector3(0,0,-90)
 		Util.Down: rot = Vector3(0,0,180)
 		Util.Left: rot = Vector3(0,0,90)
-	targetRotation = rot# + Vector3(0,0,randf_range(-0.5,0.5))
+	targetRotation = rot
 
+func setState(state: States):
+	self.state = state
 
-# Update
-func _process(delta: float) -> void:
-
+func debug():
 	var string = ""
-
-	#region Debug
 	directionText.text = string
 	if (tileNode != null):
 		tilenameText.text = tileNode.str
@@ -82,56 +129,15 @@ func _process(delta: float) -> void:
 		rightTakenIndicator.modulate = Color.TRANSPARENT
 		bottomTakenIndicator.modulate = Color.TRANSPARENT
 		leftTakenIndicator.modulate = Color.TRANSPARENT
-	#endregion	
-	
-	spriteTop.texture = sprites[topValue]
-	spriteBottom.texture = sprites[bottomValue]
-	scale = scale.lerp(targetScale, delta*20)
-	global_position = global_position.lerp(targetPosition + Vector3.UP * selectedOffset * ( 1 if (selected) else 0), delta*20) 
-	
-	#if not (Util.angleDifferenceLessThan(rotation_degrees,targetRotation,2)):
-	
-	#var a = Quaternion.from_euler(rotation_degrees)
-	#var b = Quaternion.from_euler(targetRotation)
-	#var c = a.slerp(b,delta*20)
-	#rot.x = lerp(rotation_degrees.x,targetRotation.x,delta*20)
-	#rot.y = lerp(rotation_degrees.y,targetRotation.y,delta*20)
-	#if abs(rotation_degrees.z - targetRotation.z):
-	#rot.z = lerp(rotation_degrees.z,targetRotation.z,delta*20)
-	#var a = rotation_degrees.z
-	#var b = targetRotation.z
 
-
-	#rotation_degrees.z = lerp_angle(a, b, delta*20)
-	rotation_degrees = rotation_degrees.lerp(targetRotation,delta*20)
-	#print("teeeeeeeee")
-	if (hovered):
-		print(rotation_degrees)
-		if (Input.is_action_just_pressed("click")):	
-			playFrom()
-			if not (selected):
-				select()	
-			else:
-				deselect()
-
-	if not (shakerIdle.is_playing):
-		if (played): return
-		#shakerIdle.play_shake()
-
-func _on_area_3d_mouse_entered() -> void:
-	if not (hoverable): return
-	hover()
-	
-func _on_area_3d_mouse_exited() -> void:
-	unhover()
 
 
 func play(): 
 	unhover()
 	deselect()
-
 	selectable = false
 	played = true
+	state = States.onBoard
 	shakerIdle.force_stop_shake()
 	SignalBus.emit_signal("OnTilePlayed", self)
 	pass
@@ -147,15 +153,22 @@ func playFrom():
 	if not (played): return
 	SignalBus.emit_signal("OnPlayedFrom", self)
 
+
+
+func validStates(_validStates: Array[States]):
+	return state in _validStates
+
+func validState(_validState: States):
+	return (state == _validState)
+
 func select():
-	if not (selectable): return
+	if not validState(States.inHand): return
 	selected = true
 	SignalBus.emit_signal("OnTileSelected", self)
 	shakerSelect.play_shake()
 	pass
 
 func deselect():
-	if not (selectable): return
 	selected = false
 	SignalBus.emit_signal("OnTileDeselected", self)
 	shakerSelect.play_shake()	
@@ -176,6 +189,9 @@ func unhover():
 	pass
 
 func activate():
+	await get_tree().create_timer(.5).timeout
 	print("activated!")
+	SignalBus.emit_signal("OnTileActivated", self)
+	shakerActivate.play_shake()	
 	pass
 	

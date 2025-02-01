@@ -6,6 +6,7 @@
 
 [node name="AudioManager" type="Node"]
 script = ExtResource("1_kr86f")
+sound = ExtResource("2_3pv0n")
 
 [node name="Domino 1" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_3pv0n")
