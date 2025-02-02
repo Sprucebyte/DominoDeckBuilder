@@ -1,42 +1,41 @@
-extends Node3D
+extends TileContainer
 class_name PlayArea
+
 
 var tileNodeTree: TileNodeTree = TileNodeTree.new()
 var gridSize = 1.1
 var validSlots
 
-func playFrom(oldTile):
+func _ready():
+	SignalBus.connect("OnPlayedFrom",playFrom)
+
+
+func playFrom(tileToPlayFrom):
 	if (GameManager.selectedTiles.size() != 1): return
 	var tile = GameManager.selectedTiles[0]
-	#if not tile in GameManager.hand.tiles: return
 	if not tile.state == Tile.States.inHand: return
 	var chosenSlot = null
 	var tileSide = Util.Top
-	
 	for validSlot in validSlots:
-		if (validSlot.node == oldTile.tileNode):
+		if (validSlot.node == tileToPlayFrom.tileNode):
 			chosenSlot = validSlot
-			print("real shit")
 			break
-	if (chosenSlot == null):
-		print("not a valid slot")
-		return
-	print(chosenSlot.pips)
+	if (chosenSlot == null): return
+	tileSide = chooseTileSide(tile, chosenSlot)
+	addTile(tile, chosenSlot.node, tileSide, chosenSlot.side)
+
 	
+func chooseTileSide(tile, chosenSlot):
+	var tileSide
 	if (chosenSlot.pips == tile.topValue) and (chosenSlot.pips == tile.bottomValue):
 		tileSide = Util.Right
 	else: if (chosenSlot.pips == tile.topValue):
 		tileSide = Util.Top
 	else: if (chosenSlot.pips == tile.bottomValue):
 		tileSide = Util.Bottom
-	addTile(tile, chosenSlot.node, tileSide, chosenSlot.side)
-	pass
-	
+	return tileSide
 
-func _ready():
-	SignalBus.connect("OnPlayedFrom",playFrom)
 	
-
 func _process(_delta: float) -> void:
 	if (GameManager.selectedTiles.size() == 1):
 		var tile = GameManager.selectedTiles[0]
@@ -47,12 +46,7 @@ func _process(_delta: float) -> void:
 				var tileSide
 				if (validSlots.size() > 0):
 					chosenSlot = validSlots[0]
-					if (chosenSlot.pips == tile.topValue) and (chosenSlot.pips == tile.bottomValue):
-						tileSide = Util.Right
-					else: if (chosenSlot.pips == tile.topValue):
-						tileSide = Util.Top
-					else: if (chosenSlot.pips == tile.bottomValue):
-						tileSide = Util.Bottom
+					tileSide = chooseTileSide(tile, chosenSlot)
 				else:
 					return
 				addTile(tile, chosenSlot.node, tileSide, chosenSlot.side)
@@ -85,15 +79,17 @@ func addTile(tile: Tile, parentTileNode: TileNode, sideOfTile = Util.Top, sideOf
 		tile.targetPosition = parentTileNode.tile.global_position + offsetAndDirection.offset;
 		tile.setDirection(offsetAndDirection.direction)
 		
+	GameManager.hand.moveTo(tile,GameManager.playArea)	
 	tile.play()
-	tile.reparent(self)
 	
 	var edgeValue = tileNodeTree.getEdgeValue()
 	SignalBus.emit_signal("UpdateEdgeValue",edgeValue)
 
-
 	# -------------- #
 
+
+
+# WORK IN PROGRESS
 func getTilePosition(tile: Tile):
 	var tileNode = tile.tileNode
 	var offset: Vector3 = Vector3.ZERO
@@ -107,6 +103,7 @@ func getTilePosition(tile: Tile):
 			
 	pass
 
+# GOOD
 func getTileOffsetAndDirection(parentTileNode, tileNode, sideOfParent, sideOfTile) -> Dictionary:
 	var offset = Vector3.ZERO
 	var direction = 0

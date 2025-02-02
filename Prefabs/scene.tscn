@@ -53,14 +53,6 @@ size = 30.0
 near = 0.01
 far = 2000.0
 
-[node name="Hand" type="Node3D" parent="." groups=["Hand"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -12.9196, 0)
-script = ExtResource("2_sdeua")
-rotationCurve = SubResource("Curve_46ek5")
-maxTileCount = 20
-
-[node name="AudioManager" parent="." instance=ExtResource("6_3ltku")]
-
 [node name="PlayArea" type="Node3D" parent="." groups=["PlayArea"]]
 transform = Transform3D(0.999992, 0, 0, 0, 0.999994, 0, 0, 0, 0.999998, 0, 0, -1)
 script = ExtResource("4_ce05m")
@@ -71,6 +63,22 @@ size = Vector2i(1920, 1080)
 
 [node name="3D UI" parent="PlayArea/SubViewport" instance=ExtResource("8_j2tmk")]
 visible = false
+
+[node name="Hand" type="Node3D" parent="." groups=["Hand"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -12.9196, 0)
+script = ExtResource("2_sdeua")
+rotationCurve = SubResource("Curve_46ek5")
+containerTileState = 2
+
+[node name="Deck" type="Node3D" parent="." groups=["Deck"]]
+script = ExtResource("7_2v4lr")
+containerTileState = 1
+
+[node name="DiscardPile" type="Node3D" parent="." groups=["DiscardPile"]]
+script = ExtResource("8_hflr1")
+containerTileState = 5
+
+[node name="AudioManager" parent="." instance=ExtResource("6_3ltku")]
 
 [node name="UI" type="Sprite3D" parent="."]
 transform = Transform3D(2.85178, 0, 0, 0, 2.85178, 0, 0, 0, 2, 0, 0, -9.55676)
@@ -155,12 +163,6 @@ focus_mode = 0
 action_mode = 0
 text = "Discard
 "
-
-[node name="Deck" type="Node3D" parent="." groups=["Deck"]]
-script = ExtResource("7_2v4lr")
-
-[node name="DiscardPile" type="Node3D" parent="." groups=["DiscardPile"]]
-script = ExtResource("8_hflr1")
 
 [connection signal="pressed" from="User Interface/Draw Button" to="User Interface" method="drawButtonPressed"]
 [connection signal="pressed" from="User Interface/Discard Button" to="User Interface" method="discardButtonPressed"]
