@@ -1,13 +1,13 @@
 extends TileContainer
 class_name Deck
 
-
+var deckSize = 6
 #func add()
 #func remove()
 #func moveTo()
 
 func _ready() -> void:
-	generate(4)
+	generate(deckSize)
 
 
 func generate(highestValue = 6):
