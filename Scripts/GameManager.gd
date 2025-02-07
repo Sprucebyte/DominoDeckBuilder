@@ -4,6 +4,7 @@ extends Node
 var tilePrefab = preload("res://Prefabs/tile.tscn")
 var selectedTiles: Array[Tile] = []
 
+
 var discardPile: DiscardPile = null
 var hand: Hand = null
 var playArea: PlayArea = null

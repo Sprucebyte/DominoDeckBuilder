@@ -5,9 +5,6 @@ enum States {onBoard, inDeck, inHand, inShop, inPack, discarded, disabled}
 var state = States.inDeck
 
 
-
-
-
 @export var sprites: Array[Texture2D] = []
 
 @export var selectedOffset = .5;
@@ -53,19 +50,10 @@ func _ready() -> void:
 	
 
 func _process(delta: float) -> void:
-
-
 	if (selected):
 		if (Input.is_physical_key_pressed(KEY_ENTER)):
 			faceDown = !faceDown
 		
-
-	match state:
-		States.inDeck: faceDown = true
-		States.inHand: faceDown = false
-		States.onBoard: faceDown = false
-		States.discarded: faceDown = true
-
 	debug()
 
 	if (faceDown):
@@ -107,6 +95,11 @@ func setDirection(direction):
 
 func setState(state: States):
 	self.state = state
+	match state:
+		States.inDeck: faceDown = true
+		States.inHand: faceDown = false
+		States.onBoard: faceDown = false
+		States.discarded: faceDown = true
 
 func debug():
 	var string = ""
@@ -164,7 +157,8 @@ func validState(_validState: States):
 func select():
 	if not validState(States.inHand): return
 	selected = true
-	SignalBus.emit_signal("OnTileSelected", self)
+	#SignalBus.emit_signal("OnTileSelected", self)
+	SignalBus.OnTileSelected.emit(self)
 	shakerSelect.play_shake()
 	pass
 

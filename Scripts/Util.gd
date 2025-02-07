@@ -14,6 +14,10 @@ const Top = 0
 const Bottom = 2
 #
 
+#await get_tree().create_timer(.5).timeout
+
+
+
 static func angleDifferenceLessThan(vec1, vec2, angle) -> bool:
 	return abs(vec1.x - vec2.x) <= angle and abs(vec1.y - vec2.y) <= angle and abs(vec1.z - vec2.z) <= angle
 

@@ -1,9 +1,8 @@
-[gd_scene load_steps=18 format=3 uid="uid://c1vubbps0wbru"]
+[gd_scene load_steps=17 format=3 uid="uid://c1vubbps0wbru"]
 
 [ext_resource type="Texture2D" uid="uid://b5gl8shp801fn" path="res://Textures/belfast_sunset_puresky_2k.hdr" id="1_mtpok"]
 [ext_resource type="Texture2D" uid="uid://lybc5abc6vb7" path="res://Textures/gradient.tres" id="1_s76xi"]
 [ext_resource type="PackedScene" uid="uid://dblxhm6glgeu3" path="res://Prefabs/card.tscn" id="1_xom6v"]
-[ext_resource type="Script" path="res://Scripts/Card.gd" id="2_8t1do"]
 [ext_resource type="Script" path="res://Scripts/Hand.gd" id="2_sdeua"]
 [ext_resource type="Script" path="res://Scripts/PlayArea.gd" id="4_ce05m"]
 [ext_resource type="PackedScene" uid="uid://bsolopte6gbrd" path="res://Prefabs/audio_manager.tscn" id="6_3ltku"]
@@ -37,10 +36,8 @@ viewport_path = NodePath("PlayArea/SubViewport")
 
 [node name="Scene Root" type="Node3D"]
 
-[node name="Card" parent="." node_paths=PackedStringArray("container") instance=ExtResource("1_xom6v")]
+[node name="Card" parent="." instance=ExtResource("1_xom6v")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23.4294, 12.4496, 0)
-script = ExtResource("2_8t1do")
-container = NodePath("../TestContainer")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.782228, 0.0959681, -0.615556, 0.289535, 0.818873, 0.495597, 0.551624, -0.565894, 0.61276, 0.015358, 0.21002, 0.0521584)
@@ -173,10 +170,10 @@ action_mode = 0
 text = "Discard
 "
 
-[node name="TestContainer" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.5568, 11.6709, 0)
+[node name="Node3D" type="Node3D" parent="."]
 script = ExtResource("11_7jfxn")
 allowedElementTypes = 10
+altitude = Vector3(0.275, 47.505, 0)
 
 [connection signal="pressed" from="User Interface/Draw Button" to="User Interface" method="drawButtonPressed"]
 [connection signal="pressed" from="User Interface/Discard Button" to="User Interface" method="discardButtonPressed"]

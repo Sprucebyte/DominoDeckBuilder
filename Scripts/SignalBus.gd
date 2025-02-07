@@ -22,6 +22,21 @@ signal DrawToHand(count)
 
 
 
+#region Elements
+signal OnElementClicked(element)
+signal OnElementSelected(element)
+signal OnElementDeselected(element)
+signal OnElementHovered(element)
+signal OnElementUnhovered(element)
+signal OnElementPlayed(element)
+signal OnElementActivated(element)
+signal OnElementDestroyed(element)
+signal OnElementObtained(element)
+#endregion
+
+
+
+
 #signal OnTileAdded
 #
 #signal OnTileDestroyed(tile)
