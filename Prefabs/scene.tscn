@@ -1,17 +1,18 @@
-[gd_scene load_steps=26 format=3 uid="uid://c1vubbps0wbru"]
+[gd_scene load_steps=27 format=3 uid="uid://c1vubbps0wbru"]
 
 [ext_resource type="PackedScene" uid="uid://dblxhm6glgeu3" path="res://Prefabs/card.tscn" id="1_i50vu"]
 [ext_resource type="Script" path="res://Scripts/AssetManager.gd" id="1_mdonh"]
 [ext_resource type="Texture2D" uid="uid://b5gl8shp801fn" path="res://Textures/belfast_sunset_puresky_2k.hdr" id="1_mtpok"]
-[ext_resource type="Texture2D" uid="uid://lybc5abc6vb7" path="res://Textures/gradient.tres" id="1_s76xi"]
 [ext_resource type="Texture2D" uid="uid://cr8x4kt8ws6jn" path="res://Textures/background 1.png" id="2_o2cic"]
 [ext_resource type="Resource" uid="uid://bi6yjpihwfkmc" path="res://Wild Card Assets/Rain Man.tres" id="3_1hp0x"]
 [ext_resource type="Script" path="res://Scripts/Containers/Board.gd" id="3_d6a45"]
 [ext_resource type="Resource" uid="uid://c2nf0n0caanvw" path="res://Tile Materials/White.tres" id="3_oeeda"]
 [ext_resource type="Resource" uid="uid://0cl48ukg5jx5" path="res://Wild Card Assets/Even.tres" id="5_ci61w"]
 [ext_resource type="PackedScene" uid="uid://bsolopte6gbrd" path="res://Prefabs/audio_manager.tscn" id="6_3ltku"]
+[ext_resource type="Resource" uid="uid://f4evcfcidv6p" path="res://Wild Card Assets/Odd.tres" id="6_va8nl"]
 [ext_resource type="Script" path="res://Scripts/Containers/Hand.gd" id="7_5nb6h"]
 [ext_resource type="Script" path="res://Scripts/Containers/WildCardContainer.gd" id="7_c150q"]
+[ext_resource type="Script" path="res://Scripts/CardAsset.gd" id="7_gc8a2"]
 [ext_resource type="Script" path="res://Scripts/Containers/Deck.gd" id="8_4o5i1"]
 [ext_resource type="PackedScene" uid="uid://8l8oyfxis17a" path="res://Prefabs/3d_ui.tscn" id="8_j2tmk"]
 [ext_resource type="Script" path="res://Scripts/Containers/DiscardPile.gd" id="9_2ysjb"]
@@ -62,16 +63,9 @@ viewport_path = NodePath("Board/SubViewport")
 script = ExtResource("1_mdonh")
 cardPrefab = ExtResource("1_i50vu")
 white = ExtResource("3_oeeda")
-rainMan = ExtResource("3_1hp0x")
-even = ExtResource("5_ci61w")
+wildCards = Array[ExtResource("7_gc8a2")]([ExtResource("6_va8nl"), ExtResource("5_ci61w"), ExtResource("3_1hp0x")])
 
 [node name="Backdrop" type="Sprite3D" parent="."]
-transform = Transform3D(3.13204, 0, 0, 0, 3.00034, 0, 0, 0, 1, -0.260437, -0.267242, -71.136)
-visible = false
-transparent = false
-texture = ExtResource("1_s76xi")
-
-[node name="Backdrop2" type="Sprite3D" parent="."]
 transform = Transform3D(1.47324, 0, 0, 0, 1.47324, 0, 0, 0, 1, -0.260437, -0.267242, -71.136)
 transparent = false
 texture = ExtResource("2_o2cic")
@@ -94,7 +88,7 @@ near = 0.01
 far = 2000.0
 
 [node name="Board" type="Node3D" parent="." groups=["Board"]]
-transform = Transform3D(0.999992, 0, 0, 0, 0.999994, 0, 0, 0, 0.999998, 0, 0, -1)
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, -1)
 script = ExtResource("3_d6a45")
 
 [node name="SubViewport" type="SubViewport" parent="Board"]

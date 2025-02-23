@@ -1,7 +1,7 @@
 extends WildCard
 
 func activate() -> void:
-	#super()
+	super()
 	#print("get rained")
 	var activateSpeed = 1
 	for tile: Tile in GameManager.board.elements:

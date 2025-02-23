@@ -1,8 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://dblxhm6glgeu3"]
+[gd_scene load_steps=7 format=3 uid="uid://dblxhm6glgeu3"]
 
 [ext_resource type="Script" path="res://Scripts/Elements/Card.gd" id="1_6jdnb"]
 [ext_resource type="Texture2D" uid="uid://6pjbsp5ytqvr" path="res://Textures/card.png" id="1_wew3m"]
 [ext_resource type="Texture2D" uid="uid://dt24fv66cinnv" path="res://Textures/card_back.png" id="3_iypw1"]
+[ext_resource type="Script" path="res://addons/shaker/src/Vector3/shaker_component3D.gd" id="4_hwyiw"]
+[ext_resource type="Resource" uid="uid://2iignwymlhcw" path="res://Shaker/Presets/activate.tres" id="5_fwxva"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_2w5v6"]
 size = Vector3(2.83098, 4.5664, 0.150208)
@@ -15,6 +17,15 @@ selectableInStates = 4
 hoverableInStates = 4
 state = 2
 
+[node name="Shaker Activate" type="Node3D" parent="." node_paths=PackedStringArray("Targets")]
+unique_name_in_owner = true
+script = ExtResource("4_hwyiw")
+custom_target = true
+Targets = [NodePath("../FlipAxis/IdleAxis")]
+duration = 0.01
+shake_speed = 0.05
+shakerPreset = ExtResource("5_fwxva")
+
 [node name="Area3D" type="Area3D" parent="."]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
@@ -26,6 +37,7 @@ unique_name_in_owner = true
 
 [node name="IdleAxis" type="Node3D" parent="FlipAxis"]
 unique_name_in_owner = true
+transform = Transform3D(1, -1.0943e-08, 0, 1.0943e-08, 1, 0, 0, 0, 1, 0, 0, 0)
 
 [node name="Front" type="Sprite3D" parent="FlipAxis/IdleAxis"]
 unique_name_in_owner = true

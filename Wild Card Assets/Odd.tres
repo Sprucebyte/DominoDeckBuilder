@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="CardAsset" load_steps=4 format=3 uid="uid://f4evcfcidv6p"]
+
+[ext_resource type="Script" path="res://Scripts/CardAsset.gd" id="1_3w104"]
+[ext_resource type="Script" path="res://Scripts/Wild Cards/Odd.gd" id="1_nwahf"]
+[ext_resource type="Texture2D" uid="uid://6pjbsp5ytqvr" path="res://Textures/card.png" id="3_co5fi"]
+
+[resource]
+script = ExtResource("1_3w104")
+code = ExtResource("1_nwahf")
+texture = ExtResource("3_co5fi")
+name = "Odd"
+description = "+3 mult for every odd edge"
