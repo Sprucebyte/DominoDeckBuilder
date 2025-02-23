@@ -1,7 +1,7 @@
 extends WildCard
 
 func activate() -> void:
-	super()
+	#super()
 	#print("get rained")
 	var activateSpeed = 1
 	for tile: Tile in GameManager.board.elements:
@@ -10,6 +10,7 @@ func activate() -> void:
 		SignalBus.AddToMult.emit(.2 )
 		tile.shake()
 		ScoreLabel.Spawn(tile,"+0.2x", Color.RED)
+		shakerActivate.play_shake()
 		activateSpeed *= 1.05
 
 	pass

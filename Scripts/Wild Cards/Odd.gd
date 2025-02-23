@@ -1,7 +1,7 @@
 extends WildCard
 
 func activate() -> void:
-	super()
+	#super()
 	var activateSpeed = 1
 	for node: TileNode in GameManager.board.tileNodeTree.getEdgeNodes():
 		var tile = node.tile
@@ -12,4 +12,5 @@ func activate() -> void:
 		tile.shake()
 		ScoreLabel.Spawn(tile,"+" + str(3) + "x", Color.RED)
 		activateSpeed *= 1.05
+		shakerActivate.play_shake()
 	pass
