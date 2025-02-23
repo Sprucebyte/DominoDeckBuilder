@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="CardAsset" load_steps=4 format=3 uid="uid://x6vf8snlg7uq"]
+
+[ext_resource type="Script" path="res://Scripts/Wild Cards/FullCoverage.gd" id="1_51mbv"]
+[ext_resource type="Script" path="res://Scripts/CardAsset.gd" id="1_act6e"]
+[ext_resource type="Texture2D" uid="uid://cu4gwcqya3xco" path="res://Textures/Cards/FullCoverage.png" id="3_ol2qu"]
+
+[resource]
+script = ExtResource("1_act6e")
+code = ExtResource("1_51mbv")
+texture = ExtResource("3_ol2qu")
+name = "Full Coverage"
+description = "+10 points for every edge scored "
