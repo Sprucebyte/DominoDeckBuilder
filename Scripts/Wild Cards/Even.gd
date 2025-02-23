@@ -1,6 +1,7 @@
 extends WildCard
 
 func activate() -> void:
+	super()
 	var activateSpeed = 1
 	for node: TileNode in GameManager.board.tileNodeTree.getEdgeNodes():
 		var tile = node.tile
