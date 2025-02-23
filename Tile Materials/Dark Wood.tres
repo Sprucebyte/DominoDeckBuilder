@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="TileMaterial" load_steps=6 format=3 uid="uid://hrwirj63qnef"]
+
+[ext_resource type="Texture2D" uid="uid://dixiokp7sgrso" path="res://Textures/toon_wood_dark.png" id="1_tiea4"]
+[ext_resource type="Texture2D" uid="uid://vn3la7eb0hwd" path="res://Textures/domino_wood_base.png" id="2_qngql"]
+[ext_resource type="Script" path="res://TileMaterial.gd" id="3_63kj3"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_p5xvh"]
+diffuse_mode = 1
+albedo_texture = ExtResource("1_tiea4")
+metallic_specular = 0.0
+roughness_texture_channel = 2
+heightmap_scale = 10.0
+heightmap_flip_binormal = true
+heightmap_texture = ExtResource("2_qngql")
+texture_filter = 0
+texture_repeat = false
+grow_amount = 0.001
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1x383"]
+shading_mode = 0
+albedo_color = Color(0.156863, 0.0745098, 0.027451, 1)
+
+[resource]
+script = ExtResource("3_63kj3")
+material = SubResource("StandardMaterial3D_p5xvh")
+outlineMaterial = SubResource("StandardMaterial3D_1x383")
+pipColor = Color(0.15625, 0.0762195, 0.0266768, 1)

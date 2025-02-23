@@ -1,0 +1,170 @@
+[gd_scene load_steps=16 format=3 uid="uid://c1vubbps0wbru"]
+
+[ext_resource type="Texture2D" uid="uid://b5gl8shp801fn" path="res://Textures/belfast_sunset_puresky_2k.hdr" id="1_mtpok"]
+[ext_resource type="Texture2D" uid="uid://lybc5abc6vb7" path="res://Textures/gradient.tres" id="1_s76xi"]
+[ext_resource type="Script" path="res://Scripts/Containers/Board.gd" id="3_d6a45"]
+[ext_resource type="PackedScene" uid="uid://bsolopte6gbrd" path="res://Prefabs/audio_manager.tscn" id="6_3ltku"]
+[ext_resource type="Script" path="res://Scripts/Containers/Hand.gd" id="7_5nb6h"]
+[ext_resource type="Script" path="res://Scripts/Containers/Deck.gd" id="8_4o5i1"]
+[ext_resource type="PackedScene" uid="uid://8l8oyfxis17a" path="res://Prefabs/3d_ui.tscn" id="8_j2tmk"]
+[ext_resource type="Script" path="res://Scripts/Containers/DiscardPile.gd" id="9_2ysjb"]
+[ext_resource type="Script" path="res://Scripts/Systems/AudioManager.gd" id="9_fl5jd"]
+[ext_resource type="Script" path="res://Scripts/Systems/UI.gd" id="10_t280a"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_ee50a"]
+panorama = ExtResource("1_mtpok")
+energy_multiplier = 0.5
+
+[sub_resource type="Sky" id="Sky_g6oyx"]
+sky_material = SubResource("PanoramaSkyMaterial_ee50a")
+
+[sub_resource type="Environment" id="Environment_6w10b"]
+background_mode = 2
+sky = SubResource("Sky_g6oyx")
+adjustment_enabled = true
+adjustment_saturation = 1.23
+
+[sub_resource type="Curve" id="Curve_euog4"]
+min_value = -1.0
+_data = [Vector2(0, -1), 0.0, 2.12006, 0, 0, Vector2(1, 1), 2.10389, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_d0xon"]
+viewport_path = NodePath("Board/SubViewport")
+
+[node name="Scene Root" type="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.782228, 0.0959677, -0.615556, 0.289535, 0.818873, 0.495597, 0.551624, -0.565895, 0.61276, 0.015358, 0.21002, 0.0521584)
+light_energy = 0.5
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_6w10b")
+
+[node name="Backdrop" type="Sprite3D" parent="."]
+transform = Transform3D(3.13204, 0, 0, 0, 2.81194, 0, 0, 0, 1, 0, 0, -27.5064)
+texture = ExtResource("1_s76xi")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.005, 0, 5.80323)
+projection = 1
+fov = 42.2
+size = 30.0
+near = 0.01
+far = 2000.0
+
+[node name="Board" type="Node3D" parent="." groups=["Board"]]
+transform = Transform3D(0.999992, 0, 0, 0, 0.999994, 0, 0, 0, 0.999998, 0, 0, -1)
+script = ExtResource("3_d6a45")
+
+[node name="SubViewport" type="SubViewport" parent="Board"]
+transparent_bg = true
+size = Vector2i(1920, 1080)
+
+[node name="3D UI" parent="Board/SubViewport" instance=ExtResource("8_j2tmk")]
+visible = false
+
+[node name="Hand" type="Node3D" parent="." groups=["Hand"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -12.9196, 0)
+script = ExtResource("7_5nb6h")
+rotationCurve = SubResource("Curve_euog4")
+defaultElementState = 2
+
+[node name="Deck" type="Node3D" parent="." groups=["Deck"]]
+script = ExtResource("8_4o5i1")
+defaultElementState = 1
+
+[node name="DiscardPile" type="Node3D" parent="." groups=["DiscardPile"]]
+script = ExtResource("9_2ysjb")
+defaultElementState = 5
+
+[node name="AudioManager" parent="." instance=ExtResource("6_3ltku")]
+script = ExtResource("9_fl5jd")
+sound = null
+
+[node name="UI" type="Sprite3D" parent="."]
+transform = Transform3D(2.85178, 0, 0, 0, 2.85178, 0, 0, 0, 2, 0, 0, -9.55676)
+texture = SubResource("ViewportTexture_d0xon")
+
+[node name="User Interface" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("10_t280a")
+metadata/_edit_use_anchors_ = true
+
+[node name="EdgeValueDisplay" type="Panel" parent="User Interface"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.0208333
+anchor_top = 0.0324074
+anchor_right = 0.127604
+anchor_bottom = 0.0703704
+offset_right = -1.52588e-05
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="User Interface/EdgeValueDisplay"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.064
+offset_left = 5.0
+offset_top = 7.0
+offset_right = 87.88
+offset_bottom = 49.0
+text = "Edge value:"
+
+[node name="Value" type="Label" parent="User Interface/EdgeValueDisplay"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.064
+offset_left = 100.0
+offset_top = 7.0
+offset_right = 182.88
+offset_bottom = 49.0
+text = "0"
+
+[node name="Draw Button" type="Button" parent="User Interface"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 66.0
+offset_top = -39.0
+offset_right = 172.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 0
+focus_mode = 0
+action_mode = 0
+text = "Draw
+"
+
+[node name="Discard Button" type="Button" parent="User Interface"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -53.0
+offset_top = -39.0
+offset_right = 53.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 0
+focus_mode = 0
+action_mode = 0
+text = "Discard
+"
+
+[connection signal="pressed" from="User Interface/Draw Button" to="User Interface" method="drawButtonPressed"]
+[connection signal="pressed" from="User Interface/Discard Button" to="User Interface" method="discardButtonPressed"]

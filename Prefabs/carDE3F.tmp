@@ -1,0 +1,40 @@
+[gd_scene load_steps=5 format=3 uid="uid://dblxhm6glgeu3"]
+
+[ext_resource type="Script" path="res://Scripts/Elements/Card.gd" id="1_6jdnb"]
+[ext_resource type="Texture2D" uid="uid://6pjbsp5ytqvr" path="res://Textures/card.png" id="1_wew3m"]
+[ext_resource type="Texture2D" uid="uid://dt24fv66cinnv" path="res://Textures/card_back.png" id="3_iypw1"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_2w5v6"]
+size = Vector3(2.83098, 4.5664, 0.150208)
+
+[node name="Card" type="Node3D"]
+script = ExtResource("1_6jdnb")
+textureFront = ExtResource("1_wew3m")
+textureBack = ExtResource("3_iypw1")
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00139615, 0.00722194, -0.00491333)
+shape = SubResource("BoxShape3D_2w5v6")
+
+[node name="FlipAxis" type="Node3D" parent="."]
+unique_name_in_owner = true
+
+[node name="IdleAxis" type="Node3D" parent="FlipAxis"]
+unique_name_in_owner = true
+
+[node name="Front" type="Sprite3D" parent="FlipAxis/IdleAxis"]
+unique_name_in_owner = true
+pixel_size = 0.002
+texture = ExtResource("1_wew3m")
+
+[node name="Back" type="Sprite3D" parent="FlipAxis/IdleAxis"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00353885, 0.0020752, -0.0276475)
+flip_h = true
+pixel_size = 0.002
+texture = ExtResource("1_wew3m")
+
+[connection signal="mouse_entered" from="Area3D" to="." method="hover"]
+[connection signal="mouse_exited" from="Area3D" to="." method="unhover"]

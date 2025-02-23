@@ -1,0 +1,44 @@
+[gd_resource type="Resource" script_class="TileMaterial" load_steps=7 format=3 uid="uid://1sjkx0kk2fa3"]
+
+[ext_resource type="Texture2D" uid="uid://c4w8yqsqyjgxe" path="res://Textures/domino_gold_metalness.png" id="1_yh757"]
+[ext_resource type="Texture2D" uid="uid://vn3la7eb0hwd" path="res://Textures/domino_wood_base.png" id="2_egur1"]
+[ext_resource type="Script" path="res://TileMaterial.gd" id="2_ms7xs"]
+[ext_resource type="Texture2D" uid="uid://bgon2i6ick7p0" path="res://Textures/domino_gold_roughness.png" id="3_h83cf"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_am7h5"]
+transparency = 1
+blend_mode = 1
+depth_draw_mode = 1
+albedo_color = Color(1, 1, 1, 0.235294)
+albedo_texture = ExtResource("1_yh757")
+metallic_specular = 1.0
+metallic_texture_channel = 4
+roughness_texture = ExtResource("3_h83cf")
+roughness_texture_channel = 4
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+emission_energy_multiplier = 2.0
+emission_operator = 1
+emission_texture = ExtResource("3_h83cf")
+clearcoat_enabled = true
+heightmap_scale = 10.0
+heightmap_flip_binormal = true
+heightmap_texture = ExtResource("2_egur1")
+refraction_scale = 0.29
+texture_filter = 0
+texture_repeat = false
+grow_amount = 0.001
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6stuc"]
+render_priority = 127
+transparency = 1
+blend_mode = 3
+depth_draw_mode = 1
+shading_mode = 0
+albedo_color = Color(0, 0, 0, 1)
+
+[resource]
+script = ExtResource("2_ms7xs")
+material = SubResource("StandardMaterial3D_am7h5")
+outlineMaterial = SubResource("StandardMaterial3D_6stuc")
+pipColor = Color(0, 0, 0, 1)

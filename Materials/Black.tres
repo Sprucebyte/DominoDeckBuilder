@@ -1,0 +1,12 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://ckkjftdyt1ybc"]
+
+[ext_resource type="Texture2D" uid="uid://dlt1b46v3nrh1" path="res://Textures/domino_black.png" id="1_uvwnv"]
+
+[resource]
+albedo_texture = ExtResource("1_uvwnv")
+metallic = 0.1
+roughness = 0.73
+rim_enabled = true
+rim = 0.0
+rim_tint = 1.0
+grow_amount = -0.141

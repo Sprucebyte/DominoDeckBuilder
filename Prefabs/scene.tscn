@@ -1,17 +1,23 @@
-[gd_scene load_steps=18 format=3 uid="uid://c1vubbps0wbru"]
+[gd_scene load_steps=26 format=3 uid="uid://c1vubbps0wbru"]
 
+[ext_resource type="PackedScene" uid="uid://dblxhm6glgeu3" path="res://Prefabs/card.tscn" id="1_i50vu"]
+[ext_resource type="Script" path="res://Scripts/AssetManager.gd" id="1_mdonh"]
 [ext_resource type="Texture2D" uid="uid://b5gl8shp801fn" path="res://Textures/belfast_sunset_puresky_2k.hdr" id="1_mtpok"]
 [ext_resource type="Texture2D" uid="uid://lybc5abc6vb7" path="res://Textures/gradient.tres" id="1_s76xi"]
-[ext_resource type="PackedScene" uid="uid://dblxhm6glgeu3" path="res://Prefabs/card.tscn" id="1_xom6v"]
-[ext_resource type="Script" path="res://Scripts/Card.gd" id="2_8t1do"]
-[ext_resource type="Script" path="res://Scripts/Hand.gd" id="2_sdeua"]
-[ext_resource type="Script" path="res://Scripts/PlayArea.gd" id="4_ce05m"]
+[ext_resource type="Texture2D" uid="uid://cr8x4kt8ws6jn" path="res://Textures/background 1.png" id="2_o2cic"]
+[ext_resource type="Resource" uid="uid://bi6yjpihwfkmc" path="res://Wild Card Assets/Rain Man.tres" id="3_1hp0x"]
+[ext_resource type="Script" path="res://Scripts/Containers/Board.gd" id="3_d6a45"]
+[ext_resource type="Resource" uid="uid://c2nf0n0caanvw" path="res://Tile Materials/White.tres" id="3_oeeda"]
+[ext_resource type="Resource" uid="uid://0cl48ukg5jx5" path="res://Wild Card Assets/Even.tres" id="5_ci61w"]
 [ext_resource type="PackedScene" uid="uid://bsolopte6gbrd" path="res://Prefabs/audio_manager.tscn" id="6_3ltku"]
-[ext_resource type="Script" path="res://Scripts/Deck.gd" id="7_2v4lr"]
-[ext_resource type="Script" path="res://Scripts/UI.gd" id="8_apk3h"]
-[ext_resource type="Script" path="res://Scripts/DiscardPile.gd" id="8_hflr1"]
+[ext_resource type="Script" path="res://Scripts/Containers/Hand.gd" id="7_5nb6h"]
+[ext_resource type="Script" path="res://Scripts/Containers/WildCardContainer.gd" id="7_c150q"]
+[ext_resource type="Script" path="res://Scripts/Containers/Deck.gd" id="8_4o5i1"]
 [ext_resource type="PackedScene" uid="uid://8l8oyfxis17a" path="res://Prefabs/3d_ui.tscn" id="8_j2tmk"]
-[ext_resource type="Script" path="res://Scripts/ElementContainer.gd" id="11_7jfxn"]
+[ext_resource type="Script" path="res://Scripts/Containers/DiscardPile.gd" id="9_2ysjb"]
+[ext_resource type="Script" path="res://Scripts/Systems/AudioManager.gd" id="9_fl5jd"]
+[ext_resource type="Script" path="res://Scripts/Systems/UI.gd" id="10_t280a"]
+[ext_resource type="Texture2D" uid="uid://cfg674dl7pykd" path="res://Textures/dominoed.png" id="11_yg7ua"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_ee50a"]
 panorama = ExtResource("1_mtpok")
@@ -21,73 +27,122 @@ energy_multiplier = 0.5
 sky_material = SubResource("PanoramaSkyMaterial_ee50a")
 
 [sub_resource type="Environment" id="Environment_6w10b"]
-background_mode = 2
+background_mode = 1
+background_color = Color(0.588542, 0.588542, 0.588542, 1)
 sky = SubResource("Sky_g6oyx")
 adjustment_enabled = true
 adjustment_saturation = 1.23
 
-[sub_resource type="Curve" id="Curve_46ek5"]
+[sub_resource type="Curve" id="Curve_euog4"]
 min_value = -1.0
-_data = [Vector2(0, -1), 0.0, 2.0, 0, 1, Vector2(1, 1), 2.0, 0.0, 1, 0]
+_data = [Vector2(0, -1), 0.0, 2.12006, 0, 0, Vector2(1, 1), 2.10389, 0.0, 0, 0]
 point_count = 2
-metadata/_snap_enabled = true
+
+[sub_resource type="Curve3D" id="Curve3D_om68k"]
+bake_interval = 0.01
+_data = {
+"points": PackedVector3Array(-2.16871, -0.396748, 0, 2.16871, 0.396748, 0, -6.82264, -0.155601, 0, -3.67022, -0.030756, 0, 3.67022, 0.030756, 0, 0.0209794, 0.405179, 0, -2.70306, 0.508008, 0, 2.70306, -0.508008, 0, 7.47072, -0.184845, 0),
+"tilts": PackedFloat32Array(0, 0, 0)
+}
+point_count = 3
+
+[sub_resource type="Curve3D" id="Curve3D_g7n50"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, -0.463757, 0.0379553, 0, 0, 0, 0, 0, 0, 0, 5.28238, -0.0260401, -32.7938),
+"tilts": PackedFloat32Array(0, 0)
+}
+point_count = 2
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_d0xon"]
-viewport_path = NodePath("PlayArea/SubViewport")
+viewport_path = NodePath("Board/SubViewport")
 
 [node name="Scene Root" type="Node3D"]
 
-[node name="Card" parent="." node_paths=PackedStringArray("container") instance=ExtResource("1_xom6v")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23.4294, 12.4496, 0)
-script = ExtResource("2_8t1do")
-container = NodePath("../TestContainer")
+[node name="AssetManager" type="Node" parent="." groups=["MaterialManager"]]
+script = ExtResource("1_mdonh")
+cardPrefab = ExtResource("1_i50vu")
+white = ExtResource("3_oeeda")
+rainMan = ExtResource("3_1hp0x")
+even = ExtResource("5_ci61w")
+
+[node name="Backdrop" type="Sprite3D" parent="."]
+transform = Transform3D(3.13204, 0, 0, 0, 3.00034, 0, 0, 0, 1, -0.260437, -0.267242, -71.136)
+visible = false
+transparent = false
+texture = ExtResource("1_s76xi")
+
+[node name="Backdrop2" type="Sprite3D" parent="."]
+transform = Transform3D(1.47324, 0, 0, 0, 1.47324, 0, 0, 0, 1, -0.260437, -0.267242, -71.136)
+transparent = false
+texture = ExtResource("2_o2cic")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(0.782228, 0.0959681, -0.615556, 0.289535, 0.818873, 0.495597, 0.551624, -0.565894, 0.61276, 0.015358, 0.21002, 0.0521584)
-light_energy = 0.5
+transform = Transform3D(1, 0, 0, 0, 0.880477, 0.474088, 0, -0.474088, 0.880478, 0.015358, 0.21002, 0.0521584)
+light_indirect_energy = 0.0
+light_volumetric_fog_energy = 0.0
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_6w10b")
 
-[node name="Backdrop" type="Sprite3D" parent="."]
-transform = Transform3D(3.13204, 0, 0, 0, 2.81194, 0, 0, 0, 1, 0, 0, -27.5064)
-texture = ExtResource("1_s76xi")
-
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.005, 0, 5.80323)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.005, 0, 10)
+keep_aspect = 0
 projection = 1
 fov = 42.2
-size = 30.0
+size = 55.0
 near = 0.01
 far = 2000.0
 
-[node name="PlayArea" type="Node3D" parent="." groups=["PlayArea"]]
+[node name="Board" type="Node3D" parent="." groups=["Board"]]
 transform = Transform3D(0.999992, 0, 0, 0, 0.999994, 0, 0, 0, 0.999998, 0, 0, -1)
-script = ExtResource("4_ce05m")
+script = ExtResource("3_d6a45")
 
-[node name="SubViewport" type="SubViewport" parent="PlayArea"]
+[node name="SubViewport" type="SubViewport" parent="Board"]
 transparent_bg = true
 size = Vector2i(1920, 1080)
 
-[node name="3D UI" parent="PlayArea/SubViewport" instance=ExtResource("8_j2tmk")]
+[node name="3D UI" parent="Board/SubViewport" instance=ExtResource("8_j2tmk")]
 visible = false
 
-[node name="Hand" type="Node3D" parent="." groups=["Hand"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -12.9196, 0)
-script = ExtResource("2_sdeua")
-rotationCurve = SubResource("Curve_46ek5")
-maxTileCount = 7
-containerTileState = 2
+[node name="Hand" type="Node3D" parent="." node_paths=PackedStringArray("path3d") groups=["Hand"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00497627, -11.4391, 0)
+script = ExtResource("7_5nb6h")
+rotationCurve = SubResource("Curve_euog4")
+containerSize = 15
+defaultElementState = 2
+path3d = NodePath("Path3D")
 
-[node name="Deck" type="Node3D" parent="." groups=["Deck"]]
-script = ExtResource("7_2v4lr")
-containerTileState = 1
+[node name="Path3D" type="Path3D" parent="Hand"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0130796, 0.0130787, 0)
+curve = SubResource("Curve3D_om68k")
+
+[node name="WildCards" type="Node3D" parent="." node_paths=PackedStringArray("path3d") groups=["WildCards"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24.5488, 11.2584, 0)
+script = ExtResource("7_c150q")
+defaultElementState = 2
+path3d = NodePath("Path3D")
+
+[node name="Path3D" type="Path3D" parent="WildCards"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.686831, -0.0508766, 0)
+curve = SubResource("Curve3D_g7n50")
+
+[node name="Deck" type="Node3D" parent="." node_paths=PackedStringArray("path3d") groups=["Deck"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.4422, -11.8817, 0)
+script = ExtResource("8_4o5i1")
+defaultElementState = 1
+path3d = NodePath("Path3D")
+
+[node name="Path3D" type="Path3D" parent="Deck"]
+curve = SubResource("Curve3D_g7n50")
 
 [node name="DiscardPile" type="Node3D" parent="." groups=["DiscardPile"]]
-script = ExtResource("8_hflr1")
-containerTileState = 5
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0374146, -26.6153, 0)
+script = ExtResource("9_2ysjb")
+defaultElementState = 5
 
 [node name="AudioManager" parent="." instance=ExtResource("6_3ltku")]
+script = ExtResource("9_fl5jd")
+sound = null
 
 [node name="UI" type="Sprite3D" parent="."]
 transform = Transform3D(2.85178, 0, 0, 0, 2.85178, 0, 0, 0, 2, 0, 0, -9.55676)
@@ -101,17 +156,140 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-script = ExtResource("8_apk3h")
+script = ExtResource("10_t280a")
+
+[node name="CurrentScore" type="Panel" parent="User Interface"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.0213542
+anchor_top = 0.437963
+anchor_right = 0.128125
+anchor_bottom = 0.475926
+offset_right = -1.52588e-05
 metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="User Interface/CurrentScore"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.064
+offset_left = 5.0
+offset_top = 7.0
+offset_right = 87.88
+offset_bottom = 49.0
+text = "Current score:"
+
+[node name="Value" type="Label" parent="User Interface/CurrentScore"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.064
+offset_left = 119.0
+offset_top = 7.0
+offset_right = 201.88
+offset_bottom = 49.0
+text = "0"
+
+[node name="HandScore" type="Panel" parent="User Interface"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.0213542
+anchor_top = 0.482407
+anchor_right = 0.128125
+anchor_bottom = 0.52037
+offset_right = -1.52588e-05
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="User Interface/HandScore"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.064
+offset_left = 5.0
+offset_top = 7.0
+offset_right = 87.88
+offset_bottom = 49.0
+text = "Hand score:"
+
+[node name="Value" type="Label" parent="User Interface/HandScore"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.064
+offset_left = 103.0
+offset_top = 7.0
+offset_right = 185.88
+offset_bottom = 49.0
+text = "0"
+
+[node name="Multiplier" type="Panel" parent="User Interface"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.0213542
+anchor_top = 0.527778
+anchor_right = 0.128125
+anchor_bottom = 0.565741
+offset_right = -1.52588e-05
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="User Interface/Multiplier"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.064
+offset_left = 5.0
+offset_top = 7.0
+offset_right = 87.88
+offset_bottom = 49.0
+text = "Multiplier:"
+
+[node name="Value" type="Label" parent="User Interface/Multiplier"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.064
+offset_left = 89.0
+offset_top = 7.0
+offset_right = 171.88
+offset_bottom = 49.0
+text = "0"
+
+[node name="TargetScore" type="Panel" parent="User Interface"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.0213542
+anchor_top = 0.392593
+anchor_right = 0.128125
+anchor_bottom = 0.430556
+offset_right = -1.52588e-05
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="User Interface/TargetScore"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.064
+offset_left = 5.0
+offset_top = 7.0
+offset_right = 87.88
+offset_bottom = 49.0
+text = "Target score:"
+
+[node name="Value" type="Label" parent="User Interface/TargetScore"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.064
+offset_left = 109.0
+offset_top = 7.0
+offset_right = 191.88
+offset_bottom = 49.0
+text = "0"
 
 [node name="EdgeValueDisplay" type="Panel" parent="User Interface"]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.0208333
-anchor_top = 0.0324074
+anchor_top = 0.323148
 anchor_right = 0.127604
-anchor_bottom = 0.0703704
+anchor_bottom = 0.361111
 offset_right = -1.52588e-05
 metadata/_edit_use_anchors_ = true
 
@@ -135,48 +313,66 @@ offset_right = 182.88
 offset_bottom = 49.0
 text = "0"
 
-[node name="Draw Button" type="Button" parent="User Interface"]
+[node name="PlayRoundButton" type="Button" parent="User Interface"]
 unique_name_in_owner = true
+layout_mode = 2
+offset_left = 672.0
+offset_top = 1030.0
+offset_right = 764.0
+offset_bottom = 1061.0
+focus_mode = 0
+action_mode = 0
+text = "Play round"
+
+[node name="HSplitContainer" type="HSplitContainer" parent="User Interface"]
+custom_minimum_size = Vector2(200, 0)
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = 66.0
-offset_top = -39.0
-offset_right = 172.0
-offset_bottom = -8.0
+offset_left = -100.0
+offset_top = -50.0
+offset_right = 100.0
+offset_bottom = -19.0
 grow_horizontal = 2
 grow_vertical = 0
+split_offset = 100
+
+[node name="Draw Button" type="Button" parent="User Interface/HSplitContainer"]
+unique_name_in_owner = true
+layout_mode = 2
 focus_mode = 0
 action_mode = 0
 text = "Draw
 "
 
-[node name="Discard Button" type="Button" parent="User Interface"]
+[node name="Discard Button" type="Button" parent="User Interface/HSplitContainer"]
 unique_name_in_owner = true
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -53.0
-offset_top = -39.0
-offset_right = 53.0
-offset_bottom = -8.0
-grow_horizontal = 2
-grow_vertical = 0
+layout_mode = 2
 focus_mode = 0
 action_mode = 0
 text = "Discard
 "
 
-[node name="TestContainer" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.5568, 11.6709, 0)
-script = ExtResource("11_7jfxn")
-allowedElementTypes = 10
+[node name="Gamespeed" type="HSlider" parent="User Interface"]
+unique_name_in_owner = true
+layout_mode = 0
+anchor_right = 0.14375
+anchor_bottom = 0.0148148
+min_value = 0.2
+max_value = 4.0
+step = 0.1
+value = 1.0
+metadata/_edit_use_anchors_ = true
 
-[connection signal="pressed" from="User Interface/Draw Button" to="User Interface" method="drawButtonPressed"]
-[connection signal="pressed" from="User Interface/Discard Button" to="User Interface" method="discardButtonPressed"]
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0452271, 11.5576, 0)
+visible = false
+pixel_size = 0.015
+texture = ExtResource("11_yg7ua")
+
+[connection signal="pressed" from="User Interface/PlayRoundButton" to="User Interface" method="playRoundButtonPressed"]
+[connection signal="pressed" from="User Interface/HSplitContainer/Draw Button" to="User Interface" method="drawButtonPressed"]
+[connection signal="pressed" from="User Interface/HSplitContainer/Discard Button" to="User Interface" method="discardButtonPressed"]

@@ -1,9 +1,9 @@
 [gd_scene load_steps=7 format=4 uid="uid://d1j41otwjwlq2"]
 
 [ext_resource type="PackedScene" uid="uid://u864n4oghcda" path="res://Models/domino_model.fbx" id="1_ogel2"]
-[ext_resource type="Material" uid="uid://cu8ts8612vt8s" path="res://Materials/outline_material.tres" id="2_wcxvq"]
-[ext_resource type="Material" uid="uid://b6hf16xen332f" path="res://Materials/tile_material.tres" id="3_sf8j5"]
-[ext_resource type="Material" uid="uid://b7kvxm26fldna" path="res://Materials/gold.tres" id="4_10wsu"]
+[ext_resource type="Material" uid="uid://cu8ts8612vt8s" path="res://Materials/Outline.tres" id="2_wcxvq"]
+[ext_resource type="Material" path="res://Materials/tile_material.tres" id="3_sf8j5"]
+[ext_resource type="Material" uid="uid://b7kvxm26fldna" path="res://Materials/Gold.tres" id="4_10wsu"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_ptxxq"]
 _surfaces = [{

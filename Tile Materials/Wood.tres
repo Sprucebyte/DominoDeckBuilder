@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="TileMaterial" load_steps=4 format=3 uid="uid://0co6vl5nstki"]
+
+[ext_resource type="Material" uid="uid://dfvoywsi4ubhh" path="res://Materials/Wood.tres" id="1_e4v1i"]
+[ext_resource type="Script" path="res://TileMaterial.gd" id="1_mne64"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lsmst"]
+shading_mode = 0
+albedo_color = Color(0.213542, 0.143378, 0.0457589, 1)
+
+[resource]
+script = ExtResource("1_mne64")
+material = ExtResource("1_e4v1i")
+outlineMaterial = SubResource("StandardMaterial3D_lsmst")
+pipColor = Color(0.273438, 0.185781, 0.058051, 1)
