@@ -14,10 +14,13 @@ var totalScore = 0
 var roundScore = 0
 var handScore = 0
 var multiplier = 1
-var mousePos: Vector3# = get_viewport().get_camera_3d().project_position(get_viewport().get_mouse_position(), 100)
+var mousePos: Vector3
 var gameSpeedMultiplier = 1
 
 var money = 0
+
+
+
 
 func selectTile(tile):
 	selectedTiles.push_back(tile)
