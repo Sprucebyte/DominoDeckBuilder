@@ -2,11 +2,11 @@
 
 [ext_resource type="Script" path="res://Scripts/Wild Cards/Even.gd" id="1_1vl4g"]
 [ext_resource type="Script" path="res://Scripts/CardAsset.gd" id="1_6akl1"]
-[ext_resource type="Texture2D" uid="uid://btnom5boovca1" path="res://Textures/Cards/rain_man.png" id="3_sigrj"]
+[ext_resource type="Texture2D" uid="uid://bxxjsyg3igsm0" path="res://Textures/Cards/Wild Cards/Even.png" id="3_it3ne"]
 
 [resource]
 script = ExtResource("1_6akl1")
 code = ExtResource("1_1vl4g")
-texture = ExtResource("3_sigrj")
+texture = ExtResource("3_it3ne")
 name = "Even"
 description = "+2 mult for every even edge"

@@ -63,7 +63,7 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
-
+	#if (validState(States.inPack)): return
 	if (Input.is_action_just_pressed("click")):	
 		if (hovered):
 			holdAfterFrames = 0
@@ -114,6 +114,7 @@ func updatePosition(delta : float):
 	
 	
 	if validState(States.inHand):
+		#pass
 		idleAxis.rotation.x = (cos(t * .25 * idleSpeed + offset) * .2)
 		idleAxis.rotation.y = (cos(t * .5 *  idleSpeed + offset) * .2)
 		idleAxis.rotation.z = (cos(t * .5 *  idleSpeed + offset) * .1)

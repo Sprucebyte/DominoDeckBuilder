@@ -19,8 +19,17 @@ var gameSpeedMultiplier = 1
 
 var money = 0
 
+var handSize = 8
 
+var handCount = 4
+var discardCount = 4
 
+var round = 0
+var handsRemaining = handCount
+var discardsRemaining = discardCount
+
+enum GameStates {paused, shop, openingPack, waiting, playing, scoring, lost, won, roundOver}
+var gameState = GameStates.waiting
 
 func selectTile(tile):
 	selectedTiles.push_back(tile)

@@ -38,8 +38,10 @@ var bottomValue = 4
 var tileNode: TileNode = null
 
 func _ready() -> void:
+	targetPosition = global_position
 	var tileMaterial: TileMaterial = materials.pick_random()
-
+	faceDown = false
+	#pass
 	super()
 
 	if (tileMaterial != null):
@@ -53,8 +55,8 @@ func _ready() -> void:
 	
 
 func _process(delta: float) -> void:
-
-
+	#pass
+	
 	super(delta)
 	debug()
 	if (selected):
@@ -81,7 +83,7 @@ func getEdgeValue() -> float:
 	return tileNode.getEdgeValue()
 
 func updatePosition(delta : float):
-
+	
 	if dragged: return
 
 	if (faceDown):
@@ -93,7 +95,7 @@ func updatePosition(delta : float):
 	global_position = global_position.lerp(targetPosition + (Vector3.UP * .8 * ( 1 if (selected) else 0)), delta * moveSpeed * GameManager.gameSpeedMultiplier)
 	scale = scale.lerp(targetScale, delta * scaleSpeed * GameManager.gameSpeedMultiplier)
 	
-	
+	#if (validState(States.inPack)): return
 	if validStates([States.inHand, States.onBoard]) and not lockedIn:
 		idleAxis.rotation.x = (cos(t * .25 * idleSpeed + offset) * .2)
 		idleAxis.rotation.y = (cos(t * .5 *  idleSpeed + offset) * .2)
@@ -102,7 +104,7 @@ func updatePosition(delta : float):
 		idleAxis.rotation.x = lerp_angle(idleAxis.rotation.x, 0, 	delta*10*GameManager.gameSpeedMultiplier)
 		idleAxis.rotation.y = lerp_angle(idleAxis.rotation.y, 0, 	delta*10*GameManager.gameSpeedMultiplier)
 		idleAxis.rotation.z = lerp_angle(idleAxis.rotation.z, 0, 	delta*10*GameManager.gameSpeedMultiplier)		
-
+	
 	rotation.x = lerp_angle(rotation.x, deg_to_rad(targetRotation.x),delta*rotationSpeed*GameManager.gameSpeedMultiplier)
 	rotation.y = lerp_angle(rotation.y, deg_to_rad(targetRotation.y),delta*rotationSpeed*GameManager.gameSpeedMultiplier)
 	rotation.z = lerp_angle(rotation.z, deg_to_rad(targetRotation.z),delta*rotationSpeed*GameManager.gameSpeedMultiplier)
