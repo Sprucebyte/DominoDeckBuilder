@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://c1vubbps0wbru"]
+[gd_scene load_steps=31 format=3 uid="uid://c1vubbps0wbru"]
 
 [ext_resource type="PackedScene" uid="uid://dblxhm6glgeu3" path="res://Prefabs/card.tscn" id="1_i50vu"]
 [ext_resource type="Script" path="res://Scripts/AssetManager.gd" id="1_mdonh"]
@@ -22,7 +22,6 @@
 [ext_resource type="Script" path="res://Scripts/Systems/UI.gd" id="10_t280a"]
 [ext_resource type="Resource" uid="uid://ck0snmdf63842" path="res://Wild Card Assets/FullCoverage.tres" id="10_uytok"]
 [ext_resource type="Resource" uid="uid://yyt2bhp37od3" path="res://Wild Card Assets/EqualAndOpposite.tres" id="11_e5vw8"]
-[ext_resource type="Texture2D" uid="uid://cfg674dl7pykd" path="res://Textures/dominoed.png" id="11_yg7ua"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_ee50a"]
 panorama = ExtResource("1_mtpok")
@@ -371,12 +370,6 @@ max_value = 4.0
 step = 0.1
 value = 1.0
 metadata/_edit_use_anchors_ = true
-
-[node name="Sprite3D" type="Sprite3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0452271, 11.5576, 0)
-visible = false
-pixel_size = 0.015
-texture = ExtResource("11_yg7ua")
 
 [connection signal="pressed" from="User Interface/PlayRoundButton" to="User Interface" method="playRoundButtonPressed"]
 [connection signal="pressed" from="User Interface/HSplitContainer/Draw Button" to="User Interface" method="drawButtonPressed"]
