@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="CardAsset" load_steps=3 format=3 uid="uid://wldnflsdgvt5"]
+
+[ext_resource type="Script" path="res://Scripts/Wild Cards/Baby_steps.gd" id="1_ggajy"]
+[ext_resource type="Script" path="res://Scripts/CardAsset.gd" id="1_hiupr"]
+
+[resource]
+script = ExtResource("1_hiupr")
+code = ExtResource("1_ggajy")
+name = "Baby Steps"
+description = "+2 mult for each edge value lower than 4 "

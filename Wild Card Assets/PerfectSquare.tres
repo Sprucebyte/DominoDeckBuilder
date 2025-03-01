@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="CardAsset" load_steps=3 format=3 uid="uid://bwhta00c3jl4e"]
+
+[ext_resource type="Script" path="res://Scripts/CardAsset.gd" id="1_ng0vc"]
+[ext_resource type="Script" path="res://Scripts/Wild Cards/PerfectSquare.gd" id="1_su2mm"]
+
+[resource]
+script = ExtResource("1_ng0vc")
+code = ExtResource("1_su2mm")
+name = "Perfect Square"
+description = "+ N mult If total edge value is a perfect sqare, N is the length of the square"
