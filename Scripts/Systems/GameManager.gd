@@ -31,10 +31,6 @@ var chooseFrom = []
 enum GameStates {paused, shop, openingPack, waiting, playing, scoring, lost, won, roundOver}
 var gameState = GameStates.playing
 
-
-
-
-
 func selectTile(tile):
 	selectedTiles.push_back(tile)
 	updatePlacementSlots()
@@ -73,10 +69,11 @@ func playRound():
 	var lockInSpeed = 1
 	for tile: Tile in board.elements:
 		if (tile.lockedIn): continue
+		tile.lockIn(lockInSpeed * gameSpeedMultiplier)
 		await tile.lockIn(lockInSpeed * gameSpeedMultiplier)
-		await Util.delay(.1)
+		#await Util.delay(.1)
 		lockInSpeed *= 1.1
-	await get_tree().create_timer(.3/ gameSpeedMultiplier * lockInSpeed).timeout
+	await Util.delay(.3/ gameSpeedMultiplier * lockInSpeed)
 	Score.Instance.run()
 	
 	

@@ -66,6 +66,7 @@ shape = SubResource("BoxShape3D_2w5v6")
 
 [node name="Buttons" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.5662, -0.139305)
+visible = false
 
 [node name="SelectButton" parent="Buttons" node_paths=PackedStringArray("element") instance=ExtResource("7_3o3u0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.22279, 0)

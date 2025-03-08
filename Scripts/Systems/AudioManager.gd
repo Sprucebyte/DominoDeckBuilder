@@ -16,23 +16,30 @@ func _ready() -> void:
 	SignalBus.connect("OnTileSelected",audioSelected)
 	SignalBus.connect("OnTileDeselected",audioSelected)
 	SignalBus.connect("OnTileLockedIn",audioSelected)
-	SignalBus.connect("AddToScore",addToScore)
-	SignalBus.connect("MultiplyMult",multiplyMult)
+
+	#SignalBus.connect("AddToScore",addToScore)
+	#SignalBus.connect("AddToMult",addToMult)
+	#SignalBus.connect("MultiplyMult",multiplyMult)
+	
 	SignalBus.connect("OnWildCardActivated",multiplyMult)
+	SignalBus.AddToScore.connect(addToScore)
+	SignalBus.AddToMult.connect(addToMult)
+	SignalBus.MultiplyMult.connect(multiplyMult)
+	
 
 static func play(sound):
 	sound.play()
 
-func multiplyMult():
-	coin.play()
+func multiplyMult(amount):
+	domino1.play()
 	pass
 	
-func addToScore():
-	coin.play()
+func addToScore(amount):
+	domino1.play()
 	pass
 	
-func addToMult():
-	coin.play()
+func addToMult(amount):
+	domino1.play()
 	pass
 	
 func audioSelected(_val):

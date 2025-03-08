@@ -18,5 +18,4 @@ func activate() -> void:
 	var sqrt_value = sqrt(totalvalue)
 	if roundi(sqrt_value) * roundi(sqrt_value) == totalvalue:
 		SignalBus.AddToMult.emit(sqrt_value)
-		
-	pass
+	return

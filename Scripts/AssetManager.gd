@@ -56,11 +56,10 @@ func _ready():
 		wildCards[wildCardAsset.name] = createCard(wildCardAsset)
 
 
-	#print(tarotCards)
-	#for key in wildCards:
-	#	var value = wildCards[key]
-	#	add_child(value)
-	#	GameManager.wildCards.add(value)
+	for key in wildCards:
+		var value = wildCards[key]
+		add_child(value)
+		GameManager.wildCards.add(value)
 		
 	#for key in tarotCards:
 	#	var value = tarotCards[key]

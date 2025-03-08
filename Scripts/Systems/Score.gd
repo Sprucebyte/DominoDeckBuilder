@@ -5,7 +5,7 @@ var targetScore = 0
 var totalScore = 0
 var roundScore = 0
 var handScore = 0
-var multiplier = 0
+var multiplier = 1
 var money = 100
 
 static var Instance: Score
@@ -46,11 +46,11 @@ func multiplyMult(value):
 	multiplier *= value
 
 func run():	
-	calculateEdgeScore()
+	#calculateEdgeScore()
 	await Util.delay(0.5/ GameManager.gameSpeedMultiplier)
-	triggerEdgeTiles()
+	await triggerEdgeTiles()
 	await Util.delay(0.5/ GameManager.gameSpeedMultiplier)
-	triggerWildCards()
+	await triggerWildCards()
 	await Util.delay(0.5/ GameManager.gameSpeedMultiplier)
 	setCombinedScore()
 	
@@ -63,13 +63,14 @@ func triggerEdgeTiles():
 	for node: TileNode in GameManager.board.tileNodeTree.getEdgeNodes():
 		var tile = node.tile
 		var value = node.getEdgeValue()
-		var delay = .3 / GameManager.gameSpeedMultiplier / activateSpeed
-		await Util.delay(delay)
+		tile.shake()
 		ScoreLabel.Spawn(tile,"+" + str(value), Color.ROYAL_BLUE)
 		SignalBus.AddToScore.emit(value)
-		tile.shake()
+		var delay = .3 / GameManager.gameSpeedMultiplier / activateSpeed
+		await Util.delay(delay)
 		
 		activateSpeed *= 1.05
+	return
 		
 
 
@@ -78,9 +79,10 @@ func triggerWildCards():
 	for wildCard in GameManager.wildCards.elements:
 		await wildCard.activate()
 		await Util.delay(.3)
+	return
 
 func setCombinedScore():
-	GameManager.roundScore = GameManager.handScore * GameManager.multiplier
-	GameManager.multiplier = 1
-	GameManager.handScore = 0
+	roundScore = handScore * multiplier
+	multiplier = 1
+	handScore = 0
 	

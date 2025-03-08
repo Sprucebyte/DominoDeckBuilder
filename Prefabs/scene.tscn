@@ -1,4 +1,4 @@
-[gd_scene load_steps=54 format=3 uid="uid://c1vubbps0wbru"]
+[gd_scene load_steps=56 format=3 uid="uid://c1vubbps0wbru"]
 
 [ext_resource type="PackedScene" uid="uid://wutxuycqev1q" path="res://Prefabs/tile_placement_slot.tscn" id="1_7whan"]
 [ext_resource type="Script" path="res://Scripts/Systems/Score.gd" id="1_f3a7t"]
@@ -8,14 +8,17 @@
 [ext_resource type="Texture2D" uid="uid://b7ucqn60dim45" path="res://Textures/wood edge 2.png" id="2_5e5i0"]
 [ext_resource type="Texture2D" uid="uid://cr8x4kt8ws6jn" path="res://Textures/background 1.png" id="2_o2cic"]
 [ext_resource type="Script" path="res://Scripts/Containers/Board.gd" id="3_d6a45"]
+[ext_resource type="Script" path="res://Scripts/Systems/AudioManager.gd" id="3_fevv1"]
 [ext_resource type="PackedScene" uid="uid://c6ycpsvucpten" path="res://Prefabs/score_label.tscn" id="3_ntvtt"]
 [ext_resource type="Resource" uid="uid://c2nf0n0caanvw" path="res://Tile Materials/White.tres" id="3_oeeda"]
+[ext_resource type="AudioStream" uid="uid://c8w7hfh4vrt60" path="res://Audio/Coins in Sack Dropped on Soft Surface.wav" id="4_65qr4"]
 [ext_resource type="Resource" uid="uid://bsxvsy3663lno" path="res://Tile Materials/Black.tres" id="4_ud0li"]
+[ext_resource type="AudioStream" uid="uid://b0wbtomuuvjhg" path="res://Audio/Dominoes/domino_11.mp3" id="5_7v3u3"]
 [ext_resource type="Resource" uid="uid://0cl48ukg5jx5" path="res://Wild Card Assets/Even.tres" id="5_ci61w"]
 [ext_resource type="Resource" uid="uid://cmp0bkpihitny" path="res://Tarot Card Assets/The World.tres" id="5_gkal6"]
 [ext_resource type="Resource" uid="uid://0co6vl5nstki" path="res://Tile Materials/Wood.tres" id="5_k3884"]
 [ext_resource type="Resource" uid="uid://dv1mn43og8h1u" path="res://Tarot Card Assets/Wheel Of Fortune.tres" id="6_2y26n"]
-[ext_resource type="PackedScene" uid="uid://bsolopte6gbrd" path="res://Prefabs/audio_manager.tscn" id="6_3ltku"]
+[ext_resource type="AudioStream" uid="uid://c1dsn1xou675i" path="res://Audio/Dominoes/domino_12.mp3" id="6_5iou5"]
 [ext_resource type="Resource" uid="uid://chfy7yrvmfwj3" path="res://Tile Materials/Gold.tres" id="6_l2eui"]
 [ext_resource type="Resource" uid="uid://f4evcfcidv6p" path="res://Wild Card Assets/Odd.tres" id="6_va8nl"]
 [ext_resource type="PackedScene" uid="uid://dli3f2y42248e" path="res://Prefabs/tile.tscn" id="7_5c5ie"]
@@ -30,7 +33,6 @@
 [ext_resource type="Resource" uid="uid://b0q5pcvskl5sq" path="res://Tarot Card Assets/The Hermit.tres" id="10_ar10s"]
 [ext_resource type="PackedScene" uid="uid://b8sxlx0vdd8eb" path="res://Prefabs/price_tag.tscn" id="10_owik7"]
 [ext_resource type="Script" path="res://Scripts/Systems/UI.gd" id="10_t280a"]
-[ext_resource type="Resource" uid="uid://ck0snmdf63842" path="res://Wild Card Assets/FullCoverage.tres" id="10_uytok"]
 [ext_resource type="Resource" uid="uid://dde8yj61c61dx" path="res://Tarot Card Assets/Justice.tres" id="11_ankui"]
 [ext_resource type="Resource" uid="uid://dt5v54srgeoj5" path="res://Tarot Card Assets/The Chariot.tres" id="12_p1yxy"]
 [ext_resource type="Resource" uid="uid://cdy547ap5kqvs" path="res://Tarot Card Assets/Temperance.tres" id="13_jhuo7"]
@@ -74,7 +76,7 @@ point_count = 2
 
 [sub_resource type="Curve3D" id="Curve3D_g7n50"]
 _data = {
-"points": PackedVector3Array(0, 0, 0, 0, 0, 0, -0.463757, 0.0379553, 0, 0, 0, 0, 0, 0, 0, 22.2918, -0.0260401, -32.7938),
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, -0.988436, 0.0379553, 0, 0, 0, 0, 0, 0, 0, 29.039, -0.0260401, -27.1846),
 "tilts": PackedFloat32Array(0, 0)
 }
 point_count = 2
@@ -135,7 +137,18 @@ texture = ExtResource("2_5e5i0")
 [node name="Score" type="Node" parent="."]
 script = ExtResource("1_f3a7t")
 
-[node name="AudioManager" parent="." instance=ExtResource("6_3ltku")]
+[node name="AudioManager" type="Node" parent="."]
+script = ExtResource("3_fevv1")
+
+[node name="Coin" type="AudioStreamPlayer" parent="AudioManager"]
+stream = ExtResource("4_65qr4")
+
+[node name="Domino 1" type="AudioStreamPlayer" parent="AudioManager"]
+stream = ExtResource("5_7v3u3")
+
+[node name="Domino 2" type="AudioStreamPlayer" parent="AudioManager"]
+stream = ExtResource("6_5iou5")
+volume_db = -10.321
 
 [node name="AssetManager" type="Node" parent="." groups=["MaterialManager"]]
 script = ExtResource("1_mdonh")
@@ -151,7 +164,7 @@ black = ExtResource("4_ud0li")
 wood = ExtResource("5_k3884")
 gold = ExtResource("6_l2eui")
 tarotCardAssets = Array[ExtResource("7_gc8a2")]([ExtResource("5_gkal6"), ExtResource("6_2y26n"), ExtResource("9_qvunr"), ExtResource("8_0nk7v"), ExtResource("7_ugmgk"), ExtResource("10_ar10s"), ExtResource("11_ankui"), ExtResource("12_p1yxy"), ExtResource("13_jhuo7"), ExtResource("14_m8ga2")])
-wildCardAssets = Array[ExtResource("7_gc8a2")]([ExtResource("5_ci61w"), ExtResource("10_uytok"), ExtResource("6_va8nl")])
+wildCardAssets = Array[ExtResource("7_gc8a2")]([ExtResource("6_va8nl"), ExtResource("5_ci61w")])
 
 [node name="User Interface" type="Control" parent="."]
 layout_mode = 3

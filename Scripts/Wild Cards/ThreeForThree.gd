@@ -13,4 +13,4 @@ func activate() -> void:
 		tile.shake()
 		ScoreLabel.Spawn(tile,"+" + str(3) + "x", Color.RED)
 		activateSpeed *= 1.05
-	pass
+	return
