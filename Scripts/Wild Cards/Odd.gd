@@ -11,6 +11,9 @@ func activate() -> void:
 		SignalBus.AddToMult.emit(3)
 		tile.shake()
 		ScoreLabel.Spawn(tile,"+" + str(3) + "x", Color.RED)
+		#ScoreParticle.Spawn(tile,"+" + str(value), Color.RED)
 		activateSpeed *= 1.05
 		shakerActivate.play_shake()
-	pass
+		
+		
+	return

@@ -27,16 +27,22 @@ var discardCount = 4
 var round = 0
 var handsRemaining = handCount
 var discardsRemaining = discardCount
-
+var chooseFrom = []
 enum GameStates {paused, shop, openingPack, waiting, playing, scoring, lost, won, roundOver}
-var gameState = GameStates.waiting
+var gameState = GameStates.playing
+
+
+
+
 
 func selectTile(tile):
 	selectedTiles.push_back(tile)
+	updatePlacementSlots()
 	pass
 
 func deselectTile(tile):
 	selectedTiles.erase(tile)
+	updatePlacementSlots()
 	pass
 
 
@@ -52,90 +58,76 @@ func _ready() -> void:
 	wildCards = get_tree().get_first_node_in_group("WildCards")
 	
 	SignalBus.connect("OnTileSelected",selectTile)
-	SignalBus.connect("OnTileDeselected"	,deselectTile)
+	SignalBus.connect("OnTileDeselected",deselectTile)
 	SignalBus.connect("PlayRound", playRound)
+	SignalBus.connect("OnTileRemoved", onTileRemoved)
 
-	SignalBus.connect("AddToScore",addToScore)
-	SignalBus.connect("MultiplyScore",multiplyScore)
 
-	SignalBus.connect("AddToMult",addToMult)
-	SignalBus.connect("MultiplyMult",multiplyMult)
+func onTileRemoved(tile):
+	updatePlacementSlots()
 	pass
-
-
-func addToScore(value) -> void:
-	handScore += value
-	print("Add to score")
-	pass
-
-func multiplyScore(value) -> void:
-	handScore *= value
-	print("Multiply score")
-	pass
-
-func addToMult(value) -> void:
-	multiplier += value
-	print("Add to mult")
-	pass
-
-func multiplyMult(value) -> void:
-	multiplier *= value
-	print("Multiply mult")
-	pass
-
-
-
 
 
 func playRound():
-	#await get_tree().create_timer(5).timeout
+	if gameState != GameStates.playing: return
+	var lockInSpeed = 1
 	for tile: Tile in board.elements:
-		#
 		if (tile.lockedIn): continue
-		tile.lockIn()
-		#await get_tree().create_timer(.01/ gameSpeedMultiplier).timeout
-	await get_tree().create_timer(.3/ gameSpeedMultiplier).timeout
-	runScoring()
+		await tile.lockIn(lockInSpeed * gameSpeedMultiplier)
+		await Util.delay(.1)
+		lockInSpeed *= 1.1
+	await get_tree().create_timer(.3/ gameSpeedMultiplier * lockInSpeed).timeout
+	Score.Instance.run()
+	
 	
 
-func runScoring():
-	
-	SignalBus.AddToScore.emit(board.tileNodeTree.getEdgeValue())
-	var activateSpeed = 1
-	for node: TileNode in board.tileNodeTree.getEdgeNodes():
-		var tile = node.tile
-		var value = node.getEdgeValue()
-		await get_tree().create_timer(.2/ gameSpeedMultiplier / activateSpeed).timeout
-		SignalBus.AddToScore.emit(value)
-		tile.shake()
-		ScoreLabel.Spawn(tile,"+" + str(value), Color.ROYAL_BLUE)
-		activateSpeed *= 1.05
 
 
-	await get_tree().create_timer(.3/ gameSpeedMultiplier).timeout
 	
-	for wildCard in wildCards.elements:
-		await wildCard.activate()
-		await get_tree().create_timer(.3).timeout
-
-	
-	roundScore = handScore * multiplier
-	multiplier = 1
-	handScore = 0
-	pass
-	
-		
 
 func _process(_delta: float) -> void:
 	mousePos = get_viewport().get_camera_3d().project_position(get_viewport().get_mouse_position(), 100)
 	#for element in board.elements:
+
+	if (Input.is_action_just_pressed("fullscreen")):
+		if (DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_WINDOWED):
+			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
+		else:
+			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
+		pass
+
+
 	if (Input.is_key_pressed(KEY_5)):
 		sortByDistance(board.elements)
 		if (board.size() > 0):
 			print(str(board.elements[0].topValue))
 			#board.elements[0].targetScale = Vector3.ONE * 1.5
 
-
-
-	
 	pass
+
+ 
+var placementSlots = []
+
+func updatePlacementSlots():
+	clearPlacementSlots()
+	if (board.size() > 0):
+		if (selectedTiles.size() == 1):
+			for tileSlot in board.tileNodeTree.getValidSlots(board.tileNodeTree.rootNode):
+				var placementSlot = TilePlacementSlot.Spawn()
+				var newTile = selectedTiles[0]
+				var newTileSide = GameManager.board.chooseTileSide(newTile, tileSlot)
+				var offsetAndDirection = GameManager.board.getTileOffsetAndDirection(tileSlot.node,newTile,tileSlot.side,newTileSide)
+				placementSlot.tileSlot = tileSlot
+				placementSlot.tile = newTile
+				placementSlot.side = newTileSide
+				placementSlot.offsetAndDirection = offsetAndDirection
+				placementSlot.position = tileSlot.tile.global_position + offsetAndDirection.offset;
+				placementSlot.setDirection(offsetAndDirection.direction)
+				placementSlots.append(placementSlot)
+				
+				
+
+func clearPlacementSlots():
+	for placementSlot in placementSlots:
+		placementSlot.Destroy()
+	placementSlots.clear()

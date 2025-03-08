@@ -9,10 +9,39 @@ class_name Hand
 #func onAdded()
 #func onRemoved()
 
+var hidden = false
+var targetPosition = Vector3.ZERO
+var homePosition = Vector3.ZERO
+func open():
+	hidden = false
+	targetPosition = homePosition
+	
+
+func close():
+	hidden = true
+	targetPosition = homePosition + Vector3.DOWN * 10
+	
+
+
 func _ready() -> void:
+	homePosition = position
+	targetPosition = homePosition
 	SignalBus.connect("DrawToHand",drawFromDeck)
 	SignalBus.connect("DiscardFromHand",discardTiles)
 	pass
+
+
+func _process(delta: float) -> void:
+
+
+	if (Input.is_key_pressed(KEY_K)):
+		open()
+	if (Input.is_key_pressed(KEY_L)):
+		close()
+
+	position = position.lerp(targetPosition,delta*40)
+
+	setElementPositions()
 
 
 func discardTile(tile):
@@ -59,22 +88,4 @@ func sortByTotalValue(ascending = true):
 		elements.sort_custom(func(a:Tile,b:Tile): return (a.bottomValue+a.topValue > b.bottomValue+b.topValue))
 	pass
 
-func _process(_delta: float) -> void:
 
-	if (Input.is_key_pressed(KEY_1)):
-		sortByTopValue()
-	if (Input.is_key_pressed(KEY_2)):
-		sortByBottomValue()
-	if (Input.is_key_pressed(KEY_3)):
-		sortByTotalValue()
-
-
-	setElementPositions()
-	#for i:float in size():
-	#	var ratio = i / (size())
-	#	var sample = rotationCurve.sample(ratio)
-	#	var angle = sample * -5
-	#	
-	#	elements[i].targetRotation = Vector3(0,0,angle)
-	#	elements[i].targetPosition = position + Vector3(sample * 8 + .5, 0 , 0)
-	pass

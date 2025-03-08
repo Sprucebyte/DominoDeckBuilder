@@ -19,13 +19,9 @@ class_name Tile
 @onready var directionText = %DirectionText
 @onready var tilenameText = %LabelTilename
 
-@export var prefabTest: Resource
-
 @onready var mesh: MeshInstance3D = %Mesh
 var material: Material
 var pipColor: Color
-
-@export var materials: Array[TileMaterial]
 
 
 #var played = false
@@ -39,7 +35,7 @@ var tileNode: TileNode = null
 
 func _ready() -> void:
 	targetPosition = global_position
-	var tileMaterial: TileMaterial = materials.pick_random()
+	var tileMaterial: TileMaterial = AssetManager.Instance.materials.pick_random()
 	faceDown = false
 	#pass
 	super()
@@ -51,51 +47,41 @@ func _ready() -> void:
 		spriteDivider.modulate = pipColor	
 		mesh.set_surface_override_material(1,tileMaterial.material)
 		mesh.set_surface_override_material(0,tileMaterial.outlineMaterial)
-	pass
 	
+func randomize():
+	topValue = randi_range(0,6)
+	bottomValue = randi_range(0,6)	
 
-func _process(delta: float) -> void:
-	#pass
 	
-	super(delta)
-	debug()
-	if (selected):
-		if (Input.is_physical_key_pressed(KEY_ENTER)):
-			faceDown = !faceDown
-		
+func updateNumbers():
 	spriteTop.texture = sprites[min(topValue,sprites.size()-1)]
 	spriteBottom.texture = sprites[min(bottomValue,sprites.size()-1)]
 
 
-
+func _process(delta: float) -> void:
+	super(delta)
+	updateNumbers()
+	if GameManager.gameState != GameManager.GameStates.playing: return
 	if (hovered):
-		if (Input.is_action_just_pressed("right_click")):
+		if (Input.is_action_just_pressed("click")):
 			if not lockedIn:
 				if validState(States.onBoard):
-					if tileNode.isEdgeNode():
-						GameManager.board.moveOneElement(self, GameManager.hand)
-						GameManager.board.tileNodeTree.removeNode(tileNode)
+					if tileNode != null:
+						if tileNode.isEdgeNode():
+							GameManager.board.moveOneElement(self, GameManager.hand)
+							GameManager.board.tileNodeTree.removeNode(tileNode)
+							SignalBus.emit_signal("OnTileRemoved",self)
 						
-
+						
 
 
 func getEdgeValue() -> float:
 	return tileNode.getEdgeValue()
 
-func updatePosition(delta : float):
-	
-	if dragged: return
 
-	if (faceDown):
-		flipAxis.rotation.y = lerp_angle(flipAxis.rotation.y, deg_to_rad(180), delta*flipSpeed*GameManager.gameSpeedMultiplier)
-	else:
-		flipAxis.rotation.y = lerp_angle(flipAxis.rotation.y, 0, delta*flipSpeed*GameManager.gameSpeedMultiplier)
-	
-	t += delta
-	global_position = global_position.lerp(targetPosition + (Vector3.UP * .8 * ( 1 if (selected) else 0)), delta * moveSpeed * GameManager.gameSpeedMultiplier)
-	scale = scale.lerp(targetScale, delta * scaleSpeed * GameManager.gameSpeedMultiplier)
-	
-	#if (validState(States.inPack)): return
+
+
+func updateIdleAnimation(delta):
 	if validStates([States.inHand, States.onBoard]) and not lockedIn:
 		idleAxis.rotation.x = (cos(t * .25 * idleSpeed + offset) * .2)
 		idleAxis.rotation.y = (cos(t * .5 *  idleSpeed + offset) * .2)
@@ -103,13 +89,7 @@ func updatePosition(delta : float):
 	else:
 		idleAxis.rotation.x = lerp_angle(idleAxis.rotation.x, 0, 	delta*10*GameManager.gameSpeedMultiplier)
 		idleAxis.rotation.y = lerp_angle(idleAxis.rotation.y, 0, 	delta*10*GameManager.gameSpeedMultiplier)
-		idleAxis.rotation.z = lerp_angle(idleAxis.rotation.z, 0, 	delta*10*GameManager.gameSpeedMultiplier)		
-	
-	rotation.x = lerp_angle(rotation.x, deg_to_rad(targetRotation.x),delta*rotationSpeed*GameManager.gameSpeedMultiplier)
-	rotation.y = lerp_angle(rotation.y, deg_to_rad(targetRotation.y),delta*rotationSpeed*GameManager.gameSpeedMultiplier)
-	rotation.z = lerp_angle(rotation.z, deg_to_rad(targetRotation.z),delta*rotationSpeed*GameManager.gameSpeedMultiplier)
-	
-
+		idleAxis.rotation.z = lerp_angle(idleAxis.rotation.z, 0, 	delta*10*GameManager.gameSpeedMultiplier)
 
 
 
@@ -182,7 +162,7 @@ func playFrom():
 func clicked():
 	if validState(States.onBoard):
 		playFrom();
-	else: if validState(States.inHand):
+	else: if validStates([States.inHand,States.inShop,States.inDeck]):
 		if not (selected):
 			select()
 		else:
@@ -191,11 +171,13 @@ func clicked():
 	pass
 
 func select():
-	if not validState(States.inHand): return
+	#if not validState(States.inHand): return
 	selected = true
-	#SignalBus.emit_signal("OnTileSelected", self)
 	SignalBus.OnTileSelected.emit(self)
 	shakerSelect.play_shake()
+
+	
+
 	pass
 
 func deselect():
@@ -211,27 +193,36 @@ func hover():
 	pass
 
 func unhover():
+	
 	SignalBus.emit_signal("OnTileUnhovered", self)
 	targetScale = Vector3.ONE
 	hovered = false
 	pass
 
 func activate():
-
 	await get_tree().create_timer(.5/ GameManager.gameSpeedMultiplier).timeout
 	print("activated!")
 	SignalBus.emit_signal("OnTileActivated", self)
 	shake()
 	pass
 
-func shake():
-
-	#add_child(scoreLabel)
+func shake(shaker: ShakerComponent3D = shakerActivate, speed = 1):
 	SignalBus.OnTileScored.emit(self)
-	shakerActivate.play_shake()	
+	shaker.play_shake()	
+	shaker.shake_speed = shaker.shake_speed * speed
+	await Util.shakerDone(shaker)
+	return
 
-func lockIn():
-	#SignalBus.emit_signal("OnTileLockedIn", self)
 
-	shake()
+
+func lockIn(lockInSpeed = 1):
+	targetPosition.z = 2
+	position.z = 2
+	AudioManager.play(AudioManager.Instance.domino1)
 	lockedIn = true
+	await shake(shakerActivate,lockInSpeed)
+	AudioManager.play(AudioManager.Instance.domino1)
+	position.z = 0
+	targetPosition.z = 0
+	#SignalBus.emit_signal("OnTileLockedIn", self)
+	

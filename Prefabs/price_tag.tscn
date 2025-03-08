@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://b8sxlx0vdd8eb"]
+
+[ext_resource type="Texture2D" uid="uid://6gyl73uv0qou" path="res://Textures/pricetag.png" id="1_jmsk8"]
+
+[node name="Price Tag" type="Node3D"]
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+texture = ExtResource("1_jmsk8")
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.085083)
+render_priority = 70
+outline_render_priority = 39
+text = "$5"
+font_size = 232
+outline_size = 62

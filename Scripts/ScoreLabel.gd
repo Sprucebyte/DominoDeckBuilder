@@ -9,12 +9,13 @@ var speed = 0.7
 
 
 static func Spawn(fromTile: Tile, text: String, color: Color) -> ScoreLabel:
-	var scoreLabel: ScoreLabel = fromTile.prefabTest.instantiate()
+	var scoreLabel: ScoreLabel = AssetManager.Instance.scoreLabel.instantiate()
 	GameManager.get_tree().root.add_child(scoreLabel)
 	scoreLabel.setColor(color)
 	scoreLabel.setText(text)
 	scoreLabel.global_position = Vector3(fromTile.global_position.x, fromTile.global_position.y + .5, fromTile.global_position.z)
 	return scoreLabel
+
 	
 
 

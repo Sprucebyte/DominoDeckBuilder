@@ -1,3 +1,10 @@
 [gd_resource type="SystemFont" format=3 uid="uid://ry8cbr4i1744"]
 
 [resource]
+font_names = PackedStringArray("Caladea")
+font_weight = 800
+generate_mipmaps = true
+disable_embedded_bitmaps = false
+hinting = 0
+multichannel_signed_distance_field = true
+oversampling = 0.5

@@ -1,0 +1,54 @@
+[gd_scene load_steps=2 format=3 uid="uid://bapp8fpfr8gdr"]
+
+[ext_resource type="Texture2D" uid="uid://dparqcrydtykg" path="res://Textures/Cards/Card Base.png" id="1_qr3of"]
+
+[node name="Descrption Box" type="Node3D"]
+
+[node name="Title" type="Label3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.65377, 0)
+pixel_size = 0.01
+render_priority = 1
+text = "Double or nothing"
+font_size = 74
+outline_size = 25
+
+[node name="Rarity" type="Label3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.56118, 0)
+pixel_size = 0.01
+alpha_antialiasing_mode = 1
+alpha_antialiasing_edge = 0.5
+render_priority = 1
+modulate = Color(0.963542, 0.0492448, 0, 1)
+text = "RARE"
+font_size = 61
+
+[node name="Description" type="Label3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0108016, 1.95413, 0)
+double_sided = false
+alpha_scissor_threshold = 0.517
+alpha_hash_scale = 0.0
+alpha_antialiasing_mode = 1
+alpha_antialiasing_edge = 1.0
+texture_filter = 5
+render_priority = 1
+text = "This is a description of what the card does. How it does it, when it does it, what it does it to, and why it does it
+or something idk f f f f f f f f f
+
+more text
+yay"
+font_size = 84
+outline_size = 30
+vertical_alignment = 0
+autowrap_mode = 2
+width = 1200.0
+
+[node name="Sprite" type="Sprite3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(-7.84349e-08, 1.76677, 0, -1.79438, -7.7228e-08, 0, 0, 0, 1, 0, 0.0401139, 0)
+visible = false
+modulate = Color(0, 0, 0, 1)
+pixel_size = 0.0025
+texture = ExtResource("1_qr3of")

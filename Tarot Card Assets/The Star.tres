@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="CardAsset" load_steps=3 format=3 uid="uid://cyjykaxm37r4t"]
+
+[ext_resource type="Script" path="res://Scripts/CardAsset.gd" id="1_4g33d"]
+[ext_resource type="Script" path="res://Scripts/Elements/Tarot Cards/TarotCard.gd" id="1_vjrc1"]
+
+[resource]
+script = ExtResource("1_4g33d")
+code = ExtResource("1_vjrc1")
+name = "The Fool"
+description = ""

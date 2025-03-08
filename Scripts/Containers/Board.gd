@@ -24,6 +24,12 @@ func playFrom(tileToPlayFrom):
 	tileSide = chooseTileSide(tile, chosenSlot)
 	addTile(tile, chosenSlot.node, tileSide, chosenSlot.side)
 	
+func playTileToSlot(tile: Tile, slot: TileSlot, side):
+	if not tile.state == Tile.States.inHand: return
+	addTile(tile, slot.node, side, slot.side)
+
+
+
 	
 func chooseTileSide(tile, chosenSlot):
 	var tileSide
@@ -40,6 +46,12 @@ func chooseTileSide(tile, chosenSlot):
 
 	
 func _process(_delta: float) -> void:
+
+	if (Input.is_key_pressed(KEY_UP)):
+		scale *= 1.05
+	if (Input.is_key_pressed(KEY_DOWN)):
+		scale *= 0.95
+
 	if (GameManager.selectedTiles.size() == 1):
 		var tile = GameManager.selectedTiles[0]
 		validSlots = tileNodeTree.getValidSlots(tileNodeTree.rootNode,tile)	

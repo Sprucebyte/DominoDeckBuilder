@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="CardAsset" load_steps=2 format=3 uid="uid://d2hj5bi4bm0r5"]
+
+[ext_resource type="Script" path="res://Scripts/CardAsset.gd" id="1_y7ruh"]
+
+[resource]
+script = ExtResource("1_y7ruh")
+name = "The Fool"
+description = ""

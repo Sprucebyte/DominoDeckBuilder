@@ -7,15 +7,30 @@ extends Node
 @onready var targetScore = %TargetScore/Value
 @onready var multiplier = %Multiplier/Value
 @onready var gamespeed = %Gamespeed
+@onready var money = %Money/Value
 @onready var playRoundButton = %PlayRoundButton
 
 
 func _process(delta):
-	currentScore.text = str(GameManager.roundScore)
-	handScore.text = str(GameManager.handScore)
-	multiplier.text = str(GameManager.multiplier)
+	currentScore.text = str(Score.Instance.roundScore)
+	handScore.text = str(Score.Instance.handScore)
+	multiplier.text = str(Score.Instance.multiplier)
+	money.text = "$" + str(Score.Instance.money) 
 	GameManager.gameSpeedMultiplier = gamespeed.value
 	pass
+
+
+
+
+
+func sortByTotalValue():
+	GameManager.hand.sortByTotalValue()
+
+func sortByBottomValue():
+	GameManager.hand.sortByBottomValue()
+
+func sortByTopValue():
+	GameManager.hand.sortByTopValue()
 
 
 

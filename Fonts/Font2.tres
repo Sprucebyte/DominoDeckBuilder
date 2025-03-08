@@ -1,0 +1,9 @@
+[gd_resource type="SystemFont" format=3 uid="uid://vqeaognl1rsw"]
+
+[resource]
+font_names = PackedStringArray("Caladea")
+font_weight = 800
+disable_embedded_bitmaps = false
+allow_system_fallback = false
+hinting = 0
+oversampling = 1.0

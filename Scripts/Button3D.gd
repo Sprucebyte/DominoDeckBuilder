@@ -1,0 +1,92 @@
+extends Node3D
+class_name Button3D
+	
+@onready var label: Label3D = $"%Text"
+@onready var sprite: Sprite3D = $"%Sprite"
+@export var element: Element
+var hovered = false
+@export var text = ""
+@export var color: Color
+enum ButtonTypes {Buy, Select, Sell, Use}
+@export var type: ButtonTypes = ButtonTypes.Buy
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	sprite.modulate = color
+	label.text = text
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	if hovered:
+		if Input.is_action_just_pressed("click"):
+			SignalBus.OnButtonPressed.emit(self)
+			print("clicked on button")
+			click()
+		scale = scale.lerp(Vector3.ONE * 1.1, delta*10)
+	else:
+		scale = scale.lerp(Vector3.ONE, delta*10)		
+	pass
+
+func click():
+	if type == ButtonTypes.Select:
+		select()
+	if type == ButtonTypes.Buy:
+		buy()
+	if type == ButtonTypes.Sell:
+		sell()
+		#buy()	
+	pass
+
+
+func sell():
+	if element == null: return
+	if element.container == null: return
+	if (element.state == Element.States.inWildcards or element.state == Element.States.inConsumables):
+		element.container.destroy(element)
+		SignalBus.AddMoney.emit(element.sellValue)
+
+func buy():
+	if Score.Instance.money < element.buyValue: 
+		SignalBus.CantAfford.emit(element)
+		return
+
+	if element == null: return
+	if element.state != Element.States.inShop: return
+
+	SignalBus.BuyElement.emit(element)
+	SignalBus.UseMoney.emit(element.buyValue)
+	
+
+
+	if element is Pack:
+		element.open()
+	else:
+		moveElement(element)
+		#element.container.moveOneElement
+	#moveElement(element)
+
+func select():
+	if element == null: return
+	if element.state != Element.States.inPack: return
+	moveElement(element)
+	if element.pack != null:
+		element.pack.leftToChoose -= 1 
+	pass
+
+
+func moveElement(element):
+	if element is TarotCard:
+		element.container.moveOneElement(element,ConsumablesContainer.Instance)
+	elif element is WildCard:
+		element.container.moveOneElement(element, GameManager.wildCards)
+	elif element is Tile:
+		element.container.moveOneElement(element, GameManager.deck)	
+
+
+func _on_area_3d_mouse_entered() -> void:
+	hovered = true
+func _on_area_3d_mouse_exited() -> void:
+	hovered = false

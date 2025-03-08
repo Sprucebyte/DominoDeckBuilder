@@ -1,14 +1,15 @@
-[gd_scene load_steps=8 format=3 uid="uid://dblxhm6glgeu3"]
+[gd_scene load_steps=9 format=3 uid="uid://dblxhm6glgeu3"]
 
 [ext_resource type="Script" path="res://Scripts/Elements/Card.gd" id="1_6jdnb"]
 [ext_resource type="Texture2D" uid="uid://6pjbsp5ytqvr" path="res://Textures/card.png" id="1_wew3m"]
 [ext_resource type="Texture2D" uid="uid://dt24fv66cinnv" path="res://Textures/card_back.png" id="3_iypw1"]
 [ext_resource type="Script" path="res://addons/shaker/src/Vector3/shaker_component3D.gd" id="4_hwyiw"]
-[ext_resource type="Resource" uid="uid://2iignwymlhcw" path="res://Shaker/Presets/activate.tres" id="5_fwxva"]
-[ext_resource type="Texture2D" uid="uid://br3kyo6buocih" path="res://Textures/Cards/Wild Cards/Prime.png" id="6_1i1wg"]
+[ext_resource type="Resource" uid="uid://d0l6bwdbqor8s" path="res://Shaker/Presets/activate2.tres" id="5_6mx1n"]
+[ext_resource type="Texture2D" uid="uid://bqybxwx5w1b7a" path="res://Textures/Cards/Tarot Cards/The Hermit.png" id="6_ejcbw"]
+[ext_resource type="PackedScene" uid="uid://dpsjx31un88cy" path="res://Prefabs/button.tscn" id="7_3o3u0"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_2w5v6"]
-size = Vector3(2.83098, 4.5664, 0.150208)
+size = Vector3(3.70359, 5.95459, 0.150208)
 
 [node name="Card" type="Node3D"]
 script = ExtResource("1_6jdnb")
@@ -16,43 +17,75 @@ textureFront = ExtResource("1_wew3m")
 textureBack = ExtResource("3_iypw1")
 selectableInStates = 4
 hoverableInStates = 4
-state = 2
+state = 7
 
 [node name="Shaker Activate" type="Node3D" parent="." node_paths=PackedStringArray("Targets")]
 unique_name_in_owner = true
 script = ExtResource("4_hwyiw")
 custom_target = true
-Targets = [NodePath("../FlipAxis/IdleAxis")]
+Targets = [NodePath("../SelectParent/FlipAxis/IdleAxis")]
 duration = 0.01
 shake_speed = 0.05
-shakerPreset = ExtResource("5_fwxva")
+shakerPreset = ExtResource("5_6mx1n")
 
-[node name="Area3D" type="Area3D" parent="."]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00139615, 0.00722194, -0.00491333)
-shape = SubResource("BoxShape3D_2w5v6")
-
-[node name="FlipAxis" type="Node3D" parent="."]
+[node name="SelectParent" type="Node3D" parent="."]
 unique_name_in_owner = true
 
-[node name="IdleAxis" type="Node3D" parent="FlipAxis"]
+[node name="FlipAxis" type="Node3D" parent="SelectParent"]
+unique_name_in_owner = true
+
+[node name="IdleAxis" type="Node3D" parent="SelectParent/FlipAxis"]
 unique_name_in_owner = true
 transform = Transform3D(1, 2.35159e-08, 0, -2.35159e-08, 1, 0, 0, 0, 1, 0, 0, 0)
 
-[node name="Front" type="Sprite3D" parent="FlipAxis/IdleAxis"]
+[node name="Front" type="Sprite3D" parent="SelectParent/FlipAxis/IdleAxis"]
 unique_name_in_owner = true
-pixel_size = 0.002
+pixel_size = 0.0025
+double_sided = false
+alpha_hash_scale = 0.15
 alpha_antialiasing_mode = 1
-texture = ExtResource("6_1i1wg")
+texture_filter = 5
+render_priority = 5
+texture = ExtResource("6_ejcbw")
 
-[node name="Back" type="Sprite3D" parent="FlipAxis/IdleAxis"]
+[node name="Back" type="Sprite3D" parent="SelectParent/FlipAxis/IdleAxis"]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00353885, 0.0020752, -0.0276475)
+transform = Transform3D(-1, -4.70318e-08, -8.74228e-08, -4.70318e-08, 1, -2.05583e-15, 8.74228e-08, 2.05583e-15, -1, 0.00353885, 0.0020752, -0.0276475)
 flip_h = true
-pixel_size = 0.002
+pixel_size = 0.0025
+double_sided = false
 alpha_antialiasing_mode = 1
+render_priority = 5
 texture = ExtResource("3_iypw1")
 
-[connection signal="mouse_entered" from="Area3D" to="." method="hover"]
-[connection signal="mouse_exited" from="Area3D" to="." method="unhover"]
+[node name="Area3D" type="Area3D" parent="SelectParent"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SelectParent/Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0017871, -0.0189002, -0.00491333)
+shape = SubResource("BoxShape3D_2w5v6")
+
+[node name="Buttons" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.5662, -0.139305)
+
+[node name="SelectButton" parent="Buttons" node_paths=PackedStringArray("element") instance=ExtResource("7_3o3u0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.22279, 0)
+element = NodePath("../..")
+text = "Select"
+color = Color(0.980392, 0.886275, 0.352941, 1)
+type = 1
+
+[node name="BuyButton" parent="Buttons" node_paths=PackedStringArray("element") instance=ExtResource("7_3o3u0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.110075, 0)
+element = NodePath("../..")
+text = "Buy"
+color = Color(0.98, 0.88592, 0.3528, 1)
+
+[node name="SellButton" parent="Buttons" node_paths=PackedStringArray("element") instance=ExtResource("7_3o3u0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.02327, 0)
+element = NodePath("../..")
+text = "Sell"
+color = Color(0.979167, 0.227589, 0.0659559, 1)
+type = 2
+
+[connection signal="mouse_entered" from="SelectParent/Area3D" to="." method="hover"]
+[connection signal="mouse_exited" from="SelectParent/Area3D" to="." method="unhover"]

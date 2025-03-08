@@ -1,12 +1,13 @@
 extends Node3D
 class_name Element
 
-enum Types {PlayingTile, CursedTile, TarotCard, WildCard}
+#enum Types {PlayingTile, CursedTile, TarotCard, WildCard}
 
 
 @export var title = ""
 @export_multiline var description = ""
-
+@onready var buyValue = baseBuyValue
+@onready var sellValue = baseSellValue
 
 @export_group("Interaction")
 @export_group("Interaction/Selectable")
@@ -28,18 +29,28 @@ var dragPosition = Vector3.ZERO
 var selected = false
 var hovered = false
 var dragged = false
-
+var idle = false
 var canDrag = false
 var forceSelected = false
 var holdAfterFrames = 0
+var pack = null
+@export var baseBuyValue = 4
+@export var baseSellValue = 1
+
 
 
 @onready var flipAxis: Node3D = %FlipAxis
 @onready var idleAxis: Node3D = %IdleAxis
+@onready var selectParent: Node3D = %SelectParent
+
 @onready var offset = randf()
+
+
+var container: ElementContainer
+
 @export_group("States")
 #region # - States ---------------------------- #  
-enum States {onBoard, inDeck, inHand, inShop, inPack, discarded, disabled, none}
+enum States {onBoard, inDeck, inHand, inShop, inPack, discarded, disabled, inConsumables, inWildcards, none}
 @export var state = Element.States.disabled
 var lockedIn = false
 func validStates(_validStates: Array[States] = []):
@@ -61,6 +72,7 @@ func _ready() -> void:
 	pass
 
 
+	
 
 func _process(delta: float) -> void:
 	#if (validState(States.inPack)): return
@@ -100,6 +112,8 @@ func _process(delta: float) -> void:
 
 var t: float = 0
 func updatePosition(delta : float):
+	#if (get_parent() != null):
+	scale = scale.lerp(Vector3.ONE,delta*20)
 
 	if dragged: return
 
@@ -109,24 +123,35 @@ func updatePosition(delta : float):
 		flipAxis.rotation.y = lerp_angle(flipAxis.rotation.y, 0, delta*flipSpeed*GameManager.gameSpeedMultiplier)
 	
 	t += delta
-	global_position = global_position.lerp(targetPosition + (Vector3.UP * .8 * ( 1 if (selected) else 0)), delta * moveSpeed * GameManager.gameSpeedMultiplier)
-	scale = scale.lerp(targetScale, delta * scaleSpeed * GameManager.gameSpeedMultiplier)
+	position = position.lerp(targetPosition, delta * moveSpeed * GameManager.gameSpeedMultiplier)
+	if hovered: position.z = 15
 	
+	#global_position = global_position.lerp(targetPosition, delta * moveSpeed * GameManager.gameSpeedMultiplier)
+	#if hovered: global_position.z = 15
 	
+	if selected:
+		selectParent.position = selectParent.position.lerp(Vector3.UP*.8, delta*40*GameManager.gameSpeedMultiplier)
+	else:
+		selectParent.position = selectParent.position.lerp(Vector3.ZERO, delta*40*GameManager.gameSpeedMultiplier)
+
+	selectParent.scale = selectParent.scale.lerp(targetScale, delta * scaleSpeed * GameManager.gameSpeedMultiplier)
+	
+	rotation.x = lerp_angle(rotation.x, deg_to_rad(targetRotation.x),delta*rotationSpeed*GameManager.gameSpeedMultiplier)
+	rotation.y = lerp_angle(rotation.y, deg_to_rad(targetRotation.y),delta*rotationSpeed*GameManager.gameSpeedMultiplier)
+	rotation.z = lerp_angle(rotation.z, deg_to_rad(targetRotation.z),delta*rotationSpeed*GameManager.gameSpeedMultiplier)
+	
+	#updateIdleAnimation(delta)
+			
+
+func updateIdleAnimation(delta):
 	if validState(States.inHand):
-		#pass
 		idleAxis.rotation.x = (cos(t * .25 * idleSpeed + offset) * .2)
 		idleAxis.rotation.y = (cos(t * .5 *  idleSpeed + offset) * .2)
 		idleAxis.rotation.z = (cos(t * .5 *  idleSpeed + offset) * .1)
 	else:
 		idleAxis.rotation.x = lerp_angle(idleAxis.rotation.x, 0, 	delta*10*GameManager.gameSpeedMultiplier)
 		idleAxis.rotation.y = lerp_angle(idleAxis.rotation.y, 0, 	delta*10*GameManager.gameSpeedMultiplier)
-		idleAxis.rotation.z = lerp_angle(idleAxis.rotation.z, 0, 	delta*10*GameManager.gameSpeedMultiplier)		
-
-	rotation.x = lerp_angle(rotation.x, deg_to_rad(targetRotation.x),delta*rotationSpeed*GameManager.gameSpeedMultiplier)
-	rotation.y = lerp_angle(rotation.y, deg_to_rad(targetRotation.y),delta*rotationSpeed*GameManager.gameSpeedMultiplier)
-	rotation.z = lerp_angle(rotation.z, deg_to_rad(targetRotation.z),delta*rotationSpeed*GameManager.gameSpeedMultiplier)
-	
+		idleAxis.rotation.z = lerp_angle(idleAxis.rotation.z, 0, 	delta*10*GameManager.gameSpeedMultiplier)
 
 
 #region # - Events ----------	------------------ #  
@@ -136,37 +161,29 @@ func clicked():
 		select()
 	else:
 		deselect()
-	SignalBus.emit_signal("OnElementClicked", self)
 	pass
 
 func select():
 	if not validState(): return
 	selected = true
-	SignalBus.emit_signal("OnElementSelected", self)
 	pass
 
 func deselect():
 	if (forceSelected): return
 	selected = false
-	SignalBus.emit_signal("OnElementDeselected", self)
 	pass
 
 func hover():
 	if not validState(): return
-	#print("hovering")
 	targetScale = Vector3.ONE * 1.05
-	
 	hovered = true
-	SignalBus.emit_signal("OnElementHovered", self)
 	pass
 
 func unhover():
 	hovered = false
 	targetScale = Vector3.ONE
-	SignalBus.emit_signal("OnElementUnhovered", self)
 	pass
 
 func activate():
-	SignalBus.emit_signal("OnElementActivated", self)
 	pass
 #endregion # ---------------------------------- #

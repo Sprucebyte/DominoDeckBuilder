@@ -14,4 +14,4 @@ func activate() -> void:
 		activateSpeed *= 1.05
 		shakerActivate.play_shake()
 
-	pass
+	return

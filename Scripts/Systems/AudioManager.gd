@@ -1,28 +1,44 @@
 extends Node
+class_name AudioManager
 @onready var domino1 = $"Domino 1"
 @onready var domino2 = $"Domino 2"
-@export var sound: AudioStream
+@onready var coin = $"Coin"
 
+static var Instance: AudioManager
+func _init() -> void:
+	if Instance == null:
+		Instance = self
+	else:
+		queue_free()
 
 func _ready() -> void:
 	SignalBus.connect("OnTileHovered",audioHovered)
 	SignalBus.connect("OnTileSelected",audioSelected)
 	SignalBus.connect("OnTileDeselected",audioSelected)
 	SignalBus.connect("OnTileLockedIn",audioSelected)
-	SignalBus.OnTileScored.connect(audioSelected)
-	pass
+	SignalBus.connect("AddToScore",addToScore)
+	SignalBus.connect("MultiplyMult",multiplyMult)
+	SignalBus.connect("OnWildCardActivated",multiplyMult)
 
+static func play(sound):
+	sound.play()
+
+func multiplyMult():
+	coin.play()
+	pass
+	
+func addToScore():
+	coin.play()
+	pass
+	
+func addToMult():
+	coin.play()
+	pass
+	
 func audioSelected(_val):
-	#var count = GameManager.selectedTiles.size()
-	#var originalPitch = sound.
-	#sound.pitch_scale = count
-
 	domino1.play()
-	#sound.pitch_scale = originalPitch
 	pass
-
 
 func audioHovered(_val):
 	domino2.play()
 	pass
-	

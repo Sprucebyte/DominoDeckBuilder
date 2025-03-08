@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://c4w8yqsqyjgxe" path="res://Textures/domino_gold_metalness.png" id="1_yh757"]
 [ext_resource type="Texture2D" uid="uid://vn3la7eb0hwd" path="res://Textures/domino_wood_base.png" id="2_egur1"]
-[ext_resource type="Script" path="res://TileMaterial.gd" id="2_ms7xs"]
+[ext_resource type="Script" path="res://Scripts/TileMaterial.gd" id="2_ms7xs"]
 [ext_resource type="Texture2D" uid="uid://bgon2i6ick7p0" path="res://Textures/domino_gold_roughness.png" id="3_h83cf"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_am7h5"]

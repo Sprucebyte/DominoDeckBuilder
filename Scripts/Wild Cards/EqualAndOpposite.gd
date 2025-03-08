@@ -1,7 +1,7 @@
 extends WildCard
 
 func activate() -> void:
-	super()
+	#super()
 	var activateSpeed = 1
 	var contains1 = false
 	var contains6 = false

@@ -1,0 +1,61 @@
+[gd_scene load_steps=5 format=3 uid="uid://bw077ruhrgtv"]
+
+[ext_resource type="Texture2D" uid="uid://ddhaewxwb1ypk" path="res://Textures/Herbert_Moon02.webp" id="1_qdufm"]
+[ext_resource type="Texture2D" uid="uid://cuyq1bmvl4jbf" path="res://Textures/shop.png" id="1_ulbv7"]
+[ext_resource type="Script" path="res://Scripts/Containers/ElementContainer.gd" id="2_ql2bd"]
+
+[sub_resource type="Curve3D" id="Curve3D_6cliv"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, -0.0171044, -0.00731233, 0, 0, 0, 0, 0, 0, 0, 16.99, -0.0240194, -2.64429),
+"tilts": PackedFloat32Array(0, 0)
+}
+point_count = 2
+
+[node name="Shop" type="Node3D"]
+
+[node name="Sprite3D2" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.46509, 0, -11.6982)
+visible = false
+render_priority = -10
+texture = ExtResource("1_qdufm")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.17277)
+visible = false
+render_priority = -4
+texture = ExtResource("1_ulbv7")
+
+[node name="Tiles" type="Node3D" parent="." node_paths=PackedStringArray("path3d")]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.8751, 0, 0)
+script = ExtResource("2_ql2bd")
+containerSize = 10
+defaultElementState = 3
+path3d = NodePath("Path3D")
+
+[node name="Path3D" type="Path3D" parent="Tiles"]
+curve = SubResource("Curve3D_6cliv")
+
+[node name="Cards" type="Node3D" parent="." node_paths=PackedStringArray("path3d")]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.8751, 6.463, 0)
+script = ExtResource("2_ql2bd")
+containerSize = 10
+defaultElementState = 3
+path3d = NodePath("Path3D")
+
+[node name="Path3D" type="Path3D" parent="Cards"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -6.463, 0)
+curve = SubResource("Curve3D_6cliv")
+
+[node name="Packs" type="Node3D" parent="." node_paths=PackedStringArray("path3d")]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.8751, -5.59714, 0)
+script = ExtResource("2_ql2bd")
+containerSize = 10
+defaultElementState = 3
+path3d = NodePath("Path3D")
+
+[node name="Path3D" type="Path3D" parent="Packs"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -6.463, 0)
+curve = SubResource("Curve3D_6cliv")

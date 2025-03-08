@@ -16,6 +16,15 @@ const Bottom = 2
 
 #await get_tree().create_timer(.5).timeout
 
+static func shakerDone(shaker: ShakerComponent3D):
+	
+	await shaker.shake_finished
+	pass
+
+
+static func delay(time):
+	await GameManager.get_tree().create_timer(time).timeout
+	return
 
 
 static func angleDifferenceLessThan(vec1, vec2, angle) -> bool:
@@ -62,14 +71,8 @@ static func directionToVector3(side) -> Vector3:
 #region # ---------------- Old Shit! ---------------- #
 
 
-#static func sideToTileCharacter(side) -> String:
-	#match side:
-		#Side.Top: return "🂆"
-		#Side.Bottom: return "🁨"
-		#Side.Left: return "🁔"
-		#Side.Right: return "🀶"
-	#return "🀰" 	
-	
+
+
 
 
 static func sideToAngle(side) -> int:

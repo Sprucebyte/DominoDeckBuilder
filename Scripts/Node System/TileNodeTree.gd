@@ -94,7 +94,7 @@ func addNode(tileNode: TileNode, parentTileNode: TileNode, sideOfTile, sideOfPar
 func getOpenSlots(root) -> Array:
 	if root == null: return []
 	var stack: Array[TileNode] = [root] # Stack of nodes to go trough
-	var openSlots: Array = [] # array of nodes and their directions that are confirmed to be open
+	var openSlots: Array[TileSlot] = [] # array of nodes and their directions that are confirmed to be open
 	while stack:
 		# Get and remove the last node from the stack
 		var node = stack.pop_back() 
@@ -117,8 +117,8 @@ func getOpenSlots(root) -> Array:
 				else:
 					pips = node.tile.bottomValue
 					oppositePips = node.tile.topValue
-
-				openSlots.append({"node": node, "side": side, "pips": pips, "oppositePips": oppositePips})
+				openSlots.append(TileSlot.new(node.tile,node,side,pips,oppositePips))
+				#openSlots.append({"node": node, "side": side, "pips": pips, "oppositePips": oppositePips})
 	return openSlots
 	
 func getValidSlots(root, tile = GameManager.selectedTiles[0]) -> Array:

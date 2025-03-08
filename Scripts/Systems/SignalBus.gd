@@ -20,9 +20,11 @@ signal UpdateEdgeValue(val)
 signal DiscardFromHand()
 signal DrawToHand(count)
 
-
+signal CantAfford(element)
+signal UseMoney(amount)
+signal AddMoney(amount)
+signal BuyElement(element)
 signal PlayRound()
-
 
 #region Elements
 signal OnElementClicked(element)
@@ -37,10 +39,14 @@ signal OnElementObtained(element)
 
 signal OnTileScored(tile)
 signal OnTileLockedIn(tile)
+signal OnTileRemoved(tile)
 
 signal MultiplyMult(amount)
+signal MultiplyScore(amount)
 signal AddToMult(amount)
 signal AddToScore(amount)
+signal OnWildCardActivated()
+signal OnButtonPressed(button)
 
 
 #endregion

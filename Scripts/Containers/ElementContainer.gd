@@ -5,17 +5,17 @@ class_name ElementContainer
 @export var elements: Array[Element] = []
 @export var containerSize = 1000
 @export var defaultElementState: Element.States
-@export_flags ("Playing Tile", "Cursed Tile", "Tarot Card", "Wild Card") var allowedElementTypes: int = 0
+#@export_flags ("Playing Tile", "Cursed Tile", "Tarot Card", "Wild Card") var allowedElementTypes: int = 0
 #@export var path: Path2D
 @export var path3d: Path3D
 #@onready var curve: Curve2D = path.curve
 #endregion
 
 func _ready():
-	isTypeAllowed(Element.Types.PlayingTile)
-	isTypeAllowed(Element.Types.CursedTile)
-	isTypeAllowed(Element.Types.TarotCard)
-	isTypeAllowed(Element.Types.WildCard)
+	#isTypeAllowed(Element.Types.PlayingTile)
+	##isTypeAllowed(Element.Types.CursedTile)
+	#isTypeAllowed(Element.Types.TarotCard)
+	#isTypeAllowed(Element.Types.WildCard)
 	pass
 
 
@@ -23,12 +23,12 @@ func _ready():
 func size():
 	return elements.size()
 
-func isTypeAllowed(type: Element.Types) -> bool:
-	var mask := 0 
-	mask |= 1 << type
-	var result = allowedElementTypes & mask > 0
-	#print(str(type) + " allowed = " + str(result))
-	return result
+#func isTypeAllowed(type: Element.Types) -> bool:
+#	var mask := 0 
+#	mask |= 1 << type
+#	var result = allowedElementTypes & mask > 0
+#	#print(str(type) + " allowed = " + str(result))
+#	return result
 
 
 #region Get / Check for elements
@@ -53,6 +53,7 @@ func add(element):
 	self.elements.append(element)
 	element.setState(defaultElementState)
 	element.reparent(self)
+	element.container = self
 	onAdded(element)
 	#print("added" + str(element))
 	return true
@@ -66,6 +67,21 @@ func remove(element):
 	onRemoved(element)
 
 #endregion
+
+#func destroyElements(elements: Array[Element]):
+	#var elementsToDestroy: Array[Element] = []
+	#elementsToDestroy.append_array(elements)
+	#for element in elementsToDestroy
+
+
+
+func destroy(element):
+	if not element in elements:
+		return
+	remove(element)
+	element.queue_free()
+	
+
 
 #region Moving elements
 ## Move one element to another container
@@ -130,7 +146,7 @@ func setElementPositions():
 		
 		if (path3d == null): 
 			elements[i].targetRotation = Vector3(0,0,0)
-			elements[i].targetPosition = position + Vector3(i, 0, 0)#position + Vector3(sample * 8 + .5, 0 , 0)
+			elements[i].targetPosition = Vector3(i, 0, 0)#position + Vector3(sample * 8 + .5, 0 , 0)
 		else:
 			var ratio = (j + half_size) / (size())
 			var _transform: Transform3D = path3d.curve.sample_baked_with_rotation(ratio * path3d.curve.get_baked_length())
@@ -139,5 +155,8 @@ func setElementPositions():
 			var rot = _transform.basis.x
 			#print(rot)
 			elements[i].targetRotation = rot #Vector3(0,0,0)
-			elements[i].targetPosition = position + Vector3(pos.x, pos.y, pos.z)#position + Vector3(sample * 8 + .5, 0 , 0)
+			elements[i].targetPosition = Vector3(pos.x, pos.y, pos.z)#position + Vector3(sample * 8 + .5, 0 , 0)
+			elements[i].position.z = pos.z
+			#elements[i].targetPosition.x = position.x + pos.x
+			#elements[i].targetPosition.x = position.y + pos.y
 	pass
