@@ -5,7 +5,7 @@ class_name Util
 #region # ---------------- New Shit! ---------------- #
 
 # Defining directions in constants instead of enums, that way Top and Up, and Bottom and Down can be the same value
-const Up = 0 
+const Up = 0
 const Right = 1
 const Down = 2
 const Left = 3
@@ -16,8 +16,30 @@ const Bottom = 2
 
 #await get_tree().create_timer(.5).timeout
 
+
+static func toScreen(pos: Vector3) -> Vector2:
+	return GameManager.get_viewport().get_camera_3d().unproject_position(pos)
+
+static func toWorld(pos: Vector2, depth = 0) -> Vector3:
+	return GameManager.get_viewport().get_camera_3d().project_position(pos, depth)
+
+
+enum Rarity {Common, Uncommon, Rare, Legendary}
+
+static func rarityToText(rarity) -> String:
+	match rarity:
+		Rarity.Common:
+			return "[color=green] Common"
+		Rarity.Uncommon:
+			return "[color=blue] Uncommon"
+		Rarity.Rare:
+			return "[color=red] Rare"
+		Rarity.Legendary:
+			return "[color=purple] Legendary"
+	return ""
+		
+
 static func shakerDone(shaker: ShakerComponent3D):
-	
 	await shaker.shake_finished
 	pass
 
@@ -32,7 +54,7 @@ static func angleDifferenceLessThan(vec1, vec2, angle) -> bool:
 
 static func angleToDirection(angle) -> int:
 	var direction = round(angle / 90)
-	direction = wrap(direction,0,3)
+	direction = wrap(direction, 0, 3)
 	return direction
 	
 static func directionToAngle(direction) -> int:
@@ -42,19 +64,19 @@ static func directionToAngle(direction) -> int:
 
 static func sideToString(side) -> String:
 	match side:
-		Util.Top: 	return "top"
+		Util.Top: return "top"
 		Util.Bottom: return "bottom"
 		Util.Left: return "left"
 		Util.Right: return "right"
-	return ""	
+	return ""
 
 static func directionToString(side) -> String:
 	match side:
-		Util.Up: 	return "top"
+		Util.Up: return "top"
 		Util.Down: return "bottom"
 		Util.Left: return "left"
 		Util.Right: return "right"
-	return ""	
+	return ""
 
 static func directionToVector3(side) -> Vector3:
 	match side:
@@ -62,8 +84,7 @@ static func directionToVector3(side) -> Vector3:
 		Util.Bottom: return Vector3.DOWN
 		Util.Left: return Vector3.LEFT
 		Util.Right: return Vector3.RIGHT
-	return Vector3.ZERO	 
-	
+	return Vector3.ZERO
 	
 	
 #endregion # ------------------------------------------- #
@@ -71,17 +92,13 @@ static func directionToVector3(side) -> Vector3:
 #region # ---------------- Old Shit! ---------------- #
 
 
-
-
-
-
 static func sideToAngle(side) -> int:
 	return side * 90
 	#
 ## Rotate vector around the Z axis in 90 degree steps
 static func rotateVector(vector: Vector3, steps) -> Vector3:
-	var axis = Vector3(0,0,1) 
-	var rotatedVector = vector.rotated(axis,deg_to_rad(steps*-90))
+	var axis = Vector3(0, 0, 1)
+	var rotatedVector = vector.rotated(axis, deg_to_rad(steps * -90))
 	return rotatedVector
 
 

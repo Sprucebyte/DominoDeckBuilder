@@ -7,11 +7,11 @@ func activate() -> void:
 	for node: TileNode in GameManager.board.tileNodeTree.getEdgeNodes():
 		var tile = node.tile
 		var value = node.getEdgeValue()
-		if not(roundi(value) in primeArray) : continue
+		if not (roundi(value) in primeArray): continue
+		await Util.delay(Score.wildCardElementDelay / GameManager.gameSpeedMultiplier / activateSpeed)
 		
-		await get_tree().create_timer(.2/ GameManager.gameSpeedMultiplier / activateSpeed).timeout
+		tile.shake(tile.shakerActivate)
 		SignalBus.AddToMult.emit(7)
-		tile.shake()
-		ScoreLabel.Spawn(tile,"+" + str(7) + "x", Color.RED)
-		activateSpeed *= 1.05
+		ScoreLabel.Spawn(tile, "+" + str(7) + "x", Color.RED)
+		activateSpeed *= Score.acceleration
 	return

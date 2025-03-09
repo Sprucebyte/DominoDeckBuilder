@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://drbbe2kaqsqrg"]
+[gd_scene load_steps=9 format=3 uid="uid://drbbe2kaqsqrg"]
 
 [ext_resource type="Script" path="res://Scripts/CardPack.gd" id="1_jfmws"]
 [ext_resource type="Script" path="res://addons/shaker/src/Vector3/shaker_component3D.gd" id="2_vodnk"]
@@ -9,10 +9,13 @@
 
 [sub_resource type="Curve3D" id="Curve3D_d1f0j"]
 _data = {
-"points": PackedVector3Array(0, 0, 0, 0, 0, 0, -13.2658, -2.69585, 9.10266, 0, 0, 0, 0, 0, 0, 13.9164, -2.57373, 2.32336),
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 10, 0, 10, 0, 0, 0, 0, 0, 0, -10, 0, 0),
 "tilts": PackedFloat32Array(0, 0)
 }
 point_count = 2
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_h2dnl"]
+size = Vector3(4.40441, 7.4306, 0.150208)
 
 [node name="CardPack" type="Node3D"]
 transform = Transform3D(0.999999, 4.47034e-08, -7.35744e-08, -4.47034e-08, 0.999999, 4.21423e-08, 7.35744e-08, -4.21423e-08, 0.999999, -4.17233e-07, 2.98023e-07, -2.63751e-06)
@@ -21,8 +24,13 @@ selectableInStates = 8
 hoverableInStates = 8
 state = 3
 
-[node name="ShakerOpen" type="Node3D" parent="." node_paths=PackedStringArray("Targets")]
+[node name="SelectParent" type="Node3D" parent="."]
 unique_name_in_owner = true
+transform = Transform3D(1, 4.52113e-16, 1.42109e-14, 4.52113e-16, 1, 0, -1.42109e-14, 0, 1, 0, 0, 0)
+
+[node name="ShakerOpen" type="Node3D" parent="SelectParent" node_paths=PackedStringArray("Targets")]
+unique_name_in_owner = true
+transform = Transform3D(1, 4.52113e-16, 0, 4.52113e-16, 1, 0, 0, 0, 1, 0, 0, 0)
 script = ExtResource("2_vodnk")
 custom_target = true
 Targets = [NodePath("Sprite")]
@@ -31,32 +39,44 @@ fade_in = 0.0228764
 fade_out = 0.0106722
 shakerPreset = ExtResource("3_741oa")
 
-[node name="Sprite" type="Sprite3D" parent="ShakerOpen"]
+[node name="Sprite" type="Sprite3D" parent="SelectParent/ShakerOpen"]
 unique_name_in_owner = true
 transform = Transform3D(1, 1.35042e-08, -9.31322e-09, -1.35042e-08, 1, 2.98023e-08, 9.31322e-09, -2.98023e-08, 1, 0, 0, 0)
 texture = ExtResource("3_j0l8j")
 
-[node name="Label" type="Label3D" parent="."]
+[node name="Label" type="Label3D" parent="SelectParent"]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -6.20409, 0)
+transform = Transform3D(1, 4.52113e-16, 7.10543e-15, 4.52114e-16, 1, 0, -7.10543e-15, 0, 1, -8.70261e-08, -5.36957, 8.20403e-08)
 pixel_size = 0.015
 text = "Choose 2"
 outline_size = 8
 
-[node name="BuyButton" parent="." node_paths=PackedStringArray("element") instance=ExtResource("5_3qhmo")]
+[node name="Container" type="Node3D" parent="SelectParent" node_paths=PackedStringArray("path3d")]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4.46552, 0)
-element = NodePath("..")
-text = "Buy"
-color = Color(0.98, 0.88592, 0.3528, 1)
-
-[node name="Container" type="Node3D" parent="." node_paths=PackedStringArray("path3d")]
-unique_name_in_owner = true
+transform = Transform3D(1, 4.52113e-16, 0, 4.52113e-16, 1, 0, 0, 0, 1, 0, 0, 0)
 script = ExtResource("6_wmcko")
 containerSize = 10
 defaultElementState = 4
 path3d = NodePath("Path3D")
 
-[node name="Path3D" type="Path3D" parent="Container"]
+[node name="Path3D" type="Path3D" parent="SelectParent/Container"]
 transform = Transform3D(1, 4.52113e-16, -1.42109e-14, 4.52112e-16, 1, 0, 1.42109e-14, 0, 1, 0.00329304, -0.0317879, 0.0502586)
 curve = SubResource("Curve3D_d1f0j")
+
+[node name="Area3D" type="Area3D" parent="SelectParent"]
+transform = Transform3D(1, 4.52113e-16, 0, 4.52113e-16, 1, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SelectParent/Area3D"]
+transform = Transform3D(1, 4.52113e-16, 8.73968e-13, 4.5215e-16, 1, 0, -8.73968e-13, 0, 1, 0.00477472, 0.0110376, -0.00491333)
+shape = SubResource("BoxShape3D_h2dnl")
+
+[node name="BuyButton" parent="." node_paths=PackedStringArray("element") instance=ExtResource("5_3qhmo")]
+unique_name_in_owner = true
+transform = Transform3D(1, 4.52113e-16, 2.13163e-14, 4.52114e-16, 1, 0, -2.13163e-14, 0, 1, -5.68434e-14, -4.46552, -2.27374e-13)
+visible = false
+element = NodePath("..")
+text = "Buy"
+color = Color(0.98, 0.88592, 0.3528, 1)
+
+[connection signal="mouse_entered" from="SelectParent/Area3D" to="." method="hover"]
+[connection signal="mouse_exited" from="SelectParent/Area3D" to="." method="unhover"]

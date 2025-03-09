@@ -1,29 +1,30 @@
-[gd_scene load_steps=56 format=4 uid="uid://dli3f2y42248e"]
+[gd_scene load_steps=57 format=4 uid="uid://dli3f2y42248e"]
 
 [ext_resource type="Script" path="res://Scripts/Elements/Tile.gd" id="1_qw2k2"]
-[ext_resource type="Texture2D" uid="uid://cvgq3ra2j5c0d" path="res://Textures/Pips - White/0.png" id="2_u5gsw"]
+[ext_resource type="Texture2D" uid="uid://cvgq3ra2j5c0d" path="res://Textures/Pips/0.png" id="2_050xq"]
 [ext_resource type="Script" path="res://addons/shaker/src/Vector3/shaker_component3D.gd" id="3_gatgg"]
+[ext_resource type="Texture2D" uid="uid://d4n4auuin8b51" path="res://Textures/Pips/1.png" id="3_mbg0k"]
 [ext_resource type="Script" path="res://addons/shaker/data/Vector3/BaseShakerType3D.gd" id="4_0wswn"]
-[ext_resource type="Texture2D" uid="uid://vwnuj4gkv65m" path="res://Textures/Pips - White/2.png" id="4_itqk5"]
+[ext_resource type="Texture2D" uid="uid://vwnuj4gkv65m" path="res://Textures/Pips/2.png" id="4_qoeyx"]
 [ext_resource type="Resource" uid="uid://cpdsnrua1i6fr" path="res://Shaker/Presets/select.tres" id="5_0exb5"]
-[ext_resource type="Texture2D" uid="uid://bmcveqykmx1qs" path="res://Textures/Pips - White/3.png" id="5_edwkp"]
 [ext_resource type="Script" path="res://addons/shaker/data/Vector3/ShakerTypeSineWave3D.gd" id="5_h4qqa"]
+[ext_resource type="Texture2D" uid="uid://bmcveqykmx1qs" path="res://Textures/Pips/3.png" id="5_l5vgl"]
 [ext_resource type="Script" path="res://addons/shaker/data/Vector3/ShakerPreset3D.gd" id="6_ev5fe"]
 [ext_resource type="Resource" uid="uid://dnfeg2b578roa" path="res://Shaker/Presets/place.tres" id="6_h557c"]
-[ext_resource type="Texture2D" uid="uid://0fs0x1vbgqvl" path="res://Textures/Pips - White/5.png" id="7_qfiaq"]
-[ext_resource type="Texture2D" uid="uid://bdvqpmosru35" path="res://Textures/Pips - White/6.png" id="8_jv7qa"]
-[ext_resource type="Texture2D" uid="uid://bs5yopu8qmkbv" path="res://Textures/Pips - White/7.png" id="9_8jyje"]
-[ext_resource type="Texture2D" uid="uid://bjnohxr7k6hxy" path="res://Textures/Pips - White/8.png" id="10_fmo2a"]
-[ext_resource type="Texture2D" uid="uid://c3iv6yckr4cm8" path="res://Textures/Pips - White/9.png" id="11_cpofk"]
-[ext_resource type="Resource" uid="uid://d0l6bwdbqor8s" path="res://Shaker/Presets/activate2.tres" id="13_7k7rl"]
-[ext_resource type="Texture2D" uid="uid://ccyb75drbgfwr" path="res://Textures/Pips - White/divider.png" id="19_a7d11"]
-[ext_resource type="Texture2D" uid="uid://87viidx63vjq" path="res://Textures/Pips - White/4.png" id="20_7dpdf"]
+[ext_resource type="Texture2D" uid="uid://87viidx63vjq" path="res://Textures/Pips/4.png" id="6_rxfya"]
+[ext_resource type="Texture2D" uid="uid://0fs0x1vbgqvl" path="res://Textures/Pips/5.png" id="7_lyuma"]
+[ext_resource type="Texture2D" uid="uid://bdvqpmosru35" path="res://Textures/Pips/6.png" id="8_f8xlc"]
+[ext_resource type="Texture2D" uid="uid://bs5yopu8qmkbv" path="res://Textures/Pips/7.png" id="9_cuvhn"]
+[ext_resource type="Texture2D" uid="uid://bjnohxr7k6hxy" path="res://Textures/Pips/8.png" id="10_78beo"]
+[ext_resource type="Texture2D" uid="uid://c3iv6yckr4cm8" path="res://Textures/Pips/9.png" id="11_7eham"]
+[ext_resource type="Resource" uid="uid://cw5xjnj8y341t" path="res://Shaker/Presets/activate3.tres" id="13_ccavb"]
+[ext_resource type="Texture2D" uid="uid://ccyb75drbgfwr" path="res://Textures/Pips/divider.png" id="19_yq6vl"]
 [ext_resource type="Material" uid="uid://cu8ts8612vt8s" path="res://Materials/Outline.tres" id="20_x6bwt"]
-[ext_resource type="Texture2D" uid="uid://d4n4auuin8b51" path="res://Textures/Pips - White/1.png" id="21_ck7la"]
 [ext_resource type="Texture2D" uid="uid://f470s7enp0x1" path="res://Textures/debug_arrow.png" id="21_eldiw"]
 [ext_resource type="Texture2D" uid="uid://l17s848qglji" path="res://Textures/tile_preview.png" id="22_pss3p"]
 [ext_resource type="Material" uid="uid://bd8d0em6tlkhv" path="res://Materials/White.tres" id="22_toux8"]
 [ext_resource type="Texture2D" uid="uid://dgqoo1ot5sept" path="res://Textures/pips test.png" id="27_4m5fp"]
+[ext_resource type="PackedScene" uid="uid://dpsjx31un88cy" path="res://Prefabs/button.tscn" id="28_1tw0n"]
 [ext_resource type="Texture2D" uid="uid://v2sx4vlwcq5n" path="res://Textures/domino_shading.png" id="28_dgx6y"]
 [ext_resource type="Texture2D" uid="uid://bd04uf4alkqq7" path="res://Textures/domino_white_base.png" id="29_vh0hd"]
 [ext_resource type="Texture2D" uid="uid://vn3la7eb0hwd" path="res://Textures/domino_wood_base.png" id="30_v3a76"]
@@ -267,7 +268,7 @@ size = Vector3(1.03784, 2.04153, 0.39798)
 
 [node name="Tile" type="Node3D"]
 script = ExtResource("1_qw2k2")
-sprites = Array[Texture2D]([ExtResource("2_u5gsw"), ExtResource("21_ck7la"), ExtResource("4_itqk5"), ExtResource("5_edwkp"), ExtResource("20_7dpdf"), ExtResource("7_qfiaq"), ExtResource("8_jv7qa"), ExtResource("9_8jyje"), ExtResource("10_fmo2a"), ExtResource("11_cpofk")])
+sprites = Array[Texture2D]([ExtResource("2_050xq"), ExtResource("3_mbg0k"), ExtResource("4_qoeyx"), ExtResource("5_l5vgl"), ExtResource("6_rxfya"), ExtResource("7_lyuma"), ExtResource("8_f8xlc"), ExtResource("9_cuvhn"), ExtResource("10_78beo"), ExtResource("11_7eham")])
 selectableInStates = 28
 hoverableInStates = 28
 
@@ -279,7 +280,7 @@ duration = 1.0
 shake_speed = 2.0
 fade_in = 0.034674
 fade_out = 0.0544096
-shakerPreset = ExtResource("13_7k7rl")
+shakerPreset = ExtResource("13_ccavb")
 
 [node name="Shaker Select" type="Node3D" parent="." node_paths=PackedStringArray("Targets")]
 script = ExtResource("3_gatgg")
@@ -331,11 +332,11 @@ transform = Transform3D(1, -3.16646e-08, -8.56817e-08, 3.1665e-08, 0.999988, -4.
 [node name="SpriteDivider" type="Sprite3D" parent="SelectParent/FlipAxis/IdleAxis/ModelContainer"]
 unique_name_in_owner = true
 transform = Transform3D(0.15, 2.68986e-12, -1.57743e-13, -2.68986e-12, 0.15, -4.73702e-14, 2.36615e-14, 7.10552e-15, 1, 1.70699e-05, -0.000225968, 0.12102)
-modulate = Color(0, 0, 0, 1)
+modulate = Color(0, 0, 0, 0.8)
 alpha_antialiasing_mode = 1
 alpha_antialiasing_edge = 1.0
 render_priority = 2
-texture = ExtResource("19_a7d11")
+texture = ExtResource("19_yq6vl")
 
 [node name="SpriteTop" type="Sprite3D" parent="SelectParent/FlipAxis/IdleAxis/ModelContainer"]
 unique_name_in_owner = true
@@ -345,7 +346,7 @@ double_sided = false
 alpha_antialiasing_mode = 1
 alpha_antialiasing_edge = 1.0
 render_priority = 2
-texture = ExtResource("20_7dpdf")
+texture = ExtResource("3_mbg0k")
 
 [node name="SpriteBottom" type="Sprite3D" parent="SelectParent/FlipAxis/IdleAxis/ModelContainer"]
 unique_name_in_owner = true
@@ -355,7 +356,7 @@ double_sided = false
 alpha_antialiasing_mode = 1
 alpha_antialiasing_edge = 1.0
 render_priority = 2
-texture = ExtResource("21_ck7la")
+texture = ExtResource("3_mbg0k")
 
 [node name="Mesh" type="MeshInstance3D" parent="SelectParent/FlipAxis/IdleAxis/ModelContainer"]
 unique_name_in_owner = true
@@ -445,6 +446,24 @@ outline_size = 0
 [node name="CollisionShape3D" type="CollisionShape3D" parent="SelectParent/Area3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0020752, 0.00227356, 0.00724794)
 shape = SubResource("BoxShape3D_jyux7")
+
+[node name="Buttons" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.5662, -0.139305)
+
+[node name="SelectButton" parent="Buttons" node_paths=PackedStringArray("element") instance=ExtResource("28_1tw0n")]
+unique_name_in_owner = true
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 2.01267, 0)
+element = NodePath("../..")
+text = "Select"
+color = Color(0.980392, 0.886275, 0.352941, 1)
+type = 1
+
+[node name="BuyButton" parent="Buttons" node_paths=PackedStringArray("element") instance=ExtResource("28_1tw0n")]
+unique_name_in_owner = true
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 2.01267, 0)
+element = NodePath("../..")
+text = "Buy"
+color = Color(0.98, 0.88592, 0.3528, 1)
 
 [connection signal="mouse_entered" from="SelectParent/Area3D" to="." method="hover"]
 [connection signal="mouse_exited" from="SelectParent/Area3D" to="." method="unhover"]

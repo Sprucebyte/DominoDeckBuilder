@@ -12,16 +12,16 @@ func _init() -> void:
 		queue_free()
 
 func _ready() -> void:
-	SignalBus.connect("OnTileHovered",audioHovered)
-	SignalBus.connect("OnTileSelected",audioSelected)
-	SignalBus.connect("OnTileDeselected",audioSelected)
-	SignalBus.connect("OnTileLockedIn",audioSelected)
+	SignalBus.connect("OnTileHovered", audioHovered)
+	SignalBus.connect("OnTileSelected", audioSelected)
+	SignalBus.connect("OnTileDeselected", audioSelected)
+	SignalBus.connect("OnTileLockedIn", audioSelected)
 
 	#SignalBus.connect("AddToScore",addToScore)
 	#SignalBus.connect("AddToMult",addToMult)
 	#SignalBus.connect("MultiplyMult",multiplyMult)
 	
-	SignalBus.connect("OnWildCardActivated",multiplyMult)
+	SignalBus.connect("OnWildCardActivated", multiplyMult)
 	SignalBus.AddToScore.connect(addToScore)
 	SignalBus.AddToMult.connect(addToMult)
 	SignalBus.MultiplyMult.connect(multiplyMult)

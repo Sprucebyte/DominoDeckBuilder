@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=4 uid="uid://wutxuycqev1q"]
+[gd_scene load_steps=8 format=4 uid="uid://wutxuycqev1q"]
 
 [ext_resource type="Material" uid="uid://cu8ts8612vt8s" path="res://Materials/Outline.tres" id="1_pulu1"]
 [ext_resource type="Script" path="res://Scripts/TilePlacementSlot.gd" id="1_thh5j"]
+[ext_resource type="Texture2D" uid="uid://l17s848qglji" path="res://Textures/tile_preview.png" id="3_vwbdw"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_o51s1"]
 size = Vector3(1.03784, 2.04153, 0.39798)
@@ -83,10 +84,15 @@ shape = SubResource("BoxShape3D_o51s1")
 
 [node name="Domino" type="MeshInstance3D" parent="."]
 transform = Transform3D(-100, 3.89414e-05, -2.84217e-12, 0, 5.96046e-06, 100, 3.89414e-05, 100, -1.19209e-05, 0, 0, 0)
+visible = false
 mesh = SubResource("ArrayMesh_355ps")
 skeleton = NodePath("")
 surface_material_override/0 = ExtResource("1_pulu1")
 surface_material_override/1 = SubResource("StandardMaterial3D_expbe")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(0.28911, 0, 0, 0, 0.28262, 0, 0, 0, 1, 0, 0, 0)
+texture = ExtResource("3_vwbdw")
 
 [connection signal="mouse_entered" from="Area3D" to="." method="_on_area_3d_mouse_entered"]
 [connection signal="mouse_exited" from="Area3D" to="." method="_on_area_3d_mouse_exited"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=4 uid="uid://c4fsjxgk0co1r"]
+[gd_scene load_steps=22 format=4 uid="uid://c4fsjxgk0co1r"]
 
 [ext_resource type="Script" path="res://Scripts/TilePack.gd" id="1_2aymb"]
 [ext_resource type="Material" uid="uid://dfvoywsi4ubhh" path="res://Materials/Wood.tres" id="1_jx0ex"]
@@ -6,6 +6,11 @@
 [ext_resource type="Material" uid="uid://cu8ts8612vt8s" path="res://Materials/Outline.tres" id="2_prxs7"]
 [ext_resource type="Resource" uid="uid://bvsv8a1hpq6r3" path="res://Shaker/Presets/card_pack.tres" id="3_r7l52"]
 [ext_resource type="Texture2D" uid="uid://cbky6vch8wme2" path="res://Textures/tilepack.png" id="4_7h463"]
+[ext_resource type="PackedScene" uid="uid://dpsjx31un88cy" path="res://Prefabs/button.tscn" id="7_yyam5"]
+[ext_resource type="Script" path="res://Scripts/Containers/ElementContainer.gd" id="8_3l80f"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_02777"]
+size = Vector3(4.40441, 7.4306, 0.150208)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nmwtn"]
 resource_name = "Box"
@@ -163,52 +168,100 @@ _data = {
 }
 point_count = 2
 
-[node name="Tile Pack" type="Node3D" node_paths=PackedStringArray("path3d")]
+[sub_resource type="Curve3D" id="Curve3D_ff6f5"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, -10, 0, 10, 0, 0, 0, 0, 0, 0, 10, 0, 0),
+"tilts": PackedFloat32Array(0, 0)
+}
+point_count = 2
+
+[node name="Tile Pack" type="Node3D"]
 transform = Transform3D(1, -6.55651e-07, 3.7998e-07, 6.55651e-07, 1, 4.21889e-07, -3.7998e-07, -4.21889e-07, 1, 4.09782e-08, -2.98023e-07, 5.52274e-07)
 script = ExtResource("1_2aymb")
-path3d = NodePath("ShakerOpen/Path3D")
 
-[node name="ShakerOpen" type="Node3D" parent="."]
+[node name="SelectParent" type="Node3D" parent="."]
 unique_name_in_owner = true
+transform = Transform3D(1, -1.02207e-14, 0, -1.0221e-14, 1, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="Area3D" type="Area3D" parent="SelectParent"]
+transform = Transform3D(1, -1.02207e-14, 0, -1.0221e-14, 1, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SelectParent/Area3D"]
+transform = Transform3D(1, 4.52113e-16, 8.73968e-13, 4.5215e-16, 1, 0, -8.73968e-13, 0, 1, 0.00477472, 0.0110376, -0.00491333)
+shape = SubResource("BoxShape3D_02777")
+
+[node name="ShakerOpen" type="Node3D" parent="SelectParent"]
+unique_name_in_owner = true
+transform = Transform3D(1, -1.02207e-14, 0, -1.0221e-14, 1, 0, 0, 0, 1, 0, 0, 0)
 script = ExtResource("2_mmgcu")
 duration = 1.0
 fade_in = 0.0192366
 fade_out = 0.0272048
 shakerPreset = ExtResource("3_r7l52")
 
-[node name="Sprite" type="Sprite3D" parent="ShakerOpen"]
+[node name="Sprite" type="Sprite3D" parent="SelectParent/ShakerOpen"]
 unique_name_in_owner = true
 texture = ExtResource("4_7h463")
 
-[node name="box" type="Node3D" parent="ShakerOpen"]
+[node name="box" type="Node3D" parent="SelectParent/ShakerOpen"]
 transform = Transform3D(-2.3, -2.01072e-07, 0, -8.78915e-15, 1.00536e-07, 2.3, -2.01072e-07, 2.3, -1.00536e-07, 0, -0.127027, 0)
 visible = false
 
-[node name="Box" type="MeshInstance3D" parent="ShakerOpen/box"]
+[node name="Box" type="MeshInstance3D" parent="SelectParent/ShakerOpen/box"]
 transform = Transform3D(100, 0, 0, 0, -1.19209e-05, 100, 0, -100, -1.19209e-05, 1.65436e-22, -0.38401, 0.179135)
 visible = false
 mesh = SubResource("ArrayMesh_5bem0")
 skeleton = NodePath("")
 surface_material_override/0 = ExtResource("1_jx0ex")
 
-[node name="Box outline" type="MeshInstance3D" parent="ShakerOpen/box/Box"]
+[node name="Box outline" type="MeshInstance3D" parent="SelectParent/ShakerOpen/box/Box"]
 transform = Transform3D(1.0217, 0, 0, 0, 1.03458, 0, 0, 0, 1.12293, 1.3406e-08, 0, 0)
 mesh = SubResource("ArrayMesh_j25ws")
 skeleton = NodePath("")
 surface_material_override/0 = ExtResource("2_prxs7")
 
-[node name="Lid" type="MeshInstance3D" parent="ShakerOpen/box/Box"]
+[node name="Lid" type="MeshInstance3D" parent="SelectParent/ShakerOpen/box/Box"]
 transform = Transform3D(1, 0, 0, 0, 0.860946, 0.508696, 0, -0.508696, 0.860946, -5.7833e-19, -0.00681154, 0.00283087)
 mesh = SubResource("ArrayMesh_kgq74")
 skeleton = NodePath("")
 surface_material_override/0 = ExtResource("1_jx0ex")
 
-[node name="Lid outline" type="MeshInstance3D" parent="ShakerOpen/box/Box/Lid"]
+[node name="Lid outline" type="MeshInstance3D" parent="SelectParent/ShakerOpen/box/Box/Lid"]
 transform = Transform3D(1.02571, 0, 0, 0, 1.04813, 0, 0, 0, 1.25657, 2.35225e-06, 0.000310245, 0.000343204)
 mesh = SubResource("ArrayMesh_bw4rj")
 skeleton = NodePath("")
 surface_material_override/0 = ExtResource("2_prxs7")
 
-[node name="Path3D" type="Path3D" parent="ShakerOpen"]
+[node name="Path3D" type="Path3D" parent="SelectParent/ShakerOpen"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.413795, 1.28817)
 curve = SubResource("Curve3D_wer55")
+
+[node name="BuyButton" parent="." node_paths=PackedStringArray("element") instance=ExtResource("7_yyam5")]
+unique_name_in_owner = true
+transform = Transform3D(1, 4.52113e-16, 2.13163e-14, 4.52114e-16, 1, 0, -2.13163e-14, 0, 1, -5.68434e-14, -4.46552, -2.27374e-13)
+visible = false
+element = NodePath("..")
+text = "Buy"
+color = Color(0.98, 0.88592, 0.3528, 1)
+
+[node name="Container" type="Node3D" parent="." node_paths=PackedStringArray("path3d")]
+unique_name_in_owner = true
+transform = Transform3D(1, 4.52113e-16, 0, 4.52113e-16, 1, 0, 0, 0, 1, 0, 0, 0)
+script = ExtResource("8_3l80f")
+containerSize = 10
+defaultElementState = 4
+path3d = NodePath("Path3D")
+
+[node name="Path3D" type="Path3D" parent="Container"]
+transform = Transform3D(1, 4.52113e-16, -1.42109e-14, 4.52112e-16, 1, 0, 1.42109e-14, 0, 1, 0.00329304, -0.0317879, 0.0502586)
+curve = SubResource("Curve3D_ff6f5")
+
+[node name="Label" type="Label3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, -1.02207e-14, 0, -1.0221e-14, 1, 0, 0, 0, 1, 6.11272e-07, -5.27178, 3.93333e-07)
+pixel_size = 0.015
+text = "Choose 2"
+outline_size = 8
+
+[connection signal="mouse_entered" from="SelectParent/Area3D" to="." method="hover"]
+[connection signal="mouse_exited" from="SelectParent/Area3D" to="." method="unhover"]

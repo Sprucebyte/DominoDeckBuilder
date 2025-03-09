@@ -7,7 +7,7 @@ var gridSize = 1.1
 var validSlots
 
 func _ready():
-	SignalBus.connect("OnPlayedFrom",playFrom)
+	SignalBus.connect("OnPlayedFrom", playFrom)
 
 
 func playFrom(tileToPlayFrom):
@@ -29,8 +29,24 @@ func playTileToSlot(tile: Tile, slot: TileSlot, side):
 	addTile(tile, slot.node, side, slot.side)
 
 
+func playFirstTile(tile):
+	addTile(tile, null)
 
-	
+
+func clear():
+	#for element: Tile in elements:
+	#	if element == null: continue
+	#	if element.tileNode == null: continue
+	#	element.tileNode.queue_free()
+	#	element.tileNode = null
+	#	element.lockedIn = false
+	tileNodeTree.clear()
+	for element: Tile in GameManager.board.elements:
+		element.tileNode = null
+		element.lockedIn = false
+	moveAllElements(GameManager.deck)
+
+
 func chooseTileSide(tile, chosenSlot):
 	var tileSide
 	if (tile.topValue == tile.bottomValue):
@@ -46,33 +62,32 @@ func chooseTileSide(tile, chosenSlot):
 
 	
 func _process(_delta: float) -> void:
-
 	if (Input.is_key_pressed(KEY_UP)):
 		scale *= 1.05
 	if (Input.is_key_pressed(KEY_DOWN)):
 		scale *= 0.95
 
-	if (GameManager.selectedTiles.size() == 1):
-		var tile = GameManager.selectedTiles[0]
-		validSlots = tileNodeTree.getValidSlots(tileNodeTree.rootNode,tile)	
-		if (Input.is_action_just_pressed("play")):
-			if (tileNodeTree.nodeCount > 0):
-				var chosenSlot
-				var tileSide
-				if (validSlots.size() > 0):
-					chosenSlot = validSlots[0]
-					tileSide = chooseTileSide(tile, chosenSlot)
-				else:
-					return
-				addTile(tile, chosenSlot.node, tileSide, chosenSlot.side)
-			else: 
-				# Add parent tile if node tree is empty
-				addTile(tile, null)
+	#if (GameManager.selectedTiles.size() == 1):
+	#	var tile = GameManager.selectedTiles[0]
+	#	validSlots = tileNodeTree.getValidSlots(tileNodeTree.rootNode, tile)
+	#	if (Input.is_action_just_pressed("play")):
+	#		if (tileNodeTree.nodeCount > 0):
+	#			var chosenSlot
+	#			var tileSide
+	#			if (validSlots.size() > 0):
+	#				chosenSlot = validSlots[0]
+	#				tileSide = chooseTileSide(tile, chosenSlot)
+	#			else:
+	#				return
+	#			addTile(tile, chosenSlot.node, tileSide, chosenSlot.side)
+	#		else:
+	#			# Add parent tile if node tree is empty
+	#			addTile(tile, null)
 	pass
 
 
 func addTile(tile: Tile, parentTileNode: TileNode, sideOfTile = Util.Top, sideOfParent = Util.Top):
-	if (tile == null): return;
+	if (tile == null): return ;
 	var placed = false
 	var tileNode = TileNode.new()
 	tileNode.str = str(tileNodeTree.nodeCount)
@@ -80,7 +95,7 @@ func addTile(tile: Tile, parentTileNode: TileNode, sideOfTile = Util.Top, sideOf
 	tile.tileNode = tileNode;
 
 	if (parentTileNode == null):
-		placed = tileNodeTree.addNode(tileNode,null,Util.Top, Util.Bottom)
+		placed = tileNodeTree.addNode(tileNode, null, Util.Top, Util.Bottom)
 	else:
 		placed = tileNodeTree.addNode(tileNode, parentTileNode, sideOfTile, sideOfParent)
 		
@@ -97,14 +112,13 @@ func addTile(tile: Tile, parentTileNode: TileNode, sideOfTile = Util.Top, sideOf
 		tile.targetPosition = parentTileNode.tile.global_position + offsetAndDirection.offset;
 		tile.setDirection(offsetAndDirection.direction)
 		
-	GameManager.hand.moveElements(tile,GameManager.board)	
+	GameManager.hand.moveElements(tile, GameManager.board)
 	tile.play()
 	
 	var edgeValue = tileNodeTree.getEdgeValue()
-	SignalBus.emit_signal("UpdateEdgeValue",edgeValue)
+	SignalBus.emit_signal("UpdateEdgeValue", edgeValue)
 
 	# -------------- #
-
 
 
 # WORK IN PROGRESS
@@ -115,7 +129,7 @@ func getTilePosition(tile: Tile):
 	
 	while stack:
 		# Get the last node from the list, and remove it
-		var node = stack.pop_back() 
+		var node = stack.pop_back()
 		if (node.parent != null):
 			stack.append(node.parent)
 			
@@ -130,8 +144,8 @@ func getTileOffsetAndDirection(parentTileNode, tileNode, sideOfParent, sideOfTil
 	var data = [sideOfParent, sideOfTile]
 	var offsetAmount = 2
 	
-	var directionDelta = abs(abs(sideOfParent-sideOfTile)+2)
-	direction = Util.rotateDirection(parentTileDirection, directionDelta) 
+	var directionDelta = abs(abs(sideOfParent - sideOfTile) + 2)
+	direction = Util.rotateDirection(parentTileDirection, directionDelta)
 	
 	
 	if (sideOfParent == Util.Left) or (sideOfParent == Util.Right) or (sideOfTile == Util.Left) or (sideOfTile == Util.Right):
@@ -141,16 +155,16 @@ func getTileOffsetAndDirection(parentTileNode, tileNode, sideOfParent, sideOfTil
 		offsetAmount = 1
 	
 	match data:
-		[Util.Top, Util.Left]: 
-			direction = Util.rotateDirection(parentTileDirection, 3) 
-		[Util.Top, Util.Right]: 
-			direction = Util.rotateDirection(parentTileDirection, 1) 
-		[Util.Bottom, Util.Left]: 
-			direction = Util.rotateDirection(parentTileDirection, 1) 
-		[Util.Bottom, Util.Right]: 
-			direction = Util.rotateDirection(parentTileDirection, 3) 
-		[Util.Right, Util.Bottom]: 
-			direction = Util.rotateDirection(parentTileDirection, 1) 
+		[Util.Top, Util.Left]:
+			direction = Util.rotateDirection(parentTileDirection, 3)
+		[Util.Top, Util.Right]:
+			direction = Util.rotateDirection(parentTileDirection, 1)
+		[Util.Bottom, Util.Left]:
+			direction = Util.rotateDirection(parentTileDirection, 1)
+		[Util.Bottom, Util.Right]:
+			direction = Util.rotateDirection(parentTileDirection, 3)
+		[Util.Right, Util.Bottom]:
+			direction = Util.rotateDirection(parentTileDirection, 1)
 	offset = Util.rotateVector(Util.directionToVector3(sideOfParent) * offsetAmount * gridSize, parentTileDirection)
 	
 	return {"offset": offset, "direction": direction}

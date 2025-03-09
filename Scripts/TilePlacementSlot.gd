@@ -17,7 +17,10 @@ func Destroy():
 func _process(delta):
 	if hovered:
 		if (Input.is_action_just_pressed("click")):
-			GameManager.board.playTileToSlot(tile,tileSlot,side)
+			if GameManager.board.elements.size() > 0:
+				GameManager.board.playTileToSlot(tile, tileSlot, side)
+			else:
+				GameManager.board.playFirstTile(tile)
 	pass
 
 func _on_area_3d_mouse_entered() -> void:
@@ -37,8 +40,8 @@ func setDirection(direction):
 	var rot = Vector3.ZERO
 	
 	match direction:
-		Util.Up: rot = Vector3(0,0,0)
-		Util.Right: rot = Vector3(0,0,-90)
-		Util.Down: rot = Vector3(0,0,180)
-		Util.Left: rot = Vector3(0,0,90)
+		Util.Up: rot = Vector3(0, 0, 0)
+		Util.Right: rot = Vector3(0, 0, -90)
+		Util.Down: rot = Vector3(0, 0, 180)
+		Util.Left: rot = Vector3(0, 0, 90)
 	rotation_degrees = rot

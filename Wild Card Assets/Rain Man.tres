@@ -2,11 +2,12 @@
 
 [ext_resource type="Script" path="res://Scripts/Wild Cards/RainMan.gd" id="1_7u13s"]
 [ext_resource type="Script" path="res://Scripts/CardAsset.gd" id="1_vq807"]
-[ext_resource type="Texture2D" uid="uid://btnom5boovca1" path="res://Textures/Cards/rain_man.png" id="3_usgxd"]
+[ext_resource type="Texture2D" uid="uid://clhpk81ow02ic" path="res://Textures/Cards/Wild Cards/wildcard_rain man.png" id="3_ucp0i"]
 
 [resource]
 script = ExtResource("1_vq807")
 code = ExtResource("1_7u13s")
-texture = ExtResource("3_usgxd")
+texture = ExtResource("3_ucp0i")
 name = "Rain Man"
 description = "+0.2 mult for every tile placed on the board"
+rarity = ""

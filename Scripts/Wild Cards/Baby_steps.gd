@@ -9,7 +9,7 @@ func activate() -> void:
 		if not (roundi(value) < 4): continue
 		await get_tree().create_timer(.2/ GameManager.gameSpeedMultiplier / activateSpeed).timeout
 		SignalBus.AddToScore.emit(2)
-		tile.shake()
+		tile.shake(tile.shakerActivate)
 		ScoreLabel.Spawn(tile,"+" + str(2), Color.BLUE)
 		activateSpeed *= 1.05
 	return

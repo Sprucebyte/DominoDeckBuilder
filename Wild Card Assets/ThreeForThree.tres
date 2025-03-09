@@ -2,11 +2,12 @@
 
 [ext_resource type="Script" path="res://Scripts/CardAsset.gd" id="1_51q1a"]
 [ext_resource type="Script" path="res://Scripts/Wild Cards/ThreeForThree.gd" id="1_opih5"]
-[ext_resource type="Texture2D" uid="uid://b4ryxy3n3jo7f" path="res://Textures/Cards/Wild Cards/ThreeForThree.png" id="3_ay3f3"]
+[ext_resource type="Texture2D" uid="uid://bpca00lgg6a4q" path="res://Textures/Cards/Wild Cards/wildcard_threeforthree.png" id="3_sx18a"]
 
 [resource]
 script = ExtResource("1_51q1a")
 code = ExtResource("1_opih5")
-texture = ExtResource("3_ay3f3")
-name = "Threefor3"
+texture = ExtResource("3_sx18a")
+name = "Three for Three"
 description = "+ 3 mult if edge value contains a 3"
+rarity = ""

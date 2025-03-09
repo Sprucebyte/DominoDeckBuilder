@@ -10,14 +10,14 @@ func _init() -> void:
 		queue_free()
 
 @export_category("Prefabs")
-@export var cardPrefab: Resource 
+@export var cardPrefab: Resource
 @export var scoreLabel: Resource
 @export var tilePlacementSlot: Resource
 @export var tilePrefab: Resource
 
 @export var tilePack: Resource
 @export var cardPack: Resource
-
+@export var wildCardPack: Resource
 @export var priceTag: Resource
 
 @export_group("Materials")
@@ -25,7 +25,7 @@ func _init() -> void:
 @export var black: TileMaterial
 @export var wood: TileMaterial
 @export var gold: TileMaterial
-var materials = [white,black,wood,gold]
+var materials = [white, black, wood, gold]
 
 
 @export_category("Tarot Cards")
@@ -43,23 +43,26 @@ static func createCard(cardAsset):
 		card.script = cardAsset.code
 	card.textureFront = cardAsset.texture
 	card.global_position = Vector3.ZERO
+	card.title = cardAsset.name
+	card.description = cardAsset.description
+	card.rarity = cardAsset.rarity
 	return card
 
 
 func _ready():
 	for tarotCardAsset in tarotCardAssets:
 		if tarotCardAsset == null: continue
-		tarotCards[tarotCardAsset.name] = createCard(tarotCardAsset) 
+		tarotCards[tarotCardAsset.name] = createCard(tarotCardAsset)
 
 	for wildCardAsset in wildCardAssets:
 		if wildCardAsset == null: continue
 		wildCards[wildCardAsset.name] = createCard(wildCardAsset)
 
 
-	for key in wildCards:
-		var value = wildCards[key]
-		add_child(value)
-		GameManager.wildCards.add(value)
+	#for key in wildCards:
+	#	var value = wildCards[key]
+	#	add_child(value)
+	#	GameManager.wildCards.add(value)
 		
 	#for key in tarotCards:
 	#	var value = tarotCards[key]

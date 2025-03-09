@@ -1,9 +1,10 @@
-
 extends Node
 class_name TileNodeTree
 
 var rootNode: TileNode = null
+var nodes: Array[TileNode]
 var nodeCount = 0
+
 
 func removeNode(tileNode: TileNode) -> bool:
 	print("at removeNode")
@@ -34,11 +35,10 @@ func removeNode(tileNode: TileNode) -> bool:
 		tileNode.parent = null
 
 	nodeCount -= 1
+	nodes.erase(tileNode)
 	SignalBus.UpdateEdgeValue.emit(getEdgeValue(rootNode))
 	return true
 
-	
-	
 	
 	#if (tileNode in tileNode.parent.children):
 		
@@ -53,16 +53,26 @@ func removeNode(tileNode: TileNode) -> bool:
 	#		child.parent = null
 	#		child = null
 	#pass
-
+func clear():
+	var i = 0
+	while nodes.size() > 0:
+		i += 1
+		for edgeNode in getEdgeNodes():
+			removeNode(edgeNode)
+			
+		if i > 1000:
+			print("stuck in loop")
+			return
+	return
 
 ## Adds node as a child of a given node, in the specified direction
 func addNode(tileNode: TileNode, parentTileNode: TileNode, sideOfTile, sideOfParent):
 	#print("trying to add node " + node.str)
-	
 	if (rootNode == null):
 		rootNode = tileNode;
 		print("Added node " + tileNode.str + " as root")
 		nodeCount += 1
+		nodes.append(tileNode)
 		return true
 	# Check if parent exists
 	#if not nodeExists(rootNode, parent): return null
@@ -88,6 +98,7 @@ func addNode(tileNode: TileNode, parentTileNode: TileNode, sideOfTile, sideOfPar
 		print("Position already taken")
 		return false
 	nodeCount += 1
+	nodes.append(tileNode)
 	return true
 
 ## Get all the open slots all connected nodes recursivly
@@ -97,7 +108,7 @@ func getOpenSlots(root) -> Array:
 	var openSlots: Array[TileSlot] = [] # array of nodes and their directions that are confirmed to be open
 	while stack:
 		# Get and remove the last node from the stack
-		var node = stack.pop_back() 
+		var node = stack.pop_back()
 		
 		# Go trough each child of the node, and check if they are empty slots
 		for i in node.children.size():
@@ -107,7 +118,7 @@ func getOpenSlots(root) -> Array:
 				stack.append(child)
 				
 			# if the child slot is empty, add it to the openSlots array, along with its data (node, side, pip-count)
-			if (child == null): 
+			if (child == null):
 				var pips = 0
 				var oppositePips = 0
 				var side = i
@@ -117,7 +128,7 @@ func getOpenSlots(root) -> Array:
 				else:
 					pips = node.tile.bottomValue
 					oppositePips = node.tile.topValue
-				openSlots.append(TileSlot.new(node.tile,node,side,pips,oppositePips))
+				openSlots.append(TileSlot.new(node.tile, node, side, pips, oppositePips))
 				#openSlots.append({"node": node, "side": side, "pips": pips, "oppositePips": oppositePips})
 	return openSlots
 	
@@ -126,10 +137,10 @@ func getValidSlots(root, tile = GameManager.selectedTiles[0]) -> Array:
 	var validSlots: Array
 	for slot in openSlots:
 		if (slot.side == Util.Left) or (slot.side == Util.Right):
-			if (slot.pips != slot.oppositePips): continue	
+			if (slot.pips != slot.oppositePips): continue
 			
 		if (slot.pips == tile.topValue) or (slot.pips == tile.bottomValue):
-			validSlots.append(slot)	
+			validSlots.append(slot)
 	return validSlots
 	
 ## Searches trough all connected node ms to see if specified node exists
@@ -160,7 +171,7 @@ func getEdgeNodes(root = rootNode) -> Array[TileNode]:
 					stack.append(child)
 				childCount += 1
 		if (childCount <= 1):
-			leafNodes.append(node)	
+			leafNodes.append(node)
 	return leafNodes
 
 

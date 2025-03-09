@@ -20,7 +20,7 @@ func activate() -> void:
 		for tile in tileCount:
 			await get_tree().create_timer(.2/ GameManager.gameSpeedMultiplier / activateSpeed).timeout
 			SignalBus.AddToMult.emit(1)
-			tile .shake()
+			tile.shake(shakerActivate)
 			ScoreLabel.Spawn(tile,"+" + str(1) + "x", Color.RED)
 			activateSpeed *= 1.05
 	return

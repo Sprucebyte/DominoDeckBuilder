@@ -7,18 +7,15 @@ var speed = 0.7
 # Called when the node enters the scene tree for the first time.
 
 
-
-static func Spawn(fromTile: Tile, text: String, color: Color) -> ScoreLabel:
+static func Spawn(fromElement: Element, text: String, color: Color) -> ScoreLabel:
 	var scoreLabel: ScoreLabel = AssetManager.Instance.scoreLabel.instantiate()
 	GameManager.get_tree().root.add_child(scoreLabel)
 	scoreLabel.setColor(color)
 	scoreLabel.setText(text)
-	scoreLabel.global_position = Vector3(fromTile.global_position.x, fromTile.global_position.y + .5, fromTile.global_position.z)
+	scoreLabel.global_position = Vector3(fromElement.global_position.x, fromElement.global_position.y + .5, fromElement.global_position.z)
 	return scoreLabel
 
 	
-
-
 func setText(text: String):
 	label.text = text
 	pass

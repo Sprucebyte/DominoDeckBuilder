@@ -39,8 +39,8 @@ color = Color(1, 1, 1, 1)
 [node name="Text" type="Label3D" parent="."]
 unique_name_in_owner = true
 transform = Transform3D(1, 4.19095e-09, 0, -4.65661e-10, 1, 1.49012e-08, 0, -7.45058e-09, 1, -4.65661e-10, 9.31323e-10, 0)
-render_priority = 4
-outline_render_priority = 3
+render_priority = 12
+outline_render_priority = 11
 text = "BUY"
 font_size = 116
 outline_size = 39
@@ -49,7 +49,7 @@ outline_size = 39
 unique_name_in_owner = true
 transform = Transform3D(0.85, 0, 0, 0, 0.85, 0, 0, 0, 0.85, 0, -0.0960799, 0)
 pixel_size = 0.005
-render_priority = 2
+render_priority = 10
 texture = ExtResource("5_voutx")
 
 [node name="ShakerComponent3D" type="Node3D" parent="."]

@@ -2,11 +2,12 @@
 
 [ext_resource type="Script" path="res://Scripts/CardAsset.gd" id="1_31hli"]
 [ext_resource type="Script" path="res://Scripts/Wild Cards/EqualAndOpposite.gd" id="1_77pv1"]
-[ext_resource type="Texture2D" uid="uid://8po2eyw5hx12" path="res://Textures/Cards/Wild Cards/EqualAndOpposite.png" id="3_iiw2o"]
+[ext_resource type="Texture2D" uid="uid://fxdru2kt7xsx" path="res://Textures/Cards/Wild Cards/wildcard_equalandoppioste.png" id="3_wgbh4"]
 
 [resource]
 script = ExtResource("1_31hli")
 code = ExtResource("1_77pv1")
-texture = ExtResource("3_iiw2o")
+texture = ExtResource("3_wgbh4")
 name = "Equal And Opposite"
 description = "+1 mult for every 1 and 6 edge tiles  "
+rarity = ""

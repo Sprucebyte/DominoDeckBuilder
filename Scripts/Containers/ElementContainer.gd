@@ -19,7 +19,6 @@ func _ready():
 	pass
 
 
-
 func size():
 	return elements.size()
 
@@ -42,7 +41,7 @@ func getRandom():
 #region Adding / Removing
 ## Add element to current container
 func add(element):
-	if (element == null): 
+	if (element == null):
 		print("ERROR: Can't add element to " + str(self) + ", element is null")
 		return false
 
@@ -74,7 +73,6 @@ func remove(element):
 	#for element in elementsToDestroy
 
 
-
 func destroy(element):
 	if not element in elements:
 		return
@@ -82,17 +80,16 @@ func destroy(element):
 	element.queue_free()
 	
 
-
 #region Moving elements
 ## Move one element to another container
 func moveOneElement(element, targetContainer: ElementContainer):
-	if (element == null): 
+	if (element == null):
 		print("ERROR: tile is null")
 		return false
 	if not element in elements:
 		print("ERROR: tile is not in container")
 		return false
-	if (targetContainer.elements.size() >= targetContainer.containerSize): 
+	if (targetContainer.elements.size() >= targetContainer.containerSize):
 		print("ERROR: Can't add tile to " + str(self) + ", no more space")
 		return false
 	targetContainer.add(element)
@@ -103,59 +100,61 @@ func moveOneElement(element, targetContainer: ElementContainer):
 func moveElements(elements, targetContainer: ElementContainer):
 	var _tiles: Array[Tile]
 	if (typeof(elements) == TYPE_ARRAY):
-		for element in elements:
+		for i in range(elements.size() - 1, -1, -1):
+			var element = elements[i]
 			moveOneElement(element, targetContainer)
 	else:
 		moveOneElement(elements, targetContainer)
 
 func moveAllElements(targetContainer):
-	for element in elements:
+	for i in range(elements.size() - 1, -1, -1):
+		var element = elements[i]
+		print(element.container.name)
+		print(element.tileNode)
 		moveOneElement(element, targetContainer)
+	
 
 func moveRandomElements(container):
-	moveElements(getRandom(),container)
+	moveElements(getRandom(), container)
 #endregion
 
 #region Events
 func onAdded(element):
-	print("Added " + str(element))
+	#print("Added " + str(element))
 	pass
 
 func onRemoved(element):
-	print("removing...")
-	print("Removed " + str(element))
+	#print("removing...")
+	#print("Removed " + str(element))
 	pass
 
 func onMoved(element, targetContainer):
-	print("Moved " + str(element) + " to " + str(targetContainer))
+	#print("Moved " + str(element) + " to " + str(targetContainer))
 	pass
 #endregion
 
 
-
-
-
 func setElementPositions():
 	var half_size = size() / 2.0
-	for i:float in size():
-		var j = i - half_size + 0.5
+	for i: float in size():
 		var element = elements[i]
+		if (element == null): continue
+		var j = i - half_size + 0.5
 		if (element.dragged):
-			
 			continue
 		
-		if (path3d == null): 
-			elements[i].targetRotation = Vector3(0,0,0)
-			elements[i].targetPosition = Vector3(i, 0, 0)#position + Vector3(sample * 8 + .5, 0 , 0)
+		if (path3d == null):
+			elements[i].targetRotation = Vector3(0, 0, 0)
+			elements[i].targetPosition = Vector3(i, 0, 0) # position + Vector3(sample * 8 + .5, 0 , 0)
 		else:
 			var ratio = (j + half_size) / (size())
 			var _transform: Transform3D = path3d.curve.sample_baked_with_rotation(ratio * path3d.curve.get_baked_length())
 			var t = _transform.origin
-			var pos = t#path3d.curve.sample_baked(ratio * path3d.curve.get_baked_length())
+			var pos = t # path3d.curve.sample_baked(ratio * path3d.curve.get_baked_length())
 			var rot = _transform.basis.x
 			#print(rot)
-			elements[i].targetRotation = rot #Vector3(0,0,0)
-			elements[i].targetPosition = Vector3(pos.x, pos.y, pos.z)#position + Vector3(sample * 8 + .5, 0 , 0)
+			elements[i].targetRotation = rot # Vector3(0,0,0)
+			elements[i].targetPosition = Vector3(pos.x, pos.y, pos.z) # position + Vector3(sample * 8 + .5, 0 , 0)
 			elements[i].position.z = pos.z
 			#elements[i].targetPosition.x = position.x + pos.x
 			#elements[i].targetPosition.x = position.y + pos.y

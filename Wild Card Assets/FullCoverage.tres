@@ -2,11 +2,12 @@
 
 [ext_resource type="Script" path="res://Scripts/Wild Cards/FullCoverage.gd" id="1_51mbv"]
 [ext_resource type="Script" path="res://Scripts/CardAsset.gd" id="1_act6e"]
-[ext_resource type="Texture2D" uid="uid://bowwao33j2w7q" path="res://Textures/Cards/Wild Cards/Pendulum.png" id="3_oluhk"]
+[ext_resource type="Texture2D" uid="uid://dkw772twpptna" path="res://Textures/Cards/Wild Cards/wildcard_fullcoverage.png" id="3_owgbi"]
 
 [resource]
 script = ExtResource("1_act6e")
 code = ExtResource("1_51mbv")
-texture = ExtResource("3_oluhk")
+texture = ExtResource("3_owgbi")
 name = "Full Coverage"
 description = "+10 points for every edge scored "
+rarity = ""

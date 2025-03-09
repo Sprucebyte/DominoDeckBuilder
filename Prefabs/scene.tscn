@@ -1,4 +1,4 @@
-[gd_scene load_steps=56 format=3 uid="uid://c1vubbps0wbru"]
+[gd_scene load_steps=68 format=3 uid="uid://c1vubbps0wbru"]
 
 [ext_resource type="PackedScene" uid="uid://wutxuycqev1q" path="res://Prefabs/tile_placement_slot.tscn" id="1_7whan"]
 [ext_resource type="Script" path="res://Scripts/Systems/Score.gd" id="1_f3a7t"]
@@ -36,16 +36,27 @@
 [ext_resource type="Resource" uid="uid://dde8yj61c61dx" path="res://Tarot Card Assets/Justice.tres" id="11_ankui"]
 [ext_resource type="Resource" uid="uid://dt5v54srgeoj5" path="res://Tarot Card Assets/The Chariot.tres" id="12_p1yxy"]
 [ext_resource type="Resource" uid="uid://cdy547ap5kqvs" path="res://Tarot Card Assets/Temperance.tres" id="13_jhuo7"]
+[ext_resource type="PackedScene" uid="uid://dbgj2n65cxte" path="res://Prefabs/wild_card_pack.tscn" id="14_d1208"]
 [ext_resource type="Resource" uid="uid://c5bo5pp3epobq" path="res://Tarot Card Assets/The Emperor.tres" id="14_m8ga2"]
 [ext_resource type="Theme" uid="uid://cr7c32xd1yioy" path="res://Theme & Style/main_theme.tres" id="31_3dawp"]
 [ext_resource type="Theme" uid="uid://bbiwa6pvqg7aa" path="res://Theme & Style/text_theme.tres" id="31_cm3jf"]
+[ext_resource type="Resource" uid="uid://cmkjl1hkmwwqe" path="res://Wild Card Assets/Prime.tres" id="32_ke8wn"]
+[ext_resource type="Resource" uid="uid://dxuii4cruf42p" path="res://Wild Card Assets/ThreeForThree.tres" id="33_6cs2m"]
+[ext_resource type="Resource" uid="uid://bi6yjpihwfkmc" path="res://Wild Card Assets/Rain Man.tres" id="34_hnb5h"]
 [ext_resource type="PackedScene" uid="uid://drbbe2kaqsqrg" path="res://Prefabs/card_pack.tscn" id="34_jow6n"]
-[ext_resource type="PackedScene" uid="uid://bw077ruhrgtv" path="res://Prefabs/shop.tscn" id="34_k2epa"]
+[ext_resource type="Script" path="res://Scripts/DescriptionBox.gd" id="35_23qvl"]
 [ext_resource type="Texture2D" uid="uid://dg48gdn8ts2gj" path="res://Textures/shadow box.png" id="35_dw6nl"]
 [ext_resource type="PackedScene" uid="uid://c4fsjxgk0co1r" path="res://Prefabs/tile_pack.tscn" id="35_is2jb"]
+[ext_resource type="Resource" uid="uid://dp4pw5xtxx4cl" path="res://Wild Card Assets/PerfectSquare.tres" id="35_yyx7s"]
+[ext_resource type="Resource" uid="uid://ck0snmdf63842" path="res://Wild Card Assets/FullCoverage.tres" id="36_637ta"]
+[ext_resource type="Resource" uid="uid://yyt2bhp37od3" path="res://Wild Card Assets/EqualAndOpposite.tres" id="37_ausnn"]
+[ext_resource type="Resource" uid="uid://wldnflsdgvt5" path="res://Wild Card Assets/Baby steps.tres" id="38_se8t8"]
 [ext_resource type="Script" path="res://Scripts/ConsumablesContainer.gd" id="39_xvuc8"]
-[ext_resource type="PackedScene" uid="uid://bapp8fpfr8gdr" path="res://Prefabs/description_box.tscn" id="40_cqhib"]
+[ext_resource type="Texture2D" uid="uid://8m3nobyk16wm" path="res://addons/shaker/assets/icon.png" id="40_2o7gl"]
 [ext_resource type="Script" path="res://Scripts/Shop.gd" id="40_qawd6"]
+[ext_resource type="Script" path="res://Scripts/UiTest.gd" id="41_p6njh"]
+[ext_resource type="Texture2D" uid="uid://ddhaewxwb1ypk" path="res://Textures/Herbert_Moon02.webp" id="54_use7a"]
+[ext_resource type="Script" path="res://Scripts/Containers/ElementContainer.gd" id="56_spfkd"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_ee50a"]
 panorama = ExtResource("1_mtpok")
@@ -90,6 +101,13 @@ point_count = 2
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_d0xon"]
 viewport_path = NodePath("Board/SubViewport")
+
+[sub_resource type="Curve3D" id="Curve3D_6cliv"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, -7.18511, -0.00731233, 0, 0, 0, 0, 0, 0, 0, 7.19911, -0.0240192, -19.2216),
+"tilts": PackedFloat32Array(0, 0)
+}
+point_count = 2
 
 [sub_resource type="Curve3D" id="Curve3D_oovuj"]
 _data = {
@@ -158,13 +176,14 @@ tilePlacementSlot = ExtResource("1_7whan")
 tilePrefab = ExtResource("7_5c5ie")
 tilePack = ExtResource("35_is2jb")
 cardPack = ExtResource("34_jow6n")
+wildCardPack = ExtResource("14_d1208")
 priceTag = ExtResource("10_owik7")
 white = ExtResource("3_oeeda")
 black = ExtResource("4_ud0li")
 wood = ExtResource("5_k3884")
 gold = ExtResource("6_l2eui")
 tarotCardAssets = Array[ExtResource("7_gc8a2")]([ExtResource("5_gkal6"), ExtResource("6_2y26n"), ExtResource("9_qvunr"), ExtResource("8_0nk7v"), ExtResource("7_ugmgk"), ExtResource("10_ar10s"), ExtResource("11_ankui"), ExtResource("12_p1yxy"), ExtResource("13_jhuo7"), ExtResource("14_m8ga2")])
-wildCardAssets = Array[ExtResource("7_gc8a2")]([ExtResource("6_va8nl"), ExtResource("5_ci61w")])
+wildCardAssets = Array[ExtResource("7_gc8a2")]([ExtResource("6_va8nl"), ExtResource("5_ci61w"), ExtResource("32_ke8wn"), ExtResource("33_6cs2m"), ExtResource("34_hnb5h"), ExtResource("32_ke8wn"), ExtResource("35_yyx7s"), ExtResource("36_637ta"), ExtResource("37_ausnn"), ExtResource("38_se8t8")])
 
 [node name="User Interface" type="Control" parent="."]
 layout_mode = 3
@@ -176,18 +195,52 @@ grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("10_t280a")
 
-[node name="TargetScore" type="Control" parent="User Interface"]
+[node name="TextureRect" type="TextureRect" parent="User Interface" node_paths=PackedStringArray("test")]
+visible = false
+layout_mode = 0
+offset_left = 582.0
+offset_top = 497.0
+offset_right = 646.0
+offset_bottom = 561.0
+texture = ExtResource("40_2o7gl")
+expand_mode = 1
+stretch_mode = 4
+script = ExtResource("41_p6njh")
+test = NodePath("../../Hand")
+
+[node name="Gamespeed" type="HSlider" parent="User Interface"]
 unique_name_in_owner = true
-layout_mode = 1
-anchor_left = 0.0213542
-anchor_top = 0.298148
-anchor_right = 0.128125
-anchor_bottom = 0.336111
-offset_left = -1.00006
-offset_right = -1.00008
+visible = false
+layout_mode = 0
+anchor_right = 0.14375
+anchor_bottom = 0.0148148
+offset_bottom = 1.62125e-05
+min_value = 0.2
+max_value = 4.0
+step = 0.1
+value = 1.0
 metadata/_edit_use_anchors_ = true
 
-[node name="Label" type="Label" parent="User Interface/TargetScore"]
+[node name="Side Panel" type="VBoxContainer" parent="User Interface"]
+layout_direction = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 6.825
+anchor_bottom = 18.625
+offset_left = 25.0
+offset_top = 343.0
+offset_right = -12850.0
+offset_bottom = -19294.0
+theme_override_constants/separation = 22
+alignment = 1
+
+[node name="TargetScore" type="Control" parent="User Interface/Side Panel"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="User Interface/Side Panel/TargetScore"]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 0.064
@@ -195,10 +248,10 @@ offset_top = -31.0
 offset_right = 216.88
 offset_bottom = 11.0
 theme = ExtResource("31_cm3jf")
-text = "Target score:"
+text = "Target score"
 horizontal_alignment = 1
 
-[node name="Value" type="Label" parent="User Interface/TargetScore"]
+[node name="Value" type="Label" parent="User Interface/Side Panel/TargetScore"]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 0.064
@@ -208,18 +261,14 @@ theme = ExtResource("31_3dawp")
 text = "0"
 horizontal_alignment = 1
 
-[node name="CurrentScore" type="Control" parent="User Interface"]
+[node name="CurrentScore" type="Control" parent="User Interface/Side Panel"]
 unique_name_in_owner = true
-layout_mode = 1
-anchor_left = 0.0213542
-anchor_top = 0.380556
-anchor_right = 0.128125
-anchor_bottom = 0.418519
-offset_left = -1.00006
-offset_right = -1.00008
+custom_minimum_size = Vector2(0, 50)
+layout_direction = 2
+layout_mode = 2
 metadata/_edit_use_anchors_ = true
 
-[node name="Label" type="Label" parent="User Interface/CurrentScore"]
+[node name="Label" type="Label" parent="User Interface/Side Panel/CurrentScore"]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 0.064
@@ -227,10 +276,10 @@ offset_top = -31.0
 offset_right = 216.88
 offset_bottom = 11.0
 theme = ExtResource("31_cm3jf")
-text = "Current score:"
+text = "Total score"
 horizontal_alignment = 1
 
-[node name="Value" type="Label" parent="User Interface/CurrentScore"]
+[node name="Value" type="Label" parent="User Interface/Side Panel/CurrentScore"]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 0.064
@@ -240,194 +289,205 @@ theme = ExtResource("31_3dawp")
 text = "0"
 horizontal_alignment = 1
 
-[node name="HandScore" type="Control" parent="User Interface"]
+[node name="HBoxContainer" type="HBoxContainer" parent="User Interface/Side Panel"]
+custom_minimum_size = Vector2(0, 50)
+layout_direction = 2
+layout_mode = 2
+theme_override_constants/separation = 7
+
+[node name="HandScore" type="VBoxContainer" parent="User Interface/Side Panel/HBoxContainer"]
 unique_name_in_owner = true
-layout_mode = 1
-anchor_left = 0.0213542
-anchor_top = 0.433333
-anchor_right = 0.128125
-anchor_bottom = 0.471296
-offset_left = -1.00006
-offset_top = 49.0004
-offset_right = -1.00008
-offset_bottom = 49.0004
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
 metadata/_edit_use_anchors_ = true
 
-[node name="Label" type="Label" parent="User Interface/HandScore"]
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 0.064
-offset_right = 95.88
-offset_bottom = 42.0
+[node name="Label" type="Label" parent="User Interface/Side Panel/HBoxContainer/HandScore"]
+layout_mode = 2
 theme = ExtResource("31_cm3jf")
 theme_override_colors/font_color = Color(0.319893, 0.682058, 0.958333, 1)
-text = "Hand score:"
+text = "Score"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Value" type="Label" parent="User Interface/HandScore"]
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 0.064
-offset_top = 39.89
-offset_right = 86.88
-offset_bottom = 75.89
+[node name="Value" type="Label" parent="User Interface/Side Panel/HBoxContainer/HandScore"]
+layout_mode = 2
 theme = ExtResource("31_3dawp")
 theme_override_colors/font_color = Color(0.319893, 0.682058, 0.958333, 1)
 text = "0"
 horizontal_alignment = 1
 
-[node name="Multiplier" type="Control" parent="User Interface"]
-unique_name_in_owner = true
-layout_mode = 1
-anchor_left = 0.0890625
-anchor_top = 0.478704
-anchor_right = 0.195833
-anchor_bottom = 0.516667
-offset_left = -1.00006
-offset_right = -1.00008
-metadata/_edit_use_anchors_ = true
-
-[node name="Label" type="Label" parent="User Interface/Multiplier"]
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 0.064
-offset_right = 86.88
-offset_bottom = 42.0
-theme = ExtResource("31_cm3jf")
-theme_override_colors/font_color = Color(1, 0.271996, 0.152193, 1)
-text = "Multiplier:"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Label2" type="Label" parent="User Interface/Multiplier"]
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 0.064
-offset_left = -65.0
-offset_top = 37.0
-offset_right = 21.88
-offset_bottom = 79.0
+[node name="X" type="Label" parent="User Interface/Side Panel/HBoxContainer"]
+custom_minimum_size = Vector2(0, 52.11)
+layout_mode = 2
 theme = ExtResource("31_cm3jf")
 theme_override_colors/font_color = Color(1, 0.271996, 0.152193, 1)
 text = "X"
 horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="Multiplier" type="VBoxContainer" parent="User Interface/Side Panel/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="User Interface/Side Panel/HBoxContainer/Multiplier"]
+layout_mode = 2
+theme = ExtResource("31_cm3jf")
+theme_override_colors/font_color = Color(1, 0.271996, 0.152193, 1)
+text = "Multiplier"
+horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Value" type="Label" parent="User Interface/Multiplier"]
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 0.064
-offset_top = 39.89
-offset_right = 86.88
-offset_bottom = 75.89
+[node name="Value" type="Label" parent="User Interface/Side Panel/HBoxContainer/Multiplier"]
+layout_mode = 2
 theme = ExtResource("31_3dawp")
 theme_override_colors/font_color = Color(1, 0.271996, 0.152193, 1)
 text = "0"
 horizontal_alignment = 1
 
-[node name="Money" type="Control" parent="User Interface"]
-unique_name_in_owner = true
-layout_mode = 1
-anchor_left = 0.0213542
-anchor_top = 0.569444
-anchor_right = 0.128125
-anchor_bottom = 0.607407
-offset_left = -1.00006
-offset_right = -1.00008
-metadata/_edit_use_anchors_ = true
-
-[node name="Label" type="Label" parent="User Interface/Money"]
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 0.064
-offset_left = -40.0
-offset_top = -3.99985
-offset_right = 96.88
-offset_bottom = 38.0002
-theme = ExtResource("31_cm3jf")
-theme_override_colors/font_color = Color(1, 0.750667, 0.12, 1)
-text = "Money:"
-horizontal_alignment = 2
-vertical_alignment = 1
-
-[node name="Value" type="Label" parent="User Interface/Money"]
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 0.064
-offset_left = 120.0
-offset_right = 216.88
-offset_bottom = 36.0
-theme = ExtResource("31_3dawp")
-theme_override_colors/font_color = Color(1, 0.750667, 0.12, 1)
-text = "0"
-horizontal_alignment = 2
-
-[node name="EdgeValueDisplay" type="Control" parent="User Interface"]
-unique_name_in_owner = true
-layout_mode = 1
-anchor_left = 0.439583
-anchor_top = 0.244444
-anchor_right = 0.546354
-anchor_bottom = 0.282407
-offset_left = 6.48499e-05
-offset_right = 4.57764e-05
-metadata/_edit_use_anchors_ = true
-
-[node name="Label" type="Label" parent="User Interface/EdgeValueDisplay"]
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 0.064
-offset_left = -40.0
-offset_top = -3.99985
-offset_right = 96.88
-offset_bottom = 38.0002
-theme = ExtResource("31_cm3jf")
-text = "Edge value:"
-horizontal_alignment = 2
-vertical_alignment = 1
-
-[node name="Value" type="Label" parent="User Interface/EdgeValueDisplay"]
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 0.064
-offset_left = 120.0
-offset_right = 216.88
-offset_bottom = 36.0
-theme = ExtResource("31_3dawp")
-text = "0"
-horizontal_alignment = 2
-
-[node name="PlayRoundButton" type="Button" parent="User Interface"]
-unique_name_in_owner = true
+[node name="HBoxContainer2" type="HBoxContainer" parent="User Interface/Side Panel"]
+custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
-offset_left = 619.0
-offset_top = 1030.0
-offset_right = 729.0
-offset_bottom = 1064.0
-focus_mode = 0
-theme = ExtResource("31_3dawp")
-action_mode = 0
-text = "Play round"
+theme_override_constants/separation = 28
 
-[node name="HBoxContainer" type="HBoxContainer" parent="User Interface"]
+[node name="Hands" type="VBoxContainer" parent="User Interface/Side Panel/HBoxContainer2"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="User Interface/Side Panel/HBoxContainer2/Hands"]
+layout_mode = 2
+theme = ExtResource("31_cm3jf")
+theme_override_colors/font_color = Color(0.319893, 0.682058, 0.958333, 1)
+text = "Hands"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Value" type="Label" parent="User Interface/Side Panel/HBoxContainer2/Hands"]
+layout_mode = 2
+theme = ExtResource("31_3dawp")
+theme_override_colors/font_color = Color(0.319893, 0.682058, 0.958333, 1)
+text = "0"
+horizontal_alignment = 1
+
+[node name="Discards" type="VBoxContainer" parent="User Interface/Side Panel/HBoxContainer2"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="User Interface/Side Panel/HBoxContainer2/Discards"]
+layout_mode = 2
+theme = ExtResource("31_cm3jf")
+theme_override_colors/font_color = Color(1, 0.271996, 0.152193, 1)
+text = "Discards"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Value" type="Label" parent="User Interface/Side Panel/HBoxContainer2/Discards"]
+layout_mode = 2
+theme = ExtResource("31_3dawp")
+theme_override_colors/font_color = Color(1, 0.271996, 0.152193, 1)
+text = "0"
+horizontal_alignment = 1
+
+[node name="Money" type="HBoxContainer" parent="User Interface/Side Panel"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_constants/separation = 20
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="User Interface/Side Panel/Money"]
+layout_mode = 2
+theme = ExtResource("31_cm3jf")
+theme_override_colors/font_color = Color(1, 0.750667, 0.12, 1)
+text = "Money"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Value" type="Label" parent="User Interface/Side Panel/Money"]
+custom_minimum_size = Vector2(110, 0)
+layout_mode = 2
+theme = ExtResource("31_3dawp")
+theme_override_colors/font_color = Color(1, 0.750667, 0.12, 1)
+text = "0"
+horizontal_alignment = 1
+
+[node name="EdgeValueDisplay" type="HBoxContainer" parent="User Interface/Side Panel"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+theme_override_constants/separation = 20
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="User Interface/Side Panel/EdgeValueDisplay"]
+layout_mode = 2
+theme = ExtResource("31_cm3jf")
+text = "Edge value"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Value" type="Label" parent="User Interface/Side Panel/EdgeValueDisplay"]
+custom_minimum_size = Vector2(110, 0)
+layout_mode = 2
+theme = ExtResource("31_3dawp")
+text = "0"
+horizontal_alignment = 2
+
+[node name="Round" type="HBoxContainer" parent="User Interface/Side Panel"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_constants/separation = 20
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="User Interface/Side Panel/Round"]
+layout_mode = 2
+theme = ExtResource("31_cm3jf")
+text = "Round
+"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Value" type="Label" parent="User Interface/Side Panel/Round"]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+theme = ExtResource("31_3dawp")
+text = "0"
+horizontal_alignment = 2
+
+[node name="Buttons" type="HBoxContainer" parent="User Interface"]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -188.0
+offset_left = -248.0
 offset_top = -50.0
-offset_right = 188.0
+offset_right = 248.0
 offset_bottom = -12.0
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_constants/separation = 10
 alignment = 1
 
-[node name="Draw Button" type="Button" parent="User Interface/HBoxContainer"]
+[node name="PlayRoundButton" type="Button" parent="User Interface/Buttons"]
 unique_name_in_owner = true
+layout_mode = 2
+focus_mode = 0
+theme = ExtResource("31_3dawp")
+action_mode = 0
+text = "Play round"
+
+[node name="Draw Button" type="Button" parent="User Interface/Buttons"]
+unique_name_in_owner = true
+visible = false
 custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
 focus_mode = 0
@@ -436,7 +496,7 @@ action_mode = 0
 text = "Draw
 "
 
-[node name="Button Sort By Top" type="Button" parent="User Interface/HBoxContainer"]
+[node name="Button Sort By Top" type="Button" parent="User Interface/Buttons"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(32, 0)
 layout_mode = 2
@@ -447,7 +507,7 @@ text = "▀"
 icon_alignment = 1
 expand_icon = true
 
-[node name="Button Sort By Sum" type="Button" parent="User Interface/HBoxContainer"]
+[node name="Button Sort By Sum" type="Button" parent="User Interface/Buttons"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(32, 0)
 layout_mode = 2
@@ -458,7 +518,7 @@ text = "█"
 icon_alignment = 1
 expand_icon = true
 
-[node name="Button Sort By Bottom" type="Button" parent="User Interface/HBoxContainer"]
+[node name="Button Sort By Bottom" type="Button" parent="User Interface/Buttons"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(32, 0)
 layout_mode = 2
@@ -469,7 +529,7 @@ text = "▄"
 icon_alignment = 1
 expand_icon = true
 
-[node name="Discard Button" type="Button" parent="User Interface/HBoxContainer"]
+[node name="Discard Button" type="Button" parent="User Interface/Buttons"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
@@ -479,16 +539,46 @@ action_mode = 0
 text = "Discard
 "
 
-[node name="Gamespeed" type="HSlider" parent="User Interface"]
-unique_name_in_owner = true
+[node name="Description Box" type="VBoxContainer" parent="User Interface"]
 layout_mode = 0
-anchor_right = 0.14375
-anchor_bottom = 0.0148148
-min_value = 0.2
-max_value = 4.0
-step = 0.1
-value = 1.0
-metadata/_edit_use_anchors_ = true
+offset_left = 1658.0
+offset_top = 330.0
+offset_right = 1897.0
+offset_bottom = 582.0
+theme_override_constants/separation = 15
+script = ExtResource("35_23qvl")
+
+[node name="Name" type="Label" parent="User Interface/Description Box"]
+layout_mode = 2
+theme = ExtResource("31_3dawp")
+theme_override_font_sizes/font_size = 24
+text = "Name of thing"
+horizontal_alignment = 1
+
+[node name="Description" type="RichTextLabel" parent="User Interface/Description Box"]
+clip_contents = false
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+theme = ExtResource("31_3dawp")
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+text = "[center]The description of the thing we are describing
+
++1 mult wehen shduahdh 
+
+"
+scroll_active = false
+
+[node name="Rarity" type="RichTextLabel" parent="User Interface/Description Box"]
+clip_contents = false
+custom_minimum_size = Vector2(0, 35.43)
+layout_mode = 2
+theme = ExtResource("31_3dawp")
+theme_override_font_sizes/normal_font_size = 20
+bbcode_enabled = true
+text = "[center][color=green]RARE[/color][/center]
+"
+scroll_active = false
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.880477, 0.474088, 0, -0.474088, 0.880478, 0.015358, 0.21002, 0.0521584)
@@ -574,12 +664,81 @@ transform = Transform3D(2.85178, 0, 0, 0, 2.85178, 0, 0, 0, 2, 0, 0, -9.55676)
 visible = false
 texture = SubResource("ViewportTexture_d0xon")
 
-[node name="Shop" parent="." instance=ExtResource("34_k2epa")]
+[node name="Shop" type="Node3D" parent="."]
 script = ExtResource("40_qawd6")
 
-[node name="Descrption Box" parent="." instance=ExtResource("40_cqhib")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.1267, 0.18923, 0)
+[node name="Sprite3D2" type="Sprite3D" parent="Shop"]
+transform = Transform3D(0.600661, 0, 0, 0, 0.600661, 0, 0, 0, 1, 19.9514, -9.94568, -11.6982)
 visible = false
+centered = false
+modulate = Color(1, 1, 1, 0.596078)
+render_priority = -10
+texture = ExtResource("54_use7a")
+
+[node name="Cards" type="Node3D" parent="Shop" node_paths=PackedStringArray("path3d")]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.43336, -3.87126, 0)
+script = ExtResource("56_spfkd")
+containerSize = 10
+defaultElementState = 3
+path3d = NodePath("Path3D")
+
+[node name="Shadow2" type="Sprite3D" parent="Shop/Cards"]
+transform = Transform3D(1, 0, 0, 0, 2.13987, 0, 0, 0, 1, 0, -0.0358891, -50.9552)
+modulate = Color(1, 1, 1, 0.541176)
+render_priority = -10
+texture = ExtResource("35_dw6nl")
+
+[node name="Path3D" type="Path3D" parent="Shop/Cards"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.320374, 0)
+curve = SubResource("Curve3D_6cliv")
+
+[node name="Tiles" type="Node3D" parent="Shop" node_paths=PackedStringArray("path3d")]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.903136, 3.95946, 0)
+script = ExtResource("56_spfkd")
+containerSize = 10
+defaultElementState = 3
+path3d = NodePath("Path3D")
+
+[node name="Shadow" type="Sprite3D" parent="Shop/Tiles"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -50.9552)
+modulate = Color(1, 1, 1, 0.541176)
+render_priority = -10
+texture = ExtResource("35_dw6nl")
+
+[node name="Path3D" type="Path3D" parent="Shop/Tiles"]
+curve = SubResource("Curve3D_6cliv")
+
+[node name="Packs" type="Node3D" parent="Shop" node_paths=PackedStringArray("path3d")]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.8751, -3.80829, 0)
+script = ExtResource("56_spfkd")
+containerSize = 10
+defaultElementState = 3
+path3d = NodePath("Path3D")
+
+[node name="Shadow3" type="Sprite3D" parent="Shop/Packs"]
+transform = Transform3D(1, 0, 0, 0, 2.13987, 0, 0, 0, 1, 0, 0.0358891, -50.9552)
+modulate = Color(1, 1, 1, 0.541176)
+render_priority = -10
+texture = ExtResource("35_dw6nl")
+
+[node name="Path3D" type="Path3D" parent="Shop/Packs"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0543609, 0)
+curve = SubResource("Curve3D_6cliv")
+
+[node name="ContinueButton" type="Button" parent="Shop"]
+unique_name_in_owner = true
+visible = false
+anchors_preset = -1
+anchor_right = 0.084
+anchor_bottom = 0.036
+offset_left = 876.0
+offset_top = 844.0
+offset_right = 875.72
+offset_bottom = 844.12
+text = "Continue"
 
 [node name="Consumables" type="Node3D" parent="." node_paths=PackedStringArray("path3d")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.5274, 11.898, 0)
@@ -596,9 +755,10 @@ transform = Transform3D(0.917479, 0, 0, 0, 1.3266, 0, 0, 0, 1.08333, 7.57198, -0
 transparency = 0.36
 texture = ExtResource("35_dw6nl")
 
-[connection signal="pressed" from="User Interface/PlayRoundButton" to="User Interface" method="playRoundButtonPressed"]
-[connection signal="pressed" from="User Interface/HBoxContainer/Draw Button" to="User Interface" method="drawButtonPressed"]
-[connection signal="pressed" from="User Interface/HBoxContainer/Button Sort By Top" to="User Interface" method="sortByTopValue"]
-[connection signal="pressed" from="User Interface/HBoxContainer/Button Sort By Sum" to="User Interface" method="sortByTotalValue"]
-[connection signal="pressed" from="User Interface/HBoxContainer/Button Sort By Bottom" to="User Interface" method="sortByBottomValue"]
-[connection signal="pressed" from="User Interface/HBoxContainer/Discard Button" to="User Interface" method="discardButtonPressed"]
+[connection signal="pressed" from="User Interface/Buttons/PlayRoundButton" to="User Interface" method="playRoundButtonPressed"]
+[connection signal="pressed" from="User Interface/Buttons/Draw Button" to="User Interface" method="drawButtonPressed"]
+[connection signal="pressed" from="User Interface/Buttons/Button Sort By Top" to="User Interface" method="sortByTopValue"]
+[connection signal="pressed" from="User Interface/Buttons/Button Sort By Sum" to="User Interface" method="sortByTotalValue"]
+[connection signal="pressed" from="User Interface/Buttons/Button Sort By Bottom" to="User Interface" method="sortByBottomValue"]
+[connection signal="pressed" from="User Interface/Buttons/Discard Button" to="User Interface" method="discardButtonPressed"]
+[connection signal="pressed" from="Shop/ContinueButton" to="Shop" method="close"]

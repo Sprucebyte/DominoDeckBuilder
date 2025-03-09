@@ -32,7 +32,7 @@ __follow_timeline = false
 size = Vector3(5.40858, 2.08905, 0.485291)
 
 [node name="Buy Button" type="Node3D"]
-transform = Transform3D(0.999006, -0.0373976, -0.024258, 0.0354952, 0.996581, -0.0746078, 0.0269652, 0.0736726, 0.996918, 0, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 
 [node name="ShakerComponent3D" type="Node3D" parent="."]
 script = ExtResource("1_r7k7k")

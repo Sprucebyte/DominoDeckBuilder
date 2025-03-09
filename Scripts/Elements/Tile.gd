@@ -44,23 +44,25 @@ func _ready() -> void:
 		pipColor = tileMaterial.pipColor
 		spriteTop.modulate = pipColor
 		spriteBottom.modulate = pipColor
-		spriteDivider.modulate = pipColor	
-		mesh.set_surface_override_material(1,tileMaterial.material)
-		mesh.set_surface_override_material(0,tileMaterial.outlineMaterial)
+		spriteDivider.modulate = pipColor
+		mesh.set_surface_override_material(1, tileMaterial.material)
+		mesh.set_surface_override_material(0, tileMaterial.outlineMaterial)
 	
 func randomize():
-	topValue = randi_range(0,6)
-	bottomValue = randi_range(0,6)	
+	topValue = randi_range(0, 6)
+	bottomValue = randi_range(0, 6)
 
 	
 func updateNumbers():
-	spriteTop.texture = sprites[min(topValue,sprites.size()-1)]
-	spriteBottom.texture = sprites[min(bottomValue,sprites.size()-1)]
+	spriteTop.texture = sprites[min(topValue, sprites.size() - 1)]
+	spriteBottom.texture = sprites[min(bottomValue, sprites.size() - 1)]
 
 
 func _process(delta: float) -> void:
 	super(delta)
+	updateIdleAnimation(delta)
 	updateNumbers()
+	#debug()
 	if GameManager.gameState != GameManager.GameStates.playing: return
 	if (hovered):
 		if (Input.is_action_just_pressed("click")):
@@ -70,27 +72,22 @@ func _process(delta: float) -> void:
 						if tileNode.isEdgeNode():
 							GameManager.board.moveOneElement(self, GameManager.hand)
 							GameManager.board.tileNodeTree.removeNode(tileNode)
-							SignalBus.emit_signal("OnTileRemoved",self)
+							SignalBus.emit_signal("OnTileRemoved", self)
 						
 						
-
-
 func getEdgeValue() -> float:
 	return tileNode.getEdgeValue()
 
 
-
-
 func updateIdleAnimation(delta):
-	if validStates([States.inHand, States.onBoard]) and not lockedIn:
+	if validStates([States.onBoard]) and not lockedIn:
 		idleAxis.rotation.x = (cos(t * .25 * idleSpeed + offset) * .2)
-		idleAxis.rotation.y = (cos(t * .5 *  idleSpeed + offset) * .2)
-		idleAxis.rotation.z = (cos(t * .5 *  idleSpeed + offset) * .1)
+		idleAxis.rotation.y = (cos(t * .5 * idleSpeed + offset) * .2)
+		idleAxis.rotation.z = (cos(t * .5 * idleSpeed + offset) * .1)
 	else:
-		idleAxis.rotation.x = lerp_angle(idleAxis.rotation.x, 0, 	delta*10*GameManager.gameSpeedMultiplier)
-		idleAxis.rotation.y = lerp_angle(idleAxis.rotation.y, 0, 	delta*10*GameManager.gameSpeedMultiplier)
-		idleAxis.rotation.z = lerp_angle(idleAxis.rotation.z, 0, 	delta*10*GameManager.gameSpeedMultiplier)
-
+		idleAxis.rotation.x = lerp_angle(idleAxis.rotation.x, 0, delta * 10 * GameManager.gameSpeedMultiplier)
+		idleAxis.rotation.y = lerp_angle(idleAxis.rotation.y, 0, delta * 10 * GameManager.gameSpeedMultiplier)
+		idleAxis.rotation.z = lerp_angle(idleAxis.rotation.z, 0, delta * 10 * GameManager.gameSpeedMultiplier)
 
 
 func setDirection(direction):
@@ -98,10 +95,10 @@ func setDirection(direction):
 	var rot = Vector3.ZERO
 	
 	match direction:
-		Util.Up: rot = Vector3(0,0,0)
-		Util.Right: rot = Vector3(0,0,-90)
-		Util.Down: rot = Vector3(0,0,180)
-		Util.Left: rot = Vector3(0,0,90)
+		Util.Up: rot = Vector3(0, 0, 0)
+		Util.Right: rot = Vector3(0, 0, -90)
+		Util.Down: rot = Vector3(0, 0, 180)
+		Util.Left: rot = Vector3(0, 0, 90)
 	targetRotation = rot
 
 
@@ -137,7 +134,7 @@ func debug():
 		leftTakenIndicator.modulate = Color.TRANSPARENT
 
 
-func play(): 
+func play():
 	unhover()
 	deselect()
 	#selectable = false
@@ -162,7 +159,7 @@ func playFrom():
 func clicked():
 	if validState(States.onBoard):
 		playFrom();
-	else: if validStates([States.inHand,States.inShop,States.inDeck]):
+	else: if validStates([States.inHand, States.inShop, States.inDeck]):
 		if not (selected):
 			select()
 		else:
@@ -177,13 +174,12 @@ func select():
 	shakerSelect.play_shake()
 
 	
-
 	pass
 
 func deselect():
 	selected = false
 	SignalBus.emit_signal("OnTileDeselected", self)
-	shakerSelect.play_shake()	
+	shakerSelect.play_shake()
 	pass
 
 func hover():
@@ -193,26 +189,17 @@ func hover():
 	pass
 
 func unhover():
-	
 	SignalBus.emit_signal("OnTileUnhovered", self)
 	targetScale = Vector3.ONE
 	hovered = false
 	pass
 
 func activate():
-	await get_tree().create_timer(.5/ GameManager.gameSpeedMultiplier).timeout
+	await get_tree().create_timer(.5 / GameManager.gameSpeedMultiplier).timeout
 	print("activated!")
 	SignalBus.emit_signal("OnTileActivated", self)
-	shake()
+	shake(shakerActivate)
 	pass
-
-func shake(shaker: ShakerComponent3D = shakerActivate, speed = 1):
-	SignalBus.OnTileScored.emit(self)
-	shaker.play_shake()	
-	shaker.shake_speed = shaker.shake_speed * speed
-	await Util.shakerDone(shaker)
-	return
-
 
 
 func lockIn(lockInSpeed = 1):
@@ -220,9 +207,8 @@ func lockIn(lockInSpeed = 1):
 	position.z = 2
 	AudioManager.play(AudioManager.Instance.domino1)
 	lockedIn = true
-	await shake(shakerActivate,lockInSpeed)
+	await shake(shakerActivate, lockInSpeed)
 	AudioManager.play(AudioManager.Instance.domino1)
 	position.z = 0
 	targetPosition.z = 0
 	#SignalBus.emit_signal("OnTileLockedIn", self)
-	

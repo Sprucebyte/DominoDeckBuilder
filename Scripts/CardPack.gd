@@ -1,13 +1,12 @@
 extends Pack
 class_name CardPack
 @onready var shakerOpen = %ShakerOpen
-@onready var sprite = %Sprite 
+@onready var sprite = %Sprite
 
 var cards = []
 
 enum Types {TarotCards, WildCards}
 @export var type: Types
-
 
 
 # Called when the node enters the scene tree for the first time.
@@ -17,7 +16,7 @@ func _ready() -> void:
 
 func open():
 	randomize()
-	super()
+	await super()
 	var tempArray = []
 	if type == Types.TarotCards:
 		tempArray.append_array(AssetManager.Instance.tarotCardAssets)
@@ -40,6 +39,6 @@ func open():
 		add_child(card)
 		elementContainer.add(card)
 		GameManager.chooseFrom.append(card)
-
-	sprite.visible = false
 	
+	opened = true
+	sprite.visible = false

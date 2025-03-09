@@ -2,11 +2,12 @@
 
 [ext_resource type="Script" path="res://Scripts/CardAsset.gd" id="1_ucgvo"]
 [ext_resource type="Script" path="res://Scripts/Wild Cards/Prime.gd" id="1_wyje7"]
-[ext_resource type="Texture2D" uid="uid://br3kyo6buocih" path="res://Textures/Cards/Wild Cards/Prime.png" id="3_tjnq6"]
+[ext_resource type="Texture2D" uid="uid://85vs4k68045h" path="res://Textures/Cards/Wild Cards/wildcard_prime.png" id="3_wwgh0"]
 
 [resource]
 script = ExtResource("1_ucgvo")
 code = ExtResource("1_wyje7")
-texture = ExtResource("3_tjnq6")
+texture = ExtResource("3_wwgh0")
 name = "Prime"
 description = "+ 7 mult when edge value is prime"
+rarity = ""

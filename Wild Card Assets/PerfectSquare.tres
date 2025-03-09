@@ -2,11 +2,12 @@
 
 [ext_resource type="Script" path="res://Scripts/CardAsset.gd" id="1_ng0vc"]
 [ext_resource type="Script" path="res://Scripts/Wild Cards/PerfectSquare.gd" id="1_su2mm"]
-[ext_resource type="Texture2D" uid="uid://20nuoka5q2pu" path="res://Textures/Cards/Wild Cards/backup/Prime.png" id="3_rt65u"]
+[ext_resource type="Texture2D" uid="uid://dy2mjiolcgfv5" path="res://Textures/Cards/Wild Cards/wildcard_perfectsquare.png" id="3_8x5o6"]
 
 [resource]
 script = ExtResource("1_ng0vc")
 code = ExtResource("1_su2mm")
-texture = ExtResource("3_rt65u")
+texture = ExtResource("3_8x5o6")
 name = "Perfect Square"
 description = "+ N mult If total edge value is a perfect sqare, N is the length of the square"
+rarity = ""

@@ -10,14 +10,8 @@ var board: Board = null
 var deck: Deck = null
 var wildCards: WildCardContainer = null
 
-var totalScore = 0
-var roundScore = 0
-var handScore = 0
-var multiplier = 1
 var mousePos: Vector3
 var gameSpeedMultiplier = 1
-
-var money = 0
 
 var handSize = 8
 
@@ -25,11 +19,16 @@ var handCount = 4
 var discardCount = 4
 
 var round = 0
+
+
 var handsRemaining = handCount
 var discardsRemaining = discardCount
 var chooseFrom = []
+
+
 enum GameStates {paused, shop, openingPack, waiting, playing, scoring, lost, won, roundOver}
 var gameState = GameStates.playing
+
 
 func selectTile(tile):
 	selectedTiles.push_back(tile)
@@ -42,8 +41,8 @@ func deselectTile(tile):
 	pass
 
 
-func sortByDistance(elements : Array[Element]):
-	elements.sort_custom(func(a:Tile,b:Tile): return (abs(a.position.distance_to(mousePos)) < abs(b.position.distance_to(mousePos))))
+func sortByDistance(elements: Array[Element]):
+	elements.sort_custom(func(a: Tile, b: Tile): return (abs(a.position.distance_to(mousePos)) < abs(b.position.distance_to(mousePos))))
 
 
 func _ready() -> void:
@@ -53,10 +52,12 @@ func _ready() -> void:
 	board = get_tree().get_first_node_in_group("Board")
 	wildCards = get_tree().get_first_node_in_group("WildCards")
 	
-	SignalBus.connect("OnTileSelected",selectTile)
-	SignalBus.connect("OnTileDeselected",deselectTile)
-	SignalBus.connect("PlayRound", playRound)
+	SignalBus.connect("OnTileSelected", selectTile)
+	SignalBus.connect("OnTileDeselected", deselectTile)
+	SignalBus.connect("PlayRound", playHand)
 	SignalBus.connect("OnTileRemoved", onTileRemoved)
+	await Util.delay(15)
+	startRound()
 
 
 func onTileRemoved(tile):
@@ -64,24 +65,17 @@ func onTileRemoved(tile):
 	pass
 
 
-func playRound():
-	if gameState != GameStates.playing: return
+func lockInTiles():
 	var lockInSpeed = 1
 	for tile: Tile in board.elements:
 		if (tile.lockedIn): continue
 		tile.lockIn(lockInSpeed * gameSpeedMultiplier)
 		await tile.lockIn(lockInSpeed * gameSpeedMultiplier)
-		#await Util.delay(.1)
-		lockInSpeed *= 1.1
-	await Util.delay(.3/ gameSpeedMultiplier * lockInSpeed)
-	Score.Instance.run()
+		lockInSpeed *= Score.acceleration
+	await Util.delay(.3 / gameSpeedMultiplier * lockInSpeed)
+	return
 	
 	
-
-
-
-	
-
 func _process(_delta: float) -> void:
 	mousePos = get_viewport().get_camera_3d().project_position(get_viewport().get_mouse_position(), 100)
 	#for element in board.elements:
@@ -93,27 +87,97 @@ func _process(_delta: float) -> void:
 			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
 		pass
 
-
-	if (Input.is_key_pressed(KEY_5)):
-		sortByDistance(board.elements)
-		if (board.size() > 0):
-			print(str(board.elements[0].topValue))
+		#sortByDistance(board.elements)
+		#if (board.size() > 0):
+		#	print(str(board.elements[0].topValue))
 			#board.elements[0].targetScale = Vector3.ONE * 1.5
-
 	pass
 
- 
+
+func startRound():
+	Score.Instance.reset()
+	gameState = GameStates.playing
+	discardsRemaining = discardCount
+	handsRemaining = handCount
+	SignalBus.DrawToHand.emit(handSize)
+	#updatePlacementSlots()
+	pass
+
+func endRound():
+	if Score.Instance.roundScore >= Score.Instance.targetScore:
+		win()
+	else:
+		loose()
+	board.clear()
+	hand.moveAllElements(deck)
+		
+func win():
+	gameState = GameStates.won
+	await Util.delay(.5)
+
+	Score.Instance.money += 5
+	Score.Instance.money += handsRemaining
+	Score.Instance.money += discardsRemaining
+	await Util.delay(.5)
+	openShop()
+
+func openShop():
+	Shop.Instance.open()
+	gameState = GameStates.shop
+
+
+func loose():
+	gameState = GameStates.lost
+	await Util.delay(.5)
+	restart()
+
+func nextRound():
+	round += 1
+	Score.Instance.targetScore = round(Score.Instance.targetScore * 1.5)
+	startRound()
+	pass
+
+func restart():
+	round = 0
+	Score.Instance.resetAll()
+	startRound()
+	pass
+
+
+func playHand():
+	if gameState != GameStates.playing: return
+	gameState = GameStates.scoring
+	await lockInTiles()
+	await Score.Instance.run()
+	
+	handsRemaining -= 1
+
+	if (handsRemaining > 0):
+		gameState = GameStates.playing
+	else:
+		gameState = GameStates.roundOver
+		endRound()
+		return
+	
+	if (Score.Instance.roundScore >= Score.Instance.targetScore):
+		endRound()
+		return
+	
+	SignalBus.DrawToHand.emit()
+	return
+
+
 var placementSlots = []
 
 func updatePlacementSlots():
 	clearPlacementSlots()
-	if (board.size() > 0):
-		if (selectedTiles.size() == 1):
+	if (selectedTiles.size() == 1):
+		if (board.size() > 0):
 			for tileSlot in board.tileNodeTree.getValidSlots(board.tileNodeTree.rootNode):
 				var placementSlot = TilePlacementSlot.Spawn()
 				var newTile = selectedTiles[0]
 				var newTileSide = GameManager.board.chooseTileSide(newTile, tileSlot)
-				var offsetAndDirection = GameManager.board.getTileOffsetAndDirection(tileSlot.node,newTile,tileSlot.side,newTileSide)
+				var offsetAndDirection = GameManager.board.getTileOffsetAndDirection(tileSlot.node, newTile, tileSlot.side, newTileSide)
 				placementSlot.tileSlot = tileSlot
 				placementSlot.tile = newTile
 				placementSlot.side = newTileSide
@@ -121,9 +185,14 @@ func updatePlacementSlots():
 				placementSlot.position = tileSlot.tile.global_position + offsetAndDirection.offset;
 				placementSlot.setDirection(offsetAndDirection.direction)
 				placementSlots.append(placementSlot)
-				
-				
+		else:
+			var placementSlot = TilePlacementSlot.Spawn()
+			placementSlot.position = board.position
+			var newTile = selectedTiles[0]
+			placementSlot.tile = newTile
+			placementSlots.append(placementSlot)
 
+				
 func clearPlacementSlots():
 	for placementSlot in placementSlots:
 		placementSlot.Destroy()
