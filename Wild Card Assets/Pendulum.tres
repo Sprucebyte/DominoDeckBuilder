@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="CardAsset" load_steps=4 format=3 uid="uid://bhlbpwxoya3jw"]
+
+[ext_resource type="Script" path="res://Scripts/Wild Cards/Pendulum.gd" id="1_74l7a"]
+[ext_resource type="Script" path="res://Scripts/CardAsset.gd" id="1_xhpkm"]
+[ext_resource type="Texture2D" uid="uid://c38mwknthdqbe" path="res://Textures/Cards/Wild Cards/wildcard_pendulum.png" id="3_rwjqr"]
+
+[resource]
+script = ExtResource("1_xhpkm")
+code = ExtResource("1_74l7a")
+texture = ExtResource("3_rwjqr")
+name = "Pendulum"
+description = "[b][mult]x1.5 mult[/mult][/b] every other turn"
+rarity = 0

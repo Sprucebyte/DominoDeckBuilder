@@ -1,4 +1,4 @@
-[gd_scene load_steps=68 format=3 uid="uid://c1vubbps0wbru"]
+[gd_scene load_steps=78 format=3 uid="uid://c1vubbps0wbru"]
 
 [ext_resource type="PackedScene" uid="uid://wutxuycqev1q" path="res://Prefabs/tile_placement_slot.tscn" id="1_7whan"]
 [ext_resource type="Script" path="res://Scripts/Systems/Score.gd" id="1_f3a7t"]
@@ -42,7 +42,7 @@
 [ext_resource type="Theme" uid="uid://bbiwa6pvqg7aa" path="res://Theme & Style/text_theme.tres" id="31_cm3jf"]
 [ext_resource type="Resource" uid="uid://cmkjl1hkmwwqe" path="res://Wild Card Assets/Prime.tres" id="32_ke8wn"]
 [ext_resource type="Resource" uid="uid://dxuii4cruf42p" path="res://Wild Card Assets/ThreeForThree.tres" id="33_6cs2m"]
-[ext_resource type="Resource" uid="uid://bi6yjpihwfkmc" path="res://Wild Card Assets/Rain Man.tres" id="34_hnb5h"]
+[ext_resource type="Resource" uid="uid://bi6yjpihwfkmc" path="res://Wild Card Assets/RainMan.tres" id="34_hnb5h"]
 [ext_resource type="PackedScene" uid="uid://drbbe2kaqsqrg" path="res://Prefabs/card_pack.tscn" id="34_jow6n"]
 [ext_resource type="Script" path="res://Scripts/DescriptionBox.gd" id="35_23qvl"]
 [ext_resource type="Texture2D" uid="uid://dg48gdn8ts2gj" path="res://Textures/shadow box.png" id="35_dw6nl"]
@@ -55,8 +55,24 @@
 [ext_resource type="Texture2D" uid="uid://8m3nobyk16wm" path="res://addons/shaker/assets/icon.png" id="40_2o7gl"]
 [ext_resource type="Script" path="res://Scripts/Shop.gd" id="40_qawd6"]
 [ext_resource type="Script" path="res://Scripts/UiTest.gd" id="41_p6njh"]
+[ext_resource type="StyleBox" uid="uid://so6n5lxsr1we" path="res://Theme & Style/button_disabled.tres" id="45_4tfii"]
+[ext_resource type="StyleBox" uid="uid://5ic2283122pj" path="res://Theme & Style/button_hover.tres" id="46_wwrfw"]
+[ext_resource type="StyleBox" uid="uid://d2f8o5hrpjav7" path="res://Theme & Style/button_pressed.tres" id="47_w4t1l"]
+[ext_resource type="StyleBox" uid="uid://l47h3q3j4pv2" path="res://Theme & Style/button_normal.tres" id="48_4t578"]
+[ext_resource type="Script" path="res://Scripts/TextEffects/TextEffectMoney.gd" id="50_0jh6r"]
+[ext_resource type="Script" path="res://Scripts/TextEffects/TextEffectMult.gd" id="51_q31hi"]
+[ext_resource type="Script" path="res://Scripts/TextEffects/TextEffectScore.gd" id="52_mxj5d"]
 [ext_resource type="Texture2D" uid="uid://ddhaewxwb1ypk" path="res://Textures/Herbert_Moon02.webp" id="54_use7a"]
 [ext_resource type="Script" path="res://Scripts/Containers/ElementContainer.gd" id="56_spfkd"]
+
+[sub_resource type="RichTextEffect" id="RichTextEffect_i3dd7"]
+script = ExtResource("50_0jh6r")
+
+[sub_resource type="RichTextEffect" id="RichTextEffect_elt6e"]
+script = ExtResource("51_q31hi")
+
+[sub_resource type="RichTextEffect" id="RichTextEffect_6t7wd"]
+script = ExtResource("52_mxj5d")
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_ee50a"]
 panorama = ExtResource("1_mtpok")
@@ -482,6 +498,10 @@ unique_name_in_owner = true
 layout_mode = 2
 focus_mode = 0
 theme = ExtResource("31_3dawp")
+theme_override_styles/disabled = ExtResource("45_4tfii")
+theme_override_styles/hover = ExtResource("46_wwrfw")
+theme_override_styles/pressed = ExtResource("47_w4t1l")
+theme_override_styles/normal = ExtResource("48_4t578")
 action_mode = 0
 text = "Play round"
 
@@ -568,6 +588,7 @@ text = "[center]The description of the thing we are describing
 
 "
 scroll_active = false
+custom_effects = [SubResource("RichTextEffect_i3dd7"), SubResource("RichTextEffect_elt6e"), SubResource("RichTextEffect_6t7wd")]
 
 [node name="Rarity" type="RichTextLabel" parent="User Interface/Description Box"]
 clip_contents = false
@@ -738,6 +759,7 @@ offset_left = 876.0
 offset_top = 844.0
 offset_right = 875.72
 offset_bottom = 844.12
+theme = ExtResource("31_3dawp")
 text = "Continue"
 
 [node name="Consumables" type="Node3D" parent="." node_paths=PackedStringArray("path3d")]

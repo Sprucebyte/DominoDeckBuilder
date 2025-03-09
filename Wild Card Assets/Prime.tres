@@ -9,5 +9,5 @@ script = ExtResource("1_ucgvo")
 code = ExtResource("1_wyje7")
 texture = ExtResource("3_wwgh0")
 name = "Prime"
-description = "+ 7 mult when edge value is prime"
-rarity = ""
+description = "[b][mult]x2 mult[/mult][/b] when edge value is prime"
+rarity = 0

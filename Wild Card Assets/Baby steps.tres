@@ -9,5 +9,6 @@ script = ExtResource("1_hiupr")
 code = ExtResource("1_ggajy")
 texture = ExtResource("3_nb48v")
 name = "Baby Steps"
-description = "+2 mult for each edge value lower than 4 "
-rarity = ""
+description = "[b][mult]+2 mult[/mult][/b] for each edge lower than [b]4[/b] 
+"
+rarity = 0

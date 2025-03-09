@@ -9,5 +9,5 @@ script = ExtResource("1_3w104")
 code = ExtResource("1_nwahf")
 texture = ExtResource("3_1skr3")
 name = "Odd"
-description = "[color=red]+3 mult[/color] for every odd edge"
-rarity = ""
+description = "[b][mult]+3 mult[/mult][/b] for every odd edge"
+rarity = 0

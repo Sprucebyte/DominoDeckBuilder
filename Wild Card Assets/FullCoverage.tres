@@ -9,5 +9,5 @@ script = ExtResource("1_act6e")
 code = ExtResource("1_51mbv")
 texture = ExtResource("3_owgbi")
 name = "Full Coverage"
-description = "+10 points for every edge scored "
-rarity = ""
+description = "[b][score]+10 points[/score][/b] for every edge scored "
+rarity = 0

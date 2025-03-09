@@ -79,7 +79,7 @@ func triggerEdgeTiles():
 	for node: TileNode in GameManager.board.tileNodeTree.getEdgeNodes():
 		var tile = node.tile
 		var value = node.getEdgeValue()
-		tile.shake(tile.shakerActivate)
+		tile.shake()
 		ScoreLabel.Spawn(tile, "+" + str(value), Color.ROYAL_BLUE)
 		SignalBus.AddToScore.emit(value)
 		var delay = .3 / GameManager.gameSpeedMultiplier / activateSpeed

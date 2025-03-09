@@ -4,7 +4,7 @@ class_name Tile
 
 @export var sprites: Array[Texture2D] = []
 
-@onready var shakerActivate: ShakerComponent3D = $"Shaker Activate"
+#@onready var shakerActivate: ShakerComponent3D = $"Shaker Activate"
 @onready var shakerSelect: ShakerComponent3D = $"Shaker Select"
 
 @onready var spriteTop = %SpriteTop
@@ -198,7 +198,7 @@ func activate():
 	await get_tree().create_timer(.5 / GameManager.gameSpeedMultiplier).timeout
 	print("activated!")
 	SignalBus.emit_signal("OnTileActivated", self)
-	shake(shakerActivate)
+	shake()
 	pass
 
 
@@ -207,7 +207,7 @@ func lockIn(lockInSpeed = 1):
 	position.z = 2
 	AudioManager.play(AudioManager.Instance.domino1)
 	lockedIn = true
-	await shake(shakerActivate, lockInSpeed)
+	await shake(lockInSpeed)
 	AudioManager.play(AudioManager.Instance.domino1)
 	position.z = 0
 	targetPosition.z = 0

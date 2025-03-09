@@ -1,17 +1,11 @@
 extends WildCard
 
 func activate() -> void:
-
-	var activateSpeed = 1
-	for tile: Tile in GameManager.board.elements:
-		tile.shake(tile.shakerActivate)
-		ScoreLabel.Spawn(tile,"+0.2x", Color.RED)
-		SignalBus.AddToMult.emit(.2)
-		shakerActivate.play_shake()
-		activateSpeed *= 1.05
-		await Util.delay(.15/ GameManager.gameSpeedMultiplier / activateSpeed)
-	pass
-
-func _process(delta):
-	super(delta)
-	pass
+	super()
+	for tile: Tile in tiles():
+		multiplyMult(1.2, tile)
+		tile.shake()
+		shake()
+		delay()
+		accelerate()
+	return

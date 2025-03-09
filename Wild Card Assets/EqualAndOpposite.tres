@@ -9,5 +9,5 @@ script = ExtResource("1_31hli")
 code = ExtResource("1_77pv1")
 texture = ExtResource("3_wgbh4")
 name = "Equal And Opposite"
-description = "+1 mult for every 1 and 6 edge tiles  "
-rarity = ""
+description = "[b][mult]+2 mult[/mult][/b] for every [b]1[/b] and [b]6[/b] edge tiles"
+rarity = 0

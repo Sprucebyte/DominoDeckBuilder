@@ -9,5 +9,8 @@ script = ExtResource("1_ng0vc")
 code = ExtResource("1_su2mm")
 texture = ExtResource("3_8x5o6")
 name = "Perfect Square"
-description = "+ N mult If total edge value is a perfect sqare, N is the length of the square"
-rarity = ""
+description = "Adds [b][mult]mult[/mult][/b] equal to the length of the square of the edge value if it is a perfect square; [b]4[/b], [b]9[/b], [b]16[/b], [b]25[/b], etc.
+
+
+"
+rarity = 0

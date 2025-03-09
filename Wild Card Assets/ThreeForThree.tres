@@ -9,5 +9,5 @@ script = ExtResource("1_51q1a")
 code = ExtResource("1_opih5")
 texture = ExtResource("3_sx18a")
 name = "Three for Three"
-description = "+ 3 mult if edge value contains a 3"
-rarity = ""
+description = "[b][mult]+3 mult[/mult][/b] for every [b]3[/b] in the hand score"
+rarity = 0

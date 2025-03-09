@@ -2,5 +2,6 @@ extends WildCard
 
 func activate() -> void:
 	super()
-	SignalBus.AddToMult.emit(4)
+	addMult(4)
+	shake()
 	return

@@ -48,6 +48,8 @@ var pack = null
 @onready var selectButton: Node3D = %SelectButton
 @onready var sellButton: Node3D = %SellButton
 
+@onready var shakerActivate: ShakerComponent3D = %"Shaker Activate"
+
 var container: ElementContainer
 
 @export_group("States")
@@ -67,7 +69,7 @@ func setState(state: States):
 #endregion # ---------------------------------- #
 
 
-func shake(shaker: ShakerComponent3D, speed = 1):
+func shake(speed = 1, shaker: ShakerComponent3D = shakerActivate):
 	shaker.play_shake()
 	shaker.shake_speed = shaker.shake_speed * speed
 	await Util.shakerDone(shaker)

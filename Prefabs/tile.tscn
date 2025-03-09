@@ -273,6 +273,7 @@ selectableInStates = 28
 hoverableInStates = 28
 
 [node name="Shaker Activate" type="Node3D" parent="." node_paths=PackedStringArray("Targets")]
+unique_name_in_owner = true
 script = ExtResource("3_gatgg")
 custom_target = true
 Targets = [NodePath("../SelectParent/FlipAxis/IdleAxis/ModelContainer")]
@@ -283,6 +284,7 @@ fade_out = 0.0544096
 shakerPreset = ExtResource("13_ccavb")
 
 [node name="Shaker Select" type="Node3D" parent="." node_paths=PackedStringArray("Targets")]
+unique_name_in_owner = true
 script = ExtResource("3_gatgg")
 custom_target = true
 Targets = [NodePath("../SelectParent/FlipAxis/IdleAxis/ModelContainer")]
@@ -294,6 +296,7 @@ fade_out = 1e-05
 shakerPreset = ExtResource("5_0exb5")
 
 [node name="Shaker Place" type="Node3D" parent="." node_paths=PackedStringArray("Targets")]
+unique_name_in_owner = true
 script = ExtResource("3_gatgg")
 custom_target = true
 Targets = [NodePath("../SelectParent/FlipAxis/IdleAxis/ModelContainer")]
@@ -305,6 +308,7 @@ fade_out = 1e-05
 shakerPreset = ExtResource("6_h557c")
 
 [node name="Shaker Idle" type="Node3D" parent="." node_paths=PackedStringArray("Targets")]
+unique_name_in_owner = true
 transform = Transform3D(1, -1.81899e-12, 0, -1.81899e-12, 1, 0, 0, 0, 1, -0.00879639, 0.00873366, -0.00163199)
 script = ExtResource("3_gatgg")
 custom_target = true

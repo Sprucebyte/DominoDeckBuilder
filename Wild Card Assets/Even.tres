@@ -9,6 +9,5 @@ script = ExtResource("1_6akl1")
 code = ExtResource("1_1vl4g")
 texture = ExtResource("3_rursm")
 name = "Even"
-description = "[color=red]+2 mult[/color] for every even edge
-"
-rarity = ""
+description = "[b][mult]+2 mult[/mult][/b] for every even edge"
+rarity = 0

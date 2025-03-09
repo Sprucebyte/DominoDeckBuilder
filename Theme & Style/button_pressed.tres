@@ -2,16 +2,17 @@
 
 [resource]
 content_margin_left = 5.0
-content_margin_top = 5.0
+content_margin_top = 10.0
 content_margin_right = 5.0
 content_margin_bottom = 5.0
-bg_color = Color(0.619792, 0.433054, 0, 1)
-border_width_bottom = 6
-border_color = Color(0.460938, 0.284958, 0, 1)
+bg_color = Color(0.839216, 0.584314, 0, 1)
+border_width_top = 5
+border_color = Color(0.56, 0.345333, 0, 0)
 corner_radius_top_left = 8
 corner_radius_top_right = 8
 corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
 expand_margin_bottom = 5.0
-shadow_color = Color(0, 0, 0, 1)
+shadow_color = Color(0, 0, 0, 0.501961)
 shadow_size = 5
+shadow_offset = Vector2(0, 4)

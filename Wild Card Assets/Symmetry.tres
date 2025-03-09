@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="CardAsset" load_steps=4 format=3 uid="uid://bnbj6qiop3p50"]
+
+[ext_resource type="Script" path="res://Scripts/Wild Cards/Symmetry.gd" id="1_4ace5"]
+[ext_resource type="Script" path="res://Scripts/CardAsset.gd" id="1_vvudn"]
+[ext_resource type="Texture2D" uid="uid://d2a35ik56sx4a" path="res://Textures/Cards/Wild Cards/wildcard_symmetry.png" id="3_l3w0p"]
+
+[resource]
+script = ExtResource("1_vvudn")
+code = ExtResource("1_4ace5")
+texture = ExtResource("3_l3w0p")
+name = "Symmetry"
+description = "[b][mult]+20 mult[/mult][/b] if all edges are the same value"
+rarity = 0

@@ -6,5 +6,5 @@ class_name CardAsset
 @export var texture: Texture2D
 @export var name: String
 @export_multiline var description: String
-@export var rarity: String
+@export var rarity: Util.Rarity
 #@export var test: RichTextEffect
