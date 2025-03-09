@@ -56,7 +56,7 @@ func _ready() -> void:
 	SignalBus.connect("OnTileDeselected", deselectTile)
 	SignalBus.connect("PlayRound", playHand)
 	SignalBus.connect("OnTileRemoved", onTileRemoved)
-	await Util.delay(15)
+	await Util.delay(1)
 	startRound()
 
 
