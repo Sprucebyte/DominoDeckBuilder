@@ -50,7 +50,7 @@ var bankid = 0
 
 @onready var shakerActivate: ShakerComponent3D = %"Shaker Activate"
 
-var container: ElementContainer
+@export var container: ElementContainer
 
 @export_group("States")
 #region # - States ---------------------------- #  
@@ -68,6 +68,12 @@ func setState(state: States):
 	self.state = state
 #endregion # ---------------------------------- #
 
+
+func createCopy() -> Element:
+	var newTile = duplicate()
+	get_parent().add_child(newTile)
+	newTile.copyFrom(self)
+	return newTile
 
 func shake(speed = 1, shaker: ShakerComponent3D = shakerActivate):
 	shaker.play_shake()

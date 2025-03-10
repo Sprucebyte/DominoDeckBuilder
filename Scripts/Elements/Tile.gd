@@ -20,33 +20,25 @@ class_name Tile
 @onready var tilenameText = %LabelTilename
 
 enum Types {normal, gold, black, wood}
-var type = Types.normal
+@export var type = Types.normal
 
 enum PipTypes {normal, red, blue, yellow, purple}
-var pipType = PipTypes.normal
+@export var pipType = PipTypes.normal
 
 @onready var mesh: MeshInstance3D = %Mesh
-var material: Material
-var pipColor: Color
+@export var material: Material
+@export var pipColor: Color
 
 
 #var played = false
 
 var direction = Util.Up
 
-var topValue = 2
-var bottomValue = 4
+@export var topValue = 2
+@export var bottomValue = 4
 
 var tileNode: TileNode = null
 
-func copyFrom(tile: Tile):
-	type = tile.type
-	pipType = tile.pipType
-	material = tile.material
-	pipColor = tile.pipColor
-	topValue = tile.topValue
-	bottomValue = tile.bottomValue
-	
 
 func _ready() -> void:
 	targetPosition = global_position
