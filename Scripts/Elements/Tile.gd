@@ -39,6 +39,14 @@ var bottomValue = 4
 
 var tileNode: TileNode = null
 
+func copyFrom(tile: Tile):
+	type = tile.type
+	pipType = tile.pipType
+	material = tile.material
+	pipColor = tile.pipColor
+	topValue = tile.topValue
+	bottomValue = tile.bottomValue
+	
 
 func _ready() -> void:
 	targetPosition = global_position
@@ -77,6 +85,7 @@ func randomize():
 	
 	
 func updateNumbers():
+	description = "[b]" + str(topValue) + " | " + str(bottomValue)
 	spriteTop.texture = sprites[min(topValue, sprites.size() - 1)]
 	spriteBottom.texture = sprites[min(bottomValue, sprites.size() - 1)]
 		
@@ -196,7 +205,7 @@ func clicked():
 
 func select():
 	#if not validState(States.inHand): return
-	selected = true
+	super()
 	SignalBus.OnTileSelected.emit(self)
 	shakerSelect.play_shake()
 
@@ -204,7 +213,7 @@ func select():
 	pass
 
 func deselect():
-	selected = false
+	super()
 	SignalBus.emit_signal("OnTileDeselected", self)
 	shakerSelect.play_shake()
 	pass
@@ -221,10 +230,21 @@ func unhover():
 	pass
 
 func activate():
-	await get_tree().create_timer(.5 / GameManager.gameSpeedMultiplier).timeout
-	print("activated!")
+	#await get_tree().create_timer(.5 / GameManager.gameSpeedMultiplier).timeout
+	#print("activated!")
 	SignalBus.emit_signal("OnTileActivated", self)
-	shake()
+	#shake()
+	match type:
+		Types.gold:
+			addMoney(1, self)
+		Types.black:
+			addMult(1, self)
+		Types.wood:
+			for element in GameManager.board.elements:
+				if element.type == Types.wood:
+					addScore(5, self)
+
+		
 	pass
 
 

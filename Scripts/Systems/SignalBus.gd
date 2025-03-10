@@ -51,6 +51,7 @@ signal AddToScore(amount)
 signal OnWildCardActivated()
 signal OnButtonPressed(button)
 
+signal TarotCardUsed(element)
 
 #endregion
 

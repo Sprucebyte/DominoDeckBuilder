@@ -51,7 +51,7 @@ func discardTile(tile):
 	pass
 
 
-func discardTiles(elements = GameManager.selectedTiles.duplicate()):
+func discardTiles(elements = GameManager.hand.selectedElements.duplicate()):
 	for tile in elements:
 		discardTile(tile)
 	pass

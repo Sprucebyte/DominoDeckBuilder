@@ -1,18 +1,16 @@
-[gd_resource type="StandardMaterial3D" load_steps=5 format=3 uid="uid://b7kvxm26fldna"]
+[gd_resource type="StandardMaterial3D" load_steps=4 format=3 uid="uid://b7kvxm26fldna"]
 
 [ext_resource type="Texture2D" uid="uid://bwr1qedo4ejsl" path="res://Textures/domino_gold_base.png" id="1_bkmd4"]
 [ext_resource type="Texture2D" uid="uid://vn3la7eb0hwd" path="res://Textures/domino_wood_base.png" id="2_hb1in"]
 [ext_resource type="Texture2D" uid="uid://c4w8yqsqyjgxe" path="res://Textures/domino_gold_metalness.png" id="3_n55rk"]
-[ext_resource type="Texture2D" uid="uid://bgon2i6ick7p0" path="res://Textures/domino_gold_roughness.png" id="4_h8lfj"]
 
 [resource]
 albedo_texture = ExtResource("1_bkmd4")
-metallic = 0.4
-metallic_specular = 0.0
-metallic_texture = ExtResource("3_n55rk")
+metallic = 0.1
+metallic_specular = 0.37
 metallic_texture_channel = 4
-roughness = 0.85
-roughness_texture = ExtResource("4_h8lfj")
+roughness = 0.41
+roughness_texture = ExtResource("3_n55rk")
 roughness_texture_channel = 4
 heightmap_scale = 10.0
 heightmap_flip_binormal = true

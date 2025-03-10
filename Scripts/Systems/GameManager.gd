@@ -4,7 +4,6 @@ extends Node
 var highestPips = 6
 
 var tilePrefab = preload("res://Prefabs/tile.tscn")
-var selectedTiles: Array[Tile] = []
 
 var discardPile: DiscardPile = null
 var hand: Hand = null
@@ -22,6 +21,8 @@ var discardCount = 4
 
 var round = 1
 
+var kodebrikke = 0
+
 
 var handsRemaining = handCount
 var discardsRemaining = discardCount
@@ -34,12 +35,10 @@ var gameState = GameStates.playing
 
 
 func selectTile(tile):
-	selectedTiles.push_back(tile)
 	updatePlacementSlots()
 	pass
 
 func deselectTile(tile):
-	selectedTiles.erase(tile)
 	updatePlacementSlots()
 	pass
 
@@ -188,11 +187,11 @@ var placementSlots = []
 
 func updatePlacementSlots():
 	clearPlacementSlots()
-	if (selectedTiles.size() == 1):
+	if (hand.selectedElements.size() == 1):
 		if (board.size() > 0):
 			for tileSlot in board.tileNodeTree.getValidSlots(board.tileNodeTree.rootNode):
 				var placementSlot = TilePlacementSlot.Spawn()
-				var newTile = selectedTiles[0]
+				var newTile = hand.selectedElements[0]
 				var newTileSide = GameManager.board.chooseTileSide(newTile, tileSlot)
 				var offsetAndDirection = GameManager.board.getTileOffsetAndDirection(tileSlot.node, newTile, tileSlot.side, newTileSide)
 				placementSlot.tileSlot = tileSlot
@@ -205,7 +204,7 @@ func updatePlacementSlots():
 		else:
 			var placementSlot = TilePlacementSlot.Spawn()
 			placementSlot.position = board.position
-			var newTile = selectedTiles[0]
+			var newTile = hand.selectedElements[0]
 			placementSlot.tile = newTile
 			placementSlots.append(placementSlot)
 

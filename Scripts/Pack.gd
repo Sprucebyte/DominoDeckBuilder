@@ -24,7 +24,7 @@ func open():
 	return
 
 
-func close(delta):
+func close():
 	for element in elementContainer.elements:
 		element.state == States.disabled
 	
@@ -38,7 +38,7 @@ func close(delta):
 func _process(delta: float) -> void:
 	super(delta)
 	if (leftToChoose <= 0):
-		close(delta)
+		close()
 		
 	if opened:
 		label.text = "Choose " + str(leftToChoose)

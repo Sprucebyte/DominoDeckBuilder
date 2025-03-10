@@ -93,8 +93,10 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	continueButton.visible = visible
-
+	if opened:
+		continueButton.visible = visible
+	else:
+		continueButton.visible = false
 	position = position.lerp(targetPosition, delta * 20)
 	
 	tiles.setElementPositions()

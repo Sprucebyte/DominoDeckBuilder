@@ -22,3 +22,7 @@ func activate():
 	super()
 	shakerActivate.play_shake()
 	pass
+
+
+func tiles() -> Array[Element]:
+	return GameManager.board.elements

@@ -11,8 +11,8 @@ func _ready():
 
 
 func playFrom(tileToPlayFrom):
-	if (GameManager.selectedTiles.size() != 1): return
-	var tile = GameManager.selectedTiles[0]
+	if (GameManager.hand.selectedElements.size() != 1): return
+	var tile = GameManager.hand.selectedElements[0]
 	if not tile.state == Tile.States.inHand: return
 	var chosenSlot = null
 	var tileSide = Util.Top

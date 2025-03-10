@@ -38,15 +38,21 @@ func useMoney(amount):
 
 func addToScore(value):
 	handScore += value
+	handScore = Util.roundToDigits(handScore)
+	
 
 func multiplyScore(value):
 	handScore *= value
+	handScore = Util.roundToDigits(handScore)
 
 func addToMult(value):
 	multiplier += value
+	multiplier = Util.roundToDigits(multiplier)
+	
 
 func multiplyMult(value):
 	multiplier *= value
+	multiplier = Util.roundToDigits(multiplier)
 
 
 func reset():
@@ -84,8 +90,11 @@ func triggerEdgeTiles():
 		SignalBus.AddToScore.emit(value)
 		var delay = .3 / GameManager.gameSpeedMultiplier / activateSpeed
 		await Util.delay(delay)
-		
+		if tile.type != Tile.Types.normal:
+			tile.activate()
+			Util.delay(delay)
 		activateSpeed *= acceleration
+		
 	return
 		
 

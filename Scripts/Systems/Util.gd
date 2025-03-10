@@ -17,6 +17,9 @@ const Bottom = 2
 #await get_tree().create_timer(.5).timeout
 
 
+static func roundToDigits(num, digit = 1):
+	return round(num * pow(10.0, digit)) / pow(10.0, digit)
+
 static func toScreen(pos: Vector3) -> Vector2:
 	return GameManager.get_viewport().get_camera_3d().unproject_position(pos)
 
@@ -36,6 +39,8 @@ static func rarityToText(rarity) -> String:
 			return "[color=red] Rare"
 		Rarity.Legendary:
 			return "[color=purple] Legendary"
+		Rarity.None:
+			return ""
 	return ""
 		
 

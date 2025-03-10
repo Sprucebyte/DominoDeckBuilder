@@ -6,7 +6,7 @@ class_name Element
 
 @export var title = ""
 @export_multiline var description = ""
-@export var rarity: Util.Rarity
+@export var rarity: Util.Rarity = Util.Rarity.None
 @export var baseBuyValue = 4
 @export var baseSellValue = 1
 @onready var buyValue = baseBuyValue
@@ -37,7 +37,7 @@ var canDrag = false
 var forceSelected = false
 var holdAfterFrames = 0
 var pack = null
-
+var bankid = 0
 
 @onready var flipAxis: Node3D = %FlipAxis
 @onready var idleAxis: Node3D = %IdleAxis
@@ -75,6 +75,10 @@ func shake(speed = 1, shaker: ShakerComponent3D = shakerActivate):
 	await Util.shakerDone(shaker)
 	return
 
+func _init():
+	bankid = GameManager.kodebrikke
+	GameManager.kodebrikke += 1
+	pass
 
 func _ready() -> void:
 	targetPosition = position
@@ -201,11 +205,15 @@ func clicked():
 func select():
 	if not validState(): return
 	selected = true
+	if container != null:
+		container.addSelectedElement(self)
 	pass
 
 func deselect():
 	if (forceSelected): return
 	selected = false
+	if container != null:
+		container.removeSelectedElement(self)
 	pass
 
 func hover():
@@ -225,3 +233,41 @@ func unhover():
 func activate():
 	pass
 #endregion # ---------------------------------- #
+
+
+func addScore(value, from = self):
+	SignalBus.AddToScore.emit(value)
+	ScoreLabel.Spawn(from, "+" + str(value), Color.BLUE)
+	pass
+
+func multScore(value, from = self):
+	SignalBus.MultiplyScore.emit(value)
+	ScoreLabel.Spawn(from, "x" + str(value), Color.BLUE)
+	pass
+
+func addMult(value, from = self):
+	SignalBus.AddToMult.emit(value)
+	ScoreLabel.Spawn(from, "+" + str(value) + "x", Color.RED)
+	pass
+
+func multiplyMult(value, from = self):
+	SignalBus.MultiplyMult.emit(value)
+	ScoreLabel.Spawn(from, "x" + str(value) + "x", Color.RED)
+	pass
+
+func addMoney(value, from = self):
+	SignalBus.AddMoney.emit(value)
+	ScoreLabel.Spawn(from, "+ $" + str(value), Color.YELLOW)
+	pass
+
+func multiplyMoney(value, from = self):
+	#SignalBus.MultiplyMoney.emit(value)
+	print("multiplyMoney - not implemented")
+	ScoreLabel.Spawn(from, "$x" + str(value), Color.YELLOW)
+	pass
+
+func edgeNodes() -> Array[TileNode]:
+	return GameManager.board.tileNodeTree.getEdgeNodes()
+
+func edgeValue():
+	return GameManager.board.tileNodeTree.getEdgeValue()

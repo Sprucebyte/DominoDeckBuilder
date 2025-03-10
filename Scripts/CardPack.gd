@@ -14,6 +14,7 @@ func _ready() -> void:
 	label.text = ""
 	pass # Replace with function body.
 
+
 func open():
 	randomize()
 	await super()

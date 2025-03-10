@@ -11,6 +11,17 @@ class_name ElementContainer
 #@onready var curve: Curve2D = path.curve
 #endregion
 
+
+var selectedElements = []
+
+
+func addSelectedElement(element):
+	if not element in selectedElements:
+		selectedElements.append(element)
+
+func removeSelectedElement(element):
+	selectedElements.erase(element)
+
 func _ready():
 	#isTypeAllowed(Element.Types.PlayingTile)
 	##isTypeAllowed(Element.Types.CursedTile)

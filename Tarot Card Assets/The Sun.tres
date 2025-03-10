@@ -1,8 +1,13 @@
-[gd_resource type="Resource" script_class="CardAsset" load_steps=2 format=3 uid="uid://d2hj5bi4bm0r5"]
+[gd_resource type="Resource" script_class="CardAsset" load_steps=4 format=3 uid="uid://d2hj5bi4bm0r5"]
 
+[ext_resource type="Script" path="res://Scripts/Elements/Tarot Cards/TheSun.gd" id="1_ol4vt"]
 [ext_resource type="Script" path="res://Scripts/CardAsset.gd" id="1_y7ruh"]
+[ext_resource type="Texture2D" uid="uid://55d51e0oe11k" path="res://Textures/Cards/Tarot Cards/The Sun.png" id="3_ewhp6"]
 
 [resource]
 script = ExtResource("1_y7ruh")
-name = "The Fool"
-description = ""
+code = ExtResource("1_ol4vt")
+texture = ExtResource("3_ewhp6")
+name = "The Sun"
+description = "Changes 1 selected tiles into a Gold Tile"
+rarity = 4

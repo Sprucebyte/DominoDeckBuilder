@@ -8,6 +8,7 @@ class_name TilePack
 func _ready() -> void:
 	pass # Replace with function body.
 
+
 func open():
 	randomize()
 	await super()
@@ -26,10 +27,9 @@ func open():
 		elementContainer.add(tile)
 		GameManager.chooseFrom.append(tile)
 		tile.randomize()
-		
+				
 	opened = true
 	sprite.visible = false
-
 
 func _process(delta: float) -> void:
 	super(delta)

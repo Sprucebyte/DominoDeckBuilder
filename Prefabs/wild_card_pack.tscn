@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://dbgj2n65cxte"]
+[gd_scene load_steps=10 format=3 uid="uid://dbgj2n65cxte"]
 
 [ext_resource type="Script" path="res://Scripts/CardPack.gd" id="1_2ukhh"]
 [ext_resource type="Script" path="res://addons/shaker/src/Vector3/shaker_component3D.gd" id="2_xlygj"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://6a2f6b1g7kx2" path="res://Textures/wildcardpack.png" id="4_lf58s"]
 [ext_resource type="Script" path="res://Scripts/Containers/ElementContainer.gd" id="5_t2567"]
 [ext_resource type="PackedScene" uid="uid://dpsjx31un88cy" path="res://Prefabs/button.tscn" id="6_0fh6q"]
+[ext_resource type="Theme" uid="uid://cr7c32xd1yioy" path="res://Theme & Style/main_theme.tres" id="7_af1dv"]
 
 [sub_resource type="Curve3D" id="Curve3D_d1f0j"]
 _data = {
@@ -82,5 +83,18 @@ element = NodePath("..")
 text = "Buy"
 color = Color(0.98, 0.88592, 0.3528, 1)
 
+[node name="SkipButton" type="Button" parent="."]
+unique_name_in_owner = true
+anchors_preset = -1
+anchor_right = 0.084
+anchor_bottom = 0.036
+offset_left = 876.0
+offset_top = 844.0
+offset_right = 875.72
+offset_bottom = 844.12
+theme = ExtResource("7_af1dv")
+text = "SKIP"
+
 [connection signal="mouse_entered" from="SelectParent/Area3D" to="." method="hover"]
 [connection signal="mouse_exited" from="SelectParent/Area3D" to="." method="unhover"]
+[connection signal="pressed" from="SkipButton" to="." method="close"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=4 uid="uid://c4fsjxgk0co1r"]
+[gd_scene load_steps=23 format=4 uid="uid://c4fsjxgk0co1r"]
 
 [ext_resource type="Script" path="res://Scripts/TilePack.gd" id="1_2aymb"]
 [ext_resource type="Material" uid="uid://dfvoywsi4ubhh" path="res://Materials/Wood.tres" id="1_jx0ex"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://cbky6vch8wme2" path="res://Textures/tilepack.png" id="4_7h463"]
 [ext_resource type="PackedScene" uid="uid://dpsjx31un88cy" path="res://Prefabs/button.tscn" id="7_yyam5"]
 [ext_resource type="Script" path="res://Scripts/Containers/ElementContainer.gd" id="8_3l80f"]
+[ext_resource type="Theme" uid="uid://cr7c32xd1yioy" path="res://Theme & Style/main_theme.tres" id="9_dc7q8"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_02777"]
 size = Vector3(4.40441, 7.4306, 0.150208)
@@ -266,5 +267,18 @@ pixel_size = 0.015
 text = "Choose 2"
 outline_size = 8
 
+[node name="SkipButton" type="Button" parent="."]
+unique_name_in_owner = true
+anchors_preset = -1
+anchor_right = 0.084
+anchor_bottom = 0.036
+offset_left = 876.0
+offset_top = 844.0
+offset_right = 875.72
+offset_bottom = 844.12
+theme = ExtResource("9_dc7q8")
+text = "SKIP"
+
 [connection signal="mouse_entered" from="SelectParent/Area3D" to="." method="hover"]
 [connection signal="mouse_exited" from="SelectParent/Area3D" to="." method="unhover"]
+[connection signal="pressed" from="SkipButton" to="." method="close"]

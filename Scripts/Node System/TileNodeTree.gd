@@ -132,7 +132,7 @@ func getOpenSlots(root) -> Array:
 				#openSlots.append({"node": node, "side": side, "pips": pips, "oppositePips": oppositePips})
 	return openSlots
 	
-func getValidSlots(root, tile = GameManager.selectedTiles[0]) -> Array:
+func getValidSlots(root, tile = GameManager.hand.selectedElements[0]) -> Array:
 	var openSlots = getOpenSlots(root)
 	var validSlots: Array
 	for slot in openSlots:

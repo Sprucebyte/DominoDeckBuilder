@@ -67,7 +67,7 @@ func drawButtonPressed():
 func discardButtonPressed():
 	if GameManager.discardsRemaining <= 0: return
 	GameManager.discardsRemaining -= 1
-	var amount = GameManager.selectedTiles.size()
+	var amount = GameManager.hand.selectedElements.size()
 	SignalBus.Discard.emit()
 	await Util.delay(.5)
 	SignalBus.Draw.emit(amount)
