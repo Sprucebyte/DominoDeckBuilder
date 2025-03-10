@@ -81,46 +81,32 @@ func close():
 
 
 func clear():
-	for i in range(tiles.elements.size() - 1, -1, -1):
-		var tile = tiles.elements[i]
-		tiles.remove(tile)
-		tile.queue_free()
-
-
-	for i in range(cards.elements.size() - 1, -1, -1):
-		var card = cards.elements[i]
-		cards.remove(card)
-		card.queue_free()
-
-	for i in range(packs.elements.size() - 1, -1, -1):
-		var pack = packs.elements[i]
-		packs.remove(pack)
-		pack.queue_free()
+	tiles.clear()
+	cards.clear()
+	packs.clear()
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	#visible = false
 	position = targetPosition
-	#await Util.delay(3)
-	#open()
-	#await Util.delay(1)
-	#generate()
-	pass # Replace with function body.
+	pass
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	continueButton.visible = visible
+
 	position = position.lerp(targetPosition, delta * 20)
 	
 	tiles.setElementPositions()
 	cards.setElementPositions()
 	packs.setElementPositions()
 	
-
 	if (Input.is_key_pressed(KEY_K)):
-		close()
+		if opened:
+			close()
 	if (Input.is_key_pressed(KEY_L)):
-		GameManager.board.clear()
-		open()
+		if not opened:
+			GameManager.board.clear()
+			open()
 
 	pass

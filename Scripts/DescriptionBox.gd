@@ -26,6 +26,8 @@ var element: Element
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	if queue.size() > 0:
+		if queue[0] == null:
+			return
 		element = queue[0]
 		if element == null: 
 			removeFromQueue(element)

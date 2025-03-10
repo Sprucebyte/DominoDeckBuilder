@@ -30,6 +30,12 @@ func size():
 #	return result
 
 
+func clear():
+	for i in range(elements.size() - 1, -1, -1):
+		var element = elements[i]
+		remove(element)
+		element.queue_free()
+
 #region Get / Check for elements
 func getAll():
 	return elements

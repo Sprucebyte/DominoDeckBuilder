@@ -11,11 +11,11 @@ var hand: Hand = null
 var board: Board = null
 var deck: Deck = null
 var wildCards: WildCardContainer = null
-
+var consumables: ConsumablesContainer = null
 var mousePos: Vector3
 var gameSpeedMultiplier = 1
 
-var handSize = 8
+var handSize = 10
 
 var handCount = 4
 var discardCount = 4
@@ -54,7 +54,7 @@ func _ready() -> void:
 	hand = get_tree().get_first_node_in_group("Hand")
 	board = get_tree().get_first_node_in_group("Board")
 	wildCards = get_tree().get_first_node_in_group("WildCards")
-	
+	consumables = ConsumablesContainer.Instance
 	SignalBus.connect("OnTileSelected", selectTile)
 	SignalBus.connect("OnTileDeselected", deselectTile)
 	SignalBus.connect("PlayRound", playHand)
@@ -98,6 +98,7 @@ func _process(_delta: float) -> void:
 
 
 func startRound():
+	hand.open()
 	Score.Instance.reset()
 	gameState = GameStates.playing
 	discardsRemaining = discardCount
@@ -113,6 +114,7 @@ func endRound():
 		loose()
 	board.clear()
 	hand.moveAllElements(deck)
+	discardPile.returnAllTilesToDeck()
 		
 func win():
 	gameState = GameStates.won
@@ -125,6 +127,7 @@ func win():
 	Score.Instance.money = round(Score.Instance.money)
 	await Util.delay(.5)
 	openShop()
+	hand.close()
 
 func openShop():
 	Shop.Instance.open()
@@ -145,6 +148,15 @@ func nextRound():
 func restart():
 	round = 1
 	Score.Instance.resetAll()
+	hand.clear()
+	board.clear()
+	deck.clear()
+	discardPile.clear()
+	wildCards.clear()
+	consumables.clear()
+
+	deck.generate()
+
 	startRound()
 	pass
 
