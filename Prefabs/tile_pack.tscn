@@ -178,6 +178,9 @@ point_count = 2
 [node name="Tile Pack" type="Node3D"]
 transform = Transform3D(1, -6.55651e-07, 3.7998e-07, 6.55651e-07, 1, 4.21889e-07, -3.7998e-07, -4.21889e-07, 1, 4.09782e-08, -2.98023e-07, 5.52274e-07)
 script = ExtResource("1_2aymb")
+title = "Tile pack"
+description = "Choose up to 2 of 5 random tiles
+"
 
 [node name="SelectParent" type="Node3D" parent="."]
 unique_name_in_owner = true

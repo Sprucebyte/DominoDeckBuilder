@@ -507,7 +507,6 @@ text = "Play round"
 
 [node name="Draw Button" type="Button" parent="User Interface/Buttons"]
 unique_name_in_owner = true
-visible = false
 custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
 focus_mode = 0
@@ -648,6 +647,7 @@ curve = SubResource("Curve3D_om68k")
 [node name="WildCards" type="Node3D" parent="." node_paths=PackedStringArray("path3d") groups=["WildCards"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23.6812, 11.9088, 0)
 script = ExtResource("7_c150q")
+containerSize = 6
 defaultElementState = 8
 path3d = NodePath("Path3D")
 

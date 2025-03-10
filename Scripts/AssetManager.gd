@@ -37,8 +37,40 @@ var tarotCards: Dictionary
 var wildCards: Dictionary
 
 
+var doubleOdds = 4
+
+
+static func createRandomTile() -> Tile:
+	var topValue = randi_range(0, GameManager.highestPips)
+	var bottomValue = randi_range(0, GameManager.highestPips)
+	var tileMaterial = Instance.white
+	var type = Tile.Types.normal
+	var pipType = Tile.PipTypes.normal
+	if randi_range(0, 4) == 0:
+		bottomValue = topValue
+
+	var r = randi_range(0, 10)
+	match r:
+		0:
+			type = Tile.Types.black
+		1:
+			type = Tile.Types.wood
+		2:
+			type = Tile.Types.gold
+
+	return createTile(topValue, bottomValue, type, pipType)
+
+static func createTile(topValue, bottomValue, type: Tile.Types, pipType: Tile.PipTypes) -> Tile:
+	var tile: Tile = Instance.tilePrefab.instantiate()
+	tile.topValue = topValue
+	tile.bottomValue = bottomValue
+	tile.type = type
+	tile.pipType = pipType
+	return tile
+
+
 static func createCard(cardAsset):
-	var card: Card = AssetManager.Instance.cardPrefab.instantiate()
+	var card: Card = Instance.cardPrefab.instantiate()
 	if (cardAsset.code != null):
 		card.script = cardAsset.code
 	card.textureFront = cardAsset.texture

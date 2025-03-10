@@ -1,6 +1,8 @@
 extends Node
 
 
+var highestPips = 6
+
 var tilePrefab = preload("res://Prefabs/tile.tscn")
 var selectedTiles: Array[Tile] = []
 
@@ -18,13 +20,14 @@ var handSize = 8
 var handCount = 4
 var discardCount = 4
 
-var round = 0
+var round = 1
 
 
 var handsRemaining = handCount
 var discardsRemaining = discardCount
 var chooseFrom = []
 
+var draggedElement = null
 
 enum GameStates {paused, shop, openingPack, waiting, playing, scoring, lost, won, roundOver}
 var gameState = GameStates.playing
@@ -79,7 +82,6 @@ func lockInTiles():
 func _process(_delta: float) -> void:
 	mousePos = get_viewport().get_camera_3d().project_position(get_viewport().get_mouse_position(), 100)
 	#for element in board.elements:
-
 	if (Input.is_action_just_pressed("fullscreen")):
 		if (DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_WINDOWED):
 			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
@@ -87,6 +89,7 @@ func _process(_delta: float) -> void:
 			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
 		pass
 
+		
 		#sortByDistance(board.elements)
 		#if (board.size() > 0):
 		#	print(str(board.elements[0].topValue))
@@ -99,7 +102,7 @@ func startRound():
 	gameState = GameStates.playing
 	discardsRemaining = discardCount
 	handsRemaining = handCount
-	SignalBus.DrawToHand.emit(handSize)
+	SignalBus.Draw.emit(handSize)
 	#updatePlacementSlots()
 	pass
 
@@ -114,10 +117,12 @@ func endRound():
 func win():
 	gameState = GameStates.won
 	await Util.delay(.5)
-
 	Score.Instance.money += 5
+	var interest = round(Score.Instance.money / 5)
 	Score.Instance.money += handsRemaining
 	Score.Instance.money += discardsRemaining
+	Score.Instance.money += interest
+	Score.Instance.money = round(Score.Instance.money)
 	await Util.delay(.5)
 	openShop()
 
@@ -138,7 +143,7 @@ func nextRound():
 	pass
 
 func restart():
-	round = 0
+	round = 1
 	Score.Instance.resetAll()
 	startRound()
 	pass
@@ -163,7 +168,7 @@ func playHand():
 		endRound()
 		return
 	
-	SignalBus.DrawToHand.emit()
+	SignalBus.Draw.emit()
 	return
 
 

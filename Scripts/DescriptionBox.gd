@@ -12,7 +12,6 @@ func _init() -> void:
 		Instance = self
 	else:
 		queue_free()
-
 var queue = []
 
 func addToQueue(element: Element):
@@ -22,7 +21,6 @@ func addToQueue(element: Element):
 func removeFromQueue(element: Element):
 	queue.erase(element)
 	pass
-
 
 var element: Element
 # Called every frame. 'delta' is the elapsed time since the previous frame.

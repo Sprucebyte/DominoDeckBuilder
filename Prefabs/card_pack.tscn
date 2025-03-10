@@ -20,6 +20,8 @@ size = Vector3(4.40441, 7.4306, 0.150208)
 [node name="CardPack" type="Node3D"]
 transform = Transform3D(0.999999, 4.47034e-08, -7.35744e-08, -4.47034e-08, 0.999999, 4.21423e-08, 7.35744e-08, -4.21423e-08, 0.999999, -4.17233e-07, 2.98023e-07, -2.63751e-06)
 script = ExtResource("1_jfmws")
+title = "Tarot card pack"
+description = "Choose up to 2 of 5 random tarot cards"
 selectableInStates = 8
 hoverableInStates = 8
 state = 3

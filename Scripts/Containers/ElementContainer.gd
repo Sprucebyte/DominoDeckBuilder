@@ -64,6 +64,7 @@ func remove(element):
 		return false
 	self.elements.erase(element)
 	onRemoved(element)
+	onRemoved(element)
 
 #endregion
 
@@ -71,6 +72,35 @@ func remove(element):
 	#var elementsToDestroy: Array[Element] = []
 	#elementsToDestroy.append_array(elements)
 	#for element in elementsToDestroy
+
+
+func sortByDrag(draggedElement):
+	if draggedElement == null: return
+	
+	for element in elements:
+		#print("yet")
+		if element == draggedElement:
+			continue
+		
+		var elementIndex = elements.find(element)
+		var nextIndex = min(elementIndex + 2, elements.size() - 1)
+		var prevIndex = max(elementIndex - 2, 0)
+		var draggedIndex = elements.find(draggedElement)
+
+		if (draggedIndex < elementIndex):
+			if (draggedElement.position.x > element.position.x):
+				if (draggedElement.position.x < elements[nextIndex].position.x) or true:
+					#print("new index is" + str(elementIndex))
+					elements.erase(draggedElement)
+					elements.insert(elementIndex, draggedElement)
+					return
+
+		if (draggedIndex > elementIndex):
+			if (draggedElement.position.x < element.position.x):
+				if (draggedElement.position.x > elements[prevIndex].position.x) or true:
+					elements.erase(draggedElement)
+					elements.insert(elementIndex, draggedElement)
+					return
 
 
 func destroy(element):
@@ -82,14 +112,14 @@ func destroy(element):
 
 #region Moving elements
 ## Move one element to another container
-func moveOneElement(element, targetContainer: ElementContainer):
+func moveOneElement(element, targetContainer: ElementContainer, force = false):
 	if (element == null):
 		print("ERROR: tile is null")
 		return false
 	if not element in elements:
 		print("ERROR: tile is not in container")
 		return false
-	if (targetContainer.elements.size() >= targetContainer.containerSize):
+	if (targetContainer.elements.size() >= targetContainer.containerSize) and not force:
 		print("ERROR: Can't add tile to " + str(self) + ", no more space")
 		return false
 	targetContainer.add(element)
@@ -97,25 +127,25 @@ func moveOneElement(element, targetContainer: ElementContainer):
 	onMoved(element, targetContainer)
 
 ## Move one or more elements to another container
-func moveElements(elements, targetContainer: ElementContainer):
+func moveElements(elements, targetContainer: ElementContainer, force = false):
 	var _tiles: Array[Tile]
 	if (typeof(elements) == TYPE_ARRAY):
 		for i in range(elements.size() - 1, -1, -1):
 			var element = elements[i]
-			moveOneElement(element, targetContainer)
+			moveOneElement(element, targetContainer, force)
 	else:
-		moveOneElement(elements, targetContainer)
+		moveOneElement(elements, targetContainer, force)
 
-func moveAllElements(targetContainer):
+func moveAllElements(targetContainer, force = false):
 	for i in range(elements.size() - 1, -1, -1):
 		var element = elements[i]
 		print(element.container.name)
 		print(element.tileNode)
-		moveOneElement(element, targetContainer)
+		moveOneElement(element, targetContainer, force)
 	
 
-func moveRandomElements(container):
-	moveElements(getRandom(), container)
+func moveRandomElements(container, force = false):
+	moveElements(getRandom(), container, force)
 #endregion
 
 #region Events

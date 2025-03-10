@@ -269,6 +269,8 @@ size = Vector3(1.03784, 2.04153, 0.39798)
 [node name="Tile" type="Node3D"]
 script = ExtResource("1_qw2k2")
 sprites = Array[Texture2D]([ExtResource("2_050xq"), ExtResource("3_mbg0k"), ExtResource("4_qoeyx"), ExtResource("5_l5vgl"), ExtResource("6_rxfya"), ExtResource("7_lyuma"), ExtResource("8_f8xlc"), ExtResource("9_cuvhn"), ExtResource("10_78beo"), ExtResource("11_7eham")])
+title = "Tile"
+description = "a tile"
 selectableInStates = 28
 hoverableInStates = 28
 

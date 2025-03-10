@@ -24,7 +24,7 @@ static func toWorld(pos: Vector2, depth = 0) -> Vector3:
 	return GameManager.get_viewport().get_camera_3d().project_position(pos, depth)
 
 
-enum Rarity {Common, Uncommon, Rare, Legendary}
+enum Rarity {Common, Uncommon, Rare, Legendary, None}
 
 static func rarityToText(rarity) -> String:
 	match rarity:

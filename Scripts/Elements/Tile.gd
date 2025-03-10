@@ -19,6 +19,12 @@ class_name Tile
 @onready var directionText = %DirectionText
 @onready var tilenameText = %LabelTilename
 
+enum Types {normal, gold, black, wood}
+var type = Types.normal
+
+enum PipTypes {normal, red, blue, yellow, purple}
+var pipType = PipTypes.normal
+
 @onready var mesh: MeshInstance3D = %Mesh
 var material: Material
 var pipColor: Color
@@ -33,36 +39,57 @@ var bottomValue = 4
 
 var tileNode: TileNode = null
 
+
 func _ready() -> void:
 	targetPosition = global_position
 	var tileMaterial: TileMaterial = AssetManager.Instance.materials.pick_random()
 	faceDown = false
+	
 	#pass
 	super()
+	randomize()
 
-	if (tileMaterial != null):
-		pipColor = tileMaterial.pipColor
-		spriteTop.modulate = pipColor
-		spriteBottom.modulate = pipColor
-		spriteDivider.modulate = pipColor
-		mesh.set_surface_override_material(1, tileMaterial.material)
-		mesh.set_surface_override_material(0, tileMaterial.outlineMaterial)
+
+func updateMaterial():
+	var tileMaterial = AssetManager.Instance.white
+	match type:
+		Types.normal:
+			tileMaterial = AssetManager.Instance.white
+		Types.black:
+			tileMaterial = AssetManager.Instance.black
+		Types.gold:
+			tileMaterial = AssetManager.Instance.gold
+		Types.wood:
+			tileMaterial = AssetManager.Instance.wood
 	
-func randomize():
-	topValue = randi_range(0, 6)
-	bottomValue = randi_range(0, 6)
+	pipColor = tileMaterial.pipColor
+	spriteTop.modulate = pipColor
+	spriteBottom.modulate = pipColor
+	spriteDivider.modulate = pipColor
+	mesh.set_surface_override_material(1, tileMaterial.material)
+	mesh.set_surface_override_material(0, tileMaterial.outlineMaterial)
+	
 
+func randomize():
+	topValue = randi_range(0, 9)
+	bottomValue = randi_range(0, 9)
+	type = randi_range(0, 3)
+	
 	
 func updateNumbers():
 	spriteTop.texture = sprites[min(topValue, sprites.size() - 1)]
 	spriteBottom.texture = sprites[min(bottomValue, sprites.size() - 1)]
-
-
+		
 func _process(delta: float) -> void:
 	super(delta)
 	updateIdleAnimation(delta)
 	updateNumbers()
+	updateMaterial()
 	#debug()
+
+	if dragged:
+		container.sortByDrag(self)
+
 	if GameManager.gameState != GameManager.GameStates.playing: return
 	if (hovered):
 		if (Input.is_action_just_pressed("click")):
@@ -70,7 +97,7 @@ func _process(delta: float) -> void:
 				if validState(States.onBoard):
 					if tileNode != null:
 						if tileNode.isEdgeNode():
-							GameManager.board.moveOneElement(self, GameManager.hand)
+							GameManager.board.moveOneElement(self, GameManager.hand, true)
 							GameManager.board.tileNodeTree.removeNode(tileNode)
 							SignalBus.emit_signal("OnTileRemoved", self)
 						
@@ -183,9 +210,8 @@ func deselect():
 	pass
 
 func hover():
+	if not super(): return
 	SignalBus.emit_signal("OnTileHovered", self)
-	targetScale = Vector3.ONE * 1.05
-	hovered = true
 	pass
 
 func unhover():

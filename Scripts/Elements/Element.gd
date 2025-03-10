@@ -118,6 +118,7 @@ func _process(delta: float) -> void:
 			clicked()
 		dragged = false
 		canDrag = false
+		GameManager.draggedElement = null
 		
 	if (Input.is_action_pressed("click")):
 		#print("tEEEEEEEESFDSF")	
@@ -129,6 +130,7 @@ func _process(delta: float) -> void:
 				if (holdAfterFrames >= 20):
 					#print("a")	
 					dragged = true
+					GameManager.draggedElement = self
 
 	
 	if (dragged):
@@ -136,7 +138,8 @@ func _process(delta: float) -> void:
 		#\var mousePos = 
 		dragPosition = Vector3(GameManager.mousePos.x, GameManager.mousePos.y, 5)
 		global_position = global_position.lerp(dragPosition, delta * moveSpeed * GameManager.gameSpeedMultiplier * 2)
-		print("held")
+		global_position.z = 15
+		#print("held")
 
 	updatePosition(delta)
 
@@ -206,7 +209,8 @@ func deselect():
 	pass
 
 func hover():
-	if not validState(): return
+	if not validState(): return false
+	if GameManager.draggedElement != null: return false
 	targetScale = Vector3.ONE * 1.05
 	hovered = true
 	DescriptionBox.Instance.addToQueue(self)

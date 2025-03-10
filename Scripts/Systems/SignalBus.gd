@@ -17,8 +17,11 @@ signal OnTileObtained(tile)
 signal OnRoundStarted()
 signal OnPlayedFrom(val)
 signal UpdateEdgeValue(val)
-signal DiscardFromHand()
-signal DrawToHand(count)
+
+
+signal Draw(count)
+signal Discard(elements)
+
 
 signal CantAfford(element)
 signal UseMoney(amount)
@@ -50,8 +53,6 @@ signal OnButtonPressed(button)
 
 
 #endregion
-
-
 
 
 #signal OnTileAdded

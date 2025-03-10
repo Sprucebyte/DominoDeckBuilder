@@ -61,6 +61,7 @@ func generate():
 
 
 func open():
+	clear()
 	#visible = true
 	continueButton.show()
 	generate()
@@ -80,18 +81,21 @@ func close():
 
 
 func clear():
-	for tile in tiles.elements:
+	for i in range(tiles.elements.size() - 1, -1, -1):
+		var tile = tiles.elements[i]
 		tiles.remove(tile)
 		tile.queue_free()
 
-	for card in cards.elements:
+
+	for i in range(cards.elements.size() - 1, -1, -1):
+		var card = cards.elements[i]
 		cards.remove(card)
 		card.queue_free()
 
-	for pack in packs.elements:
+	for i in range(packs.elements.size() - 1, -1, -1):
+		var pack = packs.elements[i]
 		packs.remove(pack)
 		pack.queue_free()
-	pass
 
 
 # Called when the node enters the scene tree for the first time.

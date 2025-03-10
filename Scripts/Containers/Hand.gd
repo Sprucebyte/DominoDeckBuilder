@@ -28,8 +28,8 @@ func close():
 func _ready() -> void:
 	homePosition = position
 	targetPosition = homePosition
-	SignalBus.connect("DrawToHand", drawFromDeck)
-	SignalBus.connect("DiscardFromHand", discardTiles)
+	SignalBus.Draw.connect(drawFromDeck)
+	SignalBus.Discard.connect(discardTiles)
 	pass
 
 
@@ -47,16 +47,12 @@ func _process(delta: float) -> void:
 
 func discardTile(tile):
 	if tile in elements:
-		#tile.targetPosition = Vector3(0,-18,0)
-		#tile.rotation = Vector3(0,0,0)
 		moveElements(tile, GameManager.discardPile)
 	pass
 
 
-func discardTiles():
-	var tempTiles = GameManager.selectedTiles.duplicate()
-
-	for tile in tempTiles:
+func discardTiles(elements = GameManager.selectedTiles.duplicate()):
+	for tile in elements:
 		discardTile(tile)
 	pass
 
