@@ -27,6 +27,21 @@ selectableInStates = 8
 hoverableInStates = 8
 state = 3
 
+[node name="Container" type="Node3D" parent="." node_paths=PackedStringArray("path3d")]
+unique_name_in_owner = true
+transform = Transform3D(1, 4.52113e-16, 2.13163e-14, 4.52114e-16, 1, 0, -2.13163e-14, 0, 1, 0, 0, 0)
+script = ExtResource("6_wmcko")
+containerSize = 10
+defaultElementState = 4
+path3d = NodePath("Path3D")
+maxWidth = 30
+curving = 1.5
+seperation = 5.0
+
+[node name="Path3D" type="Path3D" parent="Container"]
+transform = Transform3D(1, 4.52113e-16, -1.42109e-14, 4.52112e-16, 1, 0, 1.42109e-14, 0, 1, 0.00329304, -0.0317879, 0.0502586)
+curve = SubResource("Curve3D_d1f0j")
+
 [node name="SelectParent" type="Node3D" parent="."]
 unique_name_in_owner = true
 transform = Transform3D(1, 4.52113e-16, 1.42109e-14, 4.52113e-16, 1, 0, -1.42109e-14, 0, 1, 0, 0, 0)
@@ -53,21 +68,6 @@ transform = Transform3D(1, 4.52113e-16, 7.10543e-15, 4.52114e-16, 1, 0, -7.10543
 pixel_size = 0.015
 text = "Choose 2"
 outline_size = 8
-
-[node name="Container" type="Node3D" parent="SelectParent" node_paths=PackedStringArray("path3d")]
-unique_name_in_owner = true
-transform = Transform3D(1, 4.52113e-16, 0, 4.52113e-16, 1, 0, 0, 0, 1, 0, 0, 0)
-script = ExtResource("6_wmcko")
-containerSize = 10
-defaultElementState = 4
-path3d = NodePath("Path3D")
-maxWidth = 30
-curving = 1.5
-seperation = 5.0
-
-[node name="Path3D" type="Path3D" parent="SelectParent/Container"]
-transform = Transform3D(1, 4.52113e-16, -1.42109e-14, 4.52112e-16, 1, 0, 1.42109e-14, 0, 1, 0.00329304, -0.0317879, 0.0502586)
-curve = SubResource("Curve3D_d1f0j")
 
 [node name="Area3D" type="Area3D" parent="SelectParent"]
 transform = Transform3D(1, 4.52113e-16, 0, 4.52113e-16, 1, 0, 0, 0, 1, 0, 0, 0)

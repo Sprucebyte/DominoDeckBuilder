@@ -7,26 +7,7 @@
 [ext_resource type="StyleBox" uid="uid://l47h3q3j4pv2" path="res://Theme & Style/button_normal.tres" id="3_e7sd1"]
 [ext_resource type="StyleBox" uid="uid://d2f8o5hrpjav7" path="res://Theme & Style/button_pressed.tres" id="4_kyqvq"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v0yh1"]
-content_margin_left = 4.0
-content_margin_top = 4.0
-content_margin_right = 4.0
-content_margin_bottom = 4.0
-bg_color = Color(1, 1, 1, 0.75)
-draw_center = false
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-corner_radius_top_left = 3
-corner_radius_top_right = 3
-corner_radius_bottom_right = 3
-corner_radius_bottom_left = 3
-corner_detail = 5
-expand_margin_left = 2.0
-expand_margin_top = 2.0
-expand_margin_right = 2.0
-expand_margin_bottom = 2.0
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_iywtj"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o5d4t"]
 content_margin_left = 4.0
@@ -72,7 +53,7 @@ Button/constants/icon_max_width = 0
 Button/constants/outline_size = 6
 Button/font_sizes/font_size = 20
 Button/styles/disabled = ExtResource("1_q7isq")
-Button/styles/focus = SubResource("StyleBoxFlat_v0yh1")
+Button/styles/focus = SubResource("StyleBoxEmpty_iywtj")
 Button/styles/hover = ExtResource("2_iv5di")
 Button/styles/normal = ExtResource("3_e7sd1")
 Button/styles/pressed = ExtResource("4_kyqvq")

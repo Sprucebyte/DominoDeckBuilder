@@ -117,6 +117,8 @@ func _process(delta: float) -> void:
 	showSelectButton()
 	showBuyButton()
 
+	if dragged:
+		container.sortByDrag(self)
 
 	#if (validState(States.inPack)): return
 	if (Input.is_action_just_pressed("click")):
@@ -132,7 +134,7 @@ func _process(delta: float) -> void:
 		
 	if (Input.is_action_pressed("click")):
 		#print("tEEEEEEEESFDSF")	
-		if validState(States.inHand):
+		if validStates([States.inHand, States.inConsumables, States.inWildcards]):
 			#print("WOOOWO")	
 			if (canDrag):
 				#print("e")	

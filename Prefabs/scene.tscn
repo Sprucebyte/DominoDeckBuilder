@@ -1,4 +1,4 @@
-[gd_scene load_steps=75 format=3 uid="uid://c1vubbps0wbru"]
+[gd_scene load_steps=93 format=3 uid="uid://c1vubbps0wbru"]
 
 [ext_resource type="PackedScene" uid="uid://wutxuycqev1q" path="res://Prefabs/tile_placement_slot.tscn" id="1_7whan"]
 [ext_resource type="Script" path="res://Scripts/Systems/Score.gd" id="1_f3a7t"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://Scripts/AssetManager.gd" id="1_mdonh"]
 [ext_resource type="Texture2D" uid="uid://b5gl8shp801fn" path="res://Textures/belfast_sunset_puresky_2k.hdr" id="1_mtpok"]
 [ext_resource type="Texture2D" uid="uid://b7ucqn60dim45" path="res://Textures/wood edge 2.png" id="2_5e5i0"]
+[ext_resource type="Texture2D" uid="uid://cm3dyxvngfe67" path="res://Textures/wood_corner.png" id="2_gkcv7"]
 [ext_resource type="Texture2D" uid="uid://cr8x4kt8ws6jn" path="res://Textures/background 1.png" id="2_o2cic"]
 [ext_resource type="Script" path="res://Scripts/Containers/Board.gd" id="3_d6a45"]
 [ext_resource type="Script" path="res://Scripts/Systems/AudioManager.gd" id="3_fevv1"]
@@ -47,20 +48,118 @@
 [ext_resource type="Resource" uid="uid://dp4pw5xtxx4cl" path="res://Wild Card Assets/PerfectSquare.tres" id="35_yyx7s"]
 [ext_resource type="Resource" uid="uid://ck0snmdf63842" path="res://Wild Card Assets/FullCoverage.tres" id="36_637ta"]
 [ext_resource type="Resource" uid="uid://yyt2bhp37od3" path="res://Wild Card Assets/EqualAndOpposite.tres" id="37_ausnn"]
+[ext_resource type="Resource" uid="uid://ddeu6gm7xnvxg" path="res://Wild Card Assets/Allowance.tres" id="37_voiap"]
 [ext_resource type="Resource" uid="uid://wldnflsdgvt5" path="res://Wild Card Assets/Baby steps.tres" id="38_se8t8"]
+[ext_resource type="Resource" uid="uid://5bj17o1nrlw4" path="res://Wild Card Assets/BlankShot.tres" id="38_ve6bp"]
+[ext_resource type="Resource" uid="uid://b7oiyi73ccwn0" path="res://Wild Card Assets/D20.tres" id="39_xggks"]
 [ext_resource type="Script" path="res://Scripts/ConsumablesContainer.gd" id="39_xvuc8"]
 [ext_resource type="Texture2D" uid="uid://8m3nobyk16wm" path="res://addons/shaker/assets/icon.png" id="40_2o7gl"]
+[ext_resource type="Resource" uid="uid://bmscnvosmji0n" path="res://Wild Card Assets/DéjàVu.tres" id="40_38qf0"]
 [ext_resource type="Script" path="res://Scripts/Shop.gd" id="40_qawd6"]
+[ext_resource type="Resource" uid="uid://crxnid0851q4c" path="res://Wild Card Assets/Fibonacci.tres" id="41_3kc6k"]
 [ext_resource type="Script" path="res://Scripts/UiTest.gd" id="41_p6njh"]
-[ext_resource type="StyleBox" uid="uid://so6n5lxsr1we" path="res://Theme & Style/button_disabled.tres" id="45_4tfii"]
-[ext_resource type="StyleBox" uid="uid://5ic2283122pj" path="res://Theme & Style/button_hover.tres" id="46_wwrfw"]
-[ext_resource type="StyleBox" uid="uid://d2f8o5hrpjav7" path="res://Theme & Style/button_pressed.tres" id="47_w4t1l"]
-[ext_resource type="StyleBox" uid="uid://l47h3q3j4pv2" path="res://Theme & Style/button_normal.tres" id="48_4t578"]
+[ext_resource type="Resource" uid="uid://cq8lps7icffsj" path="res://Wild Card Assets/FirstStrike.tres" id="42_cfj0f"]
+[ext_resource type="Resource" uid="uid://c1qjtbow2h7fh" path="res://Wild Card Assets/Gravity.tres" id="43_je6p8"]
+[ext_resource type="Resource" uid="uid://uw4p2wine6qg" path="res://Wild Card Assets/Joker.tres" id="44_20uqg"]
+[ext_resource type="Resource" uid="uid://xspnakg2xfce" path="res://Wild Card Assets/MagicNumber.tres" id="45_8ikpq"]
+[ext_resource type="Resource" uid="uid://dbi30jjlpofom" path="res://Wild Card Assets/Mahjong.tres" id="46_jqwuu"]
+[ext_resource type="Resource" uid="uid://bhlbpwxoya3jw" path="res://Wild Card Assets/Pendulum.tres" id="47_i7gs3"]
+[ext_resource type="Resource" uid="uid://doviywbxoe6b5" path="res://Wild Card Assets/ReturnOnInvestment.tres" id="48_lud71"]
+[ext_resource type="Resource" uid="uid://dbjhou6xkurwr" path="res://Wild Card Assets/SlowStart.tres" id="49_sfltc"]
 [ext_resource type="Script" path="res://Scripts/TextEffects/TextEffectMoney.gd" id="50_0jh6r"]
+[ext_resource type="Resource" uid="uid://cdhh7880nx1dn" path="res://Wild Card Assets/Spinning.tres" id="50_bmvk0"]
+[ext_resource type="Resource" uid="uid://dmou4m3idfnjv" path="res://Wild Card Assets/UnLuckySix.tres" id="51_o0nda"]
 [ext_resource type="Script" path="res://Scripts/TextEffects/TextEffectMult.gd" id="51_q31hi"]
+[ext_resource type="Resource" uid="uid://bnbj6qiop3p50" path="res://Wild Card Assets/Symmetry.tres" id="52_4q72n"]
 [ext_resource type="Script" path="res://Scripts/TextEffects/TextEffectScore.gd" id="52_mxj5d"]
 [ext_resource type="Texture2D" uid="uid://ddhaewxwb1ypk" path="res://Textures/Herbert_Moon02.webp" id="54_use7a"]
 [ext_resource type="Script" path="res://Scripts/Containers/ElementContainer.gd" id="56_spfkd"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1k8xk"]
+content_margin_left = 20.0
+content_margin_top = 2.0
+content_margin_right = 20.0
+content_margin_bottom = 2.0
+bg_color = Color(0.06, 0.034, 0, 0.486275)
+border_width_left = 5
+border_width_top = 5
+border_color = Color(0.09, 0.051, 0, 1)
+border_blend = true
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+expand_margin_left = 3.0
+expand_margin_top = 3.0
+expand_margin_right = 3.0
+expand_margin_bottom = 3.0
+shadow_color = Color(1, 1, 1, 0)
+shadow_size = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uo6x7"]
+content_margin_left = 5.0
+content_margin_top = 5.0
+content_margin_right = 5.0
+content_margin_bottom = 5.0
+bg_color = Color(1, 0.742, 0.14, 1)
+border_width_bottom = 6
+border_color = Color(0.911458, 0.523991, 0, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+expand_margin_bottom = 5.0
+shadow_color = Color(0, 0, 0, 0.501961)
+shadow_size = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xba5u"]
+content_margin_left = 5.0
+content_margin_top = 10.0
+content_margin_right = 5.0
+content_margin_bottom = 5.0
+bg_color = Color(1, 0.698709, 0, 1)
+border_width_top = 5
+border_color = Color(0.56, 0.345333, 0, 0)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+expand_margin_bottom = 5.0
+shadow_color = Color(0, 0, 0, 0.501961)
+shadow_size = 5
+shadow_offset = Vector2(0, 4)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_m7hga"]
+content_margin_left = 5.0
+content_margin_top = 5.0
+content_margin_right = 5.0
+content_margin_bottom = 5.0
+bg_color = Color(0.169847, 0.594622, 1, 1)
+border_width_bottom = 6
+border_color = Color(0, 0.42, 0.84, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+expand_margin_bottom = 5.0
+shadow_color = Color(0, 0, 0, 0.501961)
+shadow_size = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rd5qc"]
+content_margin_left = 5.0
+content_margin_top = 5.0
+content_margin_right = 5.0
+content_margin_bottom = 5.0
+bg_color = Color(1, 0.270588, 0.152941, 1)
+border_width_bottom = 6
+border_color = Color(0.721354, 0.0961805, 0, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+expand_margin_bottom = 5.0
+shadow_color = Color(0, 0, 0, 0.501961)
+shadow_size = 5
 
 [sub_resource type="RichTextEffect" id="RichTextEffect_i3dd7"]
 script = ExtResource("50_0jh6r")
@@ -98,6 +197,13 @@ _data = {
 }
 point_count = 2
 
+[sub_resource type="Curve3D" id="Curve3D_oovuj"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 1.57155, 0.0379553, 0.894662, 0, 0, 0, 0, 0, 0, 13.7013, -0.0264194, -32.0811),
+"tilts": PackedFloat32Array(0, 0)
+}
+point_count = 2
+
 [sub_resource type="Curve3D" id="Curve3D_g7n50"]
 _data = {
 "points": PackedVector3Array(0, 0, 0, 0, 0, 0, -0.988436, 0.0379553, 0, 0, 0, 0, 0, 0, 0, 29.039, -0.0260401, -27.1846),
@@ -118,13 +224,6 @@ viewport_path = NodePath("Board/SubViewport")
 [sub_resource type="Curve3D" id="Curve3D_6cliv"]
 _data = {
 "points": PackedVector3Array(0, 0, 0, 0, 0, 0, -7.18511, -0.00731233, 0, 0, 0, 0, 0, 0, 0, 7.19911, -0.0240192, -19.2216),
-"tilts": PackedFloat32Array(0, 0)
-}
-point_count = 2
-
-[sub_resource type="Curve3D" id="Curve3D_oovuj"]
-_data = {
-"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 1.57155, 0.0379553, 0.894662, 0, 0, 0, 0, 0, 0, 13.7013, -0.0264194, -32.0811),
 "tilts": PackedFloat32Array(0, 0)
 }
 point_count = 2
@@ -152,18 +251,29 @@ render_priority = -95
 texture = ExtResource("2_5e5i0")
 
 [node name="Wood Bottom" type="Sprite3D" parent="Background"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.375732, -15.7903, -68.6456)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -15, -68.646)
 pixel_size = 0.013
 transparent = false
 render_priority = -90
 texture = ExtResource("2_5e5i0")
 
 [node name="Wood Top" type="Sprite3D" parent="Background"]
-transform = Transform3D(-1, -1.50996e-07, 0, 1.50996e-07, -1, 0, 0, 0, 1, -0.375732, 13.7677, -68.6456)
+transform = Transform3D(-1, -1.50996e-07, 0, 1.50996e-07, -1, 0, 0, 0, 1, 0, 15, -68.646)
 pixel_size = 0.013
 transparent = false
 render_priority = -90
 texture = ExtResource("2_5e5i0")
+
+[node name="Sprite3D" type="Sprite3D" parent="Background"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.5406, 9.46524, -71.6125)
+pixel_size = 0.013
+texture = ExtResource("2_gkcv7")
+
+[node name="Sprite3D2" type="Sprite3D" parent="Background"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.5617, 9.4469, -71.6125)
+flip_h = true
+pixel_size = 0.013
+texture = ExtResource("2_gkcv7")
 
 [node name="Score" type="Node" parent="."]
 script = ExtResource("1_f3a7t")
@@ -196,7 +306,7 @@ black = ExtResource("4_ud0li")
 wood = ExtResource("18_x5k55")
 gold = ExtResource("6_l2eui")
 tarotCardAssets = Array[ExtResource("7_gc8a2")]([ExtResource("21_5m4q8"), ExtResource("13_jhuo7"), ExtResource("9_qvunr"), ExtResource("24_my2ji"), ExtResource("25_qq31i"), ExtResource("26_q1um7"), ExtResource("5_gkal6")])
-wildCardAssets = Array[ExtResource("7_gc8a2")]([ExtResource("6_va8nl"), ExtResource("5_ci61w"), ExtResource("32_ke8wn"), ExtResource("33_6cs2m"), ExtResource("34_hnb5h"), ExtResource("32_ke8wn"), ExtResource("35_yyx7s"), ExtResource("36_637ta"), ExtResource("37_ausnn"), ExtResource("38_se8t8")])
+wildCardAssets = Array[ExtResource("7_gc8a2")]([ExtResource("6_va8nl"), ExtResource("5_ci61w"), ExtResource("32_ke8wn"), ExtResource("33_6cs2m"), ExtResource("34_hnb5h"), ExtResource("32_ke8wn"), ExtResource("35_yyx7s"), ExtResource("36_637ta"), ExtResource("37_ausnn"), ExtResource("38_se8t8"), ExtResource("37_voiap"), ExtResource("38_ve6bp"), ExtResource("39_xggks"), ExtResource("40_38qf0"), ExtResource("41_3kc6k"), ExtResource("42_cfj0f"), ExtResource("43_je6p8"), ExtResource("44_20uqg"), ExtResource("45_8ikpq"), ExtResource("46_jqwuu"), ExtResource("47_i7gs3"), ExtResource("48_lud71"), ExtResource("49_sfltc"), ExtResource("50_bmvk0"), ExtResource("51_o0nda"), ExtResource("52_4q72n")])
 
 [node name="User Interface" type="Control" parent="."]
 layout_mode = 3
@@ -207,6 +317,65 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("10_t280a")
+
+[node name="HandsAndDiscards" type="HBoxContainer" parent="User Interface"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -467.0
+offset_top = -157.0
+offset_right = 467.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = 588
+alignment = 1
+
+[node name="Hands" type="VBoxContainer" parent="User Interface/HandsAndDiscards"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="User Interface/HandsAndDiscards/Hands"]
+layout_mode = 2
+theme = ExtResource("31_cm3jf")
+theme_override_colors/font_color = Color(0.319893, 0.682058, 0.958333, 1)
+text = "Hands"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Value" type="Label" parent="User Interface/HandsAndDiscards/Hands"]
+layout_mode = 2
+theme = ExtResource("31_3dawp")
+theme_override_colors/font_color = Color(0.319893, 0.682058, 0.958333, 1)
+text = "0"
+horizontal_alignment = 1
+
+[node name="Discards" type="VBoxContainer" parent="User Interface/HandsAndDiscards"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="User Interface/HandsAndDiscards/Discards"]
+layout_mode = 2
+theme = ExtResource("31_cm3jf")
+theme_override_colors/font_color = Color(1, 0.271996, 0.152193, 1)
+text = "Discards"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Value" type="Label" parent="User Interface/HandsAndDiscards/Discards"]
+layout_mode = 2
+theme = ExtResource("31_3dawp")
+theme_override_colors/font_color = Color(1, 0.271996, 0.152193, 1)
+text = "0"
+horizontal_alignment = 1
 
 [node name="TextureRect" type="TextureRect" parent="User Interface" node_paths=PackedStringArray("test")]
 visible = false
@@ -241,11 +410,10 @@ anchors_preset = -1
 anchor_right = 6.825
 anchor_bottom = 18.625
 offset_left = 25.0
-offset_top = 343.0
+offset_top = 351.0
 offset_right = -12850.0
 offset_bottom = -19294.0
 theme_override_constants/separation = 22
-alignment = 1
 
 [node name="TargetScore" type="Control" parent="User Interface/Side Panel"]
 unique_name_in_owner = true
@@ -257,10 +425,12 @@ metadata/_edit_use_anchors_ = true
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 0.064
-offset_top = -31.0
-offset_right = 216.88
+offset_top = -57.0
+offset_right = 217.344
 offset_bottom = 11.0
 theme = ExtResource("31_cm3jf")
+theme_override_colors/font_color = Color(0.878431, 0.258824, 1, 1)
+theme_override_font_sizes/font_size = 30
 text = "Target score"
 horizontal_alignment = 1
 
@@ -268,9 +438,13 @@ horizontal_alignment = 1
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 0.064
+offset_top = -14.0
 offset_right = 216.88
-offset_bottom = 36.0
+offset_bottom = 22.0
 theme = ExtResource("31_3dawp")
+theme_override_colors/font_color = Color(0.877213, 0.256886, 1, 1)
+theme_override_font_sizes/font_size = 26
+theme_override_styles/normal = SubResource("StyleBoxFlat_1k8xk")
 text = "0"
 horizontal_alignment = 1
 
@@ -302,19 +476,21 @@ theme = ExtResource("31_3dawp")
 text = "0"
 horizontal_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="User Interface/Side Panel"]
+[node name="Score and Multiplier" type="HBoxContainer" parent="User Interface/Side Panel"]
 custom_minimum_size = Vector2(0, 50)
 layout_direction = 2
 layout_mode = 2
-theme_override_constants/separation = 7
+size_flags_horizontal = 4
+theme_override_constants/separation = 10
+alignment = 1
 
-[node name="HandScore" type="VBoxContainer" parent="User Interface/Side Panel/HBoxContainer"]
+[node name="HandScore" type="VBoxContainer" parent="User Interface/Side Panel/Score and Multiplier"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 metadata/_edit_use_anchors_ = true
 
-[node name="Label" type="Label" parent="User Interface/Side Panel/HBoxContainer/HandScore"]
+[node name="Label" type="Label" parent="User Interface/Side Panel/Score and Multiplier/HandScore"]
 layout_mode = 2
 theme = ExtResource("31_cm3jf")
 theme_override_colors/font_color = Color(0.319893, 0.682058, 0.958333, 1)
@@ -322,14 +498,14 @@ text = "Score"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Value" type="Label" parent="User Interface/Side Panel/HBoxContainer/HandScore"]
+[node name="Value" type="Label" parent="User Interface/Side Panel/Score and Multiplier/HandScore"]
 layout_mode = 2
 theme = ExtResource("31_3dawp")
 theme_override_colors/font_color = Color(0.319893, 0.682058, 0.958333, 1)
 text = "0"
 horizontal_alignment = 1
 
-[node name="X" type="Label" parent="User Interface/Side Panel/HBoxContainer"]
+[node name="X" type="Label" parent="User Interface/Side Panel/Score and Multiplier"]
 custom_minimum_size = Vector2(0, 52.11)
 layout_mode = 2
 theme = ExtResource("31_cm3jf")
@@ -338,13 +514,13 @@ text = "X"
 horizontal_alignment = 1
 vertical_alignment = 2
 
-[node name="Multiplier" type="VBoxContainer" parent="User Interface/Side Panel/HBoxContainer"]
+[node name="Multiplier" type="VBoxContainer" parent="User Interface/Side Panel/Score and Multiplier"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 metadata/_edit_use_anchors_ = true
 
-[node name="Label" type="Label" parent="User Interface/Side Panel/HBoxContainer/Multiplier"]
+[node name="Label" type="Label" parent="User Interface/Side Panel/Score and Multiplier/Multiplier"]
 layout_mode = 2
 theme = ExtResource("31_cm3jf")
 theme_override_colors/font_color = Color(1, 0.271996, 0.152193, 1)
@@ -352,54 +528,7 @@ text = "Multiplier"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Value" type="Label" parent="User Interface/Side Panel/HBoxContainer/Multiplier"]
-layout_mode = 2
-theme = ExtResource("31_3dawp")
-theme_override_colors/font_color = Color(1, 0.271996, 0.152193, 1)
-text = "0"
-horizontal_alignment = 1
-
-[node name="HBoxContainer2" type="HBoxContainer" parent="User Interface/Side Panel"]
-custom_minimum_size = Vector2(0, 50)
-layout_mode = 2
-theme_override_constants/separation = 28
-
-[node name="Hands" type="VBoxContainer" parent="User Interface/Side Panel/HBoxContainer2"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-metadata/_edit_use_anchors_ = true
-
-[node name="Label" type="Label" parent="User Interface/Side Panel/HBoxContainer2/Hands"]
-layout_mode = 2
-theme = ExtResource("31_cm3jf")
-theme_override_colors/font_color = Color(0.319893, 0.682058, 0.958333, 1)
-text = "Hands"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Value" type="Label" parent="User Interface/Side Panel/HBoxContainer2/Hands"]
-layout_mode = 2
-theme = ExtResource("31_3dawp")
-theme_override_colors/font_color = Color(0.319893, 0.682058, 0.958333, 1)
-text = "0"
-horizontal_alignment = 1
-
-[node name="Discards" type="VBoxContainer" parent="User Interface/Side Panel/HBoxContainer2"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-metadata/_edit_use_anchors_ = true
-
-[node name="Label" type="Label" parent="User Interface/Side Panel/HBoxContainer2/Discards"]
-layout_mode = 2
-theme = ExtResource("31_cm3jf")
-theme_override_colors/font_color = Color(1, 0.271996, 0.152193, 1)
-text = "Discards"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Value" type="Label" parent="User Interface/Side Panel/HBoxContainer2/Discards"]
+[node name="Value" type="Label" parent="User Interface/Side Panel/Score and Multiplier/Multiplier"]
 layout_mode = 2
 theme = ExtResource("31_3dawp")
 theme_override_colors/font_color = Color(1, 0.271996, 0.152193, 1)
@@ -474,7 +603,8 @@ theme = ExtResource("31_3dawp")
 text = "0"
 horizontal_alignment = 2
 
-[node name="Buttons" type="HBoxContainer" parent="User Interface"]
+[node name="HandButtons" type="HBoxContainer" parent="User Interface"]
+unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -490,20 +620,20 @@ grow_vertical = 0
 theme_override_constants/separation = 10
 alignment = 1
 
-[node name="PlayRoundButton" type="Button" parent="User Interface/Buttons"]
+[node name="PlayRoundButton" type="Button" parent="User Interface/HandButtons"]
 unique_name_in_owner = true
 layout_mode = 2
 focus_mode = 0
 theme = ExtResource("31_3dawp")
-theme_override_styles/disabled = ExtResource("45_4tfii")
-theme_override_styles/hover = ExtResource("46_wwrfw")
-theme_override_styles/pressed = ExtResource("47_w4t1l")
-theme_override_styles/normal = ExtResource("48_4t578")
+theme_override_styles/hover = SubResource("StyleBoxFlat_uo6x7")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_xba5u")
+theme_override_styles/normal = SubResource("StyleBoxFlat_m7hga")
 action_mode = 0
 text = "Play round"
 
-[node name="Draw Button" type="Button" parent="User Interface/Buttons"]
+[node name="Draw Button" type="Button" parent="User Interface/HandButtons"]
 unique_name_in_owner = true
+visible = false
 custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
 focus_mode = 0
@@ -512,7 +642,7 @@ action_mode = 0
 text = "Draw
 "
 
-[node name="Button Sort By Top" type="Button" parent="User Interface/Buttons"]
+[node name="Button Sort By Top" type="Button" parent="User Interface/HandButtons"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(32, 0)
 layout_mode = 2
@@ -523,7 +653,7 @@ text = "▀"
 icon_alignment = 1
 expand_icon = true
 
-[node name="Button Sort By Sum" type="Button" parent="User Interface/Buttons"]
+[node name="Button Sort By Sum" type="Button" parent="User Interface/HandButtons"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(32, 0)
 layout_mode = 2
@@ -534,7 +664,7 @@ text = "█"
 icon_alignment = 1
 expand_icon = true
 
-[node name="Button Sort By Bottom" type="Button" parent="User Interface/Buttons"]
+[node name="Button Sort By Bottom" type="Button" parent="User Interface/HandButtons"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(32, 0)
 layout_mode = 2
@@ -545,12 +675,13 @@ text = "▄"
 icon_alignment = 1
 expand_icon = true
 
-[node name="Discard Button" type="Button" parent="User Interface/Buttons"]
+[node name="Discard Button" type="Button" parent="User Interface/HandButtons"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
 focus_mode = 0
 theme = ExtResource("31_3dawp")
+theme_override_styles/normal = SubResource("StyleBoxFlat_rd5qc")
 action_mode = 0
 text = "Discard
 "
@@ -606,7 +737,7 @@ light_volumetric_fog_energy = 0.0
 environment = SubResource("Environment_6w10b")
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.005, 0, 29.2815)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.005, 1.35718, 29.2815)
 keep_aspect = 0
 projection = 1
 fov = 42.2
@@ -620,11 +751,13 @@ transparent = false
 render_priority = -128
 texture = ExtResource("2_o2cic")
 
-[node name="Board" type="Node3D" parent="." groups=["Board"]]
+[node name="Board Position" type="Node3D" parent="."]
+
+[node name="Board" type="Node3D" parent="Board Position" groups=["Board"]]
 script = ExtResource("3_d6a45")
 
 [node name="Hand" type="Node3D" parent="." node_paths=PackedStringArray("path3d") groups=["Hand"]]
-transform = Transform3D(1.3, 0, 0, 0, 1.3, 0, 0, 0, 1.3, -0.00497627, -12.5888, 0)
+transform = Transform3D(1.3, 0, 0, 0, 1.3, 0, 0, 0, 1.3, -0.00497627, -11.681, 0)
 script = ExtResource("7_5nb6h")
 rotationCurve = SubResource("Curve_euog4")
 containerSize = 12
@@ -642,18 +775,37 @@ texture = ExtResource("35_dw6nl")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0130796, 0.0130787, 0)
 curve = SubResource("Curve3D_om68k")
 
-[node name="WildCards" type="Node3D" parent="." node_paths=PackedStringArray("path3d") groups=["WildCards"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.9604, 11.2023, 0)
-script = ExtResource("7_c150q")
-containerSize = 6
-defaultElementState = 8
+[node name="Consumables" type="Node3D" parent="." node_paths=PackedStringArray("path3d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.3536, 12.1, 0)
+script = ExtResource("39_xvuc8")
+containerSize = 3
+defaultElementState = 7
 path3d = NodePath("Path3D")
 maxWidth = 12
 curving = 1.0
 seperation = 5.0
 
+[node name="Path3D" type="Path3D" parent="Consumables"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.686831, -0.0508766, 0)
+curve = SubResource("Curve3D_oovuj")
+
+[node name="Sprite3D2" type="Sprite3D" parent="Consumables"]
+transform = Transform3D(0.917479, 0, 0, 0, 1.3266, 0, 0, 0, 1.08333, 0, 0.154358, -55.023)
+transparency = 0.36
+texture = ExtResource("35_dw6nl")
+
+[node name="WildCards" type="Node3D" parent="." node_paths=PackedStringArray("path3d") groups=["WildCards"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.9604, 12.1, 0)
+script = ExtResource("7_c150q")
+containerSize = 6
+defaultElementState = 8
+path3d = NodePath("Path3D")
+maxWidth = 30
+curving = 1.0
+seperation = 5.0
+
 [node name="Sprite3D2" type="Sprite3D" parent="WildCards"]
-transform = Transform3D(2.18226, 0, 0, 0, 1.3266, 0, 0, 0, 1.08333, 0, 0, -55.023)
+transform = Transform3D(2.18226, 0, 0, 0, 1.3266, 0, 0, 0, 1.08333, 0, 0.154358, -55.023)
 transparency = 0.36
 texture = ExtResource("35_dw6nl")
 
@@ -662,7 +814,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.686831, -0.0508766, 0)
 curve = SubResource("Curve3D_g7n50")
 
 [node name="Deck" type="Node3D" parent="." node_paths=PackedStringArray("path3d") groups=["Deck"]]
-transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, 19.4422, -12.3576, 0)
+transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, 19.4422, -11.5196, 0)
 script = ExtResource("8_4o5i1")
 defaultElementState = 1
 path3d = NodePath("Path3D")
@@ -773,29 +925,10 @@ offset_bottom = 844.12
 theme = ExtResource("31_3dawp")
 text = "Continue"
 
-[node name="Consumables" type="Node3D" parent="." node_paths=PackedStringArray("path3d")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.3536, 11.2023, 0)
-script = ExtResource("39_xvuc8")
-containerSize = 5
-defaultElementState = 7
-path3d = NodePath("Path3D")
-maxWidth = 12
-curving = 1.0
-seperation = 5.0
-
-[node name="Path3D" type="Path3D" parent="Consumables"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.686831, -0.0508766, 0)
-curve = SubResource("Curve3D_oovuj")
-
-[node name="Sprite3D2" type="Sprite3D" parent="Consumables"]
-transform = Transform3D(0.917479, 0, 0, 0, 1.3266, 0, 0, 0, 1.08333, 0, 0, -55.023)
-transparency = 0.36
-texture = ExtResource("35_dw6nl")
-
-[connection signal="pressed" from="User Interface/Buttons/PlayRoundButton" to="User Interface" method="playRoundButtonPressed"]
-[connection signal="pressed" from="User Interface/Buttons/Draw Button" to="User Interface" method="drawButtonPressed"]
-[connection signal="pressed" from="User Interface/Buttons/Button Sort By Top" to="User Interface" method="sortByTopValue"]
-[connection signal="pressed" from="User Interface/Buttons/Button Sort By Sum" to="User Interface" method="sortByTotalValue"]
-[connection signal="pressed" from="User Interface/Buttons/Button Sort By Bottom" to="User Interface" method="sortByBottomValue"]
-[connection signal="pressed" from="User Interface/Buttons/Discard Button" to="User Interface" method="discardButtonPressed"]
+[connection signal="pressed" from="User Interface/HandButtons/PlayRoundButton" to="User Interface" method="playRoundButtonPressed"]
+[connection signal="pressed" from="User Interface/HandButtons/Draw Button" to="User Interface" method="drawButtonPressed"]
+[connection signal="pressed" from="User Interface/HandButtons/Button Sort By Top" to="User Interface" method="sortByTopValue"]
+[connection signal="pressed" from="User Interface/HandButtons/Button Sort By Sum" to="User Interface" method="sortByTotalValue"]
+[connection signal="pressed" from="User Interface/HandButtons/Button Sort By Bottom" to="User Interface" method="sortByBottomValue"]
+[connection signal="pressed" from="User Interface/HandButtons/Discard Button" to="User Interface" method="discardButtonPressed"]
 [connection signal="pressed" from="Shop/ContinueButton" to="Shop" method="close"]

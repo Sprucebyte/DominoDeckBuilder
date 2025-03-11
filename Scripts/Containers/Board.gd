@@ -10,10 +10,11 @@ var center = Vector3.ZERO
 var boundingBox: Dictionary
 var targetPosition = Vector3.ZERO
 var targetScale = Vector3.ONE
-
+var startScale = Vector3.ONE * 1.2
+#@onready var startPosition = global_position
 func _ready():
-	targetScale = Vector3.ONE * 1
-	targetPosition = global_position
+	targetScale = startScale
+	targetPosition = Vector3.ZERO
 	boundingBox = getBoundingBox()
 	center = getCenter()
 	SignalBus.connect("OnPlayedFrom", playFrom)
@@ -81,7 +82,8 @@ func rescale():
 
 func recenter():
 	var tilesCenter = center
-	var newCenter = global_position - tilesCenter # Vector3.ZERO
+	var newCenter = position - tilesCenter # Vector3.ZERO
+	
 	targetPosition = newCenter
 	
 
@@ -109,17 +111,17 @@ func getBoundingBox() -> Dictionary:
 		result["bottom"] = min(result["bottom"], pos.y)
 	
 	
-	DebugDraw3D.draw_box_ab(Vector3(result["left"], result["top"], 0), Vector3(result["right"], result["bottom"], 0), Vector3.UP, Color.ROYAL_BLUE)
+	#DebugDraw3D.draw_box_ab(Vector3(result["left"], result["top"], 0), Vector3(result["right"], result["bottom"], 0), Vector3.UP, Color.ROYAL_BLUE)
 	
 	return result
 
 
 func updateBoard():
 	if elements.size() == 0:
+		targetPosition = Vector3.ZERO
+		global_position = Vector3.ZERO
 		center = Vector3.ZERO
-		targetPosition = center
-		global_position = center 
-		scale = Vector3.ONE * 1
+		scale = startScale
 		boundingBox = getBoundingBox()
 	else:
 		boundingBox = getBoundingBox()
@@ -128,7 +130,6 @@ func updateBoard():
 	recenter()
 
 func _process(delta: float) -> void:
-
 	global_position = global_position.lerp(targetPosition, delta * 10)
 	scale = scale.lerp(targetScale, delta * 10)
 	
@@ -154,7 +155,7 @@ func _process(delta: float) -> void:
 
 
 func addTile(tile: Tile, parentTileNode: TileNode, sideOfTile = Util.Top, sideOfParent = Util.Top):
-	if (tile == null): return ;
+	if (tile == null): return
 	var placed = false
 	var tileNode = TileNode.new()
 	tileNode.str = str(tileNodeTree.nodeCount)
@@ -169,7 +170,8 @@ func addTile(tile: Tile, parentTileNode: TileNode, sideOfTile = Util.Top, sideOf
 	if not (placed): return
 	
 	if (parentTileNode == null):
-		tile.targetPosition = global_position;
+		tile.targetPosition = Vector3.ZERO;
+		#tile.position = Vector3.ZERO
 		if tile.topValue == tile.bottomValue:
 			tile.setDirection(Util.Up)
 		else:

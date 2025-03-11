@@ -3,6 +3,7 @@ class_name Pack
 
 @onready var elementContainer: ElementContainer = %Container
 @onready var label = %Label
+
 #@onready var buyButton: Button3D = %BuyButton
 var opened = false
 var amount = 5
@@ -17,10 +18,12 @@ func open():
 	reparent(get_tree().root)
 	
 	Shop.Instance.hide()
+	#selectParent.position = Vector3.UP
 
 	targetPosition = Vector3.ZERO
 
 	await Util.delay(.1)
+	
 	return
 
 
@@ -28,15 +31,22 @@ func close():
 	for element in elementContainer.elements:
 		element.state == States.disabled
 	
-	for i in range(elementContainer.elements.size() - 1, -1, -1):
-		elementContainer.destroy(elementContainer.elements[i])
+	await destroyElements()
+	await Util.delay(1 * GameManager.gameSpeedMultiplier)
 	opened = false
 	queue_free()
 	Shop.Instance.show()
+	return
+
+
+func destroyElements():
+	for i in range(elementContainer.elements.size() - 1, -1, -1):
+		elementContainer.destroy(elementContainer.elements[i])
+	return
 
 
 func _process(delta: float) -> void:
-	super(delta)
+	super (delta)
 	if (leftToChoose <= 0):
 		close()
 		

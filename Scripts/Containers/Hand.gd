@@ -2,10 +2,11 @@ extends ElementContainer
 class_name Hand
 
 @export var rotationCurve: Curve
-
+@onready var handButtons = %HandButtons
+@onready var handsAndDiscards = %HandsAndDiscards
 #func add()
 #func remove()
-#func moveElements()
+#func moveElements()	
 #func onAdded()
 #func onRemoved()
 
@@ -18,11 +19,15 @@ var placing = 0
 func open():
 	hidden = false
 	targetPosition = homePosition
+	handButtons.show()
+	handsAndDiscards.show()
 	
 
 func close():
 	hidden = true
 	targetPosition = homePosition + Vector3.DOWN * 10
+	handButtons.hide()
+	handsAndDiscards.hide()
 	
 
 func _ready() -> void:

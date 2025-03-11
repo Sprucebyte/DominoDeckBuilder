@@ -1,11 +1,14 @@
-[gd_resource type="Resource" script_class="CardAsset" load_steps=3 format=3 uid="uid://dbjhou6xkurwr"]
+[gd_resource type="Resource" script_class="CardAsset" load_steps=4 format=3 uid="uid://dbjhou6xkurwr"]
 
 [ext_resource type="Script" path="res://Scripts/CardAsset.gd" id="1_akkyw"]
 [ext_resource type="Script" path="res://Scripts/Wild Cards/SlowStart.gd" id="1_ciyg2"]
+[ext_resource type="Texture2D" uid="uid://dxkb3tgo5bb15" path="res://Textures/Cards/Wild Cards/wildcard_slowstart.png" id="3_aj2gt"]
 
 [resource]
 script = ExtResource("1_akkyw")
 code = ExtResource("1_ciyg2")
+texture = ExtResource("3_aj2gt")
 name = "SlowStart"
-description = "[b][mult]+X0.05 mult[/mult][/b] every time a hand is played"
+description = "[b][mult]Gains X0.05 mult[/mult][/b] every time a hand is played.
+Starts at [b][mult]X1 mult[/mult][/b] "
 rarity = 1

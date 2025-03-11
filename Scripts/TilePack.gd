@@ -11,7 +11,7 @@ func _ready() -> void:
 
 func open():
 	randomize()
-	await super()
+	await super ()
 	var tiles = []
 	for i in amount:
 		tiles.append(AssetManager.Instance.tilePrefab.instantiate())
@@ -29,10 +29,11 @@ func open():
 		tile.randomize()
 				
 	opened = true
-	sprite.visible = false
+	#sprite.visible = false
+	selectParent.hide()
 
 func _process(delta: float) -> void:
-	super(delta)
+	super (delta)
 	if opened:
 		elementContainer.setElementPositions()
 	pass

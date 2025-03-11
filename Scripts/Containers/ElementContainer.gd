@@ -190,11 +190,11 @@ func setElementPositions():
 	#var maxWidth = 5
 	var width = (size() * seperation)
 	width = min(width, maxWidth)
-	var startPos = Vector3(- width / 2, 0, 0)
-	var endPos = Vector3(width / 2, 0, - size())
+	var startPos = Vector3(-width / 2, 0, 0)
+	var endPos = Vector3(width / 2, 0, -size())
 	var rotAmount = 2
 	var startRot = Vector3(0, 0, rotAmount * pow(curving, 3))
-	var endRot = Vector3(0, 0, - rotAmount * pow(curving, 3))
+	var endRot = Vector3(0, 0, -rotAmount * pow(curving, 3))
 
 	for i: float in size():
 		var element = elements[i]

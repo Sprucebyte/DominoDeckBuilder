@@ -17,7 +17,7 @@ func _ready() -> void:
 
 func open():
 	randomize()
-	await super()
+	await super ()
 	var tempArray = []
 	if type == Types.TarotCards:
 		tempArray.append_array(AssetManager.Instance.tarotCardAssets)
@@ -42,4 +42,5 @@ func open():
 		GameManager.chooseFrom.append(card)
 	
 	opened = true
-	sprite.visible = false
+	selectParent.hide()
+	#sprite.visible = false

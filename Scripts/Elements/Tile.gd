@@ -46,7 +46,7 @@ func _ready() -> void:
 	faceDown = false
 	
 	#pass
-	super()
+	super ()
 	randomize()
 
 
@@ -82,14 +82,16 @@ func updateNumbers():
 	spriteBottom.texture = sprites[min(bottomValue, sprites.size() - 1)]
 		
 func _process(delta: float) -> void:
-	super(delta)
+	super (delta)
 	updateIdleAnimation(delta)
 	updateNumbers()
 	updateMaterial()
 	#debug()
 
-	if dragged:
-		container.sortByDrag(self)
+	
+
+	if validState(States.onBoard):
+		print(global_position)
 
 	if GameManager.gameState != GameManager.GameStates.playing: return
 	if (hovered):
@@ -132,7 +134,7 @@ func setDirection(direction):
 
 
 func setState(state: States):
-	super(state)
+	super (state)
 	match state:
 		States.inDeck: faceDown = true
 		States.inHand: faceDown = false
@@ -198,7 +200,7 @@ func clicked():
 
 func select():
 	#if not validState(States.inHand): return
-	super()
+	super ()
 	SignalBus.OnTileSelected.emit(self)
 	shakerSelect.play_shake()
 
@@ -206,13 +208,13 @@ func select():
 	pass
 
 func deselect():
-	super()
+	super ()
 	SignalBus.emit_signal("OnTileDeselected", self)
 	shakerSelect.play_shake()
 	pass
 
 func hover():
-	if not super(): return
+	if not super (): return
 	SignalBus.emit_signal("OnTileHovered", self)
 	pass
 

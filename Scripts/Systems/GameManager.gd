@@ -209,7 +209,7 @@ func updatePlacementSlots():
 				placementSlots.append(placementSlot)
 		else:
 			var placementSlot = TilePlacementSlot.Spawn()
-			placementSlot.position = board.position
+			placementSlot.position = Vector3.ZERO
 			var newTile = hand.selectedElements[0]
 			placementSlot.tile = newTile
 			placementSlots.append(placementSlot)
