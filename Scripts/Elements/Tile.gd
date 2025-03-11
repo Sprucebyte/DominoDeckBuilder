@@ -101,6 +101,7 @@ func _process(delta: float) -> void:
 							GameManager.board.moveOneElement(self, GameManager.hand, true)
 							GameManager.board.tileNodeTree.removeNode(tileNode)
 							SignalBus.emit_signal("OnTileRemoved", self)
+							GameManager.board.updateBoard()
 						
 						
 func getEdgeValue() -> float:

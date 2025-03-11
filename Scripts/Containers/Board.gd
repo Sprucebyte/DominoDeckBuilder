@@ -6,7 +6,16 @@ var tileNodeTree: TileNodeTree = TileNodeTree.new()
 var gridSize = 1.1
 var validSlots
 
+var center = Vector3.ZERO
+var boundingBox: Dictionary
+var targetPosition = Vector3.ZERO
+var targetScale = Vector3.ONE
+
 func _ready():
+	targetScale = Vector3.ONE * 1
+	targetPosition = global_position
+	boundingBox = getBoundingBox()
+	center = getCenter()
 	SignalBus.connect("OnPlayedFrom", playFrom)
 
 
@@ -60,13 +69,71 @@ func chooseTileSide(tile, chosenSlot):
 		print("we going 3")
 	return tileSide
 
-	
-func _process(_delta: float) -> void:
-	if (Input.is_key_pressed(KEY_UP)):
-		scale *= 1.05
-	if (Input.is_key_pressed(KEY_DOWN)):
-		scale *= 0.95
 
+func rescale():
+	#var scaleAmount = .2
+	#if (abs(boundingBox["top"] - boundingBox["bottom"]) > 11) or (abs(boundingBox["left"] - boundingBox["right"]) > 30):
+		#targetScale = targetScale * .9
+	#elif (abs(boundingBox["top"] - boundingBox["bottom"]) < 12) and (abs(boundingBox["left"] - boundingBox["right"]) < 33):
+		#if (abs(boundingBox["top"] - boundingBox["bottom"]) > 9) or (abs(boundingBox["left"] - boundingBox["right"]) > 25):
+		#	targetScale = targetScale + (Vector3.ONE * scaleAmount)
+		pass
+
+func recenter():
+	var tilesCenter = center
+	var newCenter = global_position - tilesCenter # Vector3.ZERO
+	targetPosition = newCenter
+	
+
+func getCenter() -> Vector3:
+	var boundingBox = boundingBox
+	var xCenter = (boundingBox["left"] + boundingBox["right"]) / 2
+	var yCenter = (boundingBox["top"] + boundingBox["bottom"]) / 2
+
+	return Vector3(xCenter, yCenter, 0)
+
+func getBoundingBox() -> Dictionary:
+	var result = {
+		"top": 0,
+		"bottom": 0,
+		"left": 0,
+		"right": 0
+	}
+	
+	for element in elements:
+		var pos = to_global(element.targetPosition)
+
+		result["top"] = max(result["top"], pos.y)
+		result["left"] = min(result["left"], pos.x)
+		result["right"] = max(result["right"], pos.x)
+		result["bottom"] = min(result["bottom"], pos.y)
+	
+	
+	DebugDraw3D.draw_box_ab(Vector3(result["left"], result["top"], 0), Vector3(result["right"], result["bottom"], 0), Vector3.UP, Color.ROYAL_BLUE)
+	
+	return result
+
+
+func updateBoard():
+	if elements.size() == 0:
+		center = Vector3.ZERO
+		targetPosition = center
+		global_position = center 
+		scale = Vector3.ONE * 1
+		boundingBox = getBoundingBox()
+	else:
+		boundingBox = getBoundingBox()
+		center = getCenter()
+	rescale()
+	recenter()
+
+func _process(delta: float) -> void:
+
+	global_position = global_position.lerp(targetPosition, delta * 10)
+	scale = scale.lerp(targetScale, delta * 10)
+	
+	#DebugDraw3D.draw_sphere(getCenter(), 1)
+	#DebugDraw3D.draw_arrow(getCenter(), Vector3.ZERO)
 	#if (GameManager.selectedTiles.size() == 1):
 	#	var tile = GameManager.selectedTiles[0]
 	#	validSlots = tileNodeTree.getValidSlots(tileNodeTree.rootNode, tile)
@@ -109,7 +176,7 @@ func addTile(tile: Tile, parentTileNode: TileNode, sideOfTile = Util.Top, sideOf
 			tile.setDirection(Util.Right)
 	else:
 		var offsetAndDirection = getTileOffsetAndDirection(parentTileNode, tileNode, sideOfParent, sideOfTile)
-		tile.targetPosition = parentTileNode.tile.global_position + offsetAndDirection.offset;
+		tile.targetPosition = parentTileNode.tile.position + offsetAndDirection.offset;
 		tile.setDirection(offsetAndDirection.direction)
 		
 	GameManager.hand.moveElements(tile, GameManager.board)
@@ -117,7 +184,9 @@ func addTile(tile: Tile, parentTileNode: TileNode, sideOfTile = Util.Top, sideOf
 	
 	var edgeValue = tileNodeTree.getEdgeValue()
 	SignalBus.emit_signal("UpdateEdgeValue", edgeValue)
-
+	GameManager.updateEdgeValue()
+	updateBoard()
+	
 	# -------------- #
 
 

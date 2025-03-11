@@ -155,17 +155,17 @@ func nodeExists(root, node) -> bool:
 
 ## Returns an array of all the edge nodes (or leaf nodes) branching out from a given node 
 func getEdgeNodes(root = rootNode) -> Array[TileNode]:
-	print("1")
+	#print("1")
 	if root == null: return []
 	var stack: Array[TileNode] = [root]
 	var leafNodes: Array[TileNode]
 	while stack:
-		print("2")
+		#print("2")
 		var node = stack.pop_back() # Get and remove the last node from the stack
 		checkNodeValidity(node)
 		var childCount = 0
 		for child in node.children:
-			print("3")
+			#print("3")
 			if (child != null):
 				if (child != node.parent):
 					stack.append(child)

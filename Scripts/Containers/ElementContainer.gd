@@ -8,9 +8,11 @@ class_name ElementContainer
 #@export_flags ("Playing Tile", "Cursed Tile", "Tarot Card", "Wild Card") var allowedElementTypes: int = 0
 #@export var path: Path2D
 @export var path3d: Path3D
+@export var maxWidth = 10
+@export var curving = 0.0
 #@onready var curve: Curve2D = path.curve
 #endregion
-
+@export var seperation = 1.2
 
 var selectedElements = []
 
@@ -183,18 +185,31 @@ func onMoved(element, targetContainer):
 
 func setElementPositions():
 	var half_size = size() / 2.0
+
+	
+	#var maxWidth = 5
+	var width = (size() * seperation)
+	width = min(width, maxWidth)
+	var startPos = Vector3(- width / 2, 0, 0)
+	var endPos = Vector3(width / 2, 0, - size())
+	var rotAmount = 2
+	var startRot = Vector3(0, 0, rotAmount * pow(curving, 3))
+	var endRot = Vector3(0, 0, - rotAmount * pow(curving, 3))
+
 	for i: float in size():
 		var element = elements[i]
 		if (element == null): continue
 		var j = i - half_size + 0.5
 		if (element.dragged):
 			continue
+		var ratio = (j + half_size) / (size())
 		
-		if (path3d == null):
-			elements[i].targetRotation = Vector3(0, 0, 0)
-			elements[i].targetPosition = Vector3(i, 0, 0) # position + Vector3(sample * 8 + .5, 0 , 0)
+		if (path3d == null) or true:
+			var pos = startPos.lerp(endPos, ratio)
+			elements[i].targetRotation = startRot.lerp(endRot, ratio)
+			elements[i].targetPosition = pos + (Vector3.UP * (1 - pow(abs(ratio - 0.5) * curving, 2))) # Vector3(i, 0, 0) # position + Vector3(sample * 8 + .5, 0 , 0)
+			
 		else:
-			var ratio = (j + half_size) / (size())
 			var _transform: Transform3D = path3d.curve.sample_baked_with_rotation(ratio * path3d.curve.get_baked_length())
 			var t = _transform.origin
 			var pos = t # path3d.curve.sample_baked(ratio * path3d.curve.get_baked_length())

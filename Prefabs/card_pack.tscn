@@ -61,6 +61,9 @@ script = ExtResource("6_wmcko")
 containerSize = 10
 defaultElementState = 4
 path3d = NodePath("Path3D")
+maxWidth = 30
+curving = 1.5
+seperation = 5.0
 
 [node name="Path3D" type="Path3D" parent="SelectParent/Container"]
 transform = Transform3D(1, 4.52113e-16, -1.42109e-14, 4.52112e-16, 1, 0, 1.42109e-14, 0, 1, 0.00329304, -0.0317879, 0.0502586)

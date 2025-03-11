@@ -255,6 +255,9 @@ script = ExtResource("8_3l80f")
 containerSize = 10
 defaultElementState = 4
 path3d = NodePath("Path3D")
+maxWidth = 15
+curving = 1.0
+seperation = 4.0
 
 [node name="Path3D" type="Path3D" parent="Container"]
 transform = Transform3D(1, 4.52113e-16, -1.42109e-14, 4.52112e-16, 1, 0, 1.42109e-14, 0, 1, 0.00329304, -0.0317879, 0.0502586)

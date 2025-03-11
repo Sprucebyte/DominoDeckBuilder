@@ -14,7 +14,7 @@ var consumables: ConsumablesContainer = null
 var mousePos: Vector3
 var gameSpeedMultiplier = 1
 
-var handSize = 10
+var handSize = 8
 
 var handCount = 4
 var discardCount = 4
@@ -58,9 +58,15 @@ func _ready() -> void:
 	SignalBus.connect("OnTileDeselected", deselectTile)
 	SignalBus.connect("PlayRound", playHand)
 	SignalBus.connect("OnTileRemoved", onTileRemoved)
+	#SignalBus.UpdateEdgeValue.connect(updateEdgeValue)
 	await Util.delay(1)
 	startRound()
 
+
+func updateEdgeValue():
+	var t = Score.Instance.getHandTypes()
+	#print(t["high_card"])
+	Score.Instance.chooseHandType(t)
 
 func onTileRemoved(tile):
 	updatePlacementSlots()
@@ -76,8 +82,8 @@ func lockInTiles():
 		lockInSpeed *= Score.acceleration
 	await Util.delay(.3 / gameSpeedMultiplier * lockInSpeed)
 	return
-	
-	
+
+
 func _process(_delta: float) -> void:
 	mousePos = get_viewport().get_camera_3d().project_position(get_viewport().get_mouse_position(), 100)
 	#for element in board.elements:
@@ -198,7 +204,7 @@ func updatePlacementSlots():
 				placementSlot.tile = newTile
 				placementSlot.side = newTileSide
 				placementSlot.offsetAndDirection = offsetAndDirection
-				placementSlot.position = tileSlot.tile.global_position + offsetAndDirection.offset;
+				placementSlot.position = tileSlot.tile.position + offsetAndDirection.offset;
 				placementSlot.setDirection(offsetAndDirection.direction)
 				placementSlots.append(placementSlot)
 		else:

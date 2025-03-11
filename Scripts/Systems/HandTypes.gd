@@ -9,5 +9,4 @@ var pair = 1
 var threeOfAKind = 1
 var fullHouse = 1
 var fourOfAKind = 1
-
 var straight = 1

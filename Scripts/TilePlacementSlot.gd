@@ -7,7 +7,7 @@ var side
 var tile: Tile
 static func Spawn() -> TilePlacementSlot:
 	var tilePlacementSlot: TilePlacementSlot = AssetManager.Instance.tilePlacementSlot.instantiate()
-	GameManager.get_tree().root.add_child(tilePlacementSlot)
+	GameManager.board.add_child(tilePlacementSlot)
 	tilePlacementSlot.global_position = Vector3.ZERO
 	return tilePlacementSlot
 	

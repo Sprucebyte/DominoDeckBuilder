@@ -612,28 +612,29 @@ projection = 1
 fov = 42.2
 size = 55.0
 near = 0.01
-far = 2000.0
+far = 1000.0
 
-[node name="Board" type="Node3D" parent="." groups=["Board"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
-script = ExtResource("3_d6a45")
-
-[node name="Backdrop" type="Sprite3D" parent="Board"]
-transform = Transform3D(1.47324, 0, 0, 0, 1.47324, 0, 0, 0, 1, -0.260437, -0.267242, -70.136)
+[node name="Backdrop" type="Sprite3D" parent="."]
+transform = Transform3D(1.47324, 0, 0, 0, 1.47324, 0, 0, 0, 1, 0, 0, -145.63)
 transparent = false
-render_priority = -100
+render_priority = -128
 texture = ExtResource("2_o2cic")
 
+[node name="Board" type="Node3D" parent="." groups=["Board"]]
+script = ExtResource("3_d6a45")
+
 [node name="Hand" type="Node3D" parent="." node_paths=PackedStringArray("path3d") groups=["Hand"]]
-transform = Transform3D(1.3, 0, 0, 0, 1.3, 0, 0, 0, 1.3, -0.00497627, -12.4348, 0)
+transform = Transform3D(1.3, 0, 0, 0, 1.3, 0, 0, 0, 1.3, -0.00497627, -12.5888, 0)
 script = ExtResource("7_5nb6h")
 rotationCurve = SubResource("Curve_euog4")
-containerSize = 15
+containerSize = 12
 defaultElementState = 2
 path3d = NodePath("Path3D")
+maxWidth = 12
+curving = 1.0
 
 [node name="Sprite3D" type="Sprite3D" parent="Hand"]
-transform = Transform3D(0.803709, 0, 0, 0, 0.636807, 0, 0, 0, 1, 0, 0, -25.4946)
+transform = Transform3D(0.803709, 0, 0, 0, 0.546212, 0, 0, 0, 1, 0, 0.509456, -35.8344)
 transparency = 0.36
 texture = ExtResource("35_dw6nl")
 
@@ -642,14 +643,17 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0130796, 0.0130787, 0)
 curve = SubResource("Curve3D_om68k")
 
 [node name="WildCards" type="Node3D" parent="." node_paths=PackedStringArray("path3d") groups=["WildCards"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23.6812, 11.9088, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.9604, 11.2023, 0)
 script = ExtResource("7_c150q")
 containerSize = 6
 defaultElementState = 8
 path3d = NodePath("Path3D")
+maxWidth = 12
+curving = 1.0
+seperation = 5.0
 
 [node name="Sprite3D2" type="Sprite3D" parent="WildCards"]
-transform = Transform3D(2.18226, 0, 0, 0, 1.3266, 0, 0, 0, 1.08333, 14.2691, -0.89846, -55.0234)
+transform = Transform3D(2.18226, 0, 0, 0, 1.3266, 0, 0, 0, 1.08333, 0, 0, -55.023)
 transparency = 0.36
 texture = ExtResource("35_dw6nl")
 
@@ -662,9 +666,10 @@ transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, 19.4422, -12.3576, 0)
 script = ExtResource("8_4o5i1")
 defaultElementState = 1
 path3d = NodePath("Path3D")
+maxWidth = 9
 
 [node name="Sprite3D2" type="Sprite3D" parent="Deck"]
-transform = Transform3D(0.657504, 0, 0, 0, 0.689874, 0, 0, 0, 1.08333, 0.727989, -0.031333, -55.0234)
+transform = Transform3D(0.657504, 0, 0, 0, 0.462487, 0, 0, 0, 1.08333, 0, 0.386802, -42.5085)
 transparency = 0.36
 texture = ExtResource("35_dw6nl")
 
@@ -700,6 +705,9 @@ script = ExtResource("56_spfkd")
 containerSize = 10
 defaultElementState = 3
 path3d = NodePath("Path3D")
+maxWidth = 20
+curving = 1.0
+seperation = 4.0
 
 [node name="Shadow2" type="Sprite3D" parent="Shop/Cards"]
 transform = Transform3D(1, 0, 0, 0, 2.13987, 0, 0, 0, 1, 0, -0.0358891, -50.9552)
@@ -718,6 +726,9 @@ script = ExtResource("56_spfkd")
 containerSize = 10
 defaultElementState = 3
 path3d = NodePath("Path3D")
+maxWidth = 20
+curving = 1.0
+seperation = 3.0
 
 [node name="Shadow" type="Sprite3D" parent="Shop/Tiles"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -50.9552)
@@ -735,6 +746,9 @@ script = ExtResource("56_spfkd")
 containerSize = 10
 defaultElementState = 3
 path3d = NodePath("Path3D")
+maxWidth = 30
+curving = 1.0
+seperation = 5.0
 
 [node name="Shadow3" type="Sprite3D" parent="Shop/Packs"]
 transform = Transform3D(1, 0, 0, 0, 2.13987, 0, 0, 0, 1, 0, 0.0358891, -50.9552)
@@ -760,17 +774,21 @@ theme = ExtResource("31_3dawp")
 text = "Continue"
 
 [node name="Consumables" type="Node3D" parent="." node_paths=PackedStringArray("path3d")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.5274, 11.898, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.3536, 11.2023, 0)
 script = ExtResource("39_xvuc8")
+containerSize = 5
 defaultElementState = 7
 path3d = NodePath("Path3D")
+maxWidth = 12
+curving = 1.0
+seperation = 5.0
 
 [node name="Path3D" type="Path3D" parent="Consumables"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.686831, -0.0508766, 0)
 curve = SubResource("Curve3D_oovuj")
 
 [node name="Sprite3D2" type="Sprite3D" parent="Consumables"]
-transform = Transform3D(0.917479, 0, 0, 0, 1.3266, 0, 0, 0, 1.08333, 7.57198, -0.89846, -55.0234)
+transform = Transform3D(0.917479, 0, 0, 0, 1.3266, 0, 0, 0, 1.08333, 0, 0, -55.023)
 transparency = 0.36
 texture = ExtResource("35_dw6nl")
 
