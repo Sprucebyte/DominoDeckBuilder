@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="CardAsset" load_steps=3 format=3 uid="uid://dbjhou6xkurwr"]
+
+[ext_resource type="Script" path="res://Scripts/CardAsset.gd" id="1_akkyw"]
+[ext_resource type="Script" path="res://Scripts/Wild Cards/SlowStart.gd" id="1_ciyg2"]
+
+[resource]
+script = ExtResource("1_akkyw")
+code = ExtResource("1_ciyg2")
+name = "SlowStart"
+description = "[b][mult]+X0.05 mult[/mult][/b] every time a hand is played"
+rarity = 1
