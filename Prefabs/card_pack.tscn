@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://drbbe2kaqsqrg"]
+[gd_scene load_steps=11 format=3 uid="uid://drbbe2kaqsqrg"]
 
 [ext_resource type="Script" path="res://Scripts/CardPack.gd" id="1_jfmws"]
 [ext_resource type="Script" path="res://addons/shaker/src/Vector3/shaker_component3D.gd" id="2_vodnk"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://dpsjx31un88cy" path="res://Prefabs/button.tscn" id="5_3qhmo"]
 [ext_resource type="Script" path="res://Scripts/Containers/ElementContainer.gd" id="6_wmcko"]
 [ext_resource type="Theme" uid="uid://cr7c32xd1yioy" path="res://Theme & Style/main_theme.tres" id="7_owyps"]
+[ext_resource type="Resource" uid="uid://cpdsnrua1i6fr" path="res://Shaker/Presets/select.tres" id="8_2yfcn"]
 
 [sub_resource type="Curve3D" id="Curve3D_d1f0j"]
 _data = {
@@ -21,6 +22,7 @@ size = Vector3(4.40441, 7.4306, 0.150208)
 [node name="CardPack" type="Node3D"]
 transform = Transform3D(0.999999, 4.47034e-08, -7.35744e-08, -4.47034e-08, 0.999999, 4.21423e-08, 7.35744e-08, -4.21423e-08, 0.999999, -4.17233e-07, 2.98023e-07, -2.63751e-06)
 script = ExtResource("1_jfmws")
+leftToChoose = 1
 title = "Tarot card pack"
 description = "Choose up to 2 of 5 random tarot cards"
 selectableInStates = 8
@@ -46,9 +48,13 @@ curve = SubResource("Curve3D_d1f0j")
 unique_name_in_owner = true
 transform = Transform3D(1, 4.52113e-16, 1.42109e-14, 4.52113e-16, 1, 0, -1.42109e-14, 0, 1, 0, 0, 0)
 
-[node name="Price" type="Label3D" parent="SelectParent"]
+[node name="IdleAxis" type="Node3D" parent="SelectParent"]
 unique_name_in_owner = true
-transform = Transform3D(0.990014, 0.14097, 1.86265e-09, -0.14097, 0.990014, 9.89532e-09, -4.49099e-10, -1.00591e-08, 1, 2.19657, 3.69234, 0.440994)
+transform = Transform3D(1, 2.35159e-08, 7.10543e-15, -2.35159e-08, 1, 0, -7.10543e-15, 0, 1, 0, 0, 0)
+
+[node name="Price" type="Label3D" parent="SelectParent/IdleAxis"]
+unique_name_in_owner = true
+transform = Transform3D(0.999996, -0.00275768, 1.86265e-09, 0.00275768, 0.999996, 9.89532e-09, -1.88992e-09, -9.89015e-09, 1, -0.00803087, 4.33246, 0.440994)
 render_priority = 11
 outline_render_priority = 10
 modulate = Color(1, 0.782916, 0, 1)
@@ -56,9 +62,9 @@ text = "$4"
 font_size = 162
 outline_size = 10
 
-[node name="ShakerOpen" type="Node3D" parent="SelectParent" node_paths=PackedStringArray("Targets")]
+[node name="ShakerOpen" type="Node3D" parent="SelectParent/IdleAxis" node_paths=PackedStringArray("Targets")]
 unique_name_in_owner = true
-transform = Transform3D(1, 4.52113e-16, 0, 4.52113e-16, 1, 0, 0, 0, 1, 0, 0, 0)
+transform = Transform3D(1, -2.35159e-08, 0, 2.35159e-08, 1, 0, 0, 0, 1, 0, 0, 0)
 script = ExtResource("2_vodnk")
 custom_target = true
 Targets = [NodePath("Sprite")]
@@ -67,22 +73,22 @@ fade_in = 0.0228764
 fade_out = 0.0106722
 shakerPreset = ExtResource("3_741oa")
 
-[node name="Sprite" type="Sprite3D" parent="SelectParent/ShakerOpen"]
+[node name="Sprite" type="Sprite3D" parent="SelectParent/IdleAxis/ShakerOpen"]
 unique_name_in_owner = true
 transform = Transform3D(1, 1.35042e-08, -9.31322e-09, -1.35042e-08, 1, 2.98023e-08, 9.31322e-09, -2.98023e-08, 1, 0, 0, 0)
 texture = ExtResource("3_j0l8j")
 
-[node name="Label" type="Label3D" parent="SelectParent"]
+[node name="Label" type="Label3D" parent="SelectParent/IdleAxis"]
 unique_name_in_owner = true
-transform = Transform3D(1, 4.52113e-16, 7.10543e-15, 4.52114e-16, 1, 0, -7.10543e-15, 0, 1, -8.70261e-08, -5.36957, 8.20403e-08)
+transform = Transform3D(1, -2.35159e-08, 7.10543e-15, 2.35159e-08, 1, 0, -7.10543e-15, 0, 1, 3.92442e-08, -5.36957, 8.20403e-08)
 pixel_size = 0.015
 text = "Choose 2"
 outline_size = 8
 
-[node name="Area3D" type="Area3D" parent="SelectParent"]
-transform = Transform3D(1, 4.52113e-16, 0, 4.52113e-16, 1, 0, 0, 0, 1, 0, 0, 0)
+[node name="Area3D" type="Area3D" parent="SelectParent/IdleAxis"]
+transform = Transform3D(1, -2.35159e-08, 0, 2.35159e-08, 1, 0, 0, 0, 1, 0, 0, 0)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="SelectParent/Area3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SelectParent/IdleAxis/Area3D"]
 transform = Transform3D(1, 4.52113e-16, 8.73968e-13, 4.5215e-16, 1, 0, -8.73968e-13, 0, 1, 0.00477472, 0.0110376, -0.00491333)
 shape = SubResource("BoxShape3D_h2dnl")
 
@@ -107,6 +113,19 @@ offset_bottom = 844.12
 theme = ExtResource("7_owyps")
 text = "SKIP"
 
-[connection signal="mouse_entered" from="SelectParent/Area3D" to="." method="hover"]
-[connection signal="mouse_exited" from="SelectParent/Area3D" to="." method="unhover"]
+[node name="Shaker Select" type="Node3D" parent="." node_paths=PackedStringArray("Targets")]
+unique_name_in_owner = true
+transform = Transform3D(1, -1.02207e-14, 0, -1.0221e-14, 1, 0, 0, 0, 1, 0, 0, 0)
+script = ExtResource("2_vodnk")
+custom_target = true
+Targets = [NodePath("../SelectParent")]
+intensity = 0.787
+duration = 0.5
+shake_speed = 4.0
+fade_in = 1e-05
+fade_out = 1e-05
+shakerPreset = ExtResource("8_2yfcn")
+
+[connection signal="mouse_entered" from="SelectParent/IdleAxis/Area3D" to="." method="hover"]
+[connection signal="mouse_exited" from="SelectParent/IdleAxis/Area3D" to="." method="unhover"]
 [connection signal="pressed" from="SkipButton" to="." method="close"]

@@ -35,6 +35,23 @@ func open():
 
 	GameManager.chooseFrom.clear()
 	for card in cards:
+		if type == Types.WildCards:
+			match card.rarity:
+				Util.Rarity.Common:
+					card.baseBuyValue = 4
+					card.baseSellValue = 2
+
+				Util.Rarity.Uncommon:
+					card.baseBuyValue = 6
+					card.baseSellValue = 3
+				Util.Rarity.Rare:
+					card.baseBuyValue = 8
+					card.baseSellValue = 4
+				Util.Rarity.Legendary:
+					card.baseBuyValue = 12
+					card.baseSellValue = 8
+		card.buyValue = card.baseBuyValue
+		card.sellValue = card.baseSellValue
 		card.state = Element.States.inPack
 		card.pack = self
 		add_child(card)

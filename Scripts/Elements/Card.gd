@@ -15,11 +15,11 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
-	super(delta)
+	super (delta)
 
 
 func activate():
-	super()
+	super ()
 	shakerActivate.play_shake()
 	pass
 

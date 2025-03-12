@@ -54,6 +54,7 @@ func generate():
 			pack = AssetManager.Instance.tilePack.instantiate()
 		
 		pack.container = packs
+		pack.buyValue = 6
 		packs.add_child(pack)
 		packs.add(pack)
 		pass

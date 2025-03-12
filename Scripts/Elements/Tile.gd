@@ -5,7 +5,7 @@ class_name Tile
 @export var sprites: Array[Texture2D] = []
 
 #@onready var shakerActivate: ShakerComponent3D = $"Shaker Activate"
-@onready var shakerSelect: ShakerComponent3D = $"Shaker Select"
+
 
 @onready var spriteTop = %SpriteTop
 @onready var spriteBottom = %SpriteBottom
@@ -75,9 +75,34 @@ func randomize():
 	bottomValue = randi_range(0, 9)
 	type = randi_range(0, 3)
 	
+
+func typeDescription():
+	match type:
+		Types.normal:
+			return ("Scores if tile is an edge value\n--------------------\n")
+		Types.black:
+			return ("Scores if tile is an edge value\n[b][mult]+1 mult[/mult][/b] when scored\n--------------------\n")
+		Types.gold:
+			return ("Scores if tile is an edge value\n[b][money]+$1 [/money][/b] when scored\n--------------------\n")
+		Types.wood:
+			return ("Scores if tile is an edge value\n[b][score]+5 [/score][/b] for every wooden tile on the board\n--------------------\n")
+	return ""
 	
+func typeTitle():
+	match type:
+		Types.normal:
+			return ("Tile")
+		Types.black:
+			return ("Black Tile")
+		Types.gold:
+			return ("Golden Tile")
+		Types.wood:
+			return ("Wooden Tile")
+	return ""
+
 func updateNumbers():
-	description = "[b]" + str(topValue) + " | " + str(bottomValue)
+	title = typeTitle()
+	description = typeDescription() + "[b]" + str(topValue) + " | " + str(bottomValue)
 	spriteTop.texture = sprites[min(topValue, sprites.size() - 1)]
 	spriteBottom.texture = sprites[min(bottomValue, sprites.size() - 1)]
 		
@@ -108,17 +133,6 @@ func _process(delta: float) -> void:
 						
 func getEdgeValue() -> float:
 	return tileNode.getEdgeValue()
-
-
-func updateIdleAnimation(delta):
-	if validStates([States.onBoard]) and not lockedIn:
-		idleAxis.rotation.x = (cos(t * .25 * idleSpeed + offset) * .2)
-		idleAxis.rotation.y = (cos(t * .5 * idleSpeed + offset) * .2)
-		idleAxis.rotation.z = (cos(t * .5 * idleSpeed + offset) * .1)
-	else:
-		idleAxis.rotation.x = lerp_angle(idleAxis.rotation.x, 0, delta * 10 * GameManager.gameSpeedMultiplier)
-		idleAxis.rotation.y = lerp_angle(idleAxis.rotation.y, 0, delta * 10 * GameManager.gameSpeedMultiplier)
-		idleAxis.rotation.z = lerp_angle(idleAxis.rotation.z, 0, delta * 10 * GameManager.gameSpeedMultiplier)
 
 
 func setDirection(direction):
@@ -187,24 +201,10 @@ func playFrom():
 	if not validState(States.onBoard): return
 	SignalBus.emit_signal("OnPlayedFrom", self)
 
-func clicked():
-	if validState(States.onBoard):
-		playFrom();
-	else: if validStates([States.inHand, States.inShop, States.inDeck]):
-		if not (selected):
-			select()
-		else:
-			deselect()
-	SignalBus.emit_signal("OnElementClicked", self)
-	pass
 
 func select():
-	#if not validState(States.inHand): return
 	super ()
 	SignalBus.OnTileSelected.emit(self)
-	shakerSelect.play_shake()
-
-	
 	pass
 
 func deselect():

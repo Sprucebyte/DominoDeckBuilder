@@ -6,8 +6,8 @@ class_name Pack
 
 #@onready var buyButton: Button3D = %BuyButton
 var opened = false
-var amount = 5
-var leftToChoose = 2
+@export var amount = 5
+@export var leftToChoose = 2
 
 
 func open():
@@ -77,9 +77,9 @@ func updatePosition(delta: float):
 	else:
 		selectParent.position = selectParent.position.lerp(Vector3.ZERO, delta * 40 * GameManager.gameSpeedMultiplier)
 	
-	rotation = Vector3.ZERO
-	#selectParent.scale = selectParent.scale.lerp(targetScale, delta * scaleSpeed * GameManager.gameSpeedMultiplier)
+	rotation.x = lerp_angle(rotation.x, deg_to_rad(targetRotation.x), delta * rotationSpeed * GameManager.gameSpeedMultiplier)
+	rotation.y = lerp_angle(rotation.y, deg_to_rad(targetRotation.y), delta * rotationSpeed * GameManager.gameSpeedMultiplier)
+	rotation.z = lerp_angle(rotation.z, deg_to_rad(targetRotation.z), delta * rotationSpeed * GameManager.gameSpeedMultiplier)
 	
-	#rotation.x = lerp_angle(rotation.x, deg_to_rad(targetRotation.x), delta * rotationSpeed * GameManager.gameSpeedMultiplier)
-	#rotation.y = lerp_angle(rotation.y, deg_to_rad(targetRotation.y), delta * rotationSpeed * GameManager.gameSpeedMultiplier)
-	#rotation.z = lerp_angle(rotation.z, deg_to_rad(targetRotation.z), delta * rotationSpeed * GameManager.gameSpeedMultiplier)
+	selectParent.scale = selectParent.scale.lerp(targetScale, delta * scaleSpeed * GameManager.gameSpeedMultiplier)
+	updateIdleAnimation(delta)

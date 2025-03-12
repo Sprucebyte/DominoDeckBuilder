@@ -49,7 +49,9 @@ var bankid = 0
 @onready var sellButton: Node3D = %SellButton
 
 @onready var shakerActivate: ShakerComponent3D = %"Shaker Activate"
+@onready var shakerSelect: ShakerComponent3D = $"Shaker Select"
 
+@onready var priceTag: Label3D = %"Price"
 @export var container: ElementContainer
 
 @export_group("States")
@@ -113,6 +115,16 @@ func showSelectButton():
 		selectButton.visible = false
 
 func _process(delta: float) -> void:
+	if (validState(States.inShop)):
+		priceTag.visible = true
+		priceTag.text = "$" + str(buyValue)
+	elif (validStates([States.inConsumables, States.inWildcards]) and selected):
+		priceTag.visible = true
+		priceTag.text = "$" + str(sellValue)
+	else:
+		priceTag.visible = false
+
+
 	showSellButton()
 	showSelectButton()
 	showBuyButton()
@@ -169,7 +181,7 @@ func updatePosition(delta: float):
 	else:
 		flipAxis.rotation.y = lerp_angle(flipAxis.rotation.y, 0, delta * flipSpeed * GameManager.gameSpeedMultiplier)
 	
-	t += delta
+	
 	position = position.lerp(targetPosition, delta * moveSpeed * GameManager.gameSpeedMultiplier)
 	if hovered: position.z = 15
 
@@ -187,14 +199,15 @@ func updatePosition(delta: float):
 	rotation.y = lerp_angle(rotation.y, deg_to_rad(targetRotation.y), delta * rotationSpeed * GameManager.gameSpeedMultiplier)
 	rotation.z = lerp_angle(rotation.z, deg_to_rad(targetRotation.z), delta * rotationSpeed * GameManager.gameSpeedMultiplier)
 	
-	#updateIdleAnimation(delta)
+	updateIdleAnimation(delta)
 			
 
 func updateIdleAnimation(delta):
-	if validState(States.inHand):
-		idleAxis.rotation.x = (cos(t * .25 * idleSpeed + offset) * .2)
-		idleAxis.rotation.y = (cos(t * .5 * idleSpeed + offset) * .2)
-		idleAxis.rotation.z = (cos(t * .5 * idleSpeed + offset) * .1)
+	t += delta
+	if (validState(States.onBoard) and !lockedIn): # or validStates([States.inHand, States.inConsumables, States.inWildcards, States.inPack, States.inShop]):
+		idleAxis.rotation.x = (cos(t * .125 * idleSpeed + offset) * .1)
+		idleAxis.rotation.y = (cos(t * .25 * idleSpeed + offset) * .1)
+		idleAxis.rotation.z = (cos(t * .25 * idleSpeed + offset) * .05)
 	else:
 		idleAxis.rotation.x = lerp_angle(idleAxis.rotation.x, 0, delta * 10 * GameManager.gameSpeedMultiplier)
 		idleAxis.rotation.y = lerp_angle(idleAxis.rotation.y, 0, delta * 10 * GameManager.gameSpeedMultiplier)
@@ -205,7 +218,11 @@ func updateIdleAnimation(delta):
 
 func clicked():
 	if not (selected):
+		shakerSelect.play_shake()
+		if validState(States.inShop): return
+		if validState(States.inPack): return
 		select()
+
 	else:
 		deselect()
 	pass

@@ -271,6 +271,7 @@ script = ExtResource("1_qw2k2")
 sprites = Array[Texture2D]([ExtResource("2_050xq"), ExtResource("3_mbg0k"), ExtResource("4_qoeyx"), ExtResource("5_l5vgl"), ExtResource("6_rxfya"), ExtResource("7_lyuma"), ExtResource("8_f8xlc"), ExtResource("9_cuvhn"), ExtResource("10_78beo"), ExtResource("11_7eham")])
 title = "Tile"
 description = "a tile"
+baseBuyValue = 3
 selectableInStates = 28
 hoverableInStates = 28
 
@@ -455,31 +456,29 @@ shape = SubResource("BoxShape3D_jyux7")
 
 [node name="Price" type="Label3D" parent="SelectParent"]
 unique_name_in_owner = true
-transform = Transform3D(0.990014, 0.14097, 1.86265e-09, -0.14097, 0.990014, 9.89532e-09, -4.49103e-10, -1.00591e-08, 1, 0.416819, 1.02127, 0.440994)
+transform = Transform3D(0.999978, 0.00668454, 1.86265e-09, -0.00668454, 0.999978, 9.89532e-09, -1.79646e-09, -9.90755e-09, 1, -0.00348292, 1.34379, 0.440994)
 render_priority = 11
 outline_render_priority = 10
 modulate = Color(1, 0.782916, 0, 1)
 text = "$4"
-font_size = 81
+font_size = 80
 outline_size = 10
 
 [node name="Buttons" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.5662, -0.139305)
+transform = Transform3D(0.599639, 0, 0, 0, 0.599639, 0, 0, 0, 0.6, 0, -1.35311, 0)
 
 [node name="SelectButton" parent="Buttons" node_paths=PackedStringArray("element") instance=ExtResource("28_1tw0n")]
 unique_name_in_owner = true
-transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 2.01267, 0)
 element = NodePath("../..")
 text = "Select"
-color = Color(0.980392, 0.886275, 0.352941, 1)
+color = Color(1, 0.750667, 0.12, 1)
 type = 1
 
 [node name="BuyButton" parent="Buttons" node_paths=PackedStringArray("element") instance=ExtResource("28_1tw0n")]
 unique_name_in_owner = true
-transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 2.01267, 0)
 element = NodePath("../..")
 text = "Buy"
-color = Color(0.98, 0.88592, 0.3528, 1)
+color = Color(1, 0.750667, 0.12, 1)
 
 [connection signal="mouse_entered" from="SelectParent/Area3D" to="." method="hover"]
 [connection signal="mouse_exited" from="SelectParent/Area3D" to="." method="unhover"]

@@ -1,7 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://dpsjx31un88cy"]
+[gd_scene load_steps=11 format=3 uid="uid://dpsjx31un88cy"]
 
 [ext_resource type="Script" path="res://Scripts/Button3D.gd" id="1_3hx8p"]
 [ext_resource type="Script" path="res://addons/shaker/src/Vector3/shaker_component3D.gd" id="1_plsaj"]
+[ext_resource type="SystemFont" uid="uid://ry8cbr4i1744" path="res://Fonts/Font1.tres" id="2_1ptjr"]
 [ext_resource type="Script" path="res://addons/shaker/data/Vector3/BaseShakerType3D.gd" id="2_ik3gs"]
 [ext_resource type="Script" path="res://addons/shaker/data/Vector3/ShakerTypeSineWave3D.gd" id="3_qulub"]
 [ext_resource type="Script" path="res://addons/shaker/data/Vector3/ShakerPreset3D.gd" id="4_kfvan"]
@@ -42,6 +43,7 @@ transform = Transform3D(1, 4.19095e-09, 0, -4.65661e-10, 1, 1.49012e-08, 0, -7.4
 render_priority = 12
 outline_render_priority = 11
 text = "BUY"
+font = ExtResource("2_1ptjr")
 font_size = 116
 outline_size = 39
 
