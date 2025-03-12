@@ -61,13 +61,13 @@ func chooseTileSide(tile, chosenSlot):
 	var tileSide
 	if (tile.topValue == tile.bottomValue):
 		tileSide = Util.Right
-		print("we going 1")
+		#print("we going 1")
 	else: if (chosenSlot.pips == tile.topValue):
 		tileSide = Util.Top
-		print("we going 2")
+		#print("we going 2")
 	else: if (chosenSlot.pips == tile.bottomValue):
 		tileSide = Util.Bottom
-		print("we going 3")
+		#print("we going 3")
 	return tileSide
 
 
@@ -128,6 +128,7 @@ func updateBoard():
 		center = getCenter()
 	rescale()
 	recenter()
+	GameManager.updateEdgeValue()
 
 func _process(delta: float) -> void:
 	global_position = global_position.lerp(targetPosition, delta * 10)
@@ -186,7 +187,7 @@ func addTile(tile: Tile, parentTileNode: TileNode, sideOfTile = Util.Top, sideOf
 	
 	var edgeValue = tileNodeTree.getEdgeValue()
 	SignalBus.emit_signal("UpdateEdgeValue", edgeValue)
-	GameManager.updateEdgeValue()
+	
 	updateBoard()
 	
 	# -------------- #

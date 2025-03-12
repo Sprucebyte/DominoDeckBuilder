@@ -89,9 +89,9 @@ func _process(delta: float) -> void:
 	#debug()
 
 	
-
 	if validState(States.onBoard):
-		print(global_position)
+		#print(global_position)
+		pass
 
 	if GameManager.gameState != GameManager.GameStates.playing: return
 	if (hovered):

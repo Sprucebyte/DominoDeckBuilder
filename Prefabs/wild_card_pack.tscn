@@ -47,6 +47,16 @@ curve = SubResource("Curve3D_d1f0j")
 unique_name_in_owner = true
 transform = Transform3D(1, 4.52113e-16, 1.42109e-14, 4.52113e-16, 1, 0, -1.42109e-14, 0, 1, 0, 0, 0)
 
+[node name="Price" type="Label3D" parent="SelectParent"]
+unique_name_in_owner = true
+transform = Transform3D(0.990014, 0.14097, 1.86266e-09, -0.14097, 0.990014, 9.89532e-09, -4.49106e-10, -1.00591e-08, 1, 2.20657, 3.67952, 0.440994)
+render_priority = 11
+outline_render_priority = 10
+modulate = Color(1, 0.782916, 0, 1)
+text = "$4"
+font_size = 162
+outline_size = 10
+
 [node name="ShakerOpen" type="Node3D" parent="SelectParent" node_paths=PackedStringArray("Targets")]
 unique_name_in_owner = true
 transform = Transform3D(1, 4.52113e-16, 0, 4.52113e-16, 1, 0, 0, 0, 1, 0, 0, 0)
@@ -88,6 +98,7 @@ color = Color(0.98, 0.88592, 0.3528, 1)
 
 [node name="SkipButton" type="Button" parent="."]
 unique_name_in_owner = true
+visible = false
 anchors_preset = -1
 anchor_right = 0.084
 anchor_bottom = 0.036

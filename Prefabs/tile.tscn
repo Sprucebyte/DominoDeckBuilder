@@ -453,6 +453,16 @@ outline_size = 0
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0020752, 0.00227356, 0.00724794)
 shape = SubResource("BoxShape3D_jyux7")
 
+[node name="Price" type="Label3D" parent="SelectParent"]
+unique_name_in_owner = true
+transform = Transform3D(0.990014, 0.14097, 1.86265e-09, -0.14097, 0.990014, 9.89532e-09, -4.49103e-10, -1.00591e-08, 1, 0.416819, 1.02127, 0.440994)
+render_priority = 11
+outline_render_priority = 10
+modulate = Color(1, 0.782916, 0, 1)
+text = "$4"
+font_size = 81
+outline_size = 10
+
 [node name="Buttons" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.5662, -0.139305)
 

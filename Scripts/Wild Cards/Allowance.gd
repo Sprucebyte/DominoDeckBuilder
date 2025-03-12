@@ -1,11 +1,10 @@
 extends WildCard
 
 
-#give 50 point at start of a round
+#give 50 points at the start of a round
 func activate() -> void:
-	super()
-	#should instead check if its the first hand played that round
-	if (GameManager.handCount >= 4):
+	super ()
+	if (GameManager.handsRemaining >= GameManager.handCount):
 		delay()
 		addScore(50)
 		shake()

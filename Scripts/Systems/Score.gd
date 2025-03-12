@@ -77,31 +77,33 @@ func run():
 	setCombinedScore()
 	
 
-func chooseHandType(result: Dictionary):
-	if result["all_eights"]:
-		print("all_eights")
-	elif result["all_sevens"]:
-		print("all_sevens")
-	elif result["all_fives"]:
-		print("all_fives")
-	elif result["all_threes"]:
-		print("all_threes")
-	elif result["four_of_a_kind"]:
-		print("four_of_a_kind")
-	elif result["full_house"]:
-		print("full_house")
-	elif result["straight"]:
-		print("straight")
-	elif result["three_of_a_kind"]:
-		print("three_of_a_kind")
-	elif result["two_pair"]:
-		print("two_pair")
-	elif result["pair"]:
-		print("pair")
-	elif result["high_card"]:
-		print("high_card")
-		
+func chooseHandType(hands: Dictionary):
+	var result = ""
+	if hands["high_card"]:
+		result = ("high_card")
+	if hands["pair"]:
+		result = ("pair")
+	if hands["two_pair"]:
+		result = ("two_pair")
+	if hands["three_of_a_kind"]:
+		result = ("three_of_a_kind")
+	if hands["straight"]:
+		result = ("straight")
+	if hands["full_house"]:
+		result = ("full_house")
+	if hands["four_of_a_kind"]:
+		result = ("four_of_a_kind")
+	if hands["all_threes"]:
+		result = ("all_threes")
+	if hands["all_fives"]:
+		result = ("all_fives")
+	if hands["all_sevens"]:
+		result = ("all_sevens")
+	if hands["all_eights"]:
+		result = ("all_eights")
+	print(result)
 
+		
 func getHandTypes() -> Dictionary:
 	var values = []
 
@@ -144,11 +146,11 @@ func getHandTypes() -> Dictionary:
 	var fours = 0
 
 	for value in counts.values():
-		if value >= 2:
+		if value == 2:
 			pairs += 1
-		if value >= 3:
+		elif value == 3:
 			threes += 1
-		if value >= 4:
+		elif value == 4:
 			fours += 1
 			
 
