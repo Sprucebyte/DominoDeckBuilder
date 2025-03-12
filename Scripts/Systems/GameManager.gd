@@ -109,6 +109,7 @@ func startRound():
 	discardsRemaining = discardCount
 	handsRemaining = handCount
 	SignalBus.Draw.emit(handSize)
+	board.updateBoard()
 	#updatePlacementSlots()
 	pass
 
@@ -120,6 +121,7 @@ func endRound():
 	board.clear()
 	hand.moveAllElements(deck)
 	discardPile.returnAllTilesToDeck()
+	board.updateBoard()
 		
 func win():
 	gameState = GameStates.won
@@ -135,6 +137,7 @@ func win():
 	hand.close()
 
 func openShop():
+	Shop.Instance.rerollPrice = Shop.Instance.baseRerollPrice
 	Shop.Instance.open()
 	gameState = GameStates.shop
 
@@ -159,7 +162,8 @@ func restart():
 	discardPile.clear()
 	wildCards.clear()
 	consumables.clear()
-
+	Shop.Instance.rerollPrice = Shop.Instance.startRerollPrice
+	Shop.Instance.baseRerollPrice = Shop.Instance.startRerollPrice
 	deck.generate()
 
 	startRound()

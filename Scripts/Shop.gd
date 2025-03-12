@@ -8,12 +8,18 @@ var opened = false
 @onready var packs = $Packs
 
 @onready var continueButton = %ContinueButton
-
+@onready var rerollButton = %RerollButton
+@onready var subUI = %SubUIShop
+@onready var shopMoneyLabel = %ShopMoneyLabel
+var subUIOffset
 var tilesAmount = 5
 var cardsAmount = 3
 var packsAmount = 2
 
 var spawnedElements = false
+var startRerollPrice = 3
+var baseRerollPrice = startRerollPrice
+var rerollPrice = baseRerollPrice
 
 static var Instance: Shop
 
@@ -23,6 +29,16 @@ func _init() -> void:
 	else:
 		queue_free()
 
+
+func reroll():
+	if Score.Instance.money < rerollPrice: return
+	SignalBus.UseMoney.emit(rerollPrice)
+	clear()
+	generate()
+	rerollPrice = round(rerollPrice * 1.2)
+	rerollButton.text = "Reroll - $" + str(rerollPrice)
+
+	return
 
 func generate():
 	for i in tilesAmount:
@@ -64,18 +80,24 @@ func generate():
 func open():
 	clear()
 	#visible = true
+	subUI.show()
 	continueButton.show()
 	generate()
 	opened = true
 	targetPosition = Vector3.ZERO
+	rerollButton.text = "Reroll - $" + str(rerollPrice)
+	rerollButton.show()
 	pass
 
 func close():
 	#visible = false
+	rerollButton.hide()
 	continueButton.hide()
+	subUI.hide()
 	opened = false
 	targetPosition = Vector3.DOWN * 100
 	#await Util.delay(1)
+	
 	clear()
 	GameManager.nextRound()
 	pass
@@ -90,10 +112,19 @@ func clear():
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	position = targetPosition
+	rerollButton.hide()
+	continueButton.hide()
+	subUIOffset = subUI.global_position.y
+	subUI.hide()
 	pass
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	shopMoneyLabel.text = "$" + str(Score.Instance.money)
+	
+
+	subUI.visible = continueButton.visible
+	rerollButton.visible = continueButton.visible
 	if opened:
 		continueButton.visible = visible
 	else:

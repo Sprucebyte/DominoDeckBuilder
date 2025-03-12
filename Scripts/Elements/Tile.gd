@@ -219,10 +219,10 @@ func hover():
 	pass
 
 func unhover():
+	super ()
 	SignalBus.emit_signal("OnTileUnhovered", self)
-	targetScale = Vector3.ONE
-	hovered = false
 	pass
+
 
 func activate():
 	#await get_tree().create_timer(.5 / GameManager.gameSpeedMultiplier).timeout

@@ -8,7 +8,7 @@
 script = ExtResource("2_mn582")
 frequency = Vector3(1, 1, 1)
 phase = Vector3(1, 1, 1)
-amplitude = Vector3(0.1, 0.1, 0)
+amplitude = Vector3(0, 0, 0.02)
 offset = Vector3(0, 0, 0)
 BlendingMode = 0
 fade_in = 0.0

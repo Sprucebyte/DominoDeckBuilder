@@ -19,7 +19,9 @@ func addToQueue(element: Element):
 	pass
 
 func removeFromQueue(element: Element):
-	queue.erase(element)
+	if element in queue:
+		await Util.delay(.5)
+		queue.erase(element)
 	pass
 
 var element: Element
@@ -29,7 +31,7 @@ func _process(delta: float) -> void:
 		if queue[0] == null:
 			return
 		element = queue[0]
-		if element == null: 
+		if element == null:
 			removeFromQueue(element)
 			return
 		labelName.text = element.title

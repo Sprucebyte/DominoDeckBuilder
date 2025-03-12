@@ -1,13 +1,13 @@
-[gd_scene load_steps=90 format=3 uid="uid://c1vubbps0wbru"]
+[gd_scene load_steps=91 format=3 uid="uid://c1vubbps0wbru"]
 
 [ext_resource type="PackedScene" uid="uid://wutxuycqev1q" path="res://Prefabs/tile_placement_slot.tscn" id="1_7whan"]
 [ext_resource type="Script" path="res://Scripts/Systems/Score.gd" id="1_f3a7t"]
+[ext_resource type="Texture2D" uid="uid://hfwhbhj6ljuk" path="res://Textures/background 2.png" id="1_hrgq7"]
 [ext_resource type="PackedScene" uid="uid://dblxhm6glgeu3" path="res://Prefabs/card.tscn" id="1_i50vu"]
 [ext_resource type="Script" path="res://Scripts/AssetManager.gd" id="1_mdonh"]
 [ext_resource type="Texture2D" uid="uid://b5gl8shp801fn" path="res://Textures/belfast_sunset_puresky_2k.hdr" id="1_mtpok"]
 [ext_resource type="Texture2D" uid="uid://b7ucqn60dim45" path="res://Textures/wood edge 2.png" id="2_5e5i0"]
 [ext_resource type="Texture2D" uid="uid://cm3dyxvngfe67" path="res://Textures/wood_corner.png" id="2_gkcv7"]
-[ext_resource type="Texture2D" uid="uid://cr8x4kt8ws6jn" path="res://Textures/background 1.png" id="2_o2cic"]
 [ext_resource type="Script" path="res://Scripts/Containers/Board.gd" id="3_d6a45"]
 [ext_resource type="Script" path="res://Scripts/Systems/AudioManager.gd" id="3_fevv1"]
 [ext_resource type="PackedScene" uid="uid://c6ycpsvucpten" path="res://Prefabs/score_label.tscn" id="3_ntvtt"]
@@ -19,6 +19,7 @@
 [ext_resource type="Resource" uid="uid://0cl48ukg5jx5" path="res://Wild Card Assets/Even.tres" id="5_ci61w"]
 [ext_resource type="Resource" uid="uid://cmp0bkpihitny" path="res://Tarot Card Assets/The World.tres" id="5_gkal6"]
 [ext_resource type="AudioStream" uid="uid://c1dsn1xou675i" path="res://Audio/Dominoes/domino_12.mp3" id="6_5iou5"]
+[ext_resource type="StyleBox" uid="uid://dmh1dhf0u3yq0" path="res://Theme & Style/rounded_box_style.tres" id="6_147gj"]
 [ext_resource type="Resource" uid="uid://chfy7yrvmfwj3" path="res://Tile Materials/Gold.tres" id="6_l2eui"]
 [ext_resource type="Resource" uid="uid://f4evcfcidv6p" path="res://Wild Card Assets/Odd.tres" id="6_va8nl"]
 [ext_resource type="PackedScene" uid="uid://dli3f2y42248e" path="res://Prefabs/tile.tscn" id="7_5c5ie"]
@@ -44,7 +45,6 @@
 [ext_resource type="Resource" uid="uid://bi6yjpihwfkmc" path="res://Wild Card Assets/RainMan.tres" id="34_hnb5h"]
 [ext_resource type="PackedScene" uid="uid://drbbe2kaqsqrg" path="res://Prefabs/card_pack.tscn" id="34_jow6n"]
 [ext_resource type="Script" path="res://Scripts/DescriptionBox.gd" id="35_23qvl"]
-[ext_resource type="Texture2D" uid="uid://dg48gdn8ts2gj" path="res://Textures/shadow box.png" id="35_dw6nl"]
 [ext_resource type="PackedScene" uid="uid://c4fsjxgk0co1r" path="res://Prefabs/tile_pack.tscn" id="35_is2jb"]
 [ext_resource type="Resource" uid="uid://dp4pw5xtxx4cl" path="res://Wild Card Assets/PerfectSquare.tres" id="35_yyx7s"]
 [ext_resource type="Resource" uid="uid://ck0snmdf63842" path="res://Wild Card Assets/FullCoverage.tres" id="36_637ta"]
@@ -73,8 +73,10 @@
 [ext_resource type="Script" path="res://Scripts/TextEffects/TextEffectMult.gd" id="51_q31hi"]
 [ext_resource type="Resource" uid="uid://bnbj6qiop3p50" path="res://Wild Card Assets/Symmetry.tres" id="52_4q72n"]
 [ext_resource type="Script" path="res://Scripts/TextEffects/TextEffectScore.gd" id="52_mxj5d"]
-[ext_resource type="Texture2D" uid="uid://ddhaewxwb1ypk" path="res://Textures/Herbert_Moon02.webp" id="54_use7a"]
 [ext_resource type="Script" path="res://Scripts/Containers/ElementContainer.gd" id="56_spfkd"]
+[ext_resource type="Script" path="res://addons/shaker/src/Vector3/shaker_component3D.gd" id="75_82ycy"]
+[ext_resource type="Resource" uid="uid://dpkesp7em8ypx" path="res://Shaker/Presets/idle.tres" id="76_aksea"]
+[ext_resource type="SystemFont" uid="uid://ry8cbr4i1744" path="res://Fonts/Font1.tres" id="77_7k20x"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_d0xon"]
 viewport_path = NodePath("Background/SubViewport")
@@ -193,16 +195,15 @@ min_value = -1.0
 _data = [Vector2(0, -1), 0.0, 2.12006, 0, 0, Vector2(1, 1), 2.10389, 0.0, 0, 0]
 point_count = 2
 
-[sub_resource type="Curve3D" id="Curve3D_6cliv"]
-_data = {
-"points": PackedVector3Array(0, 0, 0, 0, 0, 0, -7.18511, -0.00731233, 0, 0, 0, 0, 0, 0, 0, 7.19911, -0.0240192, -19.2216),
-"tilts": PackedFloat32Array(0, 0)
-}
-point_count = 2
-
 [node name="Scene Root" type="Node3D"]
 
 [node name="Background" type="Node3D" parent="."]
+
+[node name="Backdrop" type="Sprite3D" parent="Background"]
+transform = Transform3D(1.04425, 0, 0, 0, 1.04425, 0, 0, 0, 1, 0, 0, -145.63)
+transparent = false
+render_priority = -128
+texture = ExtResource("1_hrgq7")
 
 [node name="Wood Top2" type="Sprite3D" parent="Background"]
 transform = Transform3D(1.94707e-07, -1, 0, 1, 1.94707e-07, 0, 0, 0, 1, 25, 0, -70)
@@ -270,8 +271,59 @@ grow_vertical = 2
 size_flags_horizontal = 4
 metadata/_edit_use_anchors_ = true
 
+[node name="SubUIShop" type="Control" parent="Background/SubViewport/CanvasLayer/Control"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="Panel" type="Panel" parent="Background/SubViewport/CanvasLayer/Control/SubUIShop"]
+layout_mode = 0
+offset_left = 315.0
+offset_top = 283.8
+offset_right = 1605.0
+offset_bottom = 891.565
+theme_override_styles/panel = ExtResource("6_147gj")
+
+[node name="Cards" type="Panel" parent="Background/SubViewport/CanvasLayer/Control/SubUIShop"]
+layout_mode = 0
+offset_left = 979.0
+offset_top = 326.51
+offset_right = 1578.0
+offset_bottom = 613.51
+theme_override_styles/panel = ExtResource("6_147gj")
+
+[node name="Tiles" type="Panel" parent="Background/SubViewport/CanvasLayer/Control/SubUIShop"]
+layout_mode = 0
+offset_left = 979.0
+offset_top = 675.965
+offset_right = 1578.0
+offset_bottom = 890.965
+theme_override_styles/panel = ExtResource("6_147gj")
+
+[node name="Packs" type="Panel" parent="Background/SubViewport/CanvasLayer/Control/SubUIShop"]
+layout_mode = 0
+offset_left = 573.0
+offset_top = 511.37
+offset_right = 955.0
+offset_bottom = 891.37
+theme_override_styles/panel = ExtResource("6_147gj")
+
+[node name="SidePanel" type="Panel" parent="Background/SubViewport/CanvasLayer/Control/SubUIShop"]
+layout_mode = 0
+offset_left = 338.0
+offset_top = 455.86
+offset_right = 561.0
+offset_bottom = 891.86
+theme_override_styles/panel = ExtResource("6_147gj")
+
 [node name="Wildcards" type="Panel" parent="Background/SubViewport/CanvasLayer/Control"]
 custom_minimum_size = Vector2(100, 100)
+layout_mode = 0
 offset_left = 82.0
 offset_top = 29.67
 offset_right = 1215.0
@@ -281,6 +333,7 @@ theme_override_styles/panel = ExtResource("4_jdc5s")
 
 [node name="Consumables" type="Panel" parent="Background/SubViewport/CanvasLayer/Control"]
 custom_minimum_size = Vector2(100, 100)
+layout_mode = 0
 offset_left = 1300.0
 offset_top = 29.67
 offset_right = 1860.0
@@ -523,6 +576,44 @@ theme = ExtResource("31_3dawp")
 text = "0"
 horizontal_alignment = 1
 
+[node name="HandTypesLabels" type="Control" parent="User Interface/Side Panel"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 102.045)
+layout_direction = 2
+layout_mode = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="User Interface/Side Panel/HandTypesLabels"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.064
+offset_top = -7.99999
+offset_right = 216.88
+offset_bottom = 34.0
+theme = ExtResource("31_cm3jf")
+text = "Hand Type"
+horizontal_alignment = 1
+
+[node name="Value1" type="Label" parent="User Interface/Side Panel/HandTypesLabels"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.064
+offset_top = 26.0
+offset_right = 216.88
+offset_bottom = 62.0
+theme = ExtResource("31_3dawp")
+horizontal_alignment = 1
+
+[node name="Value2" type="Label" parent="User Interface/Side Panel/HandTypesLabels"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.064
+offset_top = 71.0
+offset_right = 216.88
+offset_bottom = 107.0
+theme = ExtResource("31_3dawp")
+horizontal_alignment = 1
+
 [node name="Score and Multiplier" type="HBoxContainer" parent="User Interface/Side Panel"]
 custom_minimum_size = Vector2(0, 50)
 layout_direction = 2
@@ -733,6 +824,50 @@ action_mode = 0
 text = "Discard
 "
 
+[node name="Shop2" type="Control" parent="User Interface"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 452.075
+offset_top = 621.0
+offset_right = 492.075
+offset_bottom = 661.0
+
+[node name="ContinueButton" type="Button" parent="User Interface/Shop2"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = -10.0
+offset_right = 60.0
+offset_bottom = 30.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 4
+theme = ExtResource("31_3dawp")
+text = "Continue"
+
+[node name="RerollButton" type="Button" parent="User Interface/Shop2"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = -64.13
+offset_right = 60.0
+offset_bottom = -24.13
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 4
+theme = ExtResource("31_3dawp")
+text = "Reroll - $5"
+
 [node name="Description Box" type="VBoxContainer" parent="User Interface"]
 layout_mode = 0
 offset_left = 1658.0
@@ -792,50 +927,40 @@ size = 55.0
 near = 0.01
 far = 1000.0
 
-[node name="Backdrop" type="Sprite3D" parent="."]
-transform = Transform3D(1.47324, 0, 0, 0, 1.47324, 0, 0, 0, 1, 0, 0, -145.63)
-transparent = false
-render_priority = -128
-texture = ExtResource("2_o2cic")
-
 [node name="Board Position" type="Node3D" parent="."]
 
 [node name="Board" type="Node3D" parent="Board Position" groups=["Board"]]
 script = ExtResource("3_d6a45")
 
-[node name="Hand" type="Node3D" parent="." node_paths=PackedStringArray("path3d") groups=["Hand"]]
+[node name="Hand" type="Node3D" parent="." groups=["Hand"]]
 transform = Transform3D(1.3, 0, 0, 0, 1.3, 0, 0, 0, 1.3, -0.00497627, -11.681, 0)
 script = ExtResource("7_5nb6h")
 rotationCurve = SubResource("Curve_euog4")
 containerSize = 12
 defaultElementState = 2
-path3d = NodePath("")
 maxWidth = 12
 curving = 1.0
 
-[node name="Consumables" type="Node3D" parent="." node_paths=PackedStringArray("path3d")]
+[node name="Consumables" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.9007, 12.1, 0)
 script = ExtResource("39_xvuc8")
 containerSize = 3
 defaultElementState = 7
-path3d = NodePath("")
 maxWidth = 12
 seperation = 5.0
 
-[node name="WildCards" type="Node3D" parent="." node_paths=PackedStringArray("path3d") groups=["WildCards"]]
+[node name="WildCards" type="Node3D" parent="." groups=["WildCards"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.1999, 12.1, 0)
 script = ExtResource("7_c150q")
 containerSize = 6
 defaultElementState = 8
-path3d = NodePath("")
 maxWidth = 30
 seperation = 5.0
 
-[node name="Deck" type="Node3D" parent="." node_paths=PackedStringArray("path3d") groups=["Deck"]]
+[node name="Deck" type="Node3D" parent="." groups=["Deck"]]
 transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, 20.4408, -13.0007, 0)
 script = ExtResource("8_4o5i1")
 defaultElementState = 1
-path3d = NodePath("")
 maxWidth = 9
 
 [node name="DiscardPile" type="Node3D" parent="." groups=["DiscardPile"]]
@@ -846,92 +971,84 @@ defaultElementState = 5
 [node name="Shop" type="Node3D" parent="."]
 script = ExtResource("40_qawd6")
 
-[node name="Sprite3D2" type="Sprite3D" parent="Shop"]
-transform = Transform3D(0.600661, 0, 0, 0, 0.600661, 0, 0, 0, 1, 19.9514, -9.94568, -11.6982)
-visible = false
-centered = false
-modulate = Color(1, 1, 1, 0.596078)
-render_priority = -10
-texture = ExtResource("54_use7a")
+[node name="ShakerComponent3D" type="Node3D" parent="Shop" node_paths=PackedStringArray("Targets")]
+transform = Transform3D(1.5, 1.66533e-16, -1.11759e-08, 0, 1.5, 2.23517e-08, 1.11759e-08, -2.23517e-08, 1.5, -14.9531, 7.85795, 1.1494e-07)
+script = ExtResource("75_82ycy")
+custom_target = true
+Targets = [NodePath("../Shop"), NodePath("../Cards/Label3D"), NodePath("../Tiles/Label3D"), NodePath("../Packs/Label3D"), NodePath("../ShopMoneyLabel")]
+AutoPlay = true
+intensity = 2.0
+shake_speed = 0.1
+fade_in = 1e-05
+fade_out = 1e-05
+shakerPreset = ExtResource("76_aksea")
+
+[node name="Shop" type="Label3D" parent="Shop"]
+transform = Transform3D(1.5, 1.31145e-15, -5.02914e-08, 0, 1.5, 3.91155e-08, 5.02914e-08, -3.91155e-08, 1.5, -14.7093, 6.67998, 1.29731e-08)
+text = "Shop"
+font = ExtResource("77_7k20x")
+font_size = 300
+outline_size = 4
+
+[node name="ShopMoneyLabel" type="Label3D" parent="Shop"]
+unique_name_in_owner = true
+transform = Transform3D(1.5, -2.08167e-17, -5.58794e-09, 0, 1.5, -5.58794e-09, 5.58794e-09, 5.58793e-09, 1.5, -14.8202, 1.94628, 1.1522e-07)
+modulate = Color(1, 0.750667, 0.12, 1)
+text = "$100"
+font = ExtResource("77_7k20x")
+font_size = 200
+outline_size = 4
 
 [node name="Cards" type="Node3D" parent="Shop" node_paths=PackedStringArray("path3d")]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.43336, -3.87126, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.19044, 2.0302, 0)
 script = ExtResource("56_spfkd")
 containerSize = 10
 defaultElementState = 3
-path3d = NodePath("Path3D")
+path3d = NodePath("")
 maxWidth = 20
 curving = 1.0
 seperation = 4.0
 
-[node name="Shadow2" type="Sprite3D" parent="Shop/Cards"]
-transform = Transform3D(1, 0, 0, 0, 2.13987, 0, 0, 0, 1, 0, -0.0358891, -50.9552)
-modulate = Color(1, 1, 1, 0.541176)
-render_priority = -10
-texture = ExtResource("35_dw6nl")
-
-[node name="Path3D" type="Path3D" parent="Shop/Cards"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.320374, 0)
-curve = SubResource("Curve3D_6cliv")
+[node name="Label3D" type="Label3D" parent="Shop/Cards"]
+transform = Transform3D(1.5, 1.31145e-15, -5.02914e-08, 0, 1.5, 3.91155e-08, 5.02914e-08, -3.91155e-08, 1.5, 7.55882e-16, 6.13356, -2.25451e-08)
+text = "Collect  Cards!"
+font = ExtResource("77_7k20x")
+font_size = 122
 
 [node name="Tiles" type="Node3D" parent="Shop" node_paths=PackedStringArray("path3d")]
 unique_name_in_owner = true
-transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, -0.903136, 3.95946, 0)
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 9.26739, -6.72375, 0)
 script = ExtResource("56_spfkd")
 containerSize = 10
 defaultElementState = 3
-path3d = NodePath("Path3D")
+path3d = NodePath("")
 maxWidth = 20
 curving = 1.0
 seperation = 2.0
 
-[node name="Shadow" type="Sprite3D" parent="Shop/Tiles"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -50.9552)
-modulate = Color(1, 1, 1, 0.541176)
-render_priority = -10
-texture = ExtResource("35_dw6nl")
-
-[node name="Path3D" type="Path3D" parent="Shop/Tiles"]
-curve = SubResource("Curve3D_6cliv")
+[node name="Label3D" type="Label3D" parent="Shop/Tiles"]
+transform = Transform3D(1, 8.743e-16, -3.35276e-08, 0, 1, 2.6077e-08, 3.35276e-08, -2.6077e-08, 1, 2.71968e-15, 3.11069, -8.11177e-08)
+text = "Tasty  Tiles!"
+font = ExtResource("77_7k20x")
+font_size = 122
 
 [node name="Packs" type="Node3D" parent="Shop" node_paths=PackedStringArray("path3d")]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.8751, -3.80829, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.62195, -3.94347, 0)
 script = ExtResource("56_spfkd")
 containerSize = 10
 defaultElementState = 3
-path3d = NodePath("Path3D")
+path3d = NodePath("")
 maxWidth = 30
 curving = 1.0
 seperation = 5.0
 
-[node name="Shadow3" type="Sprite3D" parent="Shop/Packs"]
-transform = Transform3D(1, 0, 0, 0, 2.13987, 0, 0, 0, 1, 0, 0.0358891, -50.9552)
-modulate = Color(1, 1, 1, 0.541176)
-render_priority = -10
-texture = ExtResource("35_dw6nl")
-
-[node name="Path3D" type="Path3D" parent="Shop/Packs"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0543609, 0)
-curve = SubResource("Curve3D_6cliv")
-
-[node name="ContinueButton" type="Button" parent="Shop"]
-unique_name_in_owner = true
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -46.0
-offset_top = 246.0
-offset_right = 47.0
-offset_bottom = 280.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_vertical = 4
-theme = ExtResource("31_3dawp")
-text = "Continue"
+[node name="Label3D" type="Label3D" parent="Shop/Packs"]
+transform = Transform3D(1.5, 1.31145e-15, -5.02914e-08, 0, 1.5, 3.91155e-08, 5.02914e-08, -3.91155e-08, 1.5, -1.26664e-15, 6.67226, 3.77789e-08)
+text = "Premium Packs!"
+font = ExtResource("77_7k20x")
+font_size = 122
 
 [connection signal="pressed" from="User Interface/HandButtons/PlayRoundButton" to="User Interface" method="playRoundButtonPressed"]
 [connection signal="pressed" from="User Interface/HandButtons/Draw Button" to="User Interface" method="drawButtonPressed"]
@@ -939,4 +1056,5 @@ text = "Continue"
 [connection signal="pressed" from="User Interface/HandButtons/Button Sort By Sum" to="User Interface" method="sortByTotalValue"]
 [connection signal="pressed" from="User Interface/HandButtons/Button Sort By Bottom" to="User Interface" method="sortByBottomValue"]
 [connection signal="pressed" from="User Interface/HandButtons/Discard Button" to="User Interface" method="discardButtonPressed"]
-[connection signal="pressed" from="Shop/ContinueButton" to="Shop" method="close"]
+[connection signal="pressed" from="User Interface/Shop2/ContinueButton" to="Shop" method="close"]
+[connection signal="pressed" from="User Interface/Shop2/RerollButton" to="Shop" method="reroll"]

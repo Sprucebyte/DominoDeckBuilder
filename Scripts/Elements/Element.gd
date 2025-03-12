@@ -246,12 +246,14 @@ func hover():
 	if GameManager.draggedElement != null: return false
 	targetScale = Vector3.ONE * 1.05
 	hovered = true
-	DescriptionBox.Instance.addToQueue(self)
+	if not faceDown:
+		DescriptionBox.Instance.addToQueue(self)
 	pass
 
 func unhover():
 	hovered = false
 	targetScale = Vector3.ONE
+	
 	DescriptionBox.Instance.removeFromQueue(self)
 	pass
 

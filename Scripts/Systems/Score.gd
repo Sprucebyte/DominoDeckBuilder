@@ -1,7 +1,7 @@
 extends Node
 class_name Score
 
-var baseTargetScore = 20
+var baseTargetScore = 250
 var targetScore = baseTargetScore
 var totalScore = 0
 var roundScore = 0
@@ -11,7 +11,12 @@ var money = 100
 static var acceleration = 1.02
 static var wildCardDelay = .4
 static var wildCardElementDelay = .3
+
+@onready var label1 = %HandTypesLabels/Value1
+@onready var label2 = %HandTypesLabels/Value2
+
 static var Instance: Score
+
 
 func _init() -> void:
 	if Instance == null:
@@ -56,6 +61,8 @@ func multiplyMult(value):
 
 
 func reset():
+	label2.text = ""
+	label1.text = ""
 	totalScore = 0
 	roundScore = 0
 	handScore = 0
@@ -66,6 +73,9 @@ func resetAll():
 	money = 0
 	targetScore = baseTargetScore
 
+func setBaseScore(handScore = 0, multiplier = 1):
+	self.handScore = handScore
+	self.multiplier = multiplier
 
 func run():
 	#calculateEdgeScore()
@@ -77,31 +87,78 @@ func run():
 	setCombinedScore()
 	
 
+var highTile = HandType.new("High Tile", 5, 1)
+var pair = HandType.new("Pair", 10, 1)
+var twoPair = HandType.new("Two Pair", 10, 2)
+var threeOfAKind = HandType.new("Three of a Kind", 15, 2)
+var straight = HandType.new("Straight", 30, 3)
+var fullHouse = HandType.new("Full House", 20, 2)
+var fourOfAKind = HandType.new("Four of a Kind", 20, 3)
+
+var allThrees = HandType.new("All Threes", 3, 2)
+var allFives = HandType.new("All Fives", 5, 2)
+var allSevens = HandType.new("All Sevens", 7, 2)
+var allEights = HandType.new("All Eights", 8, 2)
+
+func upgrade(type, amount):
+	match type:
+		"High Tile": highTile.upgrade(amount)
+		"Pair": pair.upgrade(amount)
+		"Two Pair": twoPair.upgrade(amount)
+		"Three of a Kind": threeOfAKind.upgrade(amount)
+		"Straight": straight.upgrade(amount)
+		"Full House": fullHouse.upgrade(amount)
+		"Four of a Kind": fourOfAKind.upgrade(amount)
+		
+		"All Threes": allThrees.upgrade(amount)
+		"All Fives": allFives.upgrade(amount)
+		"All Sevens": allSevens.upgrade(amount)
+		"All Eights": allEights.upgrade(amount)
+
+
 func chooseHandType(hands: Dictionary):
-	var result = ""
-	if hands["high_card"]:
-		result = ("high_card")
-	if hands["pair"]:
-		result = ("pair")
-	if hands["two_pair"]:
-		result = ("two_pair")
-	if hands["three_of_a_kind"]:
-		result = ("three_of_a_kind")
-	if hands["straight"]:
-		result = ("straight")
-	if hands["full_house"]:
-		result = ("full_house")
-	if hands["four_of_a_kind"]:
-		result = ("four_of_a_kind")
-	if hands["all_threes"]:
-		result = ("all_threes")
-	if hands["all_fives"]:
-		result = ("all_fives")
-	if hands["all_sevens"]:
-		result = ("all_sevens")
-	if hands["all_eights"]:
-		result = ("all_eights")
-	print(result)
+	var result1: HandType
+	var result2: HandType
+	if hands["High Tile"]:
+		result1 = highTile
+	if hands["Pair"]:
+		result1 = pair
+	if hands["Three of a Kind"]:
+		result1 = twoPair
+	if hands["Straight"]:
+		result1 = straight
+	if hands["Full House"]:
+		result1 = fullHouse
+	if hands["Four of a Kind"]:
+		result1 = fourOfAKind
+		
+	if hands["All Threes"]:
+		result2 = allThrees
+	if hands["All Fives"]:
+		result2 = allFives
+	if hands["All Sevens"]:
+		result2 = allSevens
+	if hands["All Eights"]:
+		result2 = allEights
+		
+	
+	var s = 0
+	var m = 0
+	if result1 != null:
+		s += result1.score
+		m += result1.multiplier
+		print(result1.typeName)
+		label1.text = result1.typeName + " | lv" + str(result1.level)
+	else:
+		label1.text = ""
+	if result2 != null:
+		s += result2.score
+		m += result2.multiplier
+		print(result2.typeName)
+		label2.text = result2.typeName + " | lv" + str(result2.level)
+	else:
+		label2.text = ""
+	setBaseScore(s, m)
 
 		
 func getHandTypes() -> Dictionary:
@@ -115,24 +172,24 @@ func getHandTypes() -> Dictionary:
 
 	# Result dictionary
 	var result = {
-		"high_card": false,
-		"pair": false,
-		"two_pair": false,
-		"three_of_a_kind": false,
-		"straight": false,
-		"full_house": false,
-		"four_of_a_kind": false,
-		"all_threes": false,
-		"all_fives": false,
-		"all_sevens": false,
-		"all_eights": false
+		"High Tile": false,
+		"Pair": false,
+		"Two Pair": false,
+		"Three of a Kind": false,
+		"Straight": false,
+		"Full House": false,
+		"Four of a Kind": false,
+		"All Threes": false,
+		"All Fives": false,
+		"All Sevens": false,
+		"All Eights": false
 	}
 	
 	# If there are no values return result with everything as false
 	if values.is_empty():
 		return result
 	else:
-		result["high_card"] = true
+		result["High Tile"] = true
 
 	# Getting the count of every number in the array
 	var counts = {}
@@ -155,11 +212,11 @@ func getHandTypes() -> Dictionary:
 			
 
 	# Set the dictionary values based on the counts above
-	result["pair"] = pairs > 0
-	result["two_pair"] = pairs > 1 || fours > 0
-	result["three_of_a_kind"] = threes > 0
-	result["four_of_a_kind"] = fours > 0
-	result["full_house"] = pairs > 0 and threes > 0
+	result["Pair"] = pairs > 0
+	result["Two Pair"] = pairs > 1 || fours > 0
+	result["Three of a Kind"] = threes > 0
+	result["Four of a Kind"] = fours > 0
+	result["Full House"] = pairs > 0 and threes > 0
 
 
 	# Check for a straight
@@ -175,18 +232,18 @@ func getHandTypes() -> Dictionary:
 			straightFound = true
 			break
 
-	result["straight"] = straightFound
+	result["Straight"] = straightFound
 
 	var edgeValue = GameManager.board.tileNodeTree.getEdgeValue()
 	
 	if (edgeValue % 3 == 0):
-		result["all threes"] = true
+		result["All Threes"] = true
 	if (edgeValue % 5 == 0):
-		result["all fives"] = true
+		result["All Fives"] = true
 	if (edgeValue % 7 == 0):
-		result["all sevens"] = true
-	if (edgeValue % 7 == 0):
-		result["all eights"] = true
+		result["All Sevens"] = true
+	if (edgeValue % 8 == 0):
+		result["All Eights"] = true
 
 	return result
 	
