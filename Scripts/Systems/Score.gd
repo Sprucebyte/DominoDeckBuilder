@@ -123,8 +123,10 @@ func chooseHandType(hands: Dictionary):
 		result1 = highTile
 	if hands["Pair"]:
 		result1 = pair
-	if hands["Three of a Kind"]:
+	if hands["Two Pair"]:
 		result1 = twoPair
+	if hands["Three of a Kind"]:
+		result1 = threeOfAKind
 	if hands["Straight"]:
 		result1 = straight
 	if hands["Full House"]:

@@ -221,6 +221,7 @@ func clicked():
 		shakerSelect.play_shake()
 		if validState(States.inShop): return
 		if validState(States.inPack): return
+		if validState(States.onBoard): return
 		select()
 
 	else:
