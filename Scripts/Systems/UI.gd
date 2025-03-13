@@ -25,7 +25,7 @@ func _process(delta):
 	money.text = "$" + str(Score.Instance.money)
 	handsRemaining.text = str(GameManager.handsRemaining)
 	discardsRemaining.text = str(GameManager.discardsRemaining)
-	GameManager.gameSpeedMultiplier = gamespeed.value
+	GameManager.fps = gamespeed.value
 	pass
 
 var shake_intensity: float = 0.0
@@ -38,7 +38,7 @@ func addToScore(amount: int):
 
 func start_shake():
 	var original_position = handScore.position
-	handScore.position = original_position + Vector2(randi_range(- shake_intensity, shake_intensity), randi_range(- shake_intensity, shake_intensity))
+	handScore.position = original_position + Vector2(randi_range(-shake_intensity, shake_intensity), randi_range(-shake_intensity, shake_intensity))
 	await Util.delay(.2)
 	handScore.position = original_position
 	#for i in range(5): # Number of shakes

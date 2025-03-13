@@ -161,7 +161,9 @@ func _process(delta: float) -> void:
 		#var mousePos = get_viewport().get_camera_3d().project_position(get_viewport().get_mouse_position(), 100)
 		#\var mousePos = 
 		dragPosition = Vector3(GameManager.mousePos.x, GameManager.mousePos.y, 5)
-		global_position = global_position.lerp(dragPosition, delta * moveSpeed * GameManager.gameSpeedMultiplier * 2)
+		#global_position = global_position.lerp(dragPosition, delta * moveSpeed * GameManager.gameSpeedMultiplier * 2)
+		global_position = global_position.lerp(dragPosition, lerpDelta(delta, moveSpeed * 2))
+		lerpDelta(delta, rotationSpeed)
 		global_position.z = 15
 		#print("held")
 
@@ -172,39 +174,43 @@ func _process(delta: float) -> void:
 var t: float = 0
 func updatePosition(delta: float):
 	#if (get_parent() != null):
-	scale = scale.lerp(Vector3.ONE, delta * 20)
+	scale = scale.lerp(Vector3.ONE, lerpDelta(delta, 20))
 
 	if dragged: return
 
 	if (faceDown):
-		flipAxis.rotation.y = lerp_angle(flipAxis.rotation.y, deg_to_rad(180), delta * flipSpeed * GameManager.gameSpeedMultiplier)
+		flipAxis.rotation.y = lerp_angle(flipAxis.rotation.y, deg_to_rad(180), lerpDelta(delta, rotationSpeed))
 	else:
-		flipAxis.rotation.y = lerp_angle(flipAxis.rotation.y, 0, delta * flipSpeed * GameManager.gameSpeedMultiplier)
+		flipAxis.rotation.y = lerp_angle(flipAxis.rotation.y, 0, lerpDelta(delta, rotationSpeed))
 	
+	#
 	
-	position = position.lerp(targetPosition, delta * moveSpeed * GameManager.gameSpeedMultiplier)
+	position = position.lerp(targetPosition, lerpDelta(delta, moveSpeed))
 	if hovered: position.z = 15
 
 	#global_position = global_position.lerp(targetPosition, delta * moveSpeed * GameManager.gameSpeedMultiplier)
 	#if hovered: global_position.z = 15
 	
 	if selected:
-		selectParent.position = selectParent.position.lerp(Vector3.UP * .8, delta * 40 * GameManager.gameSpeedMultiplier)
+		selectParent.position = selectParent.position.lerp(Vector3.UP * .6, lerpDelta(delta, 40))
 	else:
-		selectParent.position = selectParent.position.lerp(Vector3.ZERO, delta * 40 * GameManager.gameSpeedMultiplier)
+		selectParent.position = selectParent.position.lerp(Vector3.ZERO, lerpDelta(delta, 40))
 
-	selectParent.scale = selectParent.scale.lerp(targetScale, delta * scaleSpeed * GameManager.gameSpeedMultiplier)
+	selectParent.scale = selectParent.scale.lerp(targetScale, lerpDelta(delta, scaleSpeed))
 	
-	rotation.x = lerp_angle(rotation.x, deg_to_rad(targetRotation.x), delta * rotationSpeed * GameManager.gameSpeedMultiplier)
-	rotation.y = lerp_angle(rotation.y, deg_to_rad(targetRotation.y), delta * rotationSpeed * GameManager.gameSpeedMultiplier)
-	rotation.z = lerp_angle(rotation.z, deg_to_rad(targetRotation.z), delta * rotationSpeed * GameManager.gameSpeedMultiplier)
+	rotation.x = lerp_angle(rotation.x, deg_to_rad(targetRotation.x), lerpDelta(delta, rotationSpeed))
+	rotation.y = lerp_angle(rotation.y, deg_to_rad(targetRotation.y), lerpDelta(delta, rotationSpeed))
+	rotation.z = lerp_angle(rotation.z, deg_to_rad(targetRotation.z), lerpDelta(delta, rotationSpeed))
 	
 	updateIdleAnimation(delta)
 			
+func lerpDelta(delta, speed, useGameSpeedMultiplier = true) -> float:
+	return 1 - exp(-speed * (GameManager.gameSpeedMultiplier if useGameSpeedMultiplier else 1) * delta)
+
 
 func updateIdleAnimation(delta):
 	t += delta
-	if (validState(States.onBoard) and !lockedIn): # or validStates([States.inHand, States.inConsumables, States.inWildcards, States.inPack, States.inShop]):
+	if (validState(States.onBoard) and !lockedIn) or validStates([States.inHand, States.inConsumables, States.inWildcards, States.inPack, States.inShop]):
 		idleAxis.rotation.x = (cos(t * .125 * idleSpeed + offset) * .1)
 		idleAxis.rotation.y = (cos(t * .25 * idleSpeed + offset) * .1)
 		idleAxis.rotation.z = (cos(t * .25 * idleSpeed + offset) * .05)

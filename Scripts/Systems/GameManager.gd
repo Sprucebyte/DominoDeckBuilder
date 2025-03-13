@@ -13,7 +13,7 @@ var wildCards: WildCardContainer = null
 var consumables: ConsumablesContainer = null
 var mousePos: Vector3
 var gameSpeedMultiplier = 1
-
+var fps = 60
 var handSize = 8
 
 var handCount = 4
@@ -85,6 +85,14 @@ func lockInTiles():
 
 
 func _process(_delta: float) -> void:
+	Engine.max_fps = round(fps)
+	
+	if Input.is_key_pressed(KEY_UP):
+		fps += 1
+	if Input.is_key_pressed(KEY_DOWN):
+		fps -= 1
+	
+
 	mousePos = get_viewport().get_camera_3d().project_position(get_viewport().get_mouse_position(), 100)
 	#for element in board.elements:
 	if (Input.is_action_just_pressed("fullscreen")):
