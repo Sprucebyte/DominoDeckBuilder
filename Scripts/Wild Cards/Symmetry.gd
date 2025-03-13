@@ -1,6 +1,7 @@
 extends WildCard
 
-func activate() -> void:
+func activate() -> bool:
+	super ()
 	var firstValue = null
 	for node in edgeNodes():
 		if firstValue == null:
@@ -8,8 +9,8 @@ func activate() -> void:
 			continue
 		
 		if node.getEdgeValue() != firstValue:
-			return
-
+			return false
+		
 	addMult(20)
-	await shake()
-	return
+	shake()
+	return true

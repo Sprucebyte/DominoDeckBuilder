@@ -2,10 +2,12 @@ extends WildCard
 
 var active = false
 
-func activate() -> void:
+func activate() -> bool:
 	super ()
 	if active:
 		multiplyMult(1.5)
-		await shake()
+		shake()
+		active = !active
+		return true
 	active = !active
-	return
+	return false

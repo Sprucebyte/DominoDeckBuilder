@@ -2,11 +2,11 @@ extends WildCard
 
 
 #give 1 money every hand played
-func activate() -> void:
+func activate() -> bool:
 	super ()
 	
 	addMoney(1)
-	await shake()
+	shake()
 	await delay()
 	accelerate()
-	return
+	return true

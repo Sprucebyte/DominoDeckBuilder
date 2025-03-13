@@ -1,11 +1,13 @@
 extends WildCard
 
-func activate() -> void:
+func activate() -> bool:
 	super ()
+	var activated = false
 	for tile: Tile in tiles():
 		multiplyMult(1.2, tile)
-		await tile.shake()
-		await shake()
+		tile.shake()
+		shake()
 		await delay()
 		accelerate()
-	return
+		activated = true
+	return activated

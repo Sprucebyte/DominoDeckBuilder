@@ -876,14 +876,18 @@ offset_top = 330.0
 offset_right = 1897.0
 offset_bottom = 582.0
 theme_override_constants/separation = 15
+alignment = 1
 script = ExtResource("35_23qvl")
 
 [node name="Name" type="Label" parent="User Interface/Description Box"]
+custom_minimum_size = Vector2(0, 82.565)
 layout_mode = 2
 theme = ExtResource("31_3dawp")
 theme_override_font_sizes/font_size = 24
 text = "Name of thing"
 horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
 
 [node name="Description" type="RichTextLabel" parent="User Interface/Description Box"]
 clip_contents = false
@@ -898,6 +902,7 @@ text = "[center]The description of the thing we are describing
 
 "
 scroll_active = false
+autowrap_mode = 2
 custom_effects = [SubResource("RichTextEffect_i3dd7"), SubResource("RichTextEffect_elt6e"), SubResource("RichTextEffect_6t7wd")]
 
 [node name="Rarity" type="RichTextLabel" parent="User Interface/Description Box"]
@@ -1000,13 +1005,12 @@ font = ExtResource("77_7k20x")
 font_size = 200
 outline_size = 4
 
-[node name="Cards" type="Node3D" parent="Shop" node_paths=PackedStringArray("path3d")]
+[node name="Cards" type="Node3D" parent="Shop"]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.19044, 2.0302, 0)
 script = ExtResource("56_spfkd")
 containerSize = 10
 defaultElementState = 3
-path3d = NodePath("")
 maxWidth = 20
 curving = 1.0
 seperation = 4.0
@@ -1017,13 +1021,12 @@ text = "Collect  Cards!"
 font = ExtResource("77_7k20x")
 font_size = 122
 
-[node name="Tiles" type="Node3D" parent="Shop" node_paths=PackedStringArray("path3d")]
+[node name="Tiles" type="Node3D" parent="Shop"]
 unique_name_in_owner = true
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 9.26739, -6.72375, 0)
 script = ExtResource("56_spfkd")
 containerSize = 10
 defaultElementState = 3
-path3d = NodePath("")
 maxWidth = 20
 curving = 1.0
 seperation = 2.0
@@ -1034,13 +1037,12 @@ text = "Tasty  Tiles!"
 font = ExtResource("77_7k20x")
 font_size = 122
 
-[node name="Packs" type="Node3D" parent="Shop" node_paths=PackedStringArray("path3d")]
+[node name="Packs" type="Node3D" parent="Shop"]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.62195, -3.94347, 0)
 script = ExtResource("56_spfkd")
 containerSize = 10
 defaultElementState = 3
-path3d = NodePath("")
 maxWidth = 30
 curving = 1.0
 seperation = 5.0

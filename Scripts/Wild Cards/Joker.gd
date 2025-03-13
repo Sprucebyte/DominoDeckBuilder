@@ -1,7 +1,7 @@
 extends WildCard
 
-func activate() -> void:
+func activate() -> bool:
 	super ()
 	addMult(4)
-	await shake()
-	return
+	shake()
+	return true

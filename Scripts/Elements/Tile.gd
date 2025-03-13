@@ -238,20 +238,28 @@ func activate():
 	match type:
 		Types.gold:
 			addMoney(1, self)
+			await Util.delay(Score.wildCardElementDelay / GameManager.gameSpeedMultiplier)
 		Types.black:
 			addMult(1, self)
+			await Util.delay(Score.wildCardElementDelay / GameManager.gameSpeedMultiplier)
 		Types.wood:
+			var activateSpeed = 1
 			for element in GameManager.board.elements:
 				if element.type == Types.wood:
-					addScore(5, self)
+					if element == self: continue
+					addScore(5)
+					element.shake()
+					await Util.delay(Score.wildCardElementDelay / GameManager.gameSpeedMultiplier / activateSpeed)
+					activateSpeed *= (Score.acceleration * 1.2)
 		Types.purple:
-			if (randi_range(0,5) == 5):
+			if (randi_range(0, 5) == 5):
 				if (ConsumablesContainer.Instance.elements.size() < ConsumablesContainer.Instance.containerSize):
 					var card = AssetManager.createCard(AssetManager.Instance.tarotCardAssets.pick_random())
 					ConsumablesContainer.Instance.add_child(card)
 					ConsumablesContainer.Instance.add(card)
+					await Util.delay(Score.wildCardElementDelay / GameManager.gameSpeedMultiplier)
 				
-	pass
+	return
 
 
 func lockIn(lockInSpeed = 1):

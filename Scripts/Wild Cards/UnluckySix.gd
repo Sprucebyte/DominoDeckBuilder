@@ -2,7 +2,7 @@ extends WildCard
 
 var lastTotalvalue = 0
 #gives +9.81 mult + it accelerates after each use, giving a little bonus
-func activate() -> void:
+func activate() -> bool:
 	super ()
 	var totalValue = 0
 	for node: TileNode in edgeNodes():
@@ -13,8 +13,10 @@ func activate() -> void:
 	if (roundi(totalValue) % 6 == 0):
 		container.destroy(self)
 		pass
+		return true
 	else:
 		addMult(6)
-		await shake()
+		shake()
 		await delay()
 		accelerate()
+		return true

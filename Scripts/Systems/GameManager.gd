@@ -78,7 +78,7 @@ func lockInTiles():
 	for tile: Tile in board.elements:
 		if (tile.lockedIn): continue
 		tile.lockIn(lockInSpeed * gameSpeedMultiplier)
-		await tile.lockIn(lockInSpeed * gameSpeedMultiplier)
+		await tile.lockIn(lockInSpeed * gameSpeedMultiplier * 5)
 		lockInSpeed *= Score.acceleration
 	await Util.delay(.3 / gameSpeedMultiplier * lockInSpeed)
 	return

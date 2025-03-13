@@ -27,3 +27,41 @@ func activate():
 
 func tiles() -> Array[Element]:
 	return GameManager.board.elements
+
+
+func addScore(value, from: Element = self):
+	SignalBus.AddToScore.emit(value)
+	var label = ScoreLabel.Spawn(from, "+" + str(value), Color.BLUE)
+	if from == self: label.scale = Vector3.ONE * 2
+	pass
+
+func multScore(value, from: Element = self):
+	SignalBus.MultiplyScore.emit(value)
+	var label = ScoreLabel.Spawn(from, "x" + str(value), Color.BLUE)
+	if from == self: label.scale = Vector3.ONE * 2
+	pass
+
+func addMult(value, from: Element = self):
+	SignalBus.AddToMult.emit(value)
+	var label = ScoreLabel.Spawn(from, "+" + str(value) + "x", Color.RED)
+	if from == self: label.scale = Vector3.ONE * 2
+	pass
+
+func multiplyMult(value, from: Element = self):
+	SignalBus.MultiplyMult.emit(value)
+	var label = ScoreLabel.Spawn(from, "x" + str(value) + "x", Color.RED)
+	if from == self: label.scale = Vector3.ONE * 2
+	pass
+
+func addMoney(value, from: Element = self):
+	SignalBus.AddMoney.emit(value)
+	var label = ScoreLabel.Spawn(from, "+ $" + str(value), Color.YELLOW)
+	if from == self: label.scale = Vector3.ONE * 2
+	pass
+
+func multiplyMoney(value, from: Element = self):
+	#SignalBus.MultiplyMoney.emit(value)
+	print("multiplyMoney - not implemented")
+	var label = ScoreLabel.Spawn(from, "$x" + str(value), Color.YELLOW)
+	if from == self: label.scale = Vector3.ONE * 2
+	pass

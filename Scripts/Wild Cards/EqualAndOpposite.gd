@@ -1,6 +1,6 @@
 extends WildCard
 
-func activate() -> void:
+func activate() -> bool:
 	super ()
 	var contains1 = false
 	var contains6 = false
@@ -16,13 +16,13 @@ func activate() -> void:
 			contains6 = true
 			tiles.append(tile)
 
-	if not contains1: return
-	if not contains6: return
+	if not contains1: return false
+	if not contains6: return false
 
 	for tile in tiles:
-		await tile.shake()
-		await shake()
+		tile.shake()
+		shake()
 		addMult(1, tile)
 		await delay()
 		accelerate()
-	return
+	return true

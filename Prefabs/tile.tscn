@@ -334,7 +334,7 @@ unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.48017e-16, -5.96046e-08)
 
 [node name="ModelContainer" type="Node3D" parent="SelectParent/FlipAxis/IdleAxis"]
-transform = Transform3D(1, -3.16646e-08, -8.56817e-08, 3.1665e-08, 0.999988, -4.24916e-09, 8.56817e-08, 4.24911e-09, 1, 0, 0, 5.96046e-08)
+transform = Transform3D(1, -4.47026e-08, -8.19563e-08, 4.47032e-08, 0.999988, -1.49012e-08, 8.19563e-08, 1.4901e-08, 1, 0, 0, -3.42519e-13)
 
 [node name="SpriteDivider" type="Sprite3D" parent="SelectParent/FlipAxis/IdleAxis/ModelContainer"]
 unique_name_in_owner = true

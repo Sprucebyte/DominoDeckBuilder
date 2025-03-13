@@ -59,6 +59,8 @@ func _ready() -> void:
 	SignalBus.connect("UpdateEdgeValue", updateEdgeValue)
 	
 func playRoundButtonPressed():
+	if GameManager.gameState != GameManager.GameStates.playing: return
+	if GameManager.board.elements.size() <= 0: return
 	SignalBus.emit_signal("PlayRound")
 
 func drawButtonPressed():

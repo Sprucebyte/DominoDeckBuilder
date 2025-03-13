@@ -9,8 +9,8 @@ class_name Element
 @export var rarity: Util.Rarity = Util.Rarity.None
 @export var baseBuyValue = 4
 @export var baseSellValue = 1
-@onready var buyValue = baseBuyValue
-@onready var sellValue = baseSellValue
+var buyValue = baseBuyValue
+var sellValue = baseSellValue
 
 @export_group("Interaction")
 @export_group("Interaction/Selectable")
@@ -119,7 +119,7 @@ func _process(delta: float) -> void:
 		priceTag.visible = true
 		priceTag.text = "$" + str(buyValue)
 	elif (validStates([States.inConsumables, States.inWildcards]) and selected):
-		priceTag.visible = true
+		#priceTag.visible = true
 		priceTag.text = "$" + str(sellValue)
 	else:
 		priceTag.visible = false

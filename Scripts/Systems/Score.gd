@@ -261,20 +261,21 @@ func triggerEdgeTiles():
 		tile.shake()
 		ScoreLabel.Spawn(tile, "+" + str(value), Color.ROYAL_BLUE)
 		SignalBus.AddToScore.emit(value)
-		var delay = .3 / GameManager.gameSpeedMultiplier / activateSpeed
+		var delay = wildCardElementDelay / GameManager.gameSpeedMultiplier / activateSpeed
 		await Util.delay(delay)
 		if tile.type != Tile.Types.normal:
-			tile.activate()
-			Util.delay(delay)
+			await tile.activate()
+			await Util.delay(delay)
 		activateSpeed *= acceleration
 		
 	return
 		
 
 func triggerWildCards():
+	var activateSpeed = 1
 	for wildCard in GameManager.wildCards.elements:
-		await wildCard.activate()
-		await Util.delay(.3)
+		var activated = await wildCard.activate()
+		if activated: await Util.delay(wildCardDelay / GameManager.gameSpeedMultiplier / activateSpeed)
 	return
 
 func setCombinedScore():

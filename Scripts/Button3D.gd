@@ -61,18 +61,21 @@ func buy():
 	if Score.Instance.money < element.buyValue:
 		SignalBus.CantAfford.emit(element)
 		return
-
 	if element == null: return
 	if element.state != Element.States.inShop: return
 
-	SignalBus.BuyElement.emit(element)
-	SignalBus.UseMoney.emit(element.buyValue)
-	
 
 	if element is Pack:
 		element.open()
+		SignalBus.BuyElement.emit(element)
+		SignalBus.UseMoney.emit(element.buyValue)
 	else:
-		moveElement(element)
+		if moveElement(element):
+			SignalBus.BuyElement.emit(element)
+			SignalBus.UseMoney.emit(element.buyValue)
+	return
+	
+
 		#element.container.moveOneElement
 	#moveElement(element)
 
@@ -87,11 +90,15 @@ func select():
 
 func moveElement(element):
 	if element is TarotCard:
-		element.container.moveOneElement(element, ConsumablesContainer.Instance)
+		if element.container.moveOneElement(element, ConsumablesContainer.Instance):
+			return true
 	elif element is WildCard:
-		element.container.moveOneElement(element, GameManager.wildCards)
+		if element.container.moveOneElement(element, GameManager.wildCards):
+			return true
 	elif element is Tile:
-		element.container.moveOneElement(element, GameManager.deck)
+		if element.container.moveOneElement(element, GameManager.deck):
+			return true
+	return false
 
 
 func _on_area_3d_mouse_entered() -> void:

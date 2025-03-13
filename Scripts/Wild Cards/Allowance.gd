@@ -2,10 +2,11 @@ extends WildCard
 
 
 #give 50 points at the start of a round
-func activate() -> void:
+func activate() -> bool:
 	super ()
 	if (GameManager.handsRemaining >= GameManager.handCount):
 		addScore(50)
-		await shake()
+		shake()
+		return true
 
-	return
+	return false

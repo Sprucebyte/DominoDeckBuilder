@@ -146,6 +146,7 @@ func moveOneElement(element, targetContainer: ElementContainer, force = false):
 	targetContainer.add(element)
 	remove(element)
 	onMoved(element, targetContainer)
+	return true
 
 ## Move one or more elements to another container
 func moveElements(elements, targetContainer: ElementContainer, force = false):

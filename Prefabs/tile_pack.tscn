@@ -204,11 +204,11 @@ transform = Transform3D(1, -1.49009e-08, 9.70851e-14, 1.49009e-08, 1, -1.49012e-
 
 [node name="Price" type="Label3D" parent="SelectParent"]
 unique_name_in_owner = true
-transform = Transform3D(1, 0.000331593, -6.26599e-08, -0.000331593, 1, 7.42079e-08, 6.26844e-08, -7.41872e-08, 1, 0.0165597, 4.37703, 0.440994)
+transform = Transform3D(1, 0.000331593, -6.26599e-08, -0.000331593, 1, 7.42079e-08, 6.26844e-08, -7.41872e-08, 1, -0.00193395, 4.37703, 0.433792)
 render_priority = 11
 outline_render_priority = 10
 modulate = Color(1, 0.782916, 0, 1)
-text = "$4"
+text = "$46"
 font_size = 162
 outline_size = 10
 

@@ -55,6 +55,7 @@ func generate():
 			card = AssetManager.createCard(AssetManager.Instance.tarotCardAssets.pick_random())
 		else:
 			card = AssetManager.createCard(AssetManager.Instance.wildCardAssets.pick_random())
+			card.setValue()
 		cards.add_child(card)
 		cards.add(card)
 		pass

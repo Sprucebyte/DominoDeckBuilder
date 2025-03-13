@@ -1,16 +1,19 @@
 extends WildCard
 
 
-func activate() -> void:
+func activate() -> bool:
+	super ()
+	var activated = false
 	for node in edgeNodes():
 		var tile = node.tile
 		var value = node.getEdgeValue()
 		if (roundi(value) % 7 == 0): continue # Skip if the edge value is even
 		#
 		addMult(7)
-		await tile.shake()
-		await shake()
+		tile.shake()
+		shake()
 		#
 		await delay()
 		accelerate()
-	return
+		activated = true
+	return activated

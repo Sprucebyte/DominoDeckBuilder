@@ -1,13 +1,15 @@
 extends WildCard
 
 #all spinners count toward hand value
-func activate() -> void:
+func activate() -> bool:
 	super ()
+	var activated = false
 	for tile: Tile in tiles():
 		if tile.bottomValue == tile.topValue:
 			addScore(tile.bottomValue + tile.topValue, tile)
-			await tile.shake()
-			await shake()
+			tile.shake()
+			shake()
 			delay()
 			accelerate()
-	return
+			activated = true
+	return activated

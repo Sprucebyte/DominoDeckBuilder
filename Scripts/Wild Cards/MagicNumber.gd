@@ -2,7 +2,7 @@ extends WildCard
 
 var totalValue = 0
 var magicNumArray = [2, 8, 20, 28, 50, 82, 126]
-func activate() -> void:
+func activate() -> bool:
 	super ()
 	for node: TileNode in edgeNodes():
 		var tile = node.tile
@@ -12,5 +12,6 @@ func activate() -> void:
 		
 	if (roundi(totalValue) in magicNumArray):
 		multiplyMult(2)
-		await shake()
-	return
+		shake()
+		return true
+	return false

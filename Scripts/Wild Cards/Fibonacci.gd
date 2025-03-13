@@ -1,8 +1,9 @@
 extends WildCard
 
 
-func activate() -> void:
+func activate() -> bool:
 	super ()
+	var activated = false
 	var edgevalues = []
 	for node in edgeNodes():
 		var tile = node.tile
@@ -17,9 +18,9 @@ func activate() -> void:
 		previousVal = edgevalues[i] # Update previousVal for next step
 		
 		addScore(edgevalues[i]) # Apply growing Fibonacci-like effect
-		await shake()
+		shake()
 		await delay()
 		accelerate()
+		activated = true
 	
-	
-	return
+	return activated

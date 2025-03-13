@@ -1,6 +1,8 @@
 extends WildCard
 
-func activate() -> void:
+func activate() -> bool:
+	super ()
+	if (Score.Instance.money <= 0): return false
 	addScore(Score.Instance.money)
-	await shake()
-	return
+	shake()
+	return true

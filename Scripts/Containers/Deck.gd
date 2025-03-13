@@ -14,14 +14,15 @@ func _ready() -> void:
 
 
 func generate(highestValue = 6):
-	for topValue in highestValue+1:
-		for bottomValue in topValue+1:
-			var tile = GameManager.tilePrefab.instantiate()
+	for topValue in highestValue + 1:
+		for bottomValue in topValue + 1:
+			var tile: Tile = GameManager.tilePrefab.instantiate()
 			add_child(tile)
 			elements.append(tile)
 			tile.topValue = topValue
 			tile.bottomValue = bottomValue
 			tile.faceDown = true
+			tile.type = Tile.Types.wood
 
 func _process(_delta: float) -> void:
 	setElementPositions()

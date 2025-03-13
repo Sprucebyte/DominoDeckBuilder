@@ -1,10 +1,10 @@
 extends WildCard
 var currentMult = 1.05
-func activate() -> void:
+func activate() -> bool:
 	super ()
 	
 	multiplyMult(currentMult)
 	currentMult += 0.05
-	await shake()
+	shake()
 	accelerate()
-	return
+	return true

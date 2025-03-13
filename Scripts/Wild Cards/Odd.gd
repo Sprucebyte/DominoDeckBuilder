@@ -1,16 +1,18 @@
 extends WildCard
 
 ## +3 mult for every odd edge
-func activate() -> void:
+func activate() -> bool:
+	var activated = false
 	for node in edgeNodes():
 		var tile = node.tile
 		var value = node.getEdgeValue()
 		if (roundi(value) % 2 == 0): continue # Skip if the edge value is even
 		#
 		addMult(3)
-		await tile.shake()
-		await shake()
+		tile.shake()
+		shake()
 		#
 		await delay()
 		accelerate()
-	return
+		activated = true
+	return activated

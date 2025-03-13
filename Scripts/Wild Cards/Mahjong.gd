@@ -1,6 +1,7 @@
 extends WildCard
 
-func activate() -> void:
+func activate() -> bool:
+	super ()
 	var seen_tiles = {} # Dictionary to store tiles by their values
 	var has_duplicates = false
 
@@ -21,4 +22,6 @@ func activate() -> void:
 	# Bonus multiplier for duplicate tiles
 	if has_duplicates:
 		addMult(14) # Adjust multiplier as needed
-		await shake()
+		shake()
+		return true
+	return false
