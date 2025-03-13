@@ -22,7 +22,7 @@
 [ext_resource type="Material" uid="uid://cu8ts8612vt8s" path="res://Materials/Outline.tres" id="20_x6bwt"]
 [ext_resource type="Texture2D" uid="uid://f470s7enp0x1" path="res://Textures/debug_arrow.png" id="21_eldiw"]
 [ext_resource type="Texture2D" uid="uid://l17s848qglji" path="res://Textures/tile_preview.png" id="22_pss3p"]
-[ext_resource type="Material" uid="uid://dfvoywsi4ubhh" path="res://Materials/Wood.tres" id="25_tyc22"]
+[ext_resource type="Material" uid="uid://d46svtcrgwrr" path="res://Materials/Purple.tres" id="25_eoiyp"]
 [ext_resource type="Texture2D" uid="uid://dgqoo1ot5sept" path="res://Textures/pips test.png" id="27_4m5fp"]
 [ext_resource type="PackedScene" uid="uid://dpsjx31un88cy" path="res://Prefabs/button.tscn" id="28_1tw0n"]
 [ext_resource type="Texture2D" uid="uid://v2sx4vlwcq5n" path="res://Textures/domino_shading.png" id="28_dgx6y"]
@@ -371,7 +371,7 @@ transform = Transform3D(-100, 3.89414e-05, -2.84217e-12, 0, 5.96046e-06, 100, 3.
 mesh = SubResource("ArrayMesh_384p8")
 skeleton = NodePath("")
 surface_material_override/0 = SubResource("StandardMaterial3D_mkoby")
-surface_material_override/1 = ExtResource("25_tyc22")
+surface_material_override/1 = ExtResource("25_eoiyp")
 
 [node name="Selection" type="Sprite3D" parent="SelectParent/FlipAxis/IdleAxis/ModelContainer"]
 transform = Transform3D(0.313329, 0, 0, 0, 0.291076, 0, 0, 0, 1, 1.70699e-05, -0.000225968, 0.12102)

@@ -3,10 +3,10 @@ extends WildCard
 
 #give 1 money every hand played
 func activate() -> void:
-	super()
+	super ()
 	
-	delay()
 	addMoney(1)
-	shake()
+	await shake()
+	await delay()
 	accelerate()
 	return

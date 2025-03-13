@@ -12,7 +12,7 @@ static func Spawn(fromElement: Element, text: String, color: Color) -> ScoreLabe
 	GameManager.get_tree().root.add_child(scoreLabel)
 	scoreLabel.setColor(color)
 	scoreLabel.setText(text)
-	scoreLabel.global_position = Vector3(fromElement.global_position.x, fromElement.global_position.y + .5, fromElement.global_position.z)
+	scoreLabel.global_position = Vector3(fromElement.global_position.x, fromElement.global_position.y + .5, 20)
 	return scoreLabel
 
 	

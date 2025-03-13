@@ -11,5 +11,5 @@ func activate() -> void:
 			return
 
 	addMult(20)
-	shake()
+	await shake()
 	return

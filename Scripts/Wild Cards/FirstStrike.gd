@@ -7,8 +7,8 @@ func activate() -> void:
 		var tile = node.tile
 		var value = node.getEdgeValue()
 		addScore(value * 2, tile)
-		tile.shake()
-		shake()
-		delay()
+		await tile.shake()
+		await shake()
+		await delay()
 		accelerate()
 	return

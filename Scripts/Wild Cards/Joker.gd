@@ -1,7 +1,7 @@
 extends WildCard
 
 func activate() -> void:
-	super()
+	super ()
 	addMult(4)
-	shake()
+	await shake()
 	return

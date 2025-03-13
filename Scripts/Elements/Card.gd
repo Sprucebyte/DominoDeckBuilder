@@ -6,6 +6,7 @@ class_name Card
 @export var textureBack: Texture2D
 @onready var spriteFront: Sprite3D = %Front
 @onready var spriteBack: Sprite3D = %Back
+
 #@onready var shakerActivate: ShakerComponent3D = $"Shaker Activate"
 
 

@@ -53,7 +53,7 @@ var bankid = 0
 
 @onready var priceTag: Label3D = %"Price"
 @export var container: ElementContainer
-
+var dragDelta = 0.0
 @export_group("States")
 #region # - States ---------------------------- #  
 enum States {onBoard, inDeck, inHand, inShop, inPack, discarded, disabled, inConsumables, inWildcards, none}
@@ -136,11 +136,14 @@ func _process(delta: float) -> void:
 	if (Input.is_action_just_pressed("click")):
 		if (hovered):
 			holdAfterFrames = 0
+			dragDelta = 0
 			canDrag = true
 	if (Input.is_action_just_released("click")):
 		if hovered and not dragged:
 			clicked()
-		dragged = false
+		if dragged:
+			dragged = false
+
 		canDrag = false
 		GameManager.draggedElement = null
 		
@@ -151,7 +154,10 @@ func _process(delta: float) -> void:
 			if (canDrag):
 				#print("e")	
 				holdAfterFrames += 1
-				if (holdAfterFrames >= 20):
+				dragDelta += delta
+				
+				print(dragDelta)
+				if (dragDelta >= .15):
 					#print("a")	
 					dragged = true
 					GameManager.draggedElement = self
@@ -163,7 +169,7 @@ func _process(delta: float) -> void:
 		dragPosition = Vector3(GameManager.mousePos.x, GameManager.mousePos.y, 5)
 		#global_position = global_position.lerp(dragPosition, delta * moveSpeed * GameManager.gameSpeedMultiplier * 2)
 		global_position = global_position.lerp(dragPosition, lerpDelta(delta, moveSpeed * 2))
-		lerpDelta(delta, rotationSpeed)
+		#lerpDelta(delta, rotationSpeed)
 		global_position.z = 15
 		#print("held")
 
@@ -215,9 +221,9 @@ func updateIdleAnimation(delta):
 		idleAxis.rotation.y = (cos(t * .25 * idleSpeed + offset) * .1)
 		idleAxis.rotation.z = (cos(t * .25 * idleSpeed + offset) * .05)
 	else:
-		idleAxis.rotation.x = lerp_angle(idleAxis.rotation.x, 0, delta * 10 * GameManager.gameSpeedMultiplier)
-		idleAxis.rotation.y = lerp_angle(idleAxis.rotation.y, 0, delta * 10 * GameManager.gameSpeedMultiplier)
-		idleAxis.rotation.z = lerp_angle(idleAxis.rotation.z, 0, delta * 10 * GameManager.gameSpeedMultiplier)
+		idleAxis.rotation.x = lerp_angle(idleAxis.rotation.x, 0, lerpDelta(delta, 10))
+		idleAxis.rotation.y = lerp_angle(idleAxis.rotation.y, 0, lerpDelta(delta, 10))
+		idleAxis.rotation.z = lerp_angle(idleAxis.rotation.z, 0, lerpDelta(delta, 10))
 
 
 #region # - Events ----------	------------------ #  

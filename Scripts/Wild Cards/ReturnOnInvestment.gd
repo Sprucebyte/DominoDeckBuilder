@@ -2,5 +2,5 @@ extends WildCard
 
 func activate() -> void:
 	addScore(Score.Instance.money)
-	shake()
+	await shake()
 	return

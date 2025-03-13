@@ -6,12 +6,14 @@
 [ext_resource type="Texture2D" uid="uid://f470s7enp0x1" path="res://Textures/debug_arrow.png" id="8_5l0rj"]
 
 [node name="Score Label" type="Node3D"]
-transform = Transform3D(1.00001, 4.19095e-08, -2.07244e-10, -4.19099e-08, 1, 3.51784e-10, 2.07246e-10, -3.51784e-10, 1, 0, -2.98023e-08, 0)
+transform = Transform3D(1.00001, 4.8487e-08, -2.07244e-10, -4.84875e-08, 1, 3.51784e-10, 2.07246e-10, -3.51784e-10, 1, 0, -2.98023e-08, 0)
 script = ExtResource("1_fqkco")
 
-[node name="LabelShaker" type="Node3D" parent="."]
+[node name="LabelShaker" type="Node3D" parent="." node_paths=PackedStringArray("Targets")]
 unique_name_in_owner = true
 script = ExtResource("1_kcwa1")
+custom_target = true
+Targets = [NodePath("..")]
 AutoPlay = true
 intensity = 0.3
 duration = 0.5
@@ -20,7 +22,8 @@ shakerPreset = ExtResource("3_og51l")
 
 [node name="Label" type="Label3D" parent="."]
 unique_name_in_owner = true
-transform = Transform3D(0.646513, 1.77631e-15, 2.77556e-17, -5.32912e-15, 0.646507, 0, 0, 0, 1, -2.22031e-16, 3.55271e-15, 8.4117)
+transform = Transform3D(0.646513, -4.71332e-20, 1.38778e-17, -7.10547e-15, 0.646507, 0, -1.38778e-17, 1.38778e-17, 1, 8.69338e-11, -1.47562e-10, 0.419481)
+pixel_size = 0.01
 render_priority = 127
 text = "5"
 font_size = 147
@@ -28,15 +31,19 @@ outline_size = 58
 
 [node name="ColorSprite" type="Sprite3D" parent="."]
 unique_name_in_owner = true
-transform = Transform3D(0.103119, 0.0839856, 2.7901e-10, -0.0884676, 0.0978943, 5.01519e-11, -2.43343e-11, -2.83424e-11, 1, 0.0399305, 0.0607131, 8)
+transform = Transform3D(0.103119, 0.0839853, 0, -0.0884674, 0.0978947, 0, 0, 0, 1, -0.0301838, 0.109791, 0)
+offset = Vector2(0, 80)
 modulate = Color(0, 0.51982, 1, 1)
+pixel_size = 0.04
 alpha_cut = 1
 render_priority = 127
 texture = ExtResource("8_5l0rj")
 
-[node name="ColorSprite2" type="Sprite3D" parent="."]
-transform = Transform3D(0.129102, 0.10046, 2.7901e-10, -0.110759, 0.117097, 5.01519e-11, -3.04658e-11, -3.39018e-11, 1, 0.0526206, 0.0721343, 7.94905)
+[node name="ColorSprite2" type="Sprite3D" parent="ColorSprite"]
+transform = Transform3D(1.25197, 8.34465e-07, 0, -8.34465e-07, 1.19616, 1.11022e-16, 8.88178e-16, -1.33227e-15, 1, -0.0121007, 0.750325, -0.163073)
+offset = Vector2(0, 63.665)
 modulate = Color(0, 0, 0, 1)
+pixel_size = 0.04
 alpha_cut = 1
 render_priority = 127
 texture = ExtResource("8_5l0rj")

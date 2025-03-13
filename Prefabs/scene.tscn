@@ -1,4 +1,4 @@
-[gd_scene load_steps=91 format=3 uid="uid://c1vubbps0wbru"]
+[gd_scene load_steps=92 format=3 uid="uid://c1vubbps0wbru"]
 
 [ext_resource type="PackedScene" uid="uid://wutxuycqev1q" path="res://Prefabs/tile_placement_slot.tscn" id="1_7whan"]
 [ext_resource type="Script" path="res://Scripts/Systems/Score.gd" id="1_f3a7t"]
@@ -36,6 +36,7 @@
 [ext_resource type="Resource" uid="uid://hrwirj63qnef" path="res://Tile Materials/Dark Wood.tres" id="18_x5k55"]
 [ext_resource type="Resource" uid="uid://c87krcvwrsa0a" path="res://Tarot Card Assets/The Magician.tres" id="21_5m4q8"]
 [ext_resource type="Resource" uid="uid://cyjykaxm37r4t" path="res://Tarot Card Assets/The Star.tres" id="24_my2ji"]
+[ext_resource type="Resource" uid="uid://ddl5u5vbmi5qk" path="res://Tile Materials/Purple.tres" id="25_0tqlv"]
 [ext_resource type="Resource" uid="uid://bkgsdsew34ffj" path="res://Tarot Card Assets/The Moon.tres" id="25_qq31i"]
 [ext_resource type="Resource" uid="uid://d2hj5bi4bm0r5" path="res://Tarot Card Assets/The Sun.tres" id="26_q1um7"]
 [ext_resource type="Theme" uid="uid://cr7c32xd1yioy" path="res://Theme & Style/main_theme.tres" id="31_3dawp"]
@@ -405,6 +406,7 @@ white = ExtResource("3_oeeda")
 black = ExtResource("4_ud0li")
 wood = ExtResource("18_x5k55")
 gold = ExtResource("6_l2eui")
+purple = ExtResource("25_0tqlv")
 tarotCardAssets = Array[ExtResource("7_gc8a2")]([ExtResource("21_5m4q8"), ExtResource("13_jhuo7"), ExtResource("9_qvunr"), ExtResource("24_my2ji"), ExtResource("25_qq31i"), ExtResource("26_q1um7"), ExtResource("5_gkal6")])
 wildCardAssets = Array[ExtResource("7_gc8a2")]([ExtResource("6_va8nl"), ExtResource("5_ci61w"), ExtResource("32_ke8wn"), ExtResource("33_6cs2m"), ExtResource("34_hnb5h"), ExtResource("32_ke8wn"), ExtResource("35_yyx7s"), ExtResource("36_637ta"), ExtResource("37_ausnn"), ExtResource("38_se8t8"), ExtResource("37_voiap"), ExtResource("38_ve6bp"), ExtResource("39_xggks"), ExtResource("40_38qf0"), ExtResource("41_3kc6k"), ExtResource("42_cfj0f"), ExtResource("43_je6p8"), ExtResource("44_20uqg"), ExtResource("45_8ikpq"), ExtResource("46_jqwuu"), ExtResource("47_i7gs3"), ExtResource("48_lud71"), ExtResource("49_sfltc"), ExtResource("50_bmvk0"), ExtResource("51_o0nda"), ExtResource("52_4q72n")])
 

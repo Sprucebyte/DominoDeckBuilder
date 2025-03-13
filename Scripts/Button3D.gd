@@ -25,9 +25,9 @@ func _process(delta: float) -> void:
 			SignalBus.OnButtonPressed.emit(self)
 			print("clicked on button")
 			click()
-		scale = scale.lerp(Vector3.ONE * 1.1, delta*10)
+		scale = scale.lerp(Vector3.ONE * 1.1, delta * 10)
 	else:
-		scale = scale.lerp(Vector3.ONE, delta*10)		
+		scale = scale.lerp(Vector3.ONE, delta * 10)
 	pass
 
 func click():
@@ -37,9 +37,18 @@ func click():
 		buy()
 	if type == ButtonTypes.Sell:
 		sell()
+	if type == ButtonTypes.Use:
+		use()
 		#buy()	
 	pass
 
+func use():
+	if element == null: return
+	if (element.state != Element.States.inConsumables): return
+	if (element is TarotCard):
+		if element.canUse():
+			element.use()
+	
 
 func sell():
 	if element == null: return
@@ -49,7 +58,7 @@ func sell():
 		SignalBus.AddMoney.emit(element.sellValue)
 
 func buy():
-	if Score.Instance.money < element.buyValue: 
+	if Score.Instance.money < element.buyValue:
 		SignalBus.CantAfford.emit(element)
 		return
 
@@ -59,7 +68,6 @@ func buy():
 	SignalBus.BuyElement.emit(element)
 	SignalBus.UseMoney.emit(element.buyValue)
 	
-
 
 	if element is Pack:
 		element.open()
@@ -73,17 +81,17 @@ func select():
 	if element.state != Element.States.inPack: return
 	moveElement(element)
 	if element.pack != null:
-		element.pack.leftToChoose -= 1 
+		element.pack.leftToChoose -= 1
 	pass
 
 
 func moveElement(element):
 	if element is TarotCard:
-		element.container.moveOneElement(element,ConsumablesContainer.Instance)
+		element.container.moveOneElement(element, ConsumablesContainer.Instance)
 	elif element is WildCard:
 		element.container.moveOneElement(element, GameManager.wildCards)
 	elif element is Tile:
-		element.container.moveOneElement(element, GameManager.deck)	
+		element.container.moveOneElement(element, GameManager.deck)
 
 
 func _on_area_3d_mouse_entered() -> void:

@@ -25,7 +25,8 @@ func _init() -> void:
 @export var black: TileMaterial
 @export var wood: TileMaterial
 @export var gold: TileMaterial
-var materials = [white, black, wood, gold]
+@export var purple: TileMaterial
+var materials = [white, black, wood, gold, purple]
 
 
 @export_category("Tarot Cards")
@@ -57,6 +58,8 @@ static func createRandomTile() -> Tile:
 			type = Tile.Types.wood
 		2:
 			type = Tile.Types.gold
+		3:
+			type = Tile.Types.purple
 
 	return createTile(topValue, bottomValue, type, pipType)
 

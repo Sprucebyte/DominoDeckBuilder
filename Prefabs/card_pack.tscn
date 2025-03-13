@@ -98,7 +98,7 @@ transform = Transform3D(1, 4.52113e-16, 2.13163e-14, 4.52114e-16, 1, 0, -2.13163
 visible = false
 element = NodePath("..")
 text = "Buy"
-color = Color(0.98, 0.88592, 0.3528, 1)
+color = Color(1, 0.74902, 0.121569, 1)
 
 [node name="SkipButton" type="Button" parent="."]
 unique_name_in_owner = true

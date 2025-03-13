@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="TileMaterial" load_steps=4 format=3 uid="uid://ddl5u5vbmi5qk"]
+
+[ext_resource type="Material" uid="uid://bd8d0em6tlkhv" path="res://Materials/White.tres" id="1_dqt8j"]
+[ext_resource type="Material" uid="uid://d46svtcrgwrr" path="res://Materials/Purple.tres" id="2_flrne"]
+[ext_resource type="Script" path="res://Scripts/TileMaterial.gd" id="3_dl658"]
+
+[resource]
+script = ExtResource("3_dl658")
+material = ExtResource("1_dqt8j")
+outlineMaterial = ExtResource("2_flrne")
+pipColor = Color(1, 1, 1, 1)

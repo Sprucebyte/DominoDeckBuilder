@@ -2,7 +2,7 @@ extends WildCard
 
 ## +2 mult for every even edge
 func activate() -> void:
-	super()
+	super ()
 	for node: TileNode in edgeNodes():
 		var tile = node.tile
 		var value = node.getEdgeValue()
@@ -10,8 +10,8 @@ func activate() -> void:
 		#
 		addMult(2, tile)
 		#
-		tile.shake()
-		shake()
-		delay()
+		await tile.shake()
+		await shake()
+		await delay()
 		accelerate()
 	return

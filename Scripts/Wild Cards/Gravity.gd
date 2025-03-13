@@ -3,7 +3,7 @@ extends WildCard
 var lastTotalvalue = 0
 #gives +9.81 mult + it accelerates after each use, giving a little bonus
 func activate() -> void:
-	super()
+	super ()
 	var totalValue = 0
 	for node: TileNode in edgeNodes():
 		var tile = node.tile
@@ -11,13 +11,10 @@ func activate() -> void:
 		totalValue += value
 		
 		
-		
 	var stringValue = str(totalValue)
 	if stringValue.contains("9") and stringValue.contains("8") and stringValue.contains("1"):
-		delay()
 		var bonus = 9.81 + (lastTotalvalue * 0.0981)
 		lastTotalvalue = totalValue
 		addMult(bonus)
-		shake()
-		accelerate()
+		await shake()
 	return

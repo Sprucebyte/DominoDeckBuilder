@@ -112,6 +112,7 @@ func sortByDrag(draggedElement):
 					#print("new index is" + str(elementIndex))
 					elements.erase(draggedElement)
 					elements.insert(elementIndex, draggedElement)
+					setElementPositions()
 					return
 
 		if (draggedIndex > elementIndex):
@@ -119,6 +120,7 @@ func sortByDrag(draggedElement):
 				if (draggedElement.position.x > elements[prevIndex].position.x) or true:
 					elements.erase(draggedElement)
 					elements.insert(elementIndex, draggedElement)
+					setElementPositions()
 					return
 
 
@@ -200,8 +202,7 @@ func setElementPositions():
 		var element = elements[i]
 		if (element == null): continue
 		var j = i - half_size + 0.5
-		if (element.dragged):
-			continue
+		
 		var ratio = (j + half_size) / (size())
 		
 		if (path3d == null) or true:

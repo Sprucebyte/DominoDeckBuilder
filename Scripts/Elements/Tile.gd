@@ -19,7 +19,7 @@ class_name Tile
 @onready var directionText = %DirectionText
 @onready var tilenameText = %LabelTilename
 
-enum Types {normal, gold, black, wood}
+enum Types {normal, gold, black, wood, purple}
 @export var type = Types.normal
 
 enum PipTypes {normal, red, blue, yellow, purple}
@@ -61,6 +61,8 @@ func updateMaterial():
 			tileMaterial = AssetManager.Instance.gold
 		Types.wood:
 			tileMaterial = AssetManager.Instance.wood
+		Types.purple:
+			tileMaterial = AssetManager.Instance.purple
 	
 	pipColor = tileMaterial.pipColor
 	spriteTop.modulate = pipColor
@@ -86,6 +88,8 @@ func typeDescription():
 			return ("Scores if tile is an edge value\n[b][money]+$1 [/money][/b] when scored\n--------------------\n")
 		Types.wood:
 			return ("Scores if tile is an edge value\n[b][score]+5 [/score][/b] for every wooden tile on the board\n--------------------\n")
+		Types.purple:
+			return ("Gives no points\n1 in 5 chance to create a tarot card when scored\n--------------------\n")
 	return ""
 	
 func typeTitle():
@@ -98,6 +102,8 @@ func typeTitle():
 			return ("Golden Tile")
 		Types.wood:
 			return ("Wooden Tile")
+		Types.purple:
+			return ("Purple Tile")
 	return ""
 
 func updateNumbers():
@@ -238,8 +244,13 @@ func activate():
 			for element in GameManager.board.elements:
 				if element.type == Types.wood:
 					addScore(5, self)
-
-		
+		Types.purple:
+			if (randi_range(0,5) == 5):
+				if (ConsumablesContainer.Instance.elements.size() < ConsumablesContainer.Instance.containerSize):
+					var card = AssetManager.createCard(AssetManager.Instance.tarotCardAssets.pick_random())
+					ConsumablesContainer.Instance.add_child(card)
+					ConsumablesContainer.Instance.add(card)
+				
 	pass
 
 

@@ -1,11 +1,11 @@
 extends WildCard
 
 func activate() -> void:
-	super()
+	super ()
 	for tile: Tile in tiles():
 		multiplyMult(1.2, tile)
-		tile.shake()
-		shake()
-		delay()
+		await tile.shake()
+		await shake()
+		await delay()
 		accelerate()
 	return

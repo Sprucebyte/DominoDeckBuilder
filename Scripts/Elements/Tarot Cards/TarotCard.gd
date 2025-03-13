@@ -1,8 +1,10 @@
 extends Card
 class_name TarotCard
+@onready var useButton = %UseButton
 
 func _process(delta: float) -> void:
-	super(delta)
+	useButton.visible = selected
+	super (delta)
 	if selected:
 		if Input.is_key_pressed(KEY_E):
 			if canUse():

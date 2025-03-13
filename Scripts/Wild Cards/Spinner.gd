@@ -2,12 +2,12 @@ extends WildCard
 
 #all spinners count toward hand value
 func activate() -> void:
-	super()
+	super ()
 	for tile: Tile in tiles():
 		if tile.bottomValue == tile.topValue:
-			addScore(tile.bottomValue + tile.topValue,tile)
-			tile.shake()
-			shake()
+			addScore(tile.bottomValue + tile.topValue, tile)
+			await tile.shake()
+			await shake()
 			delay()
 			accelerate()
 	return

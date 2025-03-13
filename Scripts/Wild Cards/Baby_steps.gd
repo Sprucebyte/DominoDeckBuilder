@@ -2,7 +2,7 @@ extends WildCard
 
 
 func activate() -> void:
-	super()
+	super ()
 	for node: TileNode in edgeNodes():
 		#
 		var tile = node.tile
@@ -10,9 +10,9 @@ func activate() -> void:
 		if not (roundi(nodeValue) < 4): continue
 		#
 		addMult(2, tile)
-		tile.shake()
-		shake()
-		delay()
+		await tile.shake()
+		await shake()
+		await delay()
 		accelerate()
 		#
 	return

@@ -1,7 +1,7 @@
 extends WildCard
 
 func activate() -> void:
-	super()
+	super ()
 	var contains1 = false
 	var contains6 = false
 	var tiles = []
@@ -20,9 +20,9 @@ func activate() -> void:
 	if not contains6: return
 
 	for tile in tiles:
-		tile.shake()
-		shake()
+		await tile.shake()
+		await shake()
 		addMult(1, tile)
-		delay()
+		await delay()
 		accelerate()
 	return

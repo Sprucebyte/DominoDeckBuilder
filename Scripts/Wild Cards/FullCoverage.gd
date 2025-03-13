@@ -1,12 +1,12 @@
 extends WildCard
 
 func activate() -> void:
-	super()
+	super ()
 	for node: TileNode in edgeNodes():
 		var tile = node.tile
-		delay()
 		addScore(10, tile)
-		tile.shake()
-		shake()
+		await tile.shake()
+		await shake()
+		await delay()
 		accelerate()
 	return

@@ -8,9 +8,9 @@ func activate() -> void:
 		if not (roundi(value) == 0): continue # Skip if the edge value is not 0
 		#
 		addMult(5)
-		tile.shake()
-		shake()
+		await tile.shake()
+		await shake()
 		#
-		delay()
+		await delay()
 		accelerate()
 	return

@@ -1,10 +1,10 @@
 extends WildCard
 
 func activate() -> void:
-	var seen_tiles = {}  # Dictionary to store tiles by their values
+	var seen_tiles = {} # Dictionary to store tiles by their values
 	var has_duplicates = false
 
-	for node : Element in GameManager.hand.elements:
+	for node: Element in GameManager.hand.elements:
 		var tile = node
 		var topValue = tile.topValue
 		var bottomValue = tile.bottomValue
@@ -14,12 +14,11 @@ func activate() -> void:
 
 		# Check if this exact tile configuration has already been seen
 		if tile_key in seen_tiles:
-			has_duplicates = true  # Found a duplicate!
+			has_duplicates = true # Found a duplicate!
 		else:
-			seen_tiles[tile_key] = true  # Store this tile
+			seen_tiles[tile_key] = true # Store this tile
 
 	# Bonus multiplier for duplicate tiles
 	if has_duplicates:
-		addMult(14)  # Adjust multiplier as needed
-		shake()  
-		accelerate()
+		addMult(14) # Adjust multiplier as needed
+		await shake()

@@ -2,7 +2,7 @@ extends WildCard
 
 
 func activate() -> void:
-	super()
+	super ()
 	var edgevalues = []
 	for node in edgeNodes():
 		var tile = node.tile
@@ -10,16 +10,15 @@ func activate() -> void:
 		edgevalues.append(value)
 		
 		
-		
 	edgevalues.sort()
 	var previousVal = 0
 	for i in range(edgevalues.size()):
-		edgevalues[i] += previousVal  # Accumulate sum
-		previousVal = edgevalues[i]  # Update previousVal for next step
+		edgevalues[i] += previousVal # Accumulate sum
+		previousVal = edgevalues[i] # Update previousVal for next step
 		
-		delay()
-		addScore(edgevalues[i])  # Apply growing Fibonacci-like effect
-		shake()
+		addScore(edgevalues[i]) # Apply growing Fibonacci-like effect
+		await shake()
+		await delay()
 		accelerate()
 	
 	
