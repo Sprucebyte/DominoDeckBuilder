@@ -155,7 +155,7 @@ func chooseHandType(hands: Dictionary):
 		setBaseScore(result.multiplier, result.score)
 	else:
 		label2.text = ""
-		setBaseScore(0, 0)
+		setBaseScore(0, 1)
 
 
 func chooseHandTypeFull(hands: Dictionary):

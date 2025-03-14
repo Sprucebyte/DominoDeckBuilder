@@ -21,11 +21,19 @@ func open():
 	#selectParent.position = Vector3.UP
 
 	targetPosition = Vector3.ZERO
-
+	SignalBus.OnPackOpened.emit(self)
 	await Util.delay(.1)
-	
+
 	return
 
+
+func hover():
+	if super ():
+		SignalBus.OnPackHovered.emit(self)
+
+func select():
+	if super ():
+		SignalBus.OnPackSelected.emit(self)
 
 func close():
 	for element in elementContainer.elements:

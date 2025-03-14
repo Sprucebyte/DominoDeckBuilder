@@ -241,11 +241,11 @@ func clicked():
 	pass
 
 func select():
-	if not validState(): return
+	if not validState(): return false
 	selected = true
 	if container != null:
 		container.addSelectedElement(self)
-	pass
+	return true
 
 func deselect():
 	if (forceSelected): return
@@ -261,7 +261,7 @@ func hover():
 	hovered = true
 	if not faceDown:
 		DescriptionBox.Instance.addToQueue(self)
-	pass
+	return true
 
 func unhover():
 	hovered = false

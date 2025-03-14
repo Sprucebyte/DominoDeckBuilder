@@ -22,6 +22,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if hovered:
 		if Input.is_action_just_pressed("click"):
+			SignalBus.ChooseElement.emit(element)
 			SignalBus.OnButtonPressed.emit(self)
 			print("clicked on button")
 			click()
@@ -80,15 +81,21 @@ func buy():
 	#moveElement(element)
 
 func select():
+	print("he's here")
 	if element == null: return
 	if element.state != Element.States.inPack: return
+	print("he's there")
+	
 	moveElement(element)
 	if element.pack != null:
+		print("roy keeent")
+		
 		element.pack.leftToChoose -= 1
 	pass
 
 
 func moveElement(element):
+	print("he's every fucking where")
 	if element is TarotCard:
 		if element.container.moveOneElement(element, ConsumablesContainer.Instance):
 			return true
@@ -102,6 +109,7 @@ func moveElement(element):
 
 
 func _on_area_3d_mouse_entered() -> void:
+	SignalBus.OnButtonHovered.emit(self)
 	hovered = true
 func _on_area_3d_mouse_exited() -> void:
 	hovered = false

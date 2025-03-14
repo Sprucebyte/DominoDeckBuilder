@@ -198,6 +198,7 @@ func playHand():
 		return
 	
 	SignalBus.Draw.emit()
+	SignalBus.OnHandEnded.emit()
 	return
 
 

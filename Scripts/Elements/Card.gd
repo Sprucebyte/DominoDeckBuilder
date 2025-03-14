@@ -15,6 +15,14 @@ func _ready() -> void:
 	spriteBack.texture = textureBack
 
 
+func hover():
+	if super ():
+		SignalBus.OnCardHovered.emit(self)
+
+func select():
+	if super ():
+		SignalBus.OnCardSelected.emit(self)
+
 func _process(delta: float) -> void:
 	super (delta)
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=107 format=3 uid="uid://c1vubbps0wbru"]
+[gd_scene load_steps=116 format=3 uid="uid://c1vubbps0wbru"]
 
 [ext_resource type="PackedScene" uid="uid://wutxuycqev1q" path="res://Prefabs/tile_placement_slot.tscn" id="1_7whan"]
 [ext_resource type="Script" path="res://Scripts/Systems/Score.gd" id="1_f3a7t"]
@@ -29,8 +29,17 @@
 [ext_resource type="Script" path="res://Scripts/Containers/Deck.gd" id="8_4o5i1"]
 [ext_resource type="Script" path="res://Scripts/Containers/DiscardPile.gd" id="9_2ysjb"]
 [ext_resource type="Resource" uid="uid://bwgdi50a8t06v" path="res://Tarot Card Assets/Death.tres" id="9_qvunr"]
+[ext_resource type="AudioStream" uid="uid://bkawrlklj74mt" path="res://Audio/Complete_02.ogg" id="10_at1gr"]
+[ext_resource type="AudioStream" uid="uid://dof3d3vyxqkfn" path="res://Audio/Collect (Pitch 4).mp3" id="10_k13v8"]
 [ext_resource type="PackedScene" uid="uid://b8sxlx0vdd8eb" path="res://Prefabs/price_tag.tscn" id="10_owik7"]
+[ext_resource type="AudioStream" uid="uid://dkh0060ikqd50" path="res://Audio/Bank Card Placed Down 03.wav" id="10_qns0i"]
+[ext_resource type="AudioStream" uid="uid://u423cdadyowe" path="res://Audio/Arcane Beacon.wav" id="10_r4v00"]
 [ext_resource type="Script" path="res://Scripts/Systems/UI.gd" id="10_t280a"]
+[ext_resource type="AudioStream" uid="uid://c7c8wd0omtp8p" path="res://Audio/Collect (Pitch 1).mp3" id="10_vd2h0"]
+[ext_resource type="AudioStream" uid="uid://cmspic8qhhy3l" path="res://Audio/Notes Scrunched In Wallet.wav" id="11_bcnib"]
+[ext_resource type="AudioStream" uid="uid://d1y0urjq5blyd" path="res://Audio/Collect (Pitch 2).mp3" id="11_gr034"]
+[ext_resource type="AudioStream" uid="uid://hrcpts0kenp8" path="res://Audio/LittleSwoosh1a.wav" id="12_s4266"]
+[ext_resource type="AudioStream" uid="uid://cga0sgk0wb2dl" path="res://Audio/Collect (Pitch 3).mp3" id="12_x5c7m"]
 [ext_resource type="Resource" uid="uid://cdy547ap5kqvs" path="res://Tarot Card Assets/Temperance.tres" id="13_jhuo7"]
 [ext_resource type="PackedScene" uid="uid://dbgj2n65cxte" path="res://Prefabs/wild_card_pack.tscn" id="14_d1208"]
 [ext_resource type="Resource" uid="uid://hrwirj63qnef" path="res://Tile Materials/Dark Wood.tres" id="18_x5k55"]
@@ -394,13 +403,57 @@ theme_override_styles/panel = ExtResource("4_jdc5s")
 [node name="Score" type="Node" parent="."]
 script = ExtResource("1_f3a7t")
 
-[node name="AudioManager" type="Node" parent="." node_paths=PackedStringArray("soundBuy", "soundSell")]
+[node name="AudioManager" type="Node" parent="." node_paths=PackedStringArray("soundBuy", "soundSell", "soundMult", "soundScore", "soundOpenPack", "soundOpenPack2", "soundChooseElement", "soundCardHover", "soundCardSelect", "soundButtonHover")]
 script = ExtResource("3_fevv1")
 soundBuy = NodePath("Coin")
 soundSell = NodePath("Coin")
+soundMult = [NodePath("Mult"), NodePath("Mult 2")]
+soundScore = [NodePath("Score 1"), NodePath("Score 2")]
+soundOpenPack = NodePath("OpenPack")
+soundOpenPack2 = NodePath("OpenPack2")
+soundChooseElement = NodePath("ChooseElement")
+soundCardHover = NodePath("CardHover")
+soundCardSelect = NodePath("CardSelect")
+soundButtonHover = NodePath("ButtonHover")
 
 [node name="Coin" type="AudioStreamPlayer" parent="AudioManager"]
 stream = ExtResource("4_65qr4")
+volume_db = -5.0
+
+[node name="CardHover" type="AudioStreamPlayer" parent="AudioManager"]
+stream = ExtResource("10_vd2h0")
+volume_db = -5.0
+
+[node name="CardSelect" type="AudioStreamPlayer" parent="AudioManager"]
+stream = ExtResource("10_qns0i")
+volume_db = -5.0
+
+[node name="ChooseElement" type="AudioStreamPlayer" parent="AudioManager"]
+stream = ExtResource("12_s4266")
+volume_db = 5.0
+
+[node name="ButtonHover" type="AudioStreamPlayer" parent="AudioManager"]
+stream = ExtResource("10_k13v8")
+
+[node name="OpenPack" type="AudioStreamPlayer" parent="AudioManager"]
+stream = ExtResource("10_r4v00")
+
+[node name="OpenPack2" type="AudioStreamPlayer" parent="AudioManager"]
+stream = ExtResource("11_bcnib")
+
+[node name="Mult" type="AudioStreamPlayer" parent="AudioManager"]
+stream = ExtResource("10_at1gr")
+volume_db = -8.0
+
+[node name="Mult 2" type="AudioStreamPlayer" parent="AudioManager"]
+stream = ExtResource("10_at1gr")
+volume_db = -8.0
+
+[node name="Score 1" type="AudioStreamPlayer" parent="AudioManager"]
+stream = ExtResource("11_gr034")
+
+[node name="Score 2" type="AudioStreamPlayer" parent="AudioManager"]
+stream = ExtResource("12_x5c7m")
 
 [node name="Domino 1" type="AudioStreamPlayer" parent="AudioManager"]
 stream = ExtResource("5_7v3u3")
