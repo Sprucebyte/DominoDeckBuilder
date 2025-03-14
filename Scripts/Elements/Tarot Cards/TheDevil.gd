@@ -9,7 +9,8 @@ func canUse() -> bool:
 func use():
 	#GameManager.wildCards.elements.erase(GameManager.wildCards.elements.pick_random())
 	#addMoney(30)
-	for i in min(GameManager.hand.elements.size(), 3):
-		GameManager.hand.destroy(GameManager.hand.elements[i])
+	for i in min(GameManager.selectedElements.elements.size(), 3):
+		GameManager.hand.destroy(GameManager.selectedElements.elements[i])
 	
+	GameManager.hand.selectedElements.clear()
 	super ()

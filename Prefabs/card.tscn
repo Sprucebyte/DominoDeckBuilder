@@ -69,6 +69,7 @@ flip_h = true
 pixel_size = 0.0025
 double_sided = false
 alpha_antialiasing_mode = 1
+texture_filter = 5
 render_priority = 5
 texture = ExtResource("3_iypw1")
 

@@ -9,5 +9,5 @@ script = ExtResource("2_tw8wk")
 code = ExtResource("1_c75u3")
 texture = ExtResource("3_7ho3k")
 name = "Justice"
-description = "t"
+description = "NOT IMPLEMENTED"
 rarity = 4

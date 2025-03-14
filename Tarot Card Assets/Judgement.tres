@@ -9,5 +9,5 @@ script = ExtResource("1_oknav")
 code = ExtResource("1_bqcis")
 texture = ExtResource("2_rbfne")
 name = "Judgement"
-description = ""
+description = "NOT IMPLEMENTED"
 rarity = 4

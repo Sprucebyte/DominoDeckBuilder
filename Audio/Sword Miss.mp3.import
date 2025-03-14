@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://cah4rgb4vauq"
+path="res://.godot/imported/Sword Miss.mp3-a137d0d162219bcc6ab285460032b52f.mp3str"
+
+[deps]
+
+source_file="res://Audio/Sword Miss.mp3"
+dest_files=["res://.godot/imported/Sword Miss.mp3-a137d0d162219bcc6ab285460032b52f.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

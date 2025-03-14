@@ -216,7 +216,7 @@ func lerpDelta(delta, speed, useGameSpeedMultiplier = true) -> float:
 
 func updateIdleAnimation(delta):
 	t += delta
-	if (validState(States.onBoard) and !lockedIn) or validStates([States.inHand, States.inConsumables, States.inWildcards, States.inPack, States.inShop]):
+	if (validState(States.onBoard) and !lockedIn) or validStates([States.inPack, States.inShop]):
 		idleAxis.rotation.x = (cos(t * .125 * idleSpeed + offset) * .1)
 		idleAxis.rotation.y = (cos(t * .25 * idleSpeed + offset) * .1)
 		idleAxis.rotation.z = (cos(t * .25 * idleSpeed + offset) * .05)

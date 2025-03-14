@@ -1,4 +1,4 @@
-[gd_scene load_steps=92 format=3 uid="uid://c1vubbps0wbru"]
+[gd_scene load_steps=107 format=3 uid="uid://c1vubbps0wbru"]
 
 [ext_resource type="PackedScene" uid="uid://wutxuycqev1q" path="res://Prefabs/tile_placement_slot.tscn" id="1_7whan"]
 [ext_resource type="Script" path="res://Scripts/Systems/Score.gd" id="1_f3a7t"]
@@ -39,24 +39,38 @@
 [ext_resource type="Resource" uid="uid://ddl5u5vbmi5qk" path="res://Tile Materials/Purple.tres" id="25_0tqlv"]
 [ext_resource type="Resource" uid="uid://bkgsdsew34ffj" path="res://Tarot Card Assets/The Moon.tres" id="25_qq31i"]
 [ext_resource type="Resource" uid="uid://d2hj5bi4bm0r5" path="res://Tarot Card Assets/The Sun.tres" id="26_q1um7"]
+[ext_resource type="Resource" uid="uid://du0gpb08olysg" path="res://Tarot Card Assets/The Fool.tres" id="27_t22px"]
+[ext_resource type="Resource" uid="uid://bb1bueueoa4si" path="res://Tarot Card Assets/The High Priestess.tres" id="29_ngfut"]
+[ext_resource type="Resource" uid="uid://cp4jecpy4rat0" path="res://Tarot Card Assets/The Empress.tres" id="30_k4t3k"]
 [ext_resource type="Theme" uid="uid://cr7c32xd1yioy" path="res://Theme & Style/main_theme.tres" id="31_3dawp"]
 [ext_resource type="Theme" uid="uid://bbiwa6pvqg7aa" path="res://Theme & Style/text_theme.tres" id="31_cm3jf"]
+[ext_resource type="Resource" uid="uid://c5bo5pp3epobq" path="res://Tarot Card Assets/The Emperor.tres" id="31_kwxy8"]
 [ext_resource type="Resource" uid="uid://cmkjl1hkmwwqe" path="res://Wild Card Assets/Prime.tres" id="32_ke8wn"]
+[ext_resource type="Resource" uid="uid://dt5v54srgeoj5" path="res://Tarot Card Assets/The Chariot.tres" id="32_p35ld"]
+[ext_resource type="Resource" uid="uid://b4iphpa4uesgk" path="res://Tarot Card Assets/The Hierophant.tres" id="32_rfc53"]
+[ext_resource type="Resource" uid="uid://ck15f234xtgmu" path="res://Tarot Card Assets/The Lovers.tres" id="33_0rvk8"]
 [ext_resource type="Resource" uid="uid://dxuii4cruf42p" path="res://Wild Card Assets/ThreeForThree.tres" id="33_6cs2m"]
+[ext_resource type="Resource" uid="uid://chg4hysdvgkfj" path="res://Tarot Card Assets/Strength.tres" id="33_0287d"]
 [ext_resource type="Resource" uid="uid://bi6yjpihwfkmc" path="res://Wild Card Assets/RainMan.tres" id="34_hnb5h"]
 [ext_resource type="PackedScene" uid="uid://drbbe2kaqsqrg" path="res://Prefabs/card_pack.tscn" id="34_jow6n"]
+[ext_resource type="Resource" uid="uid://b0q5pcvskl5sq" path="res://Tarot Card Assets/The Hermit.tres" id="34_ljw3r"]
 [ext_resource type="Script" path="res://Scripts/DescriptionBox.gd" id="35_23qvl"]
+[ext_resource type="Resource" uid="uid://dv1mn43og8h1u" path="res://Tarot Card Assets/Wheel Of Fortune.tres" id="35_dhpbe"]
 [ext_resource type="PackedScene" uid="uid://c4fsjxgk0co1r" path="res://Prefabs/tile_pack.tscn" id="35_is2jb"]
 [ext_resource type="Resource" uid="uid://dp4pw5xtxx4cl" path="res://Wild Card Assets/PerfectSquare.tres" id="35_yyx7s"]
 [ext_resource type="Resource" uid="uid://ck0snmdf63842" path="res://Wild Card Assets/FullCoverage.tres" id="36_637ta"]
+[ext_resource type="Resource" uid="uid://djq5ninaqjyvn" path="res://Tarot Card Assets/The Hanged Man.tres" id="36_ltel4"]
 [ext_resource type="Resource" uid="uid://yyt2bhp37od3" path="res://Wild Card Assets/EqualAndOpposite.tres" id="37_ausnn"]
 [ext_resource type="Resource" uid="uid://ddeu6gm7xnvxg" path="res://Wild Card Assets/Allowance.tres" id="37_voiap"]
+[ext_resource type="Resource" uid="uid://dde8yj61c61dx" path="res://Tarot Card Assets/Justice.tres" id="38_8dxje"]
 [ext_resource type="Resource" uid="uid://wldnflsdgvt5" path="res://Wild Card Assets/Baby steps.tres" id="38_se8t8"]
 [ext_resource type="Resource" uid="uid://5bj17o1nrlw4" path="res://Wild Card Assets/BlankShot.tres" id="38_ve6bp"]
+[ext_resource type="Resource" uid="uid://dortj5b2vblgf" path="res://Tarot Card Assets/The Devil.tres" id="39_kmd7m"]
 [ext_resource type="Resource" uid="uid://b7oiyi73ccwn0" path="res://Wild Card Assets/D20.tres" id="39_xggks"]
 [ext_resource type="Script" path="res://Scripts/ConsumablesContainer.gd" id="39_xvuc8"]
 [ext_resource type="Texture2D" uid="uid://8m3nobyk16wm" path="res://addons/shaker/assets/icon.png" id="40_2o7gl"]
 [ext_resource type="Resource" uid="uid://bmscnvosmji0n" path="res://Wild Card Assets/DejaVu.tres" id="40_38qf0"]
+[ext_resource type="Resource" uid="uid://68u55q61xo3" path="res://Tarot Card Assets/The Tower.tres" id="40_cbdj1"]
 [ext_resource type="Script" path="res://Scripts/Shop.gd" id="40_qawd6"]
 [ext_resource type="Resource" uid="uid://crxnid0851q4c" path="res://Wild Card Assets/Fibonacci.tres" id="41_3kc6k"]
 [ext_resource type="Script" path="res://Scripts/UiTest.gd" id="41_p6njh"]
@@ -66,6 +80,7 @@
 [ext_resource type="Resource" uid="uid://xspnakg2xfce" path="res://Wild Card Assets/MagicNumber.tres" id="45_8ikpq"]
 [ext_resource type="Resource" uid="uid://dbi30jjlpofom" path="res://Wild Card Assets/Mahjong.tres" id="46_jqwuu"]
 [ext_resource type="Resource" uid="uid://bhlbpwxoya3jw" path="res://Wild Card Assets/Pendulum.tres" id="47_i7gs3"]
+[ext_resource type="Resource" uid="uid://duoynh2y17s1h" path="res://Tarot Card Assets/Judgement.tres" id="47_xggc2"]
 [ext_resource type="Resource" uid="uid://doviywbxoe6b5" path="res://Wild Card Assets/ReturnOnInvestment.tres" id="48_lud71"]
 [ext_resource type="Resource" uid="uid://dbjhou6xkurwr" path="res://Wild Card Assets/SlowStart.tres" id="49_sfltc"]
 [ext_resource type="Script" path="res://Scripts/TextEffects/TextEffectMoney.gd" id="50_0jh6r"]
@@ -379,8 +394,10 @@ theme_override_styles/panel = ExtResource("4_jdc5s")
 [node name="Score" type="Node" parent="."]
 script = ExtResource("1_f3a7t")
 
-[node name="AudioManager" type="Node" parent="."]
+[node name="AudioManager" type="Node" parent="." node_paths=PackedStringArray("soundBuy", "soundSell")]
 script = ExtResource("3_fevv1")
+soundBuy = NodePath("Coin")
+soundSell = NodePath("Coin")
 
 [node name="Coin" type="AudioStreamPlayer" parent="AudioManager"]
 stream = ExtResource("4_65qr4")
@@ -407,7 +424,7 @@ black = ExtResource("4_ud0li")
 wood = ExtResource("18_x5k55")
 gold = ExtResource("6_l2eui")
 purple = ExtResource("25_0tqlv")
-tarotCardAssets = Array[ExtResource("7_gc8a2")]([ExtResource("21_5m4q8"), ExtResource("13_jhuo7"), ExtResource("9_qvunr"), ExtResource("24_my2ji"), ExtResource("25_qq31i"), ExtResource("26_q1um7"), ExtResource("5_gkal6")])
+tarotCardAssets = Array[ExtResource("7_gc8a2")]([ExtResource("27_t22px"), ExtResource("21_5m4q8"), ExtResource("29_ngfut"), ExtResource("30_k4t3k"), ExtResource("31_kwxy8"), ExtResource("32_rfc53"), ExtResource("33_0rvk8"), ExtResource("32_p35ld"), ExtResource("33_0287d"), ExtResource("34_ljw3r"), ExtResource("35_dhpbe"), ExtResource("38_8dxje"), ExtResource("36_ltel4"), ExtResource("9_qvunr"), ExtResource("13_jhuo7"), ExtResource("39_kmd7m"), ExtResource("40_cbdj1"), ExtResource("24_my2ji"), ExtResource("25_qq31i"), ExtResource("26_q1um7"), ExtResource("47_xggc2"), ExtResource("5_gkal6")])
 wildCardAssets = Array[ExtResource("7_gc8a2")]([ExtResource("6_va8nl"), ExtResource("5_ci61w"), ExtResource("32_ke8wn"), ExtResource("33_6cs2m"), ExtResource("34_hnb5h"), ExtResource("32_ke8wn"), ExtResource("35_yyx7s"), ExtResource("36_637ta"), ExtResource("37_ausnn"), ExtResource("38_se8t8"), ExtResource("37_voiap"), ExtResource("38_ve6bp"), ExtResource("39_xggks"), ExtResource("40_38qf0"), ExtResource("41_3kc6k"), ExtResource("42_cfj0f"), ExtResource("43_je6p8"), ExtResource("44_20uqg"), ExtResource("45_8ikpq"), ExtResource("46_jqwuu"), ExtResource("47_i7gs3"), ExtResource("48_lud71"), ExtResource("49_sfltc"), ExtResource("50_bmvk0"), ExtResource("51_o0nda"), ExtResource("52_4q72n")])
 
 [node name="User Interface" type="Control" parent="."]

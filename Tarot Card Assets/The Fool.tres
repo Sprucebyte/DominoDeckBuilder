@@ -1,12 +1,13 @@
 [gd_resource type="Resource" script_class="CardAsset" load_steps=4 format=3 uid="uid://du0gpb08olysg"]
 
-[ext_resource type="Script" path="res://Scripts/Elements/Tarot Cards/TarotCard.gd" id="1_aqjyk"]
 [ext_resource type="Script" path="res://Scripts/CardAsset.gd" id="1_pppar"]
+[ext_resource type="Script" path="res://Scripts/Elements/Tarot Cards/TheFool.gd" id="1_wge1r"]
 [ext_resource type="Texture2D" uid="uid://bxthpcryt705v" path="res://Textures/Cards/Tarot Cards/The Fool.png" id="2_71j34"]
 
 [resource]
 script = ExtResource("1_pppar")
-code = ExtResource("1_aqjyk")
+code = ExtResource("1_wge1r")
 texture = ExtResource("2_71j34")
 name = "The Fool"
-description = ""
+description = "Upgrades every hand type by 1 level"
+rarity = 4

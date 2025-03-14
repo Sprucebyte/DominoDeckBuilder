@@ -8,4 +8,4 @@ func canUse() -> bool:
 
 func use():
 	GameManager.hand.selectedElements[0].type = Tile.Types.gold
-	super()
+	super ()

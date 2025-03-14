@@ -9,4 +9,5 @@ script = ExtResource("1_em51c")
 code = ExtResource("1_fqck0")
 texture = ExtResource("2_dlja6")
 name = "The Chariot"
-description = ""
+description = "NOT IMPLEMENTED"
+rarity = 4

@@ -1,8 +1,13 @@
-[gd_resource type="Resource" script_class="CardAsset" load_steps=2 format=3 uid="uid://cp4jecpy4rat0"]
+[gd_resource type="Resource" script_class="CardAsset" load_steps=4 format=3 uid="uid://cp4jecpy4rat0"]
 
 [ext_resource type="Script" path="res://Scripts/CardAsset.gd" id="1_8xtsj"]
+[ext_resource type="Script" path="res://Scripts/Elements/Tarot Cards/TheEmpress.gd" id="1_j827y"]
+[ext_resource type="Texture2D" uid="uid://3x1rc3g2eu8" path="res://Textures/Cards/Tarot Cards/The Empress.png" id="3_46ob0"]
 
 [resource]
 script = ExtResource("1_8xtsj")
-name = "The Fool"
-description = ""
+code = ExtResource("1_j827y")
+texture = ExtResource("3_46ob0")
+name = "The Empress"
+description = "Gain a free hand this round"
+rarity = 4

@@ -11,4 +11,4 @@ func use():
 
 	if GameManager.hand.selectedElements.size() == 2:
 		GameManager.hand.selectedElements[1].type = Tile.Types.wood
-	super()
+	super ()
