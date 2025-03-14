@@ -18,7 +18,7 @@ func activate() -> bool:
 		if wildcards_to_activate.size() == 0: return false
 		for card in wildcards_to_activate:
 			var wildcardActivated = await card.activate()
-			if (wildcardActivated):
+			if (wildcardActivated and card.activate()):
 				card.shake()
 				await card.delay()
 				card.accelerate()
