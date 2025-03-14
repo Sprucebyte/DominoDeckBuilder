@@ -11,6 +11,6 @@ func use():
 
 	if GameManager.hand.selectedElements.size() == 2:
 		GameManager.hand.destroy(GameManager.hand.selectedElements[1])
-	super()
+	super ()
 
 	GameManager.hand.selectedElements.clear()

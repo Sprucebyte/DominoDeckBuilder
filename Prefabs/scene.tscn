@@ -284,10 +284,10 @@ metadata/_edit_use_anchors_ = true
 
 [node name="Panel" type="Panel" parent="Background/SubViewport/CanvasLayer/Control/SubUIShop"]
 layout_mode = 0
-offset_left = 315.0
-offset_top = 283.8
-offset_right = 1605.0
-offset_bottom = 891.565
+offset_left = 324.645
+offset_top = 274.33
+offset_right = 1592.38
+offset_bottom = 902.47
 theme_override_styles/panel = ExtResource("6_147gj")
 
 [node name="Cards" type="Panel" parent="Background/SubViewport/CanvasLayer/Control/SubUIShop"]
@@ -351,9 +351,9 @@ anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 offset_left = -275.0
-offset_top = -147.96
+offset_top = -155.0
 offset_right = 276.0
-offset_bottom = -77.96
+offset_bottom = -85.0
 grow_horizontal = 2
 grow_vertical = 0
 theme = ExtResource("31_3dawp")
@@ -368,9 +368,9 @@ anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 offset_left = 480.883
-offset_top = -148.9
+offset_top = -155.0
 offset_right = 924.593
-offset_bottom = -25.995
+offset_bottom = -32.095
 grow_horizontal = 2
 grow_vertical = 0
 theme = ExtResource("31_3dawp")
@@ -430,20 +430,22 @@ anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 offset_left = -467.0
-offset_top = -157.0
+offset_top = -67.0
 offset_right = 467.0
+offset_bottom = -17.0
 grow_horizontal = 2
 grow_vertical = 0
-theme_override_constants/separation = 588
+theme_override_constants/separation = 383
 alignment = 1
 
 [node name="Hands" type="VBoxContainer" parent="User Interface/HandsAndDiscards"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(100, 0)
+custom_minimum_size = Vector2(53.38, 0)
 layout_mode = 2
 metadata/_edit_use_anchors_ = true
 
 [node name="Label" type="Label" parent="User Interface/HandsAndDiscards/Hands"]
+visible = false
 layout_mode = 2
 theme = ExtResource("31_cm3jf")
 theme_override_colors/font_color = Color(0.319893, 0.682058, 0.958333, 1)
@@ -460,11 +462,12 @@ horizontal_alignment = 1
 
 [node name="Discards" type="VBoxContainer" parent="User Interface/HandsAndDiscards"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(100, 0)
+custom_minimum_size = Vector2(53.38, 0)
 layout_mode = 2
 metadata/_edit_use_anchors_ = true
 
 [node name="Label" type="Label" parent="User Interface/HandsAndDiscards/Discards"]
+visible = false
 layout_mode = 2
 theme = ExtResource("31_cm3jf")
 theme_override_colors/font_color = Color(1, 0.271996, 0.152193, 1)
@@ -577,59 +580,49 @@ theme = ExtResource("31_3dawp")
 text = "0"
 horizontal_alignment = 1
 
-[node name="HandTypesLabels" type="Control" parent="User Interface/Side Panel"]
+[node name="PanelContainer" type="PanelContainer" parent="User Interface/Side Panel"]
+layout_mode = 2
+theme_override_styles/panel = ExtResource("4_jdc5s")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="User Interface/Side Panel/PanelContainer"]
+layout_mode = 2
+
+[node name="HandTypesLabels" type="VBoxContainer" parent="User Interface/Side Panel/PanelContainer/VBoxContainer"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(0, 102.045)
-layout_direction = 2
+custom_minimum_size = Vector2(0, 28.69)
 layout_mode = 2
 metadata/_edit_use_anchors_ = true
 
-[node name="Label" type="Label" parent="User Interface/Side Panel/HandTypesLabels"]
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 0.064
-offset_top = -7.99999
-offset_right = 216.88
-offset_bottom = 34.0
+[node name="Value1" type="Label" parent="User Interface/Side Panel/PanelContainer/VBoxContainer/HandTypesLabels"]
+visible = false
+layout_mode = 2
 theme = ExtResource("31_cm3jf")
-text = "Hand Type"
+text = "Test 1
+"
 horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="Value1" type="Label" parent="User Interface/Side Panel/HandTypesLabels"]
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 0.064
-offset_top = 26.0
-offset_right = 216.88
-offset_bottom = 62.0
-theme = ExtResource("31_3dawp")
+[node name="Value2" type="Label" parent="User Interface/Side Panel/PanelContainer/VBoxContainer/HandTypesLabels"]
+layout_mode = 2
+theme = ExtResource("31_cm3jf")
+text = "Test 2"
 horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="Value2" type="Label" parent="User Interface/Side Panel/HandTypesLabels"]
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 0.064
-offset_top = 71.0
-offset_right = 216.88
-offset_bottom = 107.0
-theme = ExtResource("31_3dawp")
-horizontal_alignment = 1
-
-[node name="Score and Multiplier" type="HBoxContainer" parent="User Interface/Side Panel"]
+[node name="Score and Multiplier" type="HBoxContainer" parent="User Interface/Side Panel/PanelContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 50)
 layout_direction = 2
 layout_mode = 2
 size_flags_horizontal = 4
-theme_override_constants/separation = 10
 alignment = 1
 
-[node name="HandScore" type="VBoxContainer" parent="User Interface/Side Panel/Score and Multiplier"]
+[node name="HandScore" type="VBoxContainer" parent="User Interface/Side Panel/PanelContainer/VBoxContainer/Score and Multiplier"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(100, 0)
+custom_minimum_size = Vector2(93.06, 0)
 layout_mode = 2
 metadata/_edit_use_anchors_ = true
 
-[node name="Label" type="Label" parent="User Interface/Side Panel/Score and Multiplier/HandScore"]
+[node name="Label" type="Label" parent="User Interface/Side Panel/PanelContainer/VBoxContainer/Score and Multiplier/HandScore"]
 layout_mode = 2
 theme = ExtResource("31_cm3jf")
 theme_override_colors/font_color = Color(0.319893, 0.682058, 0.958333, 1)
@@ -637,42 +630,46 @@ text = "Score"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Value" type="Label" parent="User Interface/Side Panel/Score and Multiplier/HandScore"]
+[node name="Value" type="Label" parent="User Interface/Side Panel/PanelContainer/VBoxContainer/Score and Multiplier/HandScore"]
+custom_minimum_size = Vector2(0, 37.875)
 layout_mode = 2
-theme = ExtResource("31_3dawp")
+theme = ExtResource("31_cm3jf")
 theme_override_colors/font_color = Color(0.319893, 0.682058, 0.958333, 1)
 text = "0"
 horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="X" type="Label" parent="User Interface/Side Panel/Score and Multiplier"]
+[node name="X" type="Label" parent="User Interface/Side Panel/PanelContainer/VBoxContainer/Score and Multiplier"]
 custom_minimum_size = Vector2(0, 52.11)
 layout_mode = 2
 theme = ExtResource("31_cm3jf")
-theme_override_colors/font_color = Color(1, 0.271996, 0.152193, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
 text = "X"
 horizontal_alignment = 1
 vertical_alignment = 2
 
-[node name="Multiplier" type="VBoxContainer" parent="User Interface/Side Panel/Score and Multiplier"]
+[node name="Multiplier" type="VBoxContainer" parent="User Interface/Side Panel/PanelContainer/VBoxContainer/Score and Multiplier"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(100, 0)
+custom_minimum_size = Vector2(93.06, 0)
 layout_mode = 2
 metadata/_edit_use_anchors_ = true
 
-[node name="Label" type="Label" parent="User Interface/Side Panel/Score and Multiplier/Multiplier"]
+[node name="Label" type="Label" parent="User Interface/Side Panel/PanelContainer/VBoxContainer/Score and Multiplier/Multiplier"]
 layout_mode = 2
 theme = ExtResource("31_cm3jf")
 theme_override_colors/font_color = Color(1, 0.271996, 0.152193, 1)
-text = "Multiplier"
+text = "Mult"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Value" type="Label" parent="User Interface/Side Panel/Score and Multiplier/Multiplier"]
+[node name="Value" type="Label" parent="User Interface/Side Panel/PanelContainer/VBoxContainer/Score and Multiplier/Multiplier"]
+custom_minimum_size = Vector2(0, 37.875)
 layout_mode = 2
-theme = ExtResource("31_3dawp")
+theme = ExtResource("31_cm3jf")
 theme_override_colors/font_color = Color(1, 0.271996, 0.152193, 1)
 text = "0"
 horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Money" type="HBoxContainer" parent="User Interface/Side Panel"]
 unique_name_in_owner = true
@@ -751,9 +748,9 @@ anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 offset_left = -248.0
-offset_top = -50.0
+offset_top = -70.0
 offset_right = 248.0
-offset_bottom = -12.0
+offset_bottom = -32.0
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_constants/separation = 10
@@ -761,6 +758,7 @@ alignment = 1
 
 [node name="PlayRoundButton" type="Button" parent="User Interface/HandButtons"]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(114.81, 0)
 layout_mode = 2
 focus_mode = 0
 theme = ExtResource("31_3dawp")
@@ -768,7 +766,8 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_uo6x7")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_xba5u")
 theme_override_styles/normal = SubResource("StyleBoxFlat_m7hga")
 action_mode = 0
-text = "Play round"
+text = "Play
+"
 
 [node name="Draw Button" type="Button" parent="User Interface/HandButtons"]
 unique_name_in_owner = true
@@ -816,7 +815,7 @@ expand_icon = true
 
 [node name="Discard Button" type="Button" parent="User Interface/HandButtons"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(120, 0)
+custom_minimum_size = Vector2(114.81, 0)
 layout_mode = 2
 focus_mode = 0
 theme = ExtResource("31_3dawp")
@@ -939,7 +938,7 @@ far = 1000.0
 script = ExtResource("3_d6a45")
 
 [node name="Hand" type="Node3D" parent="." groups=["Hand"]]
-transform = Transform3D(1.3, 0, 0, 0, 1.3, 0, 0, 0, 1.3, -0.00497627, -11.681, 0)
+transform = Transform3D(1.3, 0, 0, 0, 1.3, 0, 0, 0, 1.3, -0.00497627, -11.325, 0)
 script = ExtResource("7_5nb6h")
 rotationCurve = SubResource("Curve_euog4")
 containerSize = 12

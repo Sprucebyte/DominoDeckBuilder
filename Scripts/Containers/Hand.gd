@@ -64,9 +64,12 @@ func discardTiles(elements = GameManager.hand.selectedElements.duplicate()):
 
 func drawFromDeck(count = containerSize):
 	count = min(count, containerSize - size(), GameManager.deck.size())
+
 	for i in count:
 		await get_tree().create_timer(.1).timeout
 		GameManager.deck.moveRandomElements(self)
+
+	#sortByTotalValue()
 	pass
 
 func sortByTopValue(ascending = true):

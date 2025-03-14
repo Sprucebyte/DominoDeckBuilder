@@ -14,6 +14,8 @@ static var wildCardElementDelay = .3
 
 @onready var label1 = %HandTypesLabels/Value1
 @onready var label2 = %HandTypesLabels/Value2
+@onready var scoreLabel = %HandScore/Value
+@onready var multiplierLabel = %Multiplier/Value
 
 static var Instance: Score
 
@@ -24,6 +26,24 @@ func _init() -> void:
 	else:
 		queue_free()
 
+var shake_intensity = 1.0
+
+func scoreShake(amount: int):
+	shake_intensity += amount * 0.5 # Adjust scaling as needed
+	shake_intensity = min(shake_intensity, 30.0)
+	start_shake()
+
+func start_shake():
+	pass
+	#var original_rotation = scoreLabel.rotation
+	#scoreLabel.rotation += randf_range(-shake_intensity, shake_intensity)
+	#scoreLabel.position = original_position + Vector2(randi_range(-shake_intensity, shake_intensity), randi_range(-shake_intensity, shake_intensity))
+	#await Util.delay(.2)
+	#scoreLabel.rotation = original_rotation
+	#scoreLabel.position = original_position
+	#for i in range(5): # Number of shakes
+	#	var random_offset = Vector2(randi_range(- shake_intensity, shake_intensity), randi_range(- shake_intensity, shake_intensity))
+		
 
 func _ready() -> void:
 	SignalBus.MultiplyScore.connect(multiplyScore)
@@ -42,6 +62,7 @@ func useMoney(amount):
 	pass
 
 func addToScore(value):
+	scoreShake(value)
 	handScore += value
 	handScore = Util.roundToDigits(handScore)
 	
@@ -117,6 +138,27 @@ func upgrade(type, amount):
 
 
 func chooseHandType(hands: Dictionary):
+	var result: HandType = null
+	if hands["All Threes"]:
+		result = allThrees
+	if hands["All Fives"]:
+		result = allFives
+	#if hands["All Sevens"]:
+	#	result = allSevens
+	if hands["All Eights"]:
+		result = allEights
+		
+	
+	if result != null:
+		print(result.typeName)
+		label2.text = result.typeName + " | lv." + str(result.level)
+		setBaseScore(result.multiplier, result.score)
+	else:
+		label2.text = ""
+		setBaseScore(0, 0)
+
+
+func chooseHandTypeFull(hands: Dictionary):
 	var result1: HandType
 	var result2: HandType
 	if hands["High Tile"]:
@@ -162,7 +204,7 @@ func chooseHandType(hands: Dictionary):
 		label2.text = ""
 	setBaseScore(s, m)
 
-		
+
 func getHandTypes() -> Dictionary:
 	var values = []
 

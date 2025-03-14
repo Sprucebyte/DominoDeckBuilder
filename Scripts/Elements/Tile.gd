@@ -250,7 +250,7 @@ func activate():
 					addScore(5)
 					element.shake()
 					await Util.delay(Score.wildCardElementDelay / GameManager.gameSpeedMultiplier / activateSpeed)
-					activateSpeed *= (Score.acceleration * 1.2)
+					activateSpeed *= (Score.acceleration * 1.1)
 		Types.purple:
 			if (randi_range(0, 5) == 5):
 				if (ConsumablesContainer.Instance.elements.size() < ConsumablesContainer.Instance.containerSize):
