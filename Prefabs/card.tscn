@@ -88,7 +88,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
 visible = false
 element = NodePath("../..")
 text = "Select"
-color = Color(0.980392, 0.886275, 0.352941, 1)
+color = Color(1, 0.74902, 0.121569, 1)
 type = 1
 
 [node name="BuyButton" parent="Buttons" node_paths=PackedStringArray("element") instance=ExtResource("7_3o3u0")]

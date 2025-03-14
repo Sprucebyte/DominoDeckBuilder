@@ -1,4 +1,4 @@
-[gd_scene load_steps=116 format=3 uid="uid://c1vubbps0wbru"]
+[gd_scene load_steps=115 format=3 uid="uid://c1vubbps0wbru"]
 
 [ext_resource type="PackedScene" uid="uid://wutxuycqev1q" path="res://Prefabs/tile_placement_slot.tscn" id="1_7whan"]
 [ext_resource type="Script" path="res://Scripts/Systems/Score.gd" id="1_f3a7t"]
@@ -30,13 +30,12 @@
 [ext_resource type="Script" path="res://Scripts/Containers/DiscardPile.gd" id="9_2ysjb"]
 [ext_resource type="Resource" uid="uid://bwgdi50a8t06v" path="res://Tarot Card Assets/Death.tres" id="9_qvunr"]
 [ext_resource type="AudioStream" uid="uid://bkawrlklj74mt" path="res://Audio/Complete_02.ogg" id="10_at1gr"]
-[ext_resource type="AudioStream" uid="uid://dof3d3vyxqkfn" path="res://Audio/Collect (Pitch 4).mp3" id="10_k13v8"]
 [ext_resource type="PackedScene" uid="uid://b8sxlx0vdd8eb" path="res://Prefabs/price_tag.tscn" id="10_owik7"]
 [ext_resource type="AudioStream" uid="uid://dkh0060ikqd50" path="res://Audio/Bank Card Placed Down 03.wav" id="10_qns0i"]
 [ext_resource type="AudioStream" uid="uid://u423cdadyowe" path="res://Audio/Arcane Beacon.wav" id="10_r4v00"]
 [ext_resource type="Script" path="res://Scripts/Systems/UI.gd" id="10_t280a"]
-[ext_resource type="AudioStream" uid="uid://c7c8wd0omtp8p" path="res://Audio/Collect (Pitch 1).mp3" id="10_vd2h0"]
 [ext_resource type="AudioStream" uid="uid://cmspic8qhhy3l" path="res://Audio/Notes Scrunched In Wallet.wav" id="11_bcnib"]
+[ext_resource type="AudioStream" uid="uid://hikuv1bcgp27" path="res://Audio/card_drop_2.mp3" id="11_bveey"]
 [ext_resource type="AudioStream" uid="uid://d1y0urjq5blyd" path="res://Audio/Collect (Pitch 2).mp3" id="11_gr034"]
 [ext_resource type="AudioStream" uid="uid://hrcpts0kenp8" path="res://Audio/LittleSwoosh1a.wav" id="12_s4266"]
 [ext_resource type="AudioStream" uid="uid://cga0sgk0wb2dl" path="res://Audio/Collect (Pitch 3).mp3" id="12_x5c7m"]
@@ -106,26 +105,7 @@
 [sub_resource type="ViewportTexture" id="ViewportTexture_d0xon"]
 viewport_path = NodePath("Background/SubViewport")
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1k8xk"]
-content_margin_left = 20.0
-content_margin_top = 2.0
-content_margin_right = 20.0
-content_margin_bottom = 2.0
-bg_color = Color(0.06, 0.034, 0, 0.486275)
-border_width_left = 5
-border_width_top = 5
-border_color = Color(0.09, 0.051, 0, 1)
-border_blend = true
-corner_radius_top_left = 8
-corner_radius_top_right = 8
-corner_radius_bottom_right = 8
-corner_radius_bottom_left = 8
-expand_margin_left = 3.0
-expand_margin_top = 3.0
-expand_margin_right = 3.0
-expand_margin_bottom = 3.0
-shadow_color = Color(1, 1, 1, 0)
-shadow_size = 4
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2mv36"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uo6x7"]
 content_margin_left = 5.0
@@ -403,12 +383,13 @@ theme_override_styles/panel = ExtResource("4_jdc5s")
 [node name="Score" type="Node" parent="."]
 script = ExtResource("1_f3a7t")
 
-[node name="AudioManager" type="Node" parent="." node_paths=PackedStringArray("soundBuy", "soundSell", "soundMult", "soundScore", "soundOpenPack", "soundOpenPack2", "soundChooseElement", "soundCardHover", "soundCardSelect", "soundButtonHover")]
+[node name="AudioManager" type="Node" parent="." node_paths=PackedStringArray("soundBuy", "soundSell", "soundMult", "soundScore", "soundDestroy", "soundOpenPack", "soundOpenPack2", "soundChooseElement", "soundCardHover", "soundCardSelect", "soundButtonHover")]
 script = ExtResource("3_fevv1")
 soundBuy = NodePath("Coin")
 soundSell = NodePath("Coin")
 soundMult = [NodePath("Mult"), NodePath("Mult 2")]
 soundScore = [NodePath("Score 1"), NodePath("Score 2")]
+soundDestroy = NodePath("CardDestroyed")
 soundOpenPack = NodePath("OpenPack")
 soundOpenPack2 = NodePath("OpenPack2")
 soundChooseElement = NodePath("ChooseElement")
@@ -420,9 +401,12 @@ soundButtonHover = NodePath("ButtonHover")
 stream = ExtResource("4_65qr4")
 volume_db = -5.0
 
-[node name="CardHover" type="AudioStreamPlayer" parent="AudioManager"]
-stream = ExtResource("10_vd2h0")
+[node name="CardDestroyed" type="AudioStreamPlayer" parent="AudioManager"]
+stream = ExtResource("11_bcnib")
 volume_db = -5.0
+
+[node name="CardHover" type="AudioStreamPlayer" parent="AudioManager"]
+stream = ExtResource("11_bveey")
 
 [node name="CardSelect" type="AudioStreamPlayer" parent="AudioManager"]
 stream = ExtResource("10_qns0i")
@@ -433,7 +417,8 @@ stream = ExtResource("12_s4266")
 volume_db = 5.0
 
 [node name="ButtonHover" type="AudioStreamPlayer" parent="AudioManager"]
-stream = ExtResource("10_k13v8")
+stream = ExtResource("11_bveey")
+volume_db = -5.0
 
 [node name="OpenPack" type="AudioStreamPlayer" parent="AudioManager"]
 stream = ExtResource("10_r4v00")
@@ -567,6 +552,7 @@ test = NodePath("../../Hand")
 
 [node name="Gamespeed" type="HSlider" parent="User Interface"]
 unique_name_in_owner = true
+visible = false
 layout_mode = 0
 anchor_right = 0.14375
 anchor_bottom = 0.0148148
@@ -578,79 +564,85 @@ rounded = true
 metadata/_edit_use_anchors_ = true
 
 [node name="Side Panel" type="VBoxContainer" parent="User Interface"]
+custom_minimum_size = Vector2(230, 0)
 layout_direction = 1
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 6.825
 anchor_bottom = 18.625
 offset_left = 25.0
-offset_top = 351.0
-offset_right = -12850.0
-offset_bottom = -19294.0
-theme_override_constants/separation = 22
+offset_top = 308.0
+offset_right = -12849.0
+offset_bottom = -19280.0
+theme_override_constants/separation = 28
 
-[node name="TargetScore" type="Control" parent="User Interface/Side Panel"]
+[node name="TargetScore" type="Panel" parent="User Interface/Side Panel"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(0, 50)
+custom_minimum_size = Vector2(230, 78.308)
 layout_mode = 2
-metadata/_edit_use_anchors_ = true
+theme_override_styles/panel = ExtResource("4_jdc5s")
 
-[node name="Label" type="Label" parent="User Interface/Side Panel/TargetScore"]
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 0.064
-offset_top = -57.0
-offset_right = 217.344
-offset_bottom = 11.0
+[node name="VBoxContainer" type="VBoxContainer" parent="User Interface/Side Panel/TargetScore"]
+layout_mode = 0
+offset_top = 4.0
+offset_right = 230.0
+offset_bottom = 73.0
+theme_override_constants/separation = 9
+alignment = 1
+
+[node name="Label" type="Label" parent="User Interface/Side Panel/TargetScore/VBoxContainer"]
+custom_minimum_size = Vector2(230, 0)
+layout_mode = 2
 theme = ExtResource("31_cm3jf")
-theme_override_colors/font_color = Color(0.878431, 0.258824, 1, 1)
-theme_override_font_sizes/font_size = 30
+theme_override_colors/font_color = Color(0, 0.678845, 1, 1)
+theme_override_font_sizes/font_size = 24
 text = "Target score"
 horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="Value" type="Label" parent="User Interface/Side Panel/TargetScore"]
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 0.064
-offset_top = -14.0
-offset_right = 216.88
-offset_bottom = 22.0
-theme = ExtResource("31_3dawp")
-theme_override_colors/font_color = Color(0.877213, 0.256886, 1, 1)
+[node name="Value" type="Label" parent="User Interface/Side Panel/TargetScore/VBoxContainer"]
+custom_minimum_size = Vector2(230, 0)
+layout_mode = 2
+theme = ExtResource("31_cm3jf")
+theme_override_colors/font_color = Color(0, 0.678845, 1, 1)
 theme_override_font_sizes/font_size = 26
-theme_override_styles/normal = SubResource("StyleBoxFlat_1k8xk")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_2mv36")
 text = "0"
 horizontal_alignment = 1
 
 [node name="CurrentScore" type="Control" parent="User Interface/Side Panel"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(0, 50)
+custom_minimum_size = Vector2(130, 50)
 layout_direction = 2
 layout_mode = 2
 metadata/_edit_use_anchors_ = true
 
 [node name="Label" type="Label" parent="User Interface/Side Panel/CurrentScore"]
+custom_minimum_size = Vector2(230, 0)
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 0.064
-offset_top = -31.0
-offset_right = 216.88
-offset_bottom = 11.0
+offset_top = -17.0
+offset_right = 215.28
+offset_bottom = 7.0
 theme = ExtResource("31_cm3jf")
 text = "Total score"
 horizontal_alignment = 1
 
 [node name="Value" type="Label" parent="User Interface/Side Panel/CurrentScore"]
+custom_minimum_size = Vector2(230, 0)
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 0.064
-offset_right = 216.88
-offset_bottom = 36.0
+offset_top = 10.0
+offset_right = 215.28
+offset_bottom = 46.0
 theme = ExtResource("31_3dawp")
 text = "0"
 horizontal_alignment = 1
 
 [node name="PanelContainer" type="PanelContainer" parent="User Interface/Side Panel"]
+custom_minimum_size = Vector2(230, 0)
 layout_mode = 2
 theme_override_styles/panel = ExtResource("4_jdc5s")
 
@@ -741,6 +733,27 @@ text = "0"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="EdgeValueDisplay" type="HBoxContainer" parent="User Interface/Side Panel"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+theme_override_constants/separation = 20
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="User Interface/Side Panel/EdgeValueDisplay"]
+layout_mode = 2
+theme = ExtResource("31_cm3jf")
+text = "Edge value"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Value" type="Label" parent="User Interface/Side Panel/EdgeValueDisplay"]
+custom_minimum_size = Vector2(110, 0)
+layout_mode = 2
+theme = ExtResource("31_3dawp")
+text = "0"
+horizontal_alignment = 2
+
 [node name="Money" type="HBoxContainer" parent="User Interface/Side Panel"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 50)
@@ -764,27 +777,6 @@ theme = ExtResource("31_3dawp")
 theme_override_colors/font_color = Color(1, 0.750667, 0.12, 1)
 text = "0"
 horizontal_alignment = 1
-
-[node name="EdgeValueDisplay" type="HBoxContainer" parent="User Interface/Side Panel"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(0, 50)
-layout_mode = 2
-theme_override_constants/separation = 20
-metadata/_edit_use_anchors_ = true
-
-[node name="Label" type="Label" parent="User Interface/Side Panel/EdgeValueDisplay"]
-layout_mode = 2
-theme = ExtResource("31_cm3jf")
-text = "Edge value"
-horizontal_alignment = 2
-vertical_alignment = 1
-
-[node name="Value" type="Label" parent="User Interface/Side Panel/EdgeValueDisplay"]
-custom_minimum_size = Vector2(110, 0)
-layout_mode = 2
-theme = ExtResource("31_3dawp")
-text = "0"
-horizontal_alignment = 2
 
 [node name="Round" type="HBoxContainer" parent="User Interface/Side Panel"]
 unique_name_in_owner = true

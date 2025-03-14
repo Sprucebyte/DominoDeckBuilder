@@ -67,16 +67,6 @@ transform = Transform3D(1, 4.52113e-16, 1.42109e-14, 4.52113e-16, 1, 0, -1.42109
 unique_name_in_owner = true
 transform = Transform3D(1, 2.35159e-08, 7.10543e-15, -2.35159e-08, 1, 0, -7.10543e-15, 0, 1, 0, 0, 0)
 
-[node name="Price" type="Label3D" parent="SelectParent/IdleAxis"]
-unique_name_in_owner = true
-transform = Transform3D(1, 0.000663147, 1.86266e-09, -0.000663147, 1, 9.89532e-09, -1.85609e-09, -9.89655e-09, 1, 0.00364532, 4.3282, 0.440994)
-render_priority = 11
-outline_render_priority = 10
-modulate = Color(1, 0.782916, 0, 1)
-text = "$4"
-font_size = 162
-outline_size = 10
-
 [node name="ShakerOpen" type="Node3D" parent="SelectParent/IdleAxis" node_paths=PackedStringArray("Targets")]
 unique_name_in_owner = true
 transform = Transform3D(1, -2.35159e-08, 0, 2.35159e-08, 1, 0, 0, 0, 1, 0, 0, 0)
@@ -94,13 +84,6 @@ transform = Transform3D(1, 1.35042e-08, -9.31322e-09, -1.35042e-08, 1, 2.98023e-
 alpha_antialiasing_mode = 1
 texture = ExtResource("4_lf58s")
 
-[node name="Label" type="Label3D" parent="SelectParent/IdleAxis"]
-unique_name_in_owner = true
-transform = Transform3D(1, -2.35159e-08, 7.10543e-15, 2.35159e-08, 1, 0, -7.10543e-15, 0, 1, 3.92442e-08, -5.36957, 8.20403e-08)
-pixel_size = 0.015
-text = "Choose 2"
-outline_size = 8
-
 [node name="Area3D" type="Area3D" parent="SelectParent/IdleAxis"]
 transform = Transform3D(1, -2.35159e-08, 0, 2.35159e-08, 1, 0, 0, 0, 1, 0, 0, 0)
 
@@ -115,6 +98,24 @@ visible = false
 element = NodePath("..")
 text = "Buy"
 color = Color(1, 0.74902, 0.121569, 1)
+
+[node name="Price" type="Label3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0.000663171, 1.86269e-09, -0.000663171, 1, 9.89532e-09, -1.85612e-09, -9.89655e-09, 1, 0.00364542, 4.3282, 0.440994)
+render_priority = 11
+outline_render_priority = 10
+modulate = Color(1, 0.782916, 0, 1)
+text = "$4"
+font_size = 162
+outline_size = 10
+
+[node name="Label" type="Label3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 4.00483e-15, 3.55271e-14, -3.1006e-15, 1, 0, -3.55271e-14, 0, 1, -8.70261e-08, -4.29765, 8.20403e-08)
+visible = false
+pixel_size = 0.015
+text = "Choose 2"
+outline_size = 8
 
 [node name="SkipButton" type="Button" parent="."]
 unique_name_in_owner = true

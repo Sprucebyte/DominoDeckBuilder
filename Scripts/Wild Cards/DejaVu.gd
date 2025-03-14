@@ -10,6 +10,7 @@ func activate() -> bool:
 	if active:
 		# Collect valid wildcards first
 		for card: WildCard in GameManager.wildCards.elements:
+			if card == self: continue
 			if card.get_script() == get_script(): continue
 			wildcards_to_activate.append(card)
 			

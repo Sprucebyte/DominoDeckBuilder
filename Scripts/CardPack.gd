@@ -57,7 +57,9 @@ func open():
 		add_child(card)
 		elementContainer.add(card)
 		GameManager.chooseFrom.append(card)
-	
+	label.show()
+	skip.show()
 	opened = true
 	selectParent.hide()
+	showLabel()
 	#sprite.visible = false

@@ -68,6 +68,8 @@ func buy():
 
 	if element is Pack:
 		element.open()
+		element.price.hide()
+		
 		SignalBus.BuyElement.emit(element)
 		SignalBus.UseMoney.emit(element.buyValue)
 	else:
@@ -91,6 +93,8 @@ func select():
 		print("roy keeent")
 		
 		element.pack.leftToChoose -= 1
+		if (element.pack.leftToChoose <= 0):
+			element.pack.label.hide()
 	pass
 
 

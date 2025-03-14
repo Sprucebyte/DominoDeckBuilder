@@ -1,13 +1,13 @@
 extends Node
 class_name Score
 
-var baseTargetScore = 250
+var baseTargetScore = 100
 var targetScore = baseTargetScore
 var totalScore = 0
 var roundScore = 0
 var handScore = 0
 var multiplier = 1
-var money = 100
+var money = 0
 static var acceleration = 1.02
 static var wildCardDelay = .4
 static var wildCardElementDelay = .3
@@ -64,21 +64,21 @@ func useMoney(amount):
 func addToScore(value):
 	scoreShake(value)
 	handScore += value
-	handScore = Util.roundToDigits(handScore)
+	handScore = round(handScore)
 	
 
 func multiplyScore(value):
 	handScore *= value
-	handScore = Util.roundToDigits(handScore)
+	handScore = round(handScore)
 
 func addToMult(value):
 	multiplier += value
-	multiplier = Util.roundToDigits(multiplier)
+	multiplier = round(multiplier)
 	
 
 func multiplyMult(value):
 	multiplier *= value
-	multiplier = Util.roundToDigits(multiplier)
+	multiplier = round(multiplier)
 
 
 func reset():

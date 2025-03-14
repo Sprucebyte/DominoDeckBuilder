@@ -3,7 +3,8 @@ class_name Pack
 
 @onready var elementContainer: ElementContainer = %Container
 @onready var label = %Label
-
+@onready var price = %Price
+@onready var skip = %SkipButton
 #@onready var buyButton: Button3D = %BuyButton
 var opened = false
 @export var amount = 5
@@ -12,6 +13,7 @@ var opened = false
 
 func open():
 	if (opened): return
+	state = States.openingPack
 	buyButton.queue_free()
 	opened = true
 	container.remove(self)
@@ -23,9 +25,15 @@ func open():
 	targetPosition = Vector3.ZERO
 	SignalBus.OnPackOpened.emit(self)
 	await Util.delay(.1)
-
+	
 	return
 
+
+func showLabel():
+	label.show()
+
+func hideLabel():
+	label.hide()
 
 func hover():
 	if super ():
@@ -36,6 +44,7 @@ func select():
 		SignalBus.OnPackSelected.emit(self)
 
 func close():
+	label.hide()
 	for element in elementContainer.elements:
 		element.state == States.disabled
 	
@@ -56,6 +65,8 @@ func destroyElements():
 func _process(delta: float) -> void:
 	super (delta)
 	if (leftToChoose <= 0):
+		skip.hide()
+		label.hide()
 		close()
 		
 	if opened:

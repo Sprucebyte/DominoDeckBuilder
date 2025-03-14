@@ -22,7 +22,7 @@ func generate(highestValue = 6):
 			tile.topValue = topValue
 			tile.bottomValue = bottomValue
 			tile.faceDown = true
-			tile.type = Tile.Types.wood
+			tile.type = Tile.Types.normal
 
 func _process(_delta: float) -> void:
 	setElementPositions()

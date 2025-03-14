@@ -19,7 +19,8 @@ func _init(typeName, baseScore, baseMultiplier):
 
 func upgrade(amount):
 	for i in amount:
-		multiplier *= multMultiplier
-		score *= scoreMultiplier
+		level += 1
+		multiplier = round(multiplier * multMultiplier)
+		score = round(score * scoreMultiplier)
 		await Util.delay(.5 * GameManager.gameSpeedMultiplier)
 	return

@@ -6,7 +6,7 @@ extends Node
 @onready var currentScore = %CurrentScore/Value
 @onready var handScore = %HandScore/Value
 @onready var multiplier = %Multiplier/Value
-@onready var targetScore = %TargetScore/Value
+@onready var targetScore = %TargetScore/VBoxContainer/Value
 @onready var round = %Round/Value
 @onready var handsRemaining = %Hands/Value
 @onready var discardsRemaining = %Discards/Value
@@ -25,7 +25,7 @@ func _process(delta):
 	money.text = "$" + str(Score.Instance.money)
 	handsRemaining.text = str(GameManager.handsRemaining)
 	discardsRemaining.text = str(GameManager.discardsRemaining)
-	GameManager.fps = gamespeed.value
+	#GameManager.fps = gamespeed.value
 	pass
 
 var shake_intensity: float = 0.0

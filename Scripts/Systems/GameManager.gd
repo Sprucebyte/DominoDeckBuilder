@@ -85,12 +85,9 @@ func lockInTiles():
 
 
 func _process(_delta: float) -> void:
-	Engine.max_fps = round(fps)
+	#Engine.max_fps = round(fps)
 	
-	if Input.is_key_pressed(KEY_UP):
-		fps += 1
-	if Input.is_key_pressed(KEY_DOWN):
-		fps -= 1
+
 	
 
 	mousePos = get_viewport().get_camera_3d().project_position(get_viewport().get_mouse_position(), 100)
@@ -126,10 +123,12 @@ func endRound():
 		win()
 	else:
 		loose()
-	board.clear()
-	hand.moveAllElements(deck)
-	discardPile.returnAllTilesToDeck()
+	#hand.moveAllElements(deck)
 	board.updateBoard()
+	board.clear()
+	discardPile.returnAllTilesToDeck()
+	await hand.returnAllTilesToDeck()
+	return
 		
 func win():
 	gameState = GameStates.won
@@ -190,15 +189,16 @@ func playHand():
 		gameState = GameStates.playing
 	else:
 		gameState = GameStates.roundOver
-		endRound()
+		await endRound()
 		return
 	
 	if (Score.Instance.roundScore >= Score.Instance.targetScore):
-		endRound()
+		await endRound()
 		return
 	
 	SignalBus.Draw.emit()
 	SignalBus.OnHandEnded.emit()
+	Score.Instance.chooseHandType(Score.Instance.getHandTypes())
 	return
 
 

@@ -48,7 +48,7 @@ func _ready() -> void:
 	#SignalBus.connect("AddToScore",addToScore)
 	#SignalBus.connect("AddToMult",addToMult)
 	#SignalBus.connect("MultiplyMult",multiplyMult)
-	SignalBus.connect("OnWildCardActivated", multiplyMult)
+	#SignalBus.connect("OnWildCardActivated", multiplyMult)
 	SignalBus.AddToScore.connect(addToScore)
 	SignalBus.AddToMult.connect(addToMult)
 	SignalBus.MultiplyMult.connect(multiplyMult)

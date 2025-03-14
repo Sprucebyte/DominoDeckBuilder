@@ -56,7 +56,7 @@ var bankid = 0
 var dragDelta = 0.0
 @export_group("States")
 #region # - States ---------------------------- #  
-enum States {onBoard, inDeck, inHand, inShop, inPack, discarded, disabled, inConsumables, inWildcards, none}
+enum States {onBoard, inDeck, inHand, inShop, inPack, discarded, disabled, inConsumables, inWildcards, openingPack, none}
 @export var state = Element.States.disabled
 var lockedIn = false
 func validStates(_validStates: Array[States] = []):

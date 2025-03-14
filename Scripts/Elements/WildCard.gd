@@ -14,7 +14,7 @@ func setValue():
 
 func activate():
 	activateSpeed = 1
-	SignalBus.OnWildCardActivated.emit()
+	#SignalBus.OnWildCardActivated.emit()
 	
 
 func delay(seconds = Score.wildCardElementDelay / GameManager.gameSpeedMultiplier / activateSpeed):

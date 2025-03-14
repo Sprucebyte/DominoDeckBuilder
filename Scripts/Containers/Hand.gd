@@ -50,6 +50,13 @@ func _process(delta: float) -> void:
 	setElementPositions()
 
 
+func returnAllTilesToDeck():
+	for i in range(elements.size() - 1, -1, -1):
+		var element = elements[i]
+		moveOneElement(element, GameManager.deck)
+		await Util.delay(0.1)
+	return
+
 func discardTile(tile):
 	if tile in elements:
 		moveElements(tile, GameManager.discardPile)

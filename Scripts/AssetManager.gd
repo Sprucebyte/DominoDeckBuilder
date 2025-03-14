@@ -9,7 +9,7 @@ func _init() -> void:
 	else:
 		queue_free()
 
-@export_category("Prefabs")
+@export_group("Prefabs")
 @export var cardPrefab: Resource
 @export var scoreLabel: Resource
 @export var tilePlacementSlot: Resource

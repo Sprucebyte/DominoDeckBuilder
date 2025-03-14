@@ -51,10 +51,18 @@ func clear():
 	#	element.tileNode = null
 	#	element.lockedIn = false
 	tileNodeTree.clear()
-	for element: Tile in GameManager.board.elements:
+	#for element: Tile in GameManager.board.elements:
+	#	element.tileNode = null
+	#	element.lockedIn = false
+	#moveAllElements(GameManager.deck)
+
+	for i in range(elements.size() - 1, -1, -1):
+		var element = elements[i]
 		element.tileNode = null
 		element.lockedIn = false
-	moveAllElements(GameManager.deck)
+		moveOneElement(element, GameManager.deck)
+		await Util.delay(0.1)
+	return
 
 
 func chooseTileSide(tile, chosenSlot):

@@ -27,7 +27,8 @@ func open():
 		elementContainer.add(tile)
 		GameManager.chooseFrom.append(tile)
 		tile.randomize()
-				
+	label.show()
+	skip.show()
 	opened = true
 	#sprite.visible = false
 	selectParent.hide()

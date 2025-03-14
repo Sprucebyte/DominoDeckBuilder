@@ -75,7 +75,7 @@ func updateMaterial():
 func randomize():
 	topValue = randi_range(0, 9)
 	bottomValue = randi_range(0, 9)
-	type = randi_range(0, 3)
+	type = randi_range(0, 4)
 	
 
 func typeDescription():

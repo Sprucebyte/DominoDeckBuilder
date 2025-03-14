@@ -9,5 +9,6 @@ script = ExtResource("1_0u7xj")
 code = ExtResource("1_q8wvq")
 texture = ExtResource("3_e66oy")
 name = "Déjà Vu "
-description = "Repeat all wild card effects every other round "
-rarity = 2
+description = "Repeat all wild card effects every other hand 
+(Except Déjà Vu)"
+rarity = 3
