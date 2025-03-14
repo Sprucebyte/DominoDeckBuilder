@@ -150,6 +150,6 @@ func audioSelected(_val):
 	pass
 
 func audioHovered(_val):
-	domino2.pitch_scale = randf_range(.95, 1.05)
+	domino2.pitch_scale = randf_range(.95, 1.05) - .4
 	domino2.play()
 	pass

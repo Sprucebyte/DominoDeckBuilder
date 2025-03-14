@@ -1,4 +1,4 @@
-[gd_scene load_steps=115 format=3 uid="uid://c1vubbps0wbru"]
+[gd_scene load_steps=113 format=3 uid="uid://c1vubbps0wbru"]
 
 [ext_resource type="PackedScene" uid="uid://wutxuycqev1q" path="res://Prefabs/tile_placement_slot.tscn" id="1_7whan"]
 [ext_resource type="Script" path="res://Scripts/Systems/Score.gd" id="1_f3a7t"]
@@ -18,7 +18,6 @@
 [ext_resource type="AudioStream" uid="uid://b0wbtomuuvjhg" path="res://Audio/Dominoes/domino_11.mp3" id="5_7v3u3"]
 [ext_resource type="Resource" uid="uid://0cl48ukg5jx5" path="res://Wild Card Assets/Even.tres" id="5_ci61w"]
 [ext_resource type="Resource" uid="uid://cmp0bkpihitny" path="res://Tarot Card Assets/The World.tres" id="5_gkal6"]
-[ext_resource type="AudioStream" uid="uid://c1dsn1xou675i" path="res://Audio/Dominoes/domino_12.mp3" id="6_5iou5"]
 [ext_resource type="StyleBox" uid="uid://dmh1dhf0u3yq0" path="res://Theme & Style/rounded_box_style.tres" id="6_147gj"]
 [ext_resource type="Resource" uid="uid://chfy7yrvmfwj3" path="res://Tile Materials/Gold.tres" id="6_l2eui"]
 [ext_resource type="Resource" uid="uid://f4evcfcidv6p" path="res://Wild Card Assets/Odd.tres" id="6_va8nl"]
@@ -28,6 +27,7 @@
 [ext_resource type="Script" path="res://Scripts/CardAsset.gd" id="7_gc8a2"]
 [ext_resource type="Script" path="res://Scripts/Containers/Deck.gd" id="8_4o5i1"]
 [ext_resource type="Script" path="res://Scripts/Containers/DiscardPile.gd" id="9_2ysjb"]
+[ext_resource type="AudioStream" uid="uid://cm14soqql3ga2" path="res://Audio/Dominoes/impact/impact_4.mp3" id="9_bhuam"]
 [ext_resource type="Resource" uid="uid://bwgdi50a8t06v" path="res://Tarot Card Assets/Death.tres" id="9_qvunr"]
 [ext_resource type="AudioStream" uid="uid://bkawrlklj74mt" path="res://Audio/Complete_02.ogg" id="10_at1gr"]
 [ext_resource type="PackedScene" uid="uid://b8sxlx0vdd8eb" path="res://Prefabs/price_tag.tscn" id="10_owik7"]
@@ -70,7 +70,6 @@
 [ext_resource type="Resource" uid="uid://djq5ninaqjyvn" path="res://Tarot Card Assets/The Hanged Man.tres" id="36_ltel4"]
 [ext_resource type="Resource" uid="uid://yyt2bhp37od3" path="res://Wild Card Assets/EqualAndOpposite.tres" id="37_ausnn"]
 [ext_resource type="Resource" uid="uid://ddeu6gm7xnvxg" path="res://Wild Card Assets/Allowance.tres" id="37_voiap"]
-[ext_resource type="Resource" uid="uid://dde8yj61c61dx" path="res://Tarot Card Assets/Justice.tres" id="38_8dxje"]
 [ext_resource type="Resource" uid="uid://wldnflsdgvt5" path="res://Wild Card Assets/Baby steps.tres" id="38_se8t8"]
 [ext_resource type="Resource" uid="uid://5bj17o1nrlw4" path="res://Wild Card Assets/BlankShot.tres" id="38_ve6bp"]
 [ext_resource type="Resource" uid="uid://dortj5b2vblgf" path="res://Tarot Card Assets/The Devil.tres" id="39_kmd7m"]
@@ -88,7 +87,6 @@
 [ext_resource type="Resource" uid="uid://xspnakg2xfce" path="res://Wild Card Assets/MagicNumber.tres" id="45_8ikpq"]
 [ext_resource type="Resource" uid="uid://dbi30jjlpofom" path="res://Wild Card Assets/Mahjong.tres" id="46_jqwuu"]
 [ext_resource type="Resource" uid="uid://bhlbpwxoya3jw" path="res://Wild Card Assets/Pendulum.tres" id="47_i7gs3"]
-[ext_resource type="Resource" uid="uid://duoynh2y17s1h" path="res://Tarot Card Assets/Judgement.tres" id="47_xggc2"]
 [ext_resource type="Resource" uid="uid://doviywbxoe6b5" path="res://Wild Card Assets/ReturnOnInvestment.tres" id="48_lud71"]
 [ext_resource type="Resource" uid="uid://dbjhou6xkurwr" path="res://Wild Card Assets/SlowStart.tres" id="49_sfltc"]
 [ext_resource type="Script" path="res://Scripts/TextEffects/TextEffectMoney.gd" id="50_0jh6r"]
@@ -383,12 +381,16 @@ theme_override_styles/panel = ExtResource("4_jdc5s")
 [node name="Score" type="Node" parent="."]
 script = ExtResource("1_f3a7t")
 
-[node name="AudioManager" type="Node" parent="." node_paths=PackedStringArray("soundBuy", "soundSell", "soundMult", "soundScore", "soundDestroy", "soundOpenPack", "soundOpenPack2", "soundChooseElement", "soundCardHover", "soundCardSelect", "soundButtonHover")]
+[node name="AudioManager" type="Node" parent="." node_paths=PackedStringArray("soundBuy", "soundSell", "soundMult", "soundScore", "soundTileWhite", "soundTileBlack", "soundTileWood", "soundTileGold", "soundDestroy", "soundOpenPack", "soundOpenPack2", "soundChooseElement", "soundCardHover", "soundCardSelect", "soundButtonHover")]
 script = ExtResource("3_fevv1")
 soundBuy = NodePath("Coin")
 soundSell = NodePath("Coin")
 soundMult = [NodePath("Mult"), NodePath("Mult 2")]
 soundScore = [NodePath("Score 1"), NodePath("Score 2")]
+soundTileWhite = NodePath("Tile White")
+soundTileBlack = NodePath("Tile Black")
+soundTileWood = NodePath("Tile Wood")
+soundTileGold = NodePath("Tile Gold")
 soundDestroy = NodePath("CardDestroyed")
 soundOpenPack = NodePath("OpenPack")
 soundOpenPack2 = NodePath("OpenPack2")
@@ -397,55 +399,91 @@ soundCardHover = NodePath("CardHover")
 soundCardSelect = NodePath("CardSelect")
 soundButtonHover = NodePath("ButtonHover")
 
+[node name="Tile White" type="AudioStreamPlayer" parent="AudioManager"]
+stream = ExtResource("9_bhuam")
+max_polyphony = 20
+
+[node name="Tile Purple" type="AudioStreamPlayer" parent="AudioManager"]
+stream = ExtResource("9_bhuam")
+max_polyphony = 20
+
+[node name="Tile Black" type="AudioStreamPlayer" parent="AudioManager"]
+stream = ExtResource("9_bhuam")
+max_polyphony = 20
+
+[node name="Tile Wood" type="AudioStreamPlayer" parent="AudioManager"]
+stream = ExtResource("9_bhuam")
+max_polyphony = 20
+
+[node name="Tile Gold" type="AudioStreamPlayer" parent="AudioManager"]
+stream = ExtResource("9_bhuam")
+max_polyphony = 20
+
 [node name="Coin" type="AudioStreamPlayer" parent="AudioManager"]
 stream = ExtResource("4_65qr4")
 volume_db = -5.0
+max_polyphony = 20
 
 [node name="CardDestroyed" type="AudioStreamPlayer" parent="AudioManager"]
 stream = ExtResource("11_bcnib")
 volume_db = -5.0
+max_polyphony = 20
 
 [node name="CardHover" type="AudioStreamPlayer" parent="AudioManager"]
 stream = ExtResource("11_bveey")
+max_polyphony = 20
 
 [node name="CardSelect" type="AudioStreamPlayer" parent="AudioManager"]
 stream = ExtResource("10_qns0i")
 volume_db = -5.0
+max_polyphony = 20
 
 [node name="ChooseElement" type="AudioStreamPlayer" parent="AudioManager"]
 stream = ExtResource("12_s4266")
 volume_db = 5.0
+max_polyphony = 20
 
 [node name="ButtonHover" type="AudioStreamPlayer" parent="AudioManager"]
 stream = ExtResource("11_bveey")
 volume_db = -5.0
+max_polyphony = 20
 
 [node name="OpenPack" type="AudioStreamPlayer" parent="AudioManager"]
 stream = ExtResource("10_r4v00")
+max_polyphony = 20
 
 [node name="OpenPack2" type="AudioStreamPlayer" parent="AudioManager"]
 stream = ExtResource("11_bcnib")
+max_polyphony = 20
 
 [node name="Mult" type="AudioStreamPlayer" parent="AudioManager"]
 stream = ExtResource("10_at1gr")
 volume_db = -8.0
+max_polyphony = 20
 
 [node name="Mult 2" type="AudioStreamPlayer" parent="AudioManager"]
 stream = ExtResource("10_at1gr")
 volume_db = -8.0
+max_polyphony = 20
 
 [node name="Score 1" type="AudioStreamPlayer" parent="AudioManager"]
 stream = ExtResource("11_gr034")
+max_polyphony = 20
 
 [node name="Score 2" type="AudioStreamPlayer" parent="AudioManager"]
 stream = ExtResource("12_x5c7m")
+max_polyphony = 20
 
 [node name="Domino 1" type="AudioStreamPlayer" parent="AudioManager"]
 stream = ExtResource("5_7v3u3")
+volume_db = -5.0
+max_polyphony = 20
 
 [node name="Domino 2" type="AudioStreamPlayer" parent="AudioManager"]
-stream = ExtResource("6_5iou5")
-volume_db = -10.321
+stream = ExtResource("5_7v3u3")
+volume_db = -12.0
+pitch_scale = 0.6
+max_polyphony = 20
 
 [node name="AssetManager" type="Node" parent="." groups=["MaterialManager"]]
 script = ExtResource("1_mdonh")
@@ -462,7 +500,7 @@ black = ExtResource("4_ud0li")
 wood = ExtResource("18_x5k55")
 gold = ExtResource("6_l2eui")
 purple = ExtResource("25_0tqlv")
-tarotCardAssets = Array[ExtResource("7_gc8a2")]([ExtResource("27_t22px"), ExtResource("21_5m4q8"), ExtResource("29_ngfut"), ExtResource("30_k4t3k"), ExtResource("31_kwxy8"), ExtResource("32_rfc53"), ExtResource("33_0rvk8"), ExtResource("32_p35ld"), ExtResource("33_0287d"), ExtResource("34_ljw3r"), ExtResource("35_dhpbe"), ExtResource("38_8dxje"), ExtResource("36_ltel4"), ExtResource("9_qvunr"), ExtResource("13_jhuo7"), ExtResource("39_kmd7m"), ExtResource("40_cbdj1"), ExtResource("24_my2ji"), ExtResource("25_qq31i"), ExtResource("26_q1um7"), ExtResource("47_xggc2"), ExtResource("5_gkal6")])
+tarotCardAssets = Array[ExtResource("7_gc8a2")]([ExtResource("27_t22px"), ExtResource("21_5m4q8"), ExtResource("29_ngfut"), ExtResource("30_k4t3k"), ExtResource("31_kwxy8"), ExtResource("32_rfc53"), ExtResource("33_0rvk8"), ExtResource("32_p35ld"), ExtResource("33_0287d"), ExtResource("34_ljw3r"), ExtResource("35_dhpbe"), ExtResource("36_ltel4"), ExtResource("9_qvunr"), ExtResource("13_jhuo7"), ExtResource("39_kmd7m"), ExtResource("40_cbdj1"), ExtResource("24_my2ji"), ExtResource("25_qq31i"), ExtResource("5_gkal6"), ExtResource("26_q1um7")])
 wildCardAssets = Array[ExtResource("7_gc8a2")]([ExtResource("6_va8nl"), ExtResource("5_ci61w"), ExtResource("32_ke8wn"), ExtResource("33_6cs2m"), ExtResource("34_hnb5h"), ExtResource("32_ke8wn"), ExtResource("35_yyx7s"), ExtResource("36_637ta"), ExtResource("37_ausnn"), ExtResource("38_se8t8"), ExtResource("37_voiap"), ExtResource("38_ve6bp"), ExtResource("39_xggks"), ExtResource("40_38qf0"), ExtResource("41_3kc6k"), ExtResource("42_cfj0f"), ExtResource("43_je6p8"), ExtResource("44_20uqg"), ExtResource("45_8ikpq"), ExtResource("46_jqwuu"), ExtResource("47_i7gs3"), ExtResource("48_lud71"), ExtResource("49_sfltc"), ExtResource("50_bmvk0"), ExtResource("51_o0nda"), ExtResource("52_4q72n")])
 
 [node name="User Interface" type="Control" parent="."]

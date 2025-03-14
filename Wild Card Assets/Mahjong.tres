@@ -9,5 +9,5 @@ script = ExtResource("1_0dlxk")
 code = ExtResource("1_ppqlg")
 texture = ExtResource("3_3a4wg")
 name = "Mahjong"
-description = "[b][mult]+14 mult[/mult][/b] for each pair in hand "
+description = "[b][mult]+14 mult[/mult][/b] for each pair left in your hand (not played)"
 rarity = 0
