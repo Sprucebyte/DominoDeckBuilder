@@ -705,7 +705,6 @@ vertical_alignment = 1
 [node name="Value2" type="Label" parent="User Interface/Side Panel/PanelContainer/VBoxContainer/HandTypesLabels"]
 layout_mode = 2
 theme = ExtResource("31_cm3jf")
-text = "Test 2"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -790,7 +789,7 @@ custom_minimum_size = Vector2(110, 0)
 layout_mode = 2
 theme = ExtResource("31_3dawp")
 text = "0"
-horizontal_alignment = 2
+horizontal_alignment = 1
 
 [node name="Money" type="HBoxContainer" parent="User Interface/Side Panel"]
 unique_name_in_owner = true
@@ -837,7 +836,8 @@ custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
 theme = ExtResource("31_3dawp")
 text = "0"
-horizontal_alignment = 2
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="HandButtons" type="HBoxContainer" parent="User Interface"]
 unique_name_in_owner = true
