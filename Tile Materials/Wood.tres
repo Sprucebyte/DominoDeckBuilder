@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="TileMaterial" load_steps=4 format=3 uid="uid://0co6vl5nstki"]
 
 [ext_resource type="Material" uid="uid://dfvoywsi4ubhh" path="res://Materials/Wood.tres" id="1_e4v1i"]
-[ext_resource type="Script" path="res://Scripts/TileMaterial.gd" id="1_mne64"]
+[ext_resource type="Script" uid="uid://d0luh3omsu5n8" path="res://Scripts/TileMaterial.gd" id="1_mne64"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lsmst"]
 shading_mode = 0

@@ -1,11 +1,11 @@
 [gd_scene load_steps=11 format=3 uid="uid://dbgj2n65cxte"]
 
-[ext_resource type="Script" path="res://Scripts/CardPack.gd" id="1_2ukhh"]
-[ext_resource type="Script" path="res://addons/shaker/src/Vector3/shaker_component3D.gd" id="2_xlygj"]
+[ext_resource type="Script" uid="uid://b06oq30j8rn62" path="res://Scripts/CardPack.gd" id="1_2ukhh"]
+[ext_resource type="Script" uid="uid://p6ervpmh3aus" path="res://addons/shaker/src/Vector3/shaker_component3D.gd" id="2_xlygj"]
 [ext_resource type="Resource" uid="uid://bvsv8a1hpq6r3" path="res://Shaker/Presets/card_pack.tres" id="3_gubah"]
 [ext_resource type="Resource" uid="uid://cpdsnrua1i6fr" path="res://Shaker/Presets/select.tres" id="3_hygxm"]
 [ext_resource type="Texture2D" uid="uid://6a2f6b1g7kx2" path="res://Textures/wildcardpack.png" id="4_lf58s"]
-[ext_resource type="Script" path="res://Scripts/Containers/ElementContainer.gd" id="5_t2567"]
+[ext_resource type="Script" uid="uid://ds8qu7ag76lo3" path="res://Scripts/Containers/ElementContainer.gd" id="5_t2567"]
 [ext_resource type="PackedScene" uid="uid://dpsjx31un88cy" path="res://Prefabs/button.tscn" id="6_0fh6q"]
 [ext_resource type="Theme" uid="uid://cr7c32xd1yioy" path="res://Theme & Style/main_theme.tres" id="7_af1dv"]
 

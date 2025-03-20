@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://c6ycpsvucpten"]
 
-[ext_resource type="Script" path="res://Scripts/ScoreLabel.gd" id="1_fqkco"]
-[ext_resource type="Script" path="res://addons/shaker/src/Vector3/shaker_component3D.gd" id="1_kcwa1"]
+[ext_resource type="Script" uid="uid://ciq0ks58el2fp" path="res://Scripts/ScoreLabel.gd" id="1_fqkco"]
+[ext_resource type="Script" uid="uid://p6ervpmh3aus" path="res://addons/shaker/src/Vector3/shaker_component3D.gd" id="1_kcwa1"]
 [ext_resource type="Resource" uid="uid://d4iruxx807n85" path="res://Shaker/Presets/score_label.tres" id="3_og51l"]
 [ext_resource type="Texture2D" uid="uid://c3bssuwe7wsdj" path="res://Textures/boxtest.png" id="4_75bbd"]
 [ext_resource type="Texture2D" uid="uid://f470s7enp0x1" path="res://Textures/debug_arrow.png" id="8_5l0rj"]

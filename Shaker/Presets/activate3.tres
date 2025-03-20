@@ -1,11 +1,11 @@
 [gd_resource type="Resource" script_class="ShakerPreset3D" load_steps=12 format=3 uid="uid://cw5xjnj8y341t"]
 
-[ext_resource type="Script" path="res://addons/shaker/data/Vector3/BaseShakerType3D.gd" id="1_q15vg"]
-[ext_resource type="Script" path="res://addons/shaker/data/Vector3/ShakerTypeSineWave3D.gd" id="2_vjr71"]
+[ext_resource type="Script" uid="uid://cxjsrbche14c6" path="res://addons/shaker/data/Vector3/BaseShakerType3D.gd" id="1_q15vg"]
+[ext_resource type="Script" uid="uid://be66txxsdrxk2" path="res://addons/shaker/data/Vector3/ShakerTypeSineWave3D.gd" id="2_vjr71"]
 [ext_resource type="Curve" uid="uid://drgvpgblqa5ew" path="res://Curves/activate_tile_rotatio_modulate_curve.tres" id="3_y7hpu"]
-[ext_resource type="Script" path="res://addons/shaker/data/Vector3/ShakerTypeCurve3D.gd" id="4_dypsf"]
+[ext_resource type="Script" uid="uid://mm7tmcrftjqd" path="res://addons/shaker/data/Vector3/ShakerTypeCurve3D.gd" id="4_dypsf"]
 [ext_resource type="Curve" uid="uid://nv76avv0jpbh" path="res://Curves/activate_tile_scale_curve.tres" id="5_u2ohk"]
-[ext_resource type="Script" path="res://addons/shaker/data/Vector3/ShakerPreset3D.gd" id="6_i3fb0"]
+[ext_resource type="Script" uid="uid://b2dtd2xr86ugb" path="res://addons/shaker/data/Vector3/ShakerPreset3D.gd" id="6_i3fb0"]
 
 [sub_resource type="Curve" id="Curve_pxvun"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.1, 1), 0.0, 0.0, 0, 0, Vector2(0.869, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]

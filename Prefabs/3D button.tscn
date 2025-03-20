@@ -1,8 +1,8 @@
 [gd_scene load_steps=6 format=3 uid="uid://g2b3jl847daj"]
 
-[ext_resource type="Script" path="res://Scripts/Button3D_2.gd" id="1_exdmb"]
+[ext_resource type="Script" uid="uid://cqs1tsl1sj6c3" path="res://Scripts/Button3D_2.gd" id="1_exdmb"]
 [ext_resource type="Texture2D" uid="uid://edjivtc04dtk" path="res://Textures/button_2.png" id="2_crhbc"]
-[ext_resource type="Script" path="res://addons/shaker/src/Vector3/shaker_component3D.gd" id="3_8iy7o"]
+[ext_resource type="Script" uid="uid://p6ervpmh3aus" path="res://addons/shaker/src/Vector3/shaker_component3D.gd" id="3_8iy7o"]
 [ext_resource type="Resource" uid="uid://2iignwymlhcw" path="res://Shaker/Presets/activate.tres" id="4_h3r0c"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_nox1m"]

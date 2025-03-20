@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="CardAsset" load_steps=4 format=3 uid="uid://dv1mn43og8h1u"]
 
-[ext_resource type="Script" path="res://Scripts/Elements/Tarot Cards/WheelOfFortune.gd" id="1_mmkcq"]
-[ext_resource type="Script" path="res://Scripts/CardAsset.gd" id="1_sw062"]
+[ext_resource type="Script" uid="uid://cfsf0pp3n02y" path="res://Scripts/Elements/Tarot Cards/WheelOfFortune.gd" id="1_mmkcq"]
+[ext_resource type="Script" uid="uid://n145n52hh5uj" path="res://Scripts/CardAsset.gd" id="1_sw062"]
 [ext_resource type="Texture2D" uid="uid://ckkagmynd3yjs" path="res://Textures/Cards/Tarot Cards/Wheel of fortune.png" id="2_fw627"]
 
 [resource]

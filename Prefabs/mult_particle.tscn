@@ -1,10 +1,10 @@
 [gd_scene load_steps=9 format=3 uid="uid://bo60lueygu3j0"]
 
-[ext_resource type="Script" path="res://Scripts/ScoreParticle.gd" id="1_j8jk0"]
-[ext_resource type="Script" path="res://addons/shaker/src/Vector3/shaker_component3D.gd" id="2_u4el3"]
-[ext_resource type="Script" path="res://addons/shaker/data/Vector3/BaseShakerType3D.gd" id="3_d86by"]
-[ext_resource type="Script" path="res://addons/shaker/data/Vector3/ShakerTypeSineWave3D.gd" id="4_wkt64"]
-[ext_resource type="Script" path="res://addons/shaker/data/Vector3/ShakerPreset3D.gd" id="5_x2b18"]
+[ext_resource type="Script" uid="uid://b5m8o4jcflx8a" path="res://Scripts/ScoreParticle.gd" id="1_j8jk0"]
+[ext_resource type="Script" uid="uid://p6ervpmh3aus" path="res://addons/shaker/src/Vector3/shaker_component3D.gd" id="2_u4el3"]
+[ext_resource type="Script" uid="uid://cxjsrbche14c6" path="res://addons/shaker/data/Vector3/BaseShakerType3D.gd" id="3_d86by"]
+[ext_resource type="Script" uid="uid://be66txxsdrxk2" path="res://addons/shaker/data/Vector3/ShakerTypeSineWave3D.gd" id="4_wkt64"]
+[ext_resource type="Script" uid="uid://b2dtd2xr86ugb" path="res://addons/shaker/data/Vector3/ShakerPreset3D.gd" id="5_x2b18"]
 [ext_resource type="Texture2D" uid="uid://f470s7enp0x1" path="res://Textures/debug_arrow.png" id="6_4l3mb"]
 
 [sub_resource type="Resource" id="Resource_5kli1"]
