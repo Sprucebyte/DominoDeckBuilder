@@ -23,6 +23,8 @@ var round = 1
 
 var kodebrikke = 0
 
+var resetTimer = 5.0
+var defaultResetTimer = 5.0
 
 var handsRemaining = handCount
 var discardsRemaining = discardCount
@@ -99,6 +101,12 @@ func _process(_delta: float) -> void:
 			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
 		pass
 
+	if Input.is_action_pressed("ui_accept"):
+		resetTimer -= _delta
+		if resetTimer <= 0:
+			restart()
+	else:
+		resetTimer = 5.0
 		
 		#sortByDistance(board.elements)
 		#if (board.size() > 0):
