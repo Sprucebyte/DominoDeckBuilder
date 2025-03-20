@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="CardAsset" load_steps=4 format=3 uid="uid://dbi30jjlpofom"]
 
-[ext_resource type="Script" path="res://Scripts/CardAsset.gd" id="1_0dlxk"]
-[ext_resource type="Script" path="res://Scripts/Wild Cards/Mahjong.gd" id="1_ppqlg"]
+[ext_resource type="Script" uid="uid://bqa7qt6vb7lpe" path="res://Scripts/CardAsset.gd" id="1_0dlxk"]
+[ext_resource type="Script" uid="uid://c60h0mme850ia" path="res://Scripts/Wild Cards/Mahjong.gd" id="1_ppqlg"]
 [ext_resource type="Texture2D" uid="uid://duau3tcig6ceh" path="res://Textures/Cards/Wild Cards/wildcard_mahjong.png" id="3_3a4wg"]
 
 [resource]

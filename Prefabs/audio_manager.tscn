@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://bsolopte6gbrd"]
 
-[ext_resource type="Script" path="res://Scripts/Systems/AudioManager.gd" id="1_nayw7"]
+[ext_resource type="Script" uid="uid://bjce06kfvvq23" path="res://Scripts/Systems/AudioManager.gd" id="1_nayw7"]
 [ext_resource type="AudioStream" uid="uid://b0wbtomuuvjhg" path="res://Audio/Dominoes/domino_11.mp3" id="2_3pv0n"]
 [ext_resource type="AudioStream" uid="uid://c8w7hfh4vrt60" path="res://Audio/Coins in Sack Dropped on Soft Surface.wav" id="2_h0euw"]
 [ext_resource type="AudioStream" uid="uid://c1dsn1xou675i" path="res://Audio/Dominoes/domino_12.mp3" id="3_b7yau"]

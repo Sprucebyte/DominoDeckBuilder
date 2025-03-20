@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="CardAsset" load_steps=4 format=3 uid="uid://b4iphpa4uesgk"]
 
-[ext_resource type="Script" path="res://Scripts/Elements/WildCard.gd" id="1_fdnc6"]
-[ext_resource type="Script" path="res://Scripts/CardAsset.gd" id="1_kis2l"]
+[ext_resource type="Script" uid="uid://dr8ghwd2rc1k5" path="res://Scripts/Elements/WildCard.gd" id="1_fdnc6"]
+[ext_resource type="Script" uid="uid://bqa7qt6vb7lpe" path="res://Scripts/CardAsset.gd" id="1_kis2l"]
 [ext_resource type="Texture2D" uid="uid://ctjsnpno7ei00" path="res://Textures/Cards/Tarot Cards/The Hierophant.png" id="3_vdd8c"]
 
 [resource]

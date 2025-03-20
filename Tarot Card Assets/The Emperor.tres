@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="CardAsset" load_steps=4 format=3 uid="uid://c5bo5pp3epobq"]
 
-[ext_resource type="Script" path="res://Scripts/Elements/Tarot Cards/TheEmperor.gd" id="1_gg4e1"]
-[ext_resource type="Script" path="res://Scripts/CardAsset.gd" id="1_nhp5w"]
+[ext_resource type="Script" uid="uid://lraq7t31o23g" path="res://Scripts/Elements/Tarot Cards/TheEmperor.gd" id="1_gg4e1"]
+[ext_resource type="Script" uid="uid://bqa7qt6vb7lpe" path="res://Scripts/CardAsset.gd" id="1_nhp5w"]
 [ext_resource type="Texture2D" uid="uid://dcm5qodr72lhj" path="res://Textures/Cards/Tarot Cards/The Emperor.png" id="2_weygo"]
 
 [resource]

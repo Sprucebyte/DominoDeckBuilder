@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="CardAsset" load_steps=4 format=3 uid="uid://duoynh2y17s1h"]
 
-[ext_resource type="Script" path="res://Scripts/Elements/Tarot Cards/TarotCard.gd" id="1_bqcis"]
-[ext_resource type="Script" path="res://Scripts/CardAsset.gd" id="1_oknav"]
+[ext_resource type="Script" uid="uid://0y58744osoy" path="res://Scripts/Elements/Tarot Cards/TarotCard.gd" id="1_bqcis"]
+[ext_resource type="Script" uid="uid://bqa7qt6vb7lpe" path="res://Scripts/CardAsset.gd" id="1_oknav"]
 [ext_resource type="Texture2D" uid="uid://cw7gydcj8ls0x" path="res://Textures/Cards/Tarot Cards/Judgement.png" id="2_rbfne"]
 
 [resource]

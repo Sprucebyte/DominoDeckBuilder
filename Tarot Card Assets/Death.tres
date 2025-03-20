@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="CardAsset" load_steps=4 format=3 uid="uid://bwgdi50a8t06v"]
 
-[ext_resource type="Script" path="res://Scripts/CardAsset.gd" id="1_blqs7"]
-[ext_resource type="Script" path="res://Scripts/Elements/Tarot Cards/Death.gd" id="1_g320u"]
+[ext_resource type="Script" uid="uid://bqa7qt6vb7lpe" path="res://Scripts/CardAsset.gd" id="1_blqs7"]
+[ext_resource type="Script" uid="uid://buo4y4locq4kh" path="res://Scripts/Elements/Tarot Cards/Death.gd" id="1_g320u"]
 [ext_resource type="Texture2D" uid="uid://b6dfscc0kdryq" path="res://Textures/Cards/Tarot Cards/Death.png" id="2_apyku"]
 
 [resource]

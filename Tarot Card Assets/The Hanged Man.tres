@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="CardAsset" load_steps=4 format=3 uid="uid://djq5ninaqjyvn"]
 
-[ext_resource type="Script" path="res://Scripts/CardAsset.gd" id="1_huto8"]
-[ext_resource type="Script" path="res://Scripts/Elements/Tarot Cards/TheHangedMan.gd" id="1_s3pir"]
+[ext_resource type="Script" uid="uid://bqa7qt6vb7lpe" path="res://Scripts/CardAsset.gd" id="1_huto8"]
+[ext_resource type="Script" uid="uid://cmm0qx7hi8o0g" path="res://Scripts/Elements/Tarot Cards/TheHangedMan.gd" id="1_s3pir"]
 [ext_resource type="Texture2D" uid="uid://6co0pug4q7ca" path="res://Textures/Cards/Tarot Cards/The Hanged Man.png" id="3_t40m2"]
 
 [resource]

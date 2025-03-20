@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="ShakerPreset3D" load_steps=7 format=3 uid="uid://2iignwymlhcw"]
 
-[ext_resource type="Script" path="res://addons/shaker/data/Vector3/BaseShakerType3D.gd" id="1_nuvg3"]
-[ext_resource type="Script" path="res://addons/shaker/data/Vector3/ShakerTypeSawtoothWave3D.gd" id="3_3c67v"]
-[ext_resource type="Script" path="res://addons/shaker/data/Vector3/ShakerPreset3D.gd" id="3_a6s0l"]
-[ext_resource type="Script" path="res://addons/shaker/data/Vector3/ShakerTypeBrownianShake3D.gd" id="3_v31fr"]
+[ext_resource type="Script" uid="uid://ctn5h65wqquhi" path="res://addons/shaker/data/Vector3/BaseShakerType3D.gd" id="1_nuvg3"]
+[ext_resource type="Script" uid="uid://7x4jxsd7dmhf" path="res://addons/shaker/data/Vector3/ShakerTypeSawtoothWave3D.gd" id="3_3c67v"]
+[ext_resource type="Script" uid="uid://0sje8pxcpvh3" path="res://addons/shaker/data/Vector3/ShakerPreset3D.gd" id="3_a6s0l"]
+[ext_resource type="Script" uid="uid://cqlisukqrymbm" path="res://addons/shaker/data/Vector3/ShakerTypeBrownianShake3D.gd" id="3_v31fr"]
 
 [sub_resource type="Resource" id="Resource_lyiky"]
 script = ExtResource("3_v31fr")

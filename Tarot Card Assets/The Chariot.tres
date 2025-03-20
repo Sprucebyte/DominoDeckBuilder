@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="CardAsset" load_steps=4 format=3 uid="uid://dt5v54srgeoj5"]
 
-[ext_resource type="Script" path="res://Scripts/CardAsset.gd" id="1_em51c"]
-[ext_resource type="Script" path="res://Scripts/Elements/Tarot Cards/TarotCard.gd" id="1_fqck0"]
+[ext_resource type="Script" uid="uid://bqa7qt6vb7lpe" path="res://Scripts/CardAsset.gd" id="1_em51c"]
+[ext_resource type="Script" uid="uid://0y58744osoy" path="res://Scripts/Elements/Tarot Cards/TarotCard.gd" id="1_fqck0"]
 [ext_resource type="Texture2D" uid="uid://dd1ccdlt7dr3x" path="res://Textures/Cards/Tarot Cards/The Chariot.png" id="2_dlja6"]
 
 [resource]

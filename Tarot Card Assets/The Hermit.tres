@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="CardAsset" load_steps=4 format=3 uid="uid://b0q5pcvskl5sq"]
 
-[ext_resource type="Script" path="res://Scripts/CardAsset.gd" id="1_8ojh3"]
-[ext_resource type="Script" path="res://Scripts/Elements/Tarot Cards/TheHermit.gd" id="1_otojr"]
+[ext_resource type="Script" uid="uid://bqa7qt6vb7lpe" path="res://Scripts/CardAsset.gd" id="1_8ojh3"]
+[ext_resource type="Script" uid="uid://dteylogbuwl18" path="res://Scripts/Elements/Tarot Cards/TheHermit.gd" id="1_otojr"]
 [ext_resource type="Texture2D" uid="uid://bqybxwx5w1b7a" path="res://Textures/Cards/Tarot Cards/The Hermit.png" id="2_eiv5q"]
 
 [resource]

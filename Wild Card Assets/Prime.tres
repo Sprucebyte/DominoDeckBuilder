@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="CardAsset" load_steps=4 format=3 uid="uid://cmkjl1hkmwwqe"]
 
-[ext_resource type="Script" path="res://Scripts/CardAsset.gd" id="1_ucgvo"]
-[ext_resource type="Script" path="res://Scripts/Wild Cards/Prime.gd" id="1_wyje7"]
+[ext_resource type="Script" uid="uid://bqa7qt6vb7lpe" path="res://Scripts/CardAsset.gd" id="1_ucgvo"]
+[ext_resource type="Script" uid="uid://c6x5xyg08snwl" path="res://Scripts/Wild Cards/Prime.gd" id="1_wyje7"]
 [ext_resource type="Texture2D" uid="uid://85vs4k68045h" path="res://Textures/Cards/Wild Cards/wildcard_prime.png" id="3_wwgh0"]
 
 [resource]

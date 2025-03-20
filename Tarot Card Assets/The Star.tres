@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="CardAsset" load_steps=4 format=3 uid="uid://cyjykaxm37r4t"]
 
-[ext_resource type="Script" path="res://Scripts/Elements/Tarot Cards/TheStar.gd" id="1_0lw8w"]
-[ext_resource type="Script" path="res://Scripts/CardAsset.gd" id="1_4g33d"]
+[ext_resource type="Script" uid="uid://d1qnmba2jtbl0" path="res://Scripts/Elements/Tarot Cards/TheStar.gd" id="1_0lw8w"]
+[ext_resource type="Script" uid="uid://bqa7qt6vb7lpe" path="res://Scripts/CardAsset.gd" id="1_4g33d"]
 [ext_resource type="Texture2D" uid="uid://b8ysr7jaatj1r" path="res://Textures/Cards/Tarot Cards/The Star.png" id="3_g0n52"]
 
 [resource]

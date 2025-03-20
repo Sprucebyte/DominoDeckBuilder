@@ -2,7 +2,7 @@
 
 [ext_resource type="Material" uid="uid://d46svtcrgwrr" path="res://Materials/Purple.tres" id="2_flrne"]
 [ext_resource type="Material" uid="uid://cu8ts8612vt8s" path="res://Materials/Outline.tres" id="2_stfif"]
-[ext_resource type="Script" path="res://Scripts/TileMaterial.gd" id="3_dl658"]
+[ext_resource type="Script" uid="uid://cx4h0okpqqkrq" path="res://Scripts/TileMaterial.gd" id="3_dl658"]
 
 [resource]
 script = ExtResource("3_dl658")

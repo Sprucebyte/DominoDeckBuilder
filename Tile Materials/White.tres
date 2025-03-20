@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="TileMaterial" load_steps=4 format=3 uid="uid://c2nf0n0caanvw"]
 
 [ext_resource type="Material" uid="uid://bd8d0em6tlkhv" path="res://Materials/White.tres" id="1_io0oh"]
-[ext_resource type="Script" path="res://Scripts/TileMaterial.gd" id="1_rjwwq"]
+[ext_resource type="Script" uid="uid://cx4h0okpqqkrq" path="res://Scripts/TileMaterial.gd" id="1_rjwwq"]
 [ext_resource type="Material" uid="uid://cu8ts8612vt8s" path="res://Materials/Outline.tres" id="2_odoxr"]
 
 [resource]

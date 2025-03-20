@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="CardAsset" load_steps=4 format=3 uid="uid://ddeu6gm7xnvxg"]
 
-[ext_resource type="Script" path="res://Scripts/Wild Cards/Allowance.gd" id="1_5dqn8"]
-[ext_resource type="Script" path="res://Scripts/CardAsset.gd" id="1_owqu7"]
+[ext_resource type="Script" uid="uid://d0p8pt4hh0omd" path="res://Scripts/Wild Cards/Allowance.gd" id="1_5dqn8"]
+[ext_resource type="Script" uid="uid://bqa7qt6vb7lpe" path="res://Scripts/CardAsset.gd" id="1_owqu7"]
 [ext_resource type="Texture2D" uid="uid://dfpr8guesl7bb" path="res://Textures/Cards/Wild Cards/allowance.png" id="3_jb2dn"]
 
 [resource]
