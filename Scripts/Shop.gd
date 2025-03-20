@@ -48,33 +48,67 @@ func generate():
 		tiles.add_child(tile)
 		tiles.add(tile)
 		pass
-	
+	var lastcard = null
+	var cardTypeWeight = [60,40]
+	var cardTypeSumWeight = cardTypeWeight[0] + cardTypeWeight[1]
+	var cardTypeCounts = [0, 0]
 	for i in cardsAmount:
 		var card = null
-		if (randi_range(0, 1) == 1):
+		var adjustedWeights = cardTypeWeight.duplicate() 
+		var randchance = randi_range(1,cardTypeSumWeight)
+		for j in range(adjustedWeights.size()):
+			if cardTypeCounts[j] > 0:
+				adjustedWeights[j] *= 0.05 
+			
+		var newWeightSum = adjustedWeights[0] + adjustedWeights[1]
+		var cardType = 0
+		if randchance > adjustedWeights[0]:
+			cardType = 1
+			
+		if cardType == 0:
 			card = AssetManager.createCard(AssetManager.Instance.tarotCardAssets.pick_random())
 		else:
 			card = AssetManager.createCard(AssetManager.Instance.wildCardAssets.pick_random())
 			card.setValue()
+		cardTypeCounts[cardType] += 1
+		cardTypeCounts[1 - cardType] = max(0, cardTypeCounts[1 - cardType] - 1)
 		cards.add_child(card)
 		cards.add(card)
 		pass
-
+		
+	
+	var packWeights = [30, 45, 45]
+	var packWeightSum = packWeights[0] + packWeights[1] + packWeights[2]
+	var lastPackType = -1
+	
 	for i in packsAmount:
 		var pack = null
-		var packType = randi_range(0, 2)
-		if (packType == 0):
+		var adjustedWeights = packWeights.duplicate()
+		
+		if lastPackType != -1:
+			adjustedWeights[lastPackType] *= 0.05
+	
+	
+		var newWeightSum = adjustedWeights[0] + adjustedWeights[1] + adjustedWeights[2]
+		#var packType = randi_range(0, 2)
+		var packType = randi_range(1, newWeightSum)
+		if (packType < adjustedWeights[0]):
 			pack = AssetManager.Instance.wildCardPack.instantiate()
-		elif packType == 1:
+			lastPackType = 0
+		elif packType <= adjustedWeights[0] + adjustedWeights[1]:
 			pack = AssetManager.Instance.cardPack.instantiate()
+			lastPackType = 1
 		else:
 			pack = AssetManager.Instance.tilePack.instantiate()
+			lastPackType = 2
 		
+		if pack == null: continue
 		pack.container = packs
 		pack.buyValue = 6
 		packs.add_child(pack)
 		packs.add(pack)
 		pass
+	
 	spawnedElements = true
 
 

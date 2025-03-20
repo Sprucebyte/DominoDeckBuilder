@@ -106,7 +106,7 @@ func _process(_delta: float) -> void:
 		if resetTimer <= 0:
 			restart()
 	else:
-		resetTimer = 5.0
+		resetTimer = defaultResetTimer
 		
 		#sortByDistance(board.elements)
 		#if (board.size() > 0):
