@@ -63,8 +63,12 @@ func _ready() -> void:
 
 	SignalBus.OnCardHovered.connect(cardHovered)
 	SignalBus.OnCardSelected.connect(cardSelected)
+
 	SignalBus.OnButtonHovered.connect(buttonHovered)
 
+
+	SignalBus.OnButtonPressed.connect(buttonPressed)
+	SignalBus.OnDisabledButtonPressed.connect(disabledButtonPressed)
 	SignalBus.OnPackHovered.connect(cardHovered)
 	#SignalBus.OnPackSelected.connect(packSelected)
 
@@ -92,6 +96,11 @@ func buttonHovered(button):
 	pass
 
 func buttonPressed(button):
+	soundButtonHover.play()
+	pass
+
+func disabledButtonPressed(button):
+	soundButtonHover.play()
 	pass
 
 func chooseElement(element):

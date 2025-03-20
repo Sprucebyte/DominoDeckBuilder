@@ -16,6 +16,9 @@ const Bottom = 2
 
 #await get_tree().create_timer(.5).timeout
 
+static func lerpDelta(delta, speed, useGameSpeedMultiplier = true) -> float:
+	return 1 - exp(-speed * (GameManager.gameSpeedMultiplier if useGameSpeedMultiplier else 1) * delta)
+
 
 static func roundToDigits(num, digit = 1):
 	return round(num * pow(10.0, digit)) / pow(10.0, digit)

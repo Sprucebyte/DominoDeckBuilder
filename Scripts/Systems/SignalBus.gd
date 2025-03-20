@@ -58,12 +58,13 @@ signal MultiplyScore(amount)
 signal AddToMult(amount)
 signal AddToScore(amount)
 signal OnWildCardActivated()
-signal OnButtonPressed(button)
 
 signal TarotCardUsed(element)
 
 #endregion
 
+signal OnButtonPressed(button)
+signal OnDisabledButtonPressed(button)
 
 #signal OnTileAdded
 #

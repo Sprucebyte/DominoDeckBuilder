@@ -1,0 +1,54 @@
+[gd_scene load_steps=6 format=3 uid="uid://g2b3jl847daj"]
+
+[ext_resource type="Script" path="res://Scripts/Button3D_2.gd" id="1_exdmb"]
+[ext_resource type="Texture2D" uid="uid://edjivtc04dtk" path="res://Textures/button_2.png" id="2_crhbc"]
+[ext_resource type="Script" path="res://addons/shaker/src/Vector3/shaker_component3D.gd" id="3_8iy7o"]
+[ext_resource type="Resource" uid="uid://2iignwymlhcw" path="res://Shaker/Presets/activate.tres" id="4_h3r0c"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_nox1m"]
+size = Vector3(4.96823, 1.58807, 0.512451)
+
+[node name="3D Button" type="Node3D"]
+transform = Transform3D(1, -7.45058e-08, -5.96046e-07, 7.45058e-08, 1, -4.47034e-08, 5.96046e-07, 4.47034e-08, 1, 0, 0, 0)
+script = ExtResource("1_exdmb")
+color = Color(0, 0.42, 0.84, 1)
+colorHovered = Color(0.1536, 0.5568, 0.96, 1)
+colorPressed = Color(0, 0.264323, 0.528646, 1)
+
+[node name="ShakerClick" type="Node3D" parent="."]
+script = ExtResource("3_8iy7o")
+intensity = 0.5
+duration = 0.15
+shakerPreset = ExtResource("4_h3r0c")
+
+[node name="SpriteNormal" type="Sprite3D" parent="."]
+transform = Transform3D(0.621269, -6.97726e-16, 0, -6.97725e-16, 0.621269, -1.77636e-15, -3.56971e-14, -1.11553e-15, 0.999006, 0, 0, 0)
+modulate = Color(0, 0.42, 0.84, 1)
+texture = ExtResource("2_crhbc")
+region_enabled = true
+region_rect = Rect2(0, 0, 800, 251)
+
+[node name="SpritePressed" type="Sprite3D" parent="."]
+transform = Transform3D(0.621269, -6.97726e-16, 0, -6.97725e-16, 0.621269, -1.77636e-15, -3.56971e-14, -1.11553e-15, 0.999006, 0, 0, 0)
+offset = Vector2(0, -16)
+modulate = Color(0, 0.264323, 0.528646, 1)
+render_priority = -1
+texture = ExtResource("2_crhbc")
+region_enabled = true
+region_rect = Rect2(0, 288, 800, 224)
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.7551e-16, 0.119123, 2.22045e-16)
+render_priority = 2
+outline_render_priority = 1
+text = "Sample Text"
+font_size = 110
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, -1.27678e-15, 0, -1.27678e-15, 1, 0, 0, 0, 1, -0.0105433, -0.0163878, 0.0272217)
+shape = SubResource("BoxShape3D_nox1m")
+
+[connection signal="mouse_entered" from="Area3D" to="." method="hover"]
+[connection signal="mouse_exited" from="Area3D" to="." method="unhover"]

@@ -93,7 +93,9 @@ func _progress_shake() -> void:
 	var _ease_out: float = 1.0
 	var _final_duration: float = duration if (duration > 0 && !_fading_out) else 1.0
 	
-	_ease_in = ease((timer) /_final_duration, fade_in)
+	_final_duration = clamp(_final_duration,0.01, 100000.0)
+	
+	_ease_in = ease((timer) / _final_duration, fade_in)
 	_ease_out = ease(1.0-(max((timer-_timer_offset), 0.0))/_final_duration, fade_out)
 
 	if (!(duration > 0) || _fading_out) && is_playing:
