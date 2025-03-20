@@ -23,8 +23,8 @@ var round = 1
 
 var kodebrikke = 0
 
-var resetTimer = 5.0
-var defaultResetTimer = 5.0
+var resetTimer = 2.5
+var defaultResetTimer = 2.5
 
 var handsRemaining = handCount
 var discardsRemaining = discardCount

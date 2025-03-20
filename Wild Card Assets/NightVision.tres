@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="CardAsset" load_steps=4 format=3 uid="uid://cihq27umi4n7t"]
+
+[ext_resource type="Script" path="res://Scripts/Wild Cards/NightVision.gd" id="1_27g6b"]
+[ext_resource type="Script" path="res://Scripts/CardAsset.gd" id="1_e3o2x"]
+[ext_resource type="Texture2D" uid="uid://crafv87xnqsgd" path="res://Textures/Cards/Wild Cards/wildcard_nightvision.png" id="3_fvcpe"]
+
+[resource]
+script = ExtResource("1_e3o2x")
+code = ExtResource("1_27g6b")
+texture = ExtResource("3_fvcpe")
+name = "Night Vision"
+description = "+3 mult for every black tile on the board "
+rarity = 1
