@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="CardAsset" load_steps=3 format=3 uid="uid://b2quhxgwydaj3"]
+
+[ext_resource type="Script" uid="uid://cmd8kkso5a3r6" path="res://Scripts/Wild Cards/MagicMirror.gd" id="1_0mg2l"]
+[ext_resource type="Script" uid="uid://n145n52hh5uj" path="res://Scripts/CardAsset.gd" id="1_3kmxl"]
+
+[resource]
+script = ExtResource("1_3kmxl")
+code = ExtResource("1_0mg2l")
+name = "Magic Mirror"
+description = "Copies the effect of the right card "
+rarity = 2
+metadata/_custom_type_script = "uid://n145n52hh5uj"

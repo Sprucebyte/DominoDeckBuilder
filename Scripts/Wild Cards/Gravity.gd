@@ -9,6 +9,7 @@ func activate() -> bool:
 	super ()
 	addMult(9.81)
 	shake()
+	var activated = true
 	var totalValue = 0
 	for node: TileNode in edgeNodes():
 		var tile = node.tile
