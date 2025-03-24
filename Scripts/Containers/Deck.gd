@@ -11,6 +11,7 @@ var deckSize = 6
 
 func _ready() -> void:
 	generate(deckSize)
+	generate(deckSize)
 
 
 func generate(highestValue = 6):

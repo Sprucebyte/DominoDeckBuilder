@@ -14,7 +14,7 @@ var consumables: ConsumablesContainer = null
 var mousePos: Vector3
 var gameSpeedMultiplier = 1
 var fps = 60
-var handSize = 8
+var handSize = 10
 
 var handCount = 4
 var discardCount = 4
@@ -79,8 +79,8 @@ func lockInTiles():
 	var lockInSpeed = 1
 	for tile: Tile in board.elements:
 		if (tile.lockedIn): continue
-		tile.lockIn(lockInSpeed * gameSpeedMultiplier)
-		await tile.lockIn(lockInSpeed * gameSpeedMultiplier * 5)
+		#tile.lockIn(lockInSpeed * gameSpeedMultiplier)
+		await tile.lockIn(lockInSpeed * gameSpeedMultiplier * 10)
 		lockInSpeed *= Score.acceleration
 	await Util.delay(.3 / gameSpeedMultiplier * lockInSpeed)
 	return
@@ -136,6 +136,7 @@ func endRound():
 	board.clear()
 	discardPile.returnAllTilesToDeck()
 	await hand.returnAllTilesToDeck()
+	
 	return
 		
 func win():
@@ -147,7 +148,7 @@ func win():
 	Score.Instance.money += discardsRemaining
 	Score.Instance.money += interest
 	Score.Instance.money = round(Score.Instance.money)
-	await Util.delay(.5)
+	await Util.delay(1.5)
 	openShop()
 	hand.close()
 

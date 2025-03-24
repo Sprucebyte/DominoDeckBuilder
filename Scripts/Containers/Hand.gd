@@ -54,7 +54,8 @@ func returnAllTilesToDeck():
 	for i in range(elements.size() - 1, -1, -1):
 		var element = elements[i]
 		moveOneElement(element, GameManager.deck)
-		await Util.delay(0.1)
+		await Util.delay(0.2)
+	await Util.delay(1.5)
 	return
 
 func discardTile(tile):

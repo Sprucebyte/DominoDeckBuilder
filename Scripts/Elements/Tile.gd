@@ -268,7 +268,7 @@ func lockIn(lockInSpeed = 1):
 	AudioManager.play(AudioManager.Instance.domino1)
 	lockedIn = true
 	await shake(lockInSpeed)
-	AudioManager.play(AudioManager.Instance.domino1)
+	#AudioManager.play(AudioManager.Instance.domino1)
 	position.z = 0
 	targetPosition.z = 0
 	#SignalBus.emit_signal("OnTileLockedIn", self)
