@@ -9,6 +9,5 @@ script = ExtResource("1_6w1ew")
 code = ExtResource("1_dqdut")
 texture = ExtResource("3_r7ryf")
 name = "Gravity"
-description = "[b][mult]+9.81 mult[/mult][/b] when your score contains 9, 8, and 1. [b][mult] Mult[/mult][/b] increases by 9.81% of your last score after every hand played
-Currently: 9.81"
+description = "[b][mult]+9.81 mult[/mult][/b]. If your total edge value contains 9, 8, and 1. [b][mult] Mult[/mult][/b] increases by 9.81% of your last total edge value after each activation."
 rarity = 1
