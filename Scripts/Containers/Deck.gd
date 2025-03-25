@@ -1,7 +1,7 @@
 extends ElementContainer
 class_name Deck
 
-var deckSize = 6
+var deckSize = 9
 
 #func add()
 #func remove()
@@ -11,8 +11,20 @@ var deckSize = 6
 
 func _ready() -> void:
 	generate(deckSize)
-	generate(deckSize)
+	#generate(deckSize)
+	generateDoubles()
 
+
+
+func generateDoubles():
+	for value in deckSize:
+		var tile: Tile = GameManager.tilePrefab.instantiate()
+		add_child(tile)
+		elements.append(tile)
+		tile.topValue = value
+		tile.bottomValue = value
+		tile.faceDown = true
+		tile.type = Tile.Types.normal
 
 func generate(highestValue = 6):
 	for topValue in highestValue + 1:
