@@ -21,4 +21,5 @@ func use():
 	selected_indices.reverse()
 	for index in selected_indices:
 		GameManager.hand.destroy(GameManager.hand.elements[index])
+	GameManager.hand.selectedElements.clear()
 	super ()
