@@ -1,13 +1,13 @@
 [gd_resource type="Resource" script_class="CardAsset" load_steps=4 format=3 uid="uid://duoynh2y17s1h"]
 
-[ext_resource type="Script" uid="uid://c6x64iele4xyr" path="res://Scripts/Elements/Tarot Cards/TarotCard.gd" id="1_bqcis"]
+[ext_resource type="Script" uid="uid://ctufpdl0jju70" path="res://Scripts/Elements/Tarot Cards/Judgement.gd" id="1_1gstk"]
 [ext_resource type="Script" uid="uid://n145n52hh5uj" path="res://Scripts/CardAsset.gd" id="1_oknav"]
 [ext_resource type="Texture2D" uid="uid://cw7gydcj8ls0x" path="res://Textures/Cards/Tarot Cards/Judgement.png" id="2_rbfne"]
 
 [resource]
 script = ExtResource("1_oknav")
-code = ExtResource("1_bqcis")
+code = ExtResource("1_1gstk")
 texture = ExtResource("2_rbfne")
 name = "Judgement"
-description = "NOT IMPLEMENTED"
+description = "Converts left tile into a high valued spinner the right turns into a blank spinner"
 rarity = 4
