@@ -17,20 +17,20 @@ func activate() -> bool:
 		# Activate them after finishing the loop
 		if wildcards_to_activate.size() == 0: return false
 		
-		for i in wildcards_to_activate.size():
-			var wildcardActivated = await wildcards_to_activate[i].activate()
-			if (wildcardActivated and wildcards_to_activate[i].activate()):
-				wildcards_to_activate[i].shake()
+		#for i in wildcards_to_activate.size():
+		#	var wildcardActivated = await wildcards_to_activate[i].activate()
+		#	if (wildcardActivated and wildcards_to_activate[i].activate()):
+		#		wildcards_to_activate[i].shake()
+		#		await delay()
+		#		accelerate()
+		#		shake()
+			
+		for card in wildcards_to_activate:
+			var wildcardActivated = await card.activate()
+			if (wildcardActivated and card.activate()):
+				shake()
 				await delay()
 				accelerate()
-				shake()
-			
-		#for card in wildcards_to_activate:
-			#var wildcardActivated = await card.activate()
-			#if (wildcardActivated and card.activate()):
-				#card.shake()
-				#await card.delay()
-				#card.accelerate()
 		#shake()
 		await delay()
 		activated = true
