@@ -137,6 +137,7 @@ func roundEndDisplay():
 	return
 	
 func winDisplay():
+	
 	labelTilesPlaced.text = "Tiles placed: " + str(Score.Instance.tilesPlaced)
 	labelTilesScored.text = "Tiles scored: " + str(Score.Instance.tilesScored)
 	all()
@@ -146,11 +147,14 @@ func winDisplay():
 	title.show()
 	title.text = "You win!"
 	title.modulate = Color.ROYAL_BLUE
+	
 	boxScoreStats.show()
 	await delay()
 	labelTargetScore.show()
 	await delay()
 	labelReachedScore.show()
+	await delay()
+	labelHighestScore.show()
 	await delay()
 	boxTilesContainer.show()
 	#await delay()
@@ -179,9 +183,18 @@ func looseDisplay():
 	hideAll()
 	panel.show()
 	title.show()
-
+	
 	title.text = "Game Over"
 	title.modulate = Color.RED
+	
+	boxScoreStats.show()
+	await delay()
+	labelTargetScore.show()
+	await delay()
+	labelReachedScore.show()
+	await delay()
+	labelHighestScore.show()
+
 	await delay()
 	boxTilesContainer.show()
 	await delay()

@@ -174,7 +174,7 @@ func chooseHandType(hands: Dictionary):
 	if result != null:
 		print(result.typeName)
 		label2.text = result.typeName + " | lv." + str(result.level)
-		setBaseScore(result.multiplier, result.score)
+		setBaseScore(result.score,result.multiplier)
 	else:
 		label2.text = ""
 		setBaseScore(0, 1)
@@ -301,15 +301,15 @@ func getHandTypes() -> Dictionary:
 	result["Straight"] = straightFound
 
 	var edgeValue = GameManager.board.tileNodeTree.getEdgeValue()
-	
-	if (edgeValue % 3 == 0):
-		result["All Threes"] = true
-	if (edgeValue % 5 == 0):
-		result["All Fives"] = true
-	if (edgeValue % 7 == 0):
-		result["All Sevens"] = true
-	if (edgeValue % 8 == 0):
-		result["All Eights"] = true
+	if (edgeValue != 0):
+		if (edgeValue % 3 == 0):
+			result["All Threes"] = true
+		if (edgeValue % 5 == 0):
+			result["All Fives"] = true
+		if (edgeValue % 7 == 0):
+			result["All Sevens"] = true
+		if (edgeValue % 8 == 0):
+			result["All Eights"] = true
 
 	return result
 	
