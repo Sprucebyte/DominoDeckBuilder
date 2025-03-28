@@ -7,3 +7,7 @@ Label/constants/outline_size = 20
 Label/font_sizes/font_size = 20
 Label/fonts/font = ExtResource("1_g5pjx")
 Label/styles/normal = null
+RichTextLabel/constants/outline_size = 13
+RichTextLabel/font_sizes/bold_font_size = 22
+RichTextLabel/font_sizes/normal_font_size = 21
+RichTextLabel/fonts/normal_font = ExtResource("1_g5pjx")

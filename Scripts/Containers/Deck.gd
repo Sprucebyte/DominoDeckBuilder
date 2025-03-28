@@ -1,7 +1,7 @@
 extends ElementContainer
 class_name Deck
 
-var deckSize = 9
+var deckSize = 6
 
 #func add()
 #func remove()
@@ -11,7 +11,7 @@ var deckSize = 9
 
 func _ready() -> void:
 	generate(deckSize)
-	#generate(deckSize)
+	generate(deckSize)
 	generateDoubles()
 
 
@@ -47,8 +47,8 @@ func _process(_delta: float) -> void:
 	#	tile.targetPosition = Vector3(10,-13,0) + Vector3(i*.2,0,-i*.5)
 	#debug()
 
-	if (Input.is_key_pressed(KEY_TAB)):
-		GameManager.discardPile.returnAllTilesToDeck()
+	#if (Input.is_key_pressed(KEY_TAB)):
+		#GameManager.discardPile.returnAllTilesToDeck()
 			
 func debug():
 	print("deck: " + str(size()))

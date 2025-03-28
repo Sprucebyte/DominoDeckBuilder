@@ -1,4 +1,4 @@
-[gd_scene load_steps=115 format=3 uid="uid://c1vubbps0wbru"]
+[gd_scene load_steps=122 format=3 uid="uid://c1vubbps0wbru"]
 
 [ext_resource type="PackedScene" uid="uid://wutxuycqev1q" path="res://Prefabs/tile_placement_slot.tscn" id="1_7whan"]
 [ext_resource type="Script" uid="uid://bsc7h2j5jhk6k" path="res://Scripts/Systems/Score.gd" id="1_f3a7t"]
@@ -7,12 +7,13 @@
 [ext_resource type="Script" uid="uid://o7ghihatryb5" path="res://Scripts/AssetManager.gd" id="1_mdonh"]
 [ext_resource type="Texture2D" uid="uid://b5gl8shp801fn" path="res://Textures/belfast_sunset_puresky_2k.hdr" id="1_mtpok"]
 [ext_resource type="Texture2D" uid="uid://b7ucqn60dim45" path="res://Textures/wood edge 2.png" id="2_5e5i0"]
-[ext_resource type="Texture2D" uid="uid://cm3dyxvngfe67" path="res://Textures/wood_corner.png" id="2_gkcv7"]
 [ext_resource type="Script" uid="uid://bmsnu5e5gkwwy" path="res://Scripts/Containers/Board.gd" id="3_d6a45"]
 [ext_resource type="Script" uid="uid://curw4jw4cag01" path="res://Scripts/Systems/AudioManager.gd" id="3_fevv1"]
 [ext_resource type="PackedScene" uid="uid://c6ycpsvucpten" path="res://Prefabs/score_label.tscn" id="3_ntvtt"]
 [ext_resource type="Resource" uid="uid://c2nf0n0caanvw" path="res://Tile Materials/White.tres" id="3_oeeda"]
+[ext_resource type="Script" uid="uid://d0y18q5wlic5l" path="res://Prefabs/UI_End.gd" id="3_sakd2"]
 [ext_resource type="AudioStream" uid="uid://c8w7hfh4vrt60" path="res://Audio/Coins in Sack Dropped on Soft Surface.wav" id="4_65qr4"]
+[ext_resource type="Texture2D" uid="uid://chueyafpb0r6h" path="res://Textures/bg test.png" id="4_fwu0m"]
 [ext_resource type="StyleBox" uid="uid://c3fjmbepwayjx" path="res://Theme & Style/score_box_style.tres" id="4_jdc5s"]
 [ext_resource type="Resource" uid="uid://bsxvsy3663lno" path="res://Tile Materials/Black.tres" id="4_ud0li"]
 [ext_resource type="AudioStream" uid="uid://b0wbtomuuvjhg" path="res://Audio/Dominoes/domino_11.mp3" id="5_7v3u3"]
@@ -44,10 +45,10 @@
 [ext_resource type="AudioStream" uid="uid://dhv48wok4b82f" path="res://Audio/Button Click.mp3" id="16_ftu2e"]
 [ext_resource type="Resource" uid="uid://hrwirj63qnef" path="res://Tile Materials/Dark Wood.tres" id="18_x5k55"]
 [ext_resource type="Resource" uid="uid://c87krcvwrsa0a" path="res://Tarot Card Assets/The Magician.tres" id="21_5m4q8"]
-[ext_resource type="AudioStream" uid="uid://c7c8wd0omtp8p" path="res://Audio/Collect (Pitch 1).mp3" id="22_sakd2"]
 [ext_resource type="Resource" uid="uid://cyjykaxm37r4t" path="res://Tarot Card Assets/The Star.tres" id="24_my2ji"]
 [ext_resource type="Resource" uid="uid://ddl5u5vbmi5qk" path="res://Tile Materials/Purple.tres" id="25_0tqlv"]
 [ext_resource type="Resource" uid="uid://bkgsdsew34ffj" path="res://Tarot Card Assets/The Moon.tres" id="25_qq31i"]
+[ext_resource type="AudioStream" uid="uid://c1dsn1xou675i" path="res://Audio/Dominoes/domino_12.mp3" id="25_sakd2"]
 [ext_resource type="Resource" uid="uid://d2hj5bi4bm0r5" path="res://Tarot Card Assets/The Sun.tres" id="26_q1um7"]
 [ext_resource type="Resource" uid="uid://du0gpb08olysg" path="res://Tarot Card Assets/The Fool.tres" id="27_t22px"]
 [ext_resource type="Resource" uid="uid://bb1bueueoa4si" path="res://Tarot Card Assets/The High Priestess.tres" id="29_ngfut"]
@@ -104,6 +105,39 @@
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_d0xon"]
 viewport_path = NodePath("Background/SubViewport")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ftu2e"]
+content_margin_left = 10.0
+content_margin_top = 20.0
+content_margin_right = 5.0
+content_margin_bottom = 10.0
+bg_color = Color(0.17, 0.17, 0.17, 0)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+shadow_color = Color(0, 0, 0, 0.34902)
+shadow_size = 14
+shadow_offset = Vector2(18.165, 37.92)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_sakd2"]
+light_mode = 1
+
+[sub_resource type="RichTextEffect" id="RichTextEffect_sakd2"]
+script = ExtResource("50_0jh6r")
+metadata/_custom_type_script = "uid://nv3u8enwe1b7"
+
+[sub_resource type="RichTextEffect" id="RichTextEffect_vq87j"]
+script = ExtResource("51_q31hi")
+metadata/_custom_type_script = "uid://jd1cyrwbb678"
+
+[sub_resource type="RichTextEffect" id="RichTextEffect_fwu0m"]
+script = ExtResource("51_q31hi")
+metadata/_custom_type_script = "uid://jd1cyrwbb678"
+
+[sub_resource type="RichTextEffect" id="RichTextEffect_u88ob"]
+script = ExtResource("52_mxj5d")
+metadata/_custom_type_script = "uid://cas1ttubu0bsi"
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2mv36"]
 
@@ -236,25 +270,12 @@ transparent = false
 render_priority = -90
 texture = ExtResource("2_5e5i0")
 
-[node name="Sprite3D" type="Sprite3D" parent="Background"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.5406, 9.46524, -71.6125)
-visible = false
-pixel_size = 0.013
-texture = ExtResource("2_gkcv7")
-
-[node name="Sprite3D2" type="Sprite3D" parent="Background"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.5617, 9.4469, -71.6125)
-visible = false
-flip_h = true
-pixel_size = 0.013
-texture = ExtResource("2_gkcv7")
-
 [node name="Sub UI" type="Sprite3D" parent="Background"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.35675, -67.9609)
 pixel_size = 0.029
 texture = SubResource("ViewportTexture_d0xon")
 
-[node name="SubUIRoundWin" type="Control" parent="Background"]
+[node name="UI_End" type="Control" parent="Background"]
 unique_name_in_owner = true
 layout_mode = 3
 anchors_preset = 15
@@ -262,174 +283,229 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("3_sakd2")
 metadata/_edit_use_anchors_ = true
 
-[node name="Panel" type="Panel" parent="Background/SubUIRoundWin"]
+[node name="UI_End_Panel" type="PanelContainer" parent="Background/UI_End"]
+unique_name_in_owner = true
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -275.0
-offset_top = -314.0
-offset_right = 275.0
-offset_bottom = 314.0
+offset_left = -359.0
+offset_top = -278.0
+offset_right = 359.87
+offset_bottom = 350.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = ExtResource("6_147gj")
+theme_override_styles/panel = SubResource("StyleBoxFlat_ftu2e")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Background/SubUIRoundWin/Panel"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.0290909
-anchor_top = 0.0286624
-anchor_right = 0.98
-anchor_bottom = 0.964968
+[node name="TextureRect" type="TextureRect" parent="Background/UI_End/UI_End_Panel"]
+material = SubResource("CanvasItemMaterial_sakd2")
+custom_minimum_size = Vector2(703.87, 0)
+layout_mode = 2
+texture = ExtResource("4_fwu0m")
+expand_mode = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Background/UI_End/UI_End_Panel"]
+custom_minimum_size = Vector2(646, 555.49)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 theme_override_constants/separation = 21
 metadata/_edit_use_anchors_ = true
 
-[node name="Panel2" type="Panel" parent="Background/SubUIRoundWin/Panel/VBoxContainer"]
-custom_minimum_size = Vector2(0, 142.115)
-layout_mode = 2
-theme_override_styles/panel = ExtResource("6_147gj")
-
-[node name="UI_RoundWin_Title" type="Label" parent="Background/SubUIRoundWin/Panel/VBoxContainer/Panel2"]
+[node name="UI_End_Title" type="Label" parent="Background/UI_End/UI_End_Panel/VBoxContainer"]
 unique_name_in_owner = true
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 1.0
-anchor_bottom = 0.319
-offset_bottom = -0.0400009
+layout_mode = 2
 theme = ExtResource("31_cm3jf")
-theme_override_font_sizes/font_size = 32
-text = "Round 5 complete!"
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 54
+text = "Game Over"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Background/SubUIRoundWin/Panel/VBoxContainer/Panel2"]
-layout_mode = 1
-anchors_preset = -1
-anchor_top = 0.324
-anchor_right = 1.0
-anchor_bottom = 0.999
-offset_top = -0.0452614
-offset_bottom = 0.0270996
-theme_override_constants/separation = 8
+[node name="UI_End_ScoreStats" type="PanelContainer" parent="Background/UI_End/UI_End_Panel/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_styles/panel = ExtResource("4_jdc5s")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Background/UI_End/UI_End_Panel/VBoxContainer/UI_End_ScoreStats"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+theme_override_constants/separation = 10
 alignment = 1
+metadata/_edit_use_anchors_ = true
 
-[node name="UI_RoundWin_TargetScore" type="Label" parent="Background/SubUIRoundWin/Panel/VBoxContainer/Panel2/VBoxContainer"]
+[node name="UI_End_TargetScore" type="Label" parent="Background/UI_End/UI_End_Panel/VBoxContainer/UI_End_ScoreStats/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 theme = ExtResource("31_cm3jf")
-text = "Target score: 1500"
+theme_override_font_sizes/font_size = 26
+text = "Target score: 6300"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="UI_RoundWin_ReachedScore" type="Label" parent="Background/SubUIRoundWin/Panel/VBoxContainer/Panel2/VBoxContainer"]
+[node name="UI_End_ReachedScore" type="Label" parent="Background/UI_End/UI_End_Panel/VBoxContainer/UI_End_ScoreStats/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 theme = ExtResource("31_cm3jf")
+theme_override_font_sizes/font_size = 26
 text = "Score reached: 4305"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Panel3" type="Panel" parent="Background/SubUIRoundWin/Panel/VBoxContainer"]
+[node name="UI_End_HighestScore" type="Label" parent="Background/UI_End/UI_End_Panel/VBoxContainer/UI_End_ScoreStats/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("31_cm3jf")
+theme_override_font_sizes/font_size = 26
+text = "Highest score: 4305"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="UI_End_Money" type="PanelContainer" parent="Background/UI_End/UI_End_Panel/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_styles/panel = ExtResource("4_jdc5s")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Background/UI_End/UI_End_Panel/VBoxContainer/UI_End_Money"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+theme_override_constants/separation = 0
+alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="UI_End_Money1" type="RichTextLabel" parent="Background/UI_End/UI_End_Panel/VBoxContainer/UI_End_Money/VBoxContainer"]
+unique_name_in_owner = true
+clip_contents = false
+custom_minimum_size = Vector2(0, 32.545)
+layout_mode = 2
+theme = ExtResource("31_cm3jf")
+bbcode_enabled = true
+text = "Completed level: [money]$5[/money]
+"
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+custom_effects = [SubResource("RichTextEffect_sakd2"), SubResource("RichTextEffect_vq87j")]
+
+[node name="UI_End_Money2" type="RichTextLabel" parent="Background/UI_End/UI_End_Panel/VBoxContainer/UI_End_Money/VBoxContainer"]
+unique_name_in_owner = true
+clip_contents = false
+custom_minimum_size = Vector2(0, 32.545)
+layout_mode = 2
+theme = ExtResource("31_cm3jf")
+bbcode_enabled = true
+text = "Tile count bonus: [money]$8[/money]"
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+custom_effects = [SubResource("RichTextEffect_sakd2"), SubResource("RichTextEffect_fwu0m"), SubResource("RichTextEffect_u88ob")]
+
+[node name="UI_End_Money3" type="RichTextLabel" parent="Background/UI_End/UI_End_Panel/VBoxContainer/UI_End_Money/VBoxContainer"]
+unique_name_in_owner = true
+clip_contents = false
+custom_minimum_size = Vector2(0, 32.545)
+layout_mode = 2
+theme = ExtResource("31_cm3jf")
+bbcode_enabled = true
+text = "Overkill bonus: [money]$2[/money]"
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+custom_effects = [SubResource("RichTextEffect_sakd2"), SubResource("RichTextEffect_fwu0m"), SubResource("RichTextEffect_u88ob")]
+
+[node name="Stats" type="PanelContainer" parent="Background/UI_End/UI_End_Panel/VBoxContainer"]
 custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
 theme_override_styles/panel = ExtResource("6_147gj")
 
-[node name="BoxContainer" type="VBoxContainer" parent="Background/SubUIRoundWin/Panel/VBoxContainer/Panel3"]
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 0.998
-anchor_bottom = 0.994
-offset_right = -0.0720215
-offset_bottom = -0.0400085
-grow_horizontal = 2
-grow_vertical = 2
+[node name="BoxContainer" type="VBoxContainer" parent="Background/UI_End/UI_End_Panel/VBoxContainer/Stats"]
+layout_mode = 2
 alignment = 1
 metadata/_edit_use_anchors_ = true
 
-[node name="HBoxContainer3" type="HBoxContainer" parent="Background/SubUIRoundWin/Panel/VBoxContainer/Panel3/BoxContainer"]
+[node name="UI_End_TilesContainer" type="HBoxContainer" parent="Background/UI_End/UI_End_Panel/VBoxContainer/Stats/BoxContainer"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 theme_override_constants/separation = 55
 alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Background/SubUIRoundWin/Panel/VBoxContainer/Panel3/BoxContainer/HBoxContainer3"]
-layout_mode = 2
-
-[node name="UI_RoundWin_4" type="Label" parent="Background/SubUIRoundWin/Panel/VBoxContainer/Panel3/BoxContainer/HBoxContainer3/HBoxContainer"]
+[node name="UI_End_TilesPlayed" type="Label" parent="Background/UI_End/UI_End_Panel/VBoxContainer/Stats/BoxContainer/UI_End_TilesContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 theme = ExtResource("31_cm3jf")
 text = "Tiles played:"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="UI_RoundWin_3" type="Label" parent="Background/SubUIRoundWin/Panel/VBoxContainer/Panel3/BoxContainer/HBoxContainer3/HBoxContainer"]
-layout_mode = 2
-theme = ExtResource("31_cm3jf")
-text = "0"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="HBoxContainer2" type="HBoxContainer" parent="Background/SubUIRoundWin/Panel/VBoxContainer/Panel3/BoxContainer/HBoxContainer3"]
-layout_mode = 2
-
-[node name="UI_RoundWin_4" type="Label" parent="Background/SubUIRoundWin/Panel/VBoxContainer/Panel3/BoxContainer/HBoxContainer3/HBoxContainer2"]
+[node name="UI_End_TilesScored" type="Label" parent="Background/UI_End/UI_End_Panel/VBoxContainer/Stats/BoxContainer/UI_End_TilesContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 theme = ExtResource("31_cm3jf")
 text = "Tiles scored:"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="UI_RoundWin_3" type="Label" parent="Background/SubUIRoundWin/Panel/VBoxContainer/Panel3/BoxContainer/HBoxContainer3/HBoxContainer2"]
-layout_mode = 2
-theme = ExtResource("31_cm3jf")
-text = "0"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="HBoxContainer4" type="HBoxContainer" parent="Background/SubUIRoundWin/Panel/VBoxContainer/Panel3/BoxContainer"]
+[node name="UI_End_HandsContainer" type="HBoxContainer" parent="Background/UI_End/UI_End_Panel/VBoxContainer/Stats/BoxContainer"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 theme_override_constants/separation = 55
 alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Background/SubUIRoundWin/Panel/VBoxContainer/Panel3/BoxContainer/HBoxContainer4"]
-layout_mode = 2
-
-[node name="UI_RoundWin_4" type="Label" parent="Background/SubUIRoundWin/Panel/VBoxContainer/Panel3/BoxContainer/HBoxContainer4/HBoxContainer"]
+[node name="UI_End_HandsUsed" type="Label" parent="Background/UI_End/UI_End_Panel/VBoxContainer/Stats/BoxContainer/UI_End_HandsContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 theme = ExtResource("31_cm3jf")
 text = "Hands used:"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="UI_RoundWin_3" type="Label" parent="Background/SubUIRoundWin/Panel/VBoxContainer/Panel3/BoxContainer/HBoxContainer4/HBoxContainer"]
-layout_mode = 2
-theme = ExtResource("31_cm3jf")
-text = "0"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="HBoxContainer2" type="HBoxContainer" parent="Background/SubUIRoundWin/Panel/VBoxContainer/Panel3/BoxContainer/HBoxContainer4"]
-layout_mode = 2
-
-[node name="UI_RoundWin_4" type="Label" parent="Background/SubUIRoundWin/Panel/VBoxContainer/Panel3/BoxContainer/HBoxContainer4/HBoxContainer2"]
+[node name="UI_End_HandsRemaining" type="Label" parent="Background/UI_End/UI_End_Panel/VBoxContainer/Stats/BoxContainer/UI_End_HandsContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 theme = ExtResource("31_cm3jf")
 text = "Hands remaining:"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="UI_RoundWin_3" type="Label" parent="Background/SubUIRoundWin/Panel/VBoxContainer/Panel3/BoxContainer/HBoxContainer4/HBoxContainer2"]
+[node name="UI_End_DiscardsContainer" type="HBoxContainer" parent="Background/UI_End/UI_End_Panel/VBoxContainer/Stats/BoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+theme_override_constants/separation = 55
+alignment = 1
+
+[node name="UI_End_DiscardsUsed" type="Label" parent="Background/UI_End/UI_End_Panel/VBoxContainer/Stats/BoxContainer/UI_End_DiscardsContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 theme = ExtResource("31_cm3jf")
-text = "0"
+text = "Hands used:"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="UI_End_DiscardsRemaining" type="Label" parent="Background/UI_End/UI_End_Panel/VBoxContainer/Stats/BoxContainer/UI_End_DiscardsContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("31_cm3jf")
+text = "Hands remaining:"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="UI_End_ContinueButton" type="Button" parent="Background/UI_End/UI_End_Panel/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(227, 42)
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("31_3dawp")
+text = "Continue"
 
 [node name="SubViewport" type="SubViewport" parent="Background"]
 disable_3d = true
@@ -553,6 +629,86 @@ grow_vertical = 0
 theme = ExtResource("31_3dawp")
 theme_override_styles/panel = ExtResource("4_jdc5s")
 
+[node name="Control2" type="Control" parent="Background/SubViewport/CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="UI_HandCount" type="Label" parent="Background/SubViewport/CanvasLayer/Control2"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -29.0
+offset_top = -93.0
+offset_right = 29.0
+offset_bottom = -69.25
+grow_horizontal = 2
+grow_vertical = 0
+theme = ExtResource("31_cm3jf")
+text = "10/10"
+horizontal_alignment = 1
+
+[node name="UI_DeckCount" type="Label" parent="Background/SubViewport/CanvasLayer/Control2"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 847.0
+offset_top = -40.0
+offset_right = 905.0
+offset_bottom = -16.25
+grow_horizontal = 2
+grow_vertical = 0
+theme = ExtResource("31_cm3jf")
+text = "10/10"
+horizontal_alignment = 1
+
+[node name="UI_ConsumableCount" type="Label" parent="Background/SubViewport/CanvasLayer/Control2"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 824.0
+offset_top = -850.955
+offset_right = 882.0
+offset_bottom = -827.205
+grow_horizontal = 2
+grow_vertical = 0
+theme = ExtResource("31_cm3jf")
+text = "10/10"
+horizontal_alignment = 1
+
+[node name="UI_WildCardCount" type="Label" parent="Background/SubViewport/CanvasLayer/Control2"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -856.665
+offset_top = -850.955
+offset_right = -798.665
+offset_bottom = -827.205
+grow_horizontal = 2
+grow_vertical = 0
+theme = ExtResource("31_cm3jf")
+text = "10/10"
+horizontal_alignment = 1
+
 [node name="Score" type="Node" parent="."]
 script = ExtResource("1_f3a7t")
 
@@ -666,10 +822,8 @@ volume_db = -5.0
 max_polyphony = 20
 
 [node name="Domino 2" type="AudioStreamPlayer" parent="AudioManager"]
-stream = ExtResource("22_sakd2")
-volume_db = -12.0
-pitch_scale = 0.6
-max_polyphony = 20
+stream = ExtResource("25_sakd2")
+volume_db = -25.0
 
 [node name="AssetManager" type="Node" parent="." groups=["MaterialManager"]]
 script = ExtResource("1_mdonh")
@@ -690,7 +844,6 @@ tarotCardAssets = Array[ExtResource("7_gc8a2")]([ExtResource("27_t22px"), ExtRes
 wildCardAssets = Array[ExtResource("7_gc8a2")]([ExtResource("6_va8nl"), ExtResource("5_ci61w"), ExtResource("32_ke8wn"), ExtResource("33_6cs2m"), ExtResource("34_hnb5h"), ExtResource("32_ke8wn"), ExtResource("35_yyx7s"), ExtResource("36_637ta"), ExtResource("37_ausnn"), ExtResource("38_se8t8"), ExtResource("37_voiap"), ExtResource("38_ve6bp"), ExtResource("39_xggks"), ExtResource("40_38qf0"), ExtResource("41_3kc6k"), ExtResource("42_cfj0f"), ExtResource("43_je6p8"), ExtResource("44_20uqg"), ExtResource("45_8ikpq"), ExtResource("46_jqwuu"), ExtResource("47_i7gs3"), ExtResource("48_lud71"), ExtResource("49_sfltc"), ExtResource("50_bmvk0"), ExtResource("51_o0nda"), ExtResource("52_4q72n")])
 
 [node name="User Interface" type="Control" parent="."]
-visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -710,9 +863,9 @@ anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 offset_left = -467.0
-offset_top = -67.0
+offset_top = -47.0
 offset_right = 467.0
-offset_bottom = -17.0
+offset_bottom = 3.0
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_constants/separation = 383
@@ -1035,9 +1188,9 @@ anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 offset_left = -248.0
-offset_top = -70.0
+offset_top = -52.0
 offset_right = 248.0
-offset_bottom = -32.0
+offset_bottom = -14.0
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_constants/separation = 10
@@ -1240,7 +1393,7 @@ maxWidth = 12
 curving = 1.0
 
 [node name="Consumables" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.9007, 12.1, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.901, 12, 0)
 script = ExtResource("39_xvuc8")
 containerSize = 3
 defaultElementState = 7
@@ -1248,7 +1401,7 @@ maxWidth = 12
 seperation = 5.0
 
 [node name="WildCards" type="Node3D" parent="." groups=["WildCards"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.1999, 12.1, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.82959, 12, 0)
 script = ExtResource("7_c150q")
 containerSize = 6
 defaultElementState = 8

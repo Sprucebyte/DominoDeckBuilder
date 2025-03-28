@@ -8,17 +8,47 @@ var roundScore = 0
 var handScore = 0
 var multiplier = 1
 var money = 0
+var highestScore = 0
+
+var tilesPlaced = 0
+var tilesPlacedThisRound = 0
+var tilesScored = 0
+var tilesScoredThisRound = 0
+var previousTargetScore = 0
+
+var moneyEarned = 0
+var moneyEarnedThisRound = 0
+var moneyUsed = 0
+
+var moneyRoundCompleted = 0
+var moneyOverkill = 0
+var moneyTilesPlaced = 0
+
 static var acceleration = 1.02
 static var wildCardDelay = .4
 static var wildCardElementDelay = .3
+
+var handsUsed = 0
+var discardsUsed = 0
+
 
 @onready var label1 = %HandTypesLabels/Value1
 @onready var label2 = %HandTypesLabels/Value2
 @onready var scoreLabel = %HandScore/Value
 @onready var multiplierLabel = %Multiplier/Value
 
-static var Instance: Score
 
+func _process(delta: float) -> void:
+	if roundScore > highestScore:
+		highestScore = roundScore
+
+func calculateRoundMoney():
+	moneyRoundCompleted = 5
+	var overkill = roundScore - targetScore
+	moneyOverkill = roundi(max(overkill / 100, 0))
+	moneyTilesPlaced = roundi(tilesPlacedThisRound / 5)
+
+static var Instance: Score
 
 func _init() -> void:
 	if Instance == null:
@@ -35,15 +65,6 @@ func scoreShake(amount: int):
 
 func start_shake():
 	pass
-	#var original_rotation = scoreLabel.rotation
-	#scoreLabel.rotation += randf_range(-shake_intensity, shake_intensity)
-	#scoreLabel.position = original_position + Vector2(randi_range(-shake_intensity, shake_intensity), randi_range(-shake_intensity, shake_intensity))
-	#await Util.delay(.2)
-	#scoreLabel.rotation = original_rotation
-	#scoreLabel.position = original_position
-	#for i in range(5): # Number of shakes
-	#	var random_offset = Vector2(randi_range(- shake_intensity, shake_intensity), randi_range(- shake_intensity, shake_intensity))
-		
 
 func _ready() -> void:
 	SignalBus.MultiplyScore.connect(multiplyScore)
@@ -55,10 +76,13 @@ func _ready() -> void:
 	
 func addMoney(amount):
 	money += amount
+	moneyEarned += amount
+	moneyEarnedThisRound += amount
 	pass
 
 func useMoney(amount):
 	money -= amount
+	moneyUsed += amount
 	pass
 
 func addToScore(value):
@@ -66,7 +90,6 @@ func addToScore(value):
 	handScore += value
 	handScore = round(handScore)
 	
-
 func multiplyScore(value):
 	handScore *= value
 	handScore = round(handScore)
@@ -75,11 +98,9 @@ func addToMult(value):
 	multiplier += value
 	multiplier = round(multiplier)
 	
-
 func multiplyMult(value):
 	multiplier *= value
 	multiplier = round(multiplier)
-
 
 func reset():
 	label2.text = ""
@@ -107,7 +128,8 @@ func run():
 	await Util.delay(0.5 / GameManager.gameSpeedMultiplier)
 	setCombinedScore()
 	
-
+	
+	
 var highTile = HandType.new("High Tile", 5, 1)
 var pair = HandType.new("Pair", 10, 1)
 var twoPair = HandType.new("Two Pair", 10, 2)
@@ -185,7 +207,7 @@ func chooseHandTypeFull(hands: Dictionary):
 	if hands["All Eights"]:
 		result2 = allEights
 		
-	
+
 	var s = 0
 	var m = 0
 	if result1 != null:
@@ -301,6 +323,8 @@ func triggerEdgeTiles():
 		var tile = node.tile
 		var value = node.getEdgeValue()
 		tile.shake()
+		tilesScored += 1
+		tilesScoredThisRound += 1
 		ScoreLabel.Spawn(tile, "+" + str(value), Color.ROYAL_BLUE)
 		SignalBus.AddToScore.emit(value)
 		var delay = wildCardElementDelay / GameManager.gameSpeedMultiplier / activateSpeed

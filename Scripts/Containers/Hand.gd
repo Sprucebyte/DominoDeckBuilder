@@ -55,6 +55,15 @@ func returnAllTilesToDeck():
 		var element = elements[i]
 		moveOneElement(element, GameManager.deck)
 		await Util.delay(0.2)
+#
+	#var tilesToReturn = elements.size()
+	#while (tilesToReturn >= 0):
+		#var i = tilesToReturn - 1
+		#var element = elements[i]
+		#moveOneElement(element, GameManager.deck)
+		##await Util.delay(0.2)
+		#tilesToReturn -= 1
+
 	await Util.delay(1.5)
 	return
 

@@ -83,7 +83,7 @@ func remove(element):
 		return false
 	self.elements.erase(element)
 	onRemoved(element)
-	onRemoved(element)
+
 
 #endregion
 

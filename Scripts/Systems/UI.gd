@@ -15,8 +15,20 @@ extends Node
 @onready var money = %Money/Value
 @onready var playRoundButton = %PlayRoundButton
 
+@onready var handCount = %UI_HandCount
+@onready var deckCount = %UI_DeckCount
+@onready var consumableCount = %UI_ConsumableCount
+@onready var wildCardCount = %UI_WildCardCount 
+
+
 
 func _process(delta):
+	
+	handCount.text = str(GameManager.hand.elements.size()) + "/" + str(GameManager.hand.containerSize)
+	deckCount.text = str(GameManager.deck.elements.size())
+	consumableCount.text = str(GameManager.consumables.elements.size()) + "/" + str(GameManager.consumables.containerSize)
+	wildCardCount.text = str(GameManager.wildCards.elements.size()) + "/" + str(GameManager.wildCards.containerSize)
+	
 	round.text = str(GameManager.round)
 	targetScore.text = str(Score.Instance.targetScore)
 	currentScore.text = str(Score.Instance.roundScore)
@@ -25,6 +37,9 @@ func _process(delta):
 	money.text = "$" + str(Score.Instance.money)
 	handsRemaining.text = str(GameManager.handsRemaining)
 	discardsRemaining.text = str(GameManager.discardsRemaining)
+	
+	
+	
 	#GameManager.fps = gamespeed.value
 	pass
 
@@ -56,6 +71,7 @@ func discardButtonPressed():
 	if GameManager.discardsRemaining <= 0: return
 	var amount = GameManager.hand.selectedElements.size()
 	if amount <= 0: return
+	Score.Instance.discardsUsed += 1
 	GameManager.discardsRemaining -= 1
 	SignalBus.Discard.emit()
 	await Util.delay(.5)

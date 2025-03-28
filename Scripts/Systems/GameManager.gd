@@ -14,7 +14,7 @@ var consumables: ConsumablesContainer = null
 var mousePos: Vector3
 var gameSpeedMultiplier = 1
 var fps = 60
-var handSize = 10
+var handSize = 9
 
 var handCount = 4
 var discardCount = 4
@@ -34,6 +34,8 @@ var draggedElement = null
 
 enum GameStates {paused, shop, openingPack, waiting, playing, scoring, lost, won, roundOver}
 var gameState = GameStates.playing
+
+
 
 
 func selectTile(tile):
@@ -81,6 +83,8 @@ func lockInTiles():
 		if (tile.lockedIn): continue
 		#tile.lockIn(lockInSpeed * gameSpeedMultiplier)
 		await tile.lockIn(lockInSpeed * gameSpeedMultiplier * 10)
+		Score.Instance.tilesPlacedThisRound += 1
+		Score.Instance.tilesPlaced += 1
 		lockInSpeed *= Score.acceleration
 	await Util.delay(.3 / gameSpeedMultiplier * lockInSpeed)
 	return
@@ -88,10 +92,6 @@ func lockInTiles():
 
 func _process(_delta: float) -> void:
 	#Engine.max_fps = round(fps)
-	
-
-	
-
 	mousePos = get_viewport().get_camera_3d().project_position(get_viewport().get_mouse_position(), 100)
 	#for element in board.elements:
 	if (Input.is_action_just_pressed("fullscreen")):
@@ -107,11 +107,6 @@ func _process(_delta: float) -> void:
 			restart()
 	else:
 		resetTimer = defaultResetTimer
-		
-		#sortByDistance(board.elements)
-		#if (board.size() > 0):
-		#	print(str(board.elements[0].topValue))
-			#board.elements[0].targetScale = Vector3.ONE * 1.5
 	pass
 
 
@@ -123,49 +118,78 @@ func startRound():
 	handsRemaining = handCount
 	SignalBus.Draw.emit(handSize)
 	board.updateBoard()
-	#updatePlacementSlots()
+	Score.Instance.tilesPlacedThisRound = 0
+	Score.Instance.moneyEarnedThisRound = 0
+	Score.Instance.tilesScoredThisRound = 0
 	pass
 
 func endRound():
-	if Score.Instance.roundScore >= Score.Instance.targetScore:
-		win()
-	else:
-		loose()
-	#hand.moveAllElements(deck)
+	print("end round")
+	discardPile.returnAllTilesToDeck()
 	board.updateBoard()
 	board.clear()
-	discardPile.returnAllTilesToDeck()
 	await hand.returnAllTilesToDeck()
+	if Score.Instance.roundScore >= Score.Instance.targetScore:
+		win()
+		#UI_End.Instance.roundEndDisplay()
+	else:
+		loose()
+		#UI_End.Instance.looseDisplay()	
+	return
 	
+	
+func winGame():
+	gameState = GameStates.waiting
+	await Util.delay(.3)
+	await UI_End.Instance.winDisplay()
+	await Util.delay(.3)
+	gameState = GameStates.won
 	return
 		
 func win():
+	print("win round")
+	
+	if (round >= 8):
+		await winGame()
+		return
+	
+	
+	gameState = GameStates.waiting
+	await Util.delay(.3)
+	await UI_End.Instance.roundEndDisplay()
 	gameState = GameStates.won
-	await Util.delay(.5)
-	Score.Instance.money += 5
-	var interest = round(Score.Instance.money / 5)
-	Score.Instance.money += handsRemaining
-	Score.Instance.money += discardsRemaining
-	Score.Instance.money += interest
-	Score.Instance.money = round(Score.Instance.money)
-	await Util.delay(1.5)
+	await Util.delay(.3)
+	#Score.Instance.money += 5
+	#var interest = round(Score.Instance.money / 5)
+	#Score.Instance.money += handsRemaining
+	#Score.Instance.money += discardsRemaining
+	#Score.Instance.money += interest
+	#Score.Instance.money = round(Score.Instance.money)
+	await Util.delay(.3)
 	openShop()
 	hand.close()
+	return
 
 func openShop():
 	Shop.Instance.rerollPrice = Shop.Instance.baseRerollPrice
 	Shop.Instance.open()
 	gameState = GameStates.shop
-
+	return
 
 func loose():
+	
+	gameState = GameStates.waiting
+	await Util.delay(.3)
+	await UI_End.Instance.looseDisplay()
 	gameState = GameStates.lost
-	await Util.delay(.5)
+	await Util.delay(.3)
 	restart()
+	return
 
 func nextRound():
 	round += 1
 	Score.Instance.targetScore = round(Score.Instance.targetScore * 1.5)
+
 	startRound()
 	pass
 
@@ -181,7 +205,10 @@ func restart():
 	Shop.Instance.rerollPrice = Shop.Instance.startRerollPrice
 	Shop.Instance.baseRerollPrice = Shop.Instance.startRerollPrice
 	deck.generate()
-
+	Score.Instance.tilesPlaced = 0
+	Score.Instance.tilesScored = 0
+	Score.Instance.tilesPlacedThisRound = 0
+	Score.Instance.tilesScoredThisRound = 0
 	startRound()
 	pass
 
@@ -193,7 +220,7 @@ func playHand():
 	await Score.Instance.run()
 	
 	handsRemaining -= 1
-
+	Score.Instance.handsUsed += 1
 	if (handsRemaining > 0):
 		gameState = GameStates.playing
 	else:
