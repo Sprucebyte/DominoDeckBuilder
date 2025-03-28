@@ -9,5 +9,5 @@ script = ExtResource("1_huto8")
 code = ExtResource("1_s3pir")
 texture = ExtResource("3_t40m2")
 name = "The Hanged Man"
-description = "Destroys 1 random wildcard, gain [money]$30[/money]"
+description = "Destroys 1 selected tile, gain [money]$[/money] equal to pips on tile"
 rarity = 4
